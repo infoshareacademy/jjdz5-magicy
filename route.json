@@ -1,0 +1,25 @@
+ [{
+   "id": "1",
+    "startAddress": "Gdynia ul. Kwiatowa 2",
+    "stopAddress": "Gdańsk ul. Fiołkowa 4",
+    "routePoint": "Sopot Centrum",
+    "date": "13-10-2018",
+    "startTime": "7:00",
+    "stopTime": "8:00"
+  }, {
+   "id": "2",
+    "startAddress": "Sopot ul. Kopernika 3",
+    "stopAddress": "Gdańsk ul. Mikołaja 70",
+    "routePoint": "Gdańsk Przymorze SKM",
+    "date": "15-11-2018",
+    "startTime": "8:00",
+    "stopTime": "9:00"
+  },{
+   "id": "3",
+    "startAddress": "Gdynia ul. Kanciasta 66",
+    "stopAddress": "Gdańsk ul. Kołobrzeska 45",
+    "routePoint": "Gdańsk Matarnia",
+    "date": "16-10-2018",
+    "startTime": "7:00",
+    "stopTime": "8:00"
+  }]
