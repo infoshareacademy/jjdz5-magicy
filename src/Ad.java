@@ -1,4 +1,13 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Ad {
 
@@ -9,9 +18,10 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(Integer id, Date date) {
+    public Ad(Integer id, Date date, Integer routeId) {
         this.id = id;
         this.date = date;
+        this.routeId = routeId;
     }
 
     public Integer getid() {
@@ -29,4 +39,5 @@ public class Ad {
     public Integer getRouteId() {
         return routeId;
     }
+
 }

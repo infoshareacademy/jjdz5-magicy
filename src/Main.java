@@ -1,6 +1,9 @@
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -11,10 +14,10 @@ public class Main {
     public static void main(String[] args) {
 
         start();
+
     }
 
     public static void start(){
-
             char choice;
             Scanner sc = new Scanner(System.in);
 
@@ -31,7 +34,7 @@ public class Main {
                         break;
 
                     case '2':
-                 //      addAd();
+                       addAd();
                         break;
 
                     case 'q':
@@ -83,6 +86,7 @@ public class Main {
                         +stopTime +"\n routePoint: "+routePoint);
 
                 System.out.println("------------");
+
             }
 
         } catch (IOException | ParseException e) {
@@ -91,9 +95,124 @@ public class Main {
 
     }
 
+    public static String getActualDate(){
+        Date date = new Date();
+        String actualDate = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
+        try {
+            actualDate = formatter.format(date);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return actualDate;
+    }
+
+    public static Integer getMaxIt(String fileName) {
+
+        JSONParser parser = new JSONParser();
+        Integer idMax = 0;
+        try {
+            JSONArray array = (JSONArray) parser.parse(new FileReader(fileName));
+
+            for (Object o : array) {
+                JSONObject ob = (JSONObject) o;
+
+                if(Integer.valueOf((String) ob.get("id"))>idMax){
+                    idMax = Integer.valueOf((String) ob.get("id"));
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (org.json.simple.parser.ParseException e) {
+            e.printStackTrace();
+        }
+
+    return idMax;
+    }
+
     public static void addAd(){
+        String actualDate = getActualDate();
+        Integer id = getMaxIt("ad.json")+1;
+        Integer routeId = getMaxIt("route.json")+1;
+        String startAddress = getUserInput("Start point:");
+        String startTime = getUserInput("At time:");
+        String stopAddress = getUserInput("End point:");
+        String stopTime = getUserInput("At time:");
+        String routePoint = getUserInput("Enter intermediate point:");
+        String date = getUserInput("Enter date in format dd-mm-yyyy:");
+
+        // create the advert object
+        JSONObject ad = new JSONObject();
+        ad.put("id", id.toString());
+        ad.put("date", actualDate);
+        ad.put("routeId", routeId.toString());
+
+        // add object to ad.json
+        writeToJsonFile("ad.json",ad.toJSONString());
+
+        // create the route object
+        JSONObject route = new JSONObject();
+        route.put("id", routeId.toString());
+        route.put("startAddress", startAddress);
+        route.put("stopAddress", stopAddress);
+        route.put("routePoint", routePoint);
+        route.put("date", date);
+        route.put("startTime", startTime);
+        route.put("stopTime", stopTime);
+
+        writeToJsonFile("route.json",route.toJSONString());
 
     }
 
+    public static String getUserInput(String text){
+
+        String userInput = null;
+
+       do{
+           Scanner scanner = new Scanner(System.in);
+           System.out.println(text);
+           userInput = scanner.nextLine();
+       }while(userInput == null || userInput.equals("")|| userInput.equals(" "));
+
+        return userInput;
+
+    }
+
+    public static boolean dateValid(String date){
+
+        boolean valid = true;
+        /// validation to write!!!!
+
+        return valid;
+    }
+
+    public static void writeToJsonFile(String jsonFile, String jsonString){
+        try{
+            RandomAccessFile randomAccessFileRoute = new RandomAccessFile(jsonFile, "rw");
+
+            long posR = randomAccessFileRoute.length();
+            while (randomAccessFileRoute.length() > 0) {
+                posR--;
+                randomAccessFileRoute.seek(posR);
+                if (randomAccessFileRoute.readByte() == ']') {
+                    randomAccessFileRoute.seek(posR);
+                    break;
+                }
+            }
+
+            randomAccessFileRoute.writeBytes("," + jsonString + "\n]");
+
+            randomAccessFileRoute.close();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
