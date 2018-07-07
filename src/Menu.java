@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class Menu {
     public Menu() {
     }
-    public static void menu() {
+
+    void menu() {
         char choice;
         Scanner sc = new Scanner(System.in);
 
@@ -16,11 +17,11 @@ public class Menu {
             choice = sc.nextLine().charAt(0);
             switch (choice) {
                 case '1':
-                    Main.showAd();
+                    Ad.showAd();
                     break;
 
                 case '2':
-                    Main.addAd();
+                    Ad.addAd();
                     break;
 
                 case 'q':
