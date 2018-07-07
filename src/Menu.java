@@ -17,10 +17,11 @@ class Menu {
             choice = sc.nextLine().charAt(0);
             switch (choice) {
                 case '1':
-                    AdManager.showAd();
+                    AdManager.showAds();
                     break;
                 case '2':
-                    AdManager.addAd();
+                    AdManager adManager = new AdManager();
+                    adManager.addAd();
                     break;
                 case '3':
                     UserInput user = new UserInput();

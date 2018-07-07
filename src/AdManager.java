@@ -11,11 +11,12 @@ import java.util.Date;
 public class AdManager {
     private static final String AD_JSON = "ad.json";
     private static final String ROUTE_JSON = "route.json";
+    private static final String DATE_FORMAT = "dd-MM-yyyy";
 
     public AdManager() {
     }
 
-    static void showAd() {
+    static void showAds() {
         try {
             JSONParser parser = new JSONParser();
             JSONArray ads = (JSONArray) parser.parse(new FileReader(AD_JSON));
@@ -60,44 +61,59 @@ public class AdManager {
         } catch (IOException | org.json.simple.parser.ParseException e) {
             e.printStackTrace();
         }
-
     }
 
-    static void addAd() {
+    void addAd() {
         final UserInput user = new UserInput();
 
-        Date currentDate = new Date();
-        Integer id = getMaxIt(AD_JSON) + 1;
-        Integer routeId = getMaxIt(ROUTE_JSON) + 1;
         String startAddress = user.askForText("Start point");
         String startTime = user.askForTime("At time (HH:mm)");
         String stopAddress = user.askForText("End point");
-        String stopTime = user.askForText("At time");
+        String stopTime = user.askForText("At time (HH:mm)");
         String routePoint = user.askForText("Enter intermediate city");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Integer routeId = getMaxIt(ROUTE_JSON) + 1;
 
         // create the advert object
-        JSONObject ad = new JSONObject();
-        ad.put("id", id.toString());
-        ad.put("date", format.format(currentDate));
-        ad.put("routeId", routeId.toString());
+        Ad ad = new Ad(Long.valueOf(getMaxIt(AD_JSON) + 1), new Date(), Long.valueOf(routeId));
+        JSONObject jsonAd = adToJson(ad);
 
         // add object to ad.json
-        JsonUtil.writeToJsonFile(AD_JSON, ad.toJSONString());
+        JsonUtil.writeToJsonFile(AD_JSON, jsonAd.toJSONString());
 
         // create the route object
-        JSONObject route = new JSONObject();
-        route.put("id", routeId.toString());
-        route.put("startAddress", startAddress);
-        route.put("stopAddress", stopAddress);
-        route.put("routePoint", routePoint);
-        route.put("date", format.format(date));
-        route.put("startTime", startTime);
-        route.put("stopTime", stopTime);
+        Route route = new Route(routeId, startAddress, stopAddress, routePoint, date, startTime, stopTime);
+        JSONObject jsonRoute = routeToJson(route);
 
-        JsonUtil.writeToJsonFile(ROUTE_JSON, route.toJSONString());
+        JsonUtil.writeToJsonFile(ROUTE_JSON, jsonRoute.toJSONString());
+    }
+
+    private JSONObject adToJson(Ad ad) {
+        final DateFormat format = new SimpleDateFormat(DATE_FORMAT);
+
+        JSONObject jsonAd = new JSONObject();
+        jsonAd.put("id", ad.getId().toString());
+        jsonAd.put("date", format.format(ad.getDate()));
+        jsonAd.put("routeId", ad.getRouteId().toString());
+
+        return jsonAd;
+    }
+
+    private JSONObject routeToJson(Route route) {
+        final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+        final DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+        JSONObject jsonRoute = new JSONObject();
+        jsonRoute.put("id", route.getId().toString());
+        jsonRoute.put("startAddress", route.getStartAddress());
+        jsonRoute.put("stopAddress", route.getStopAddress());
+        jsonRoute.put("routePoint", route.getRoutePoint());
+        jsonRoute.put("date", dateFormat.format(route.getDate()));
+        jsonRoute.put("startTime", route.getStartTime());
+        jsonRoute.put("stopTime", route.getStopTime());
+
+        return jsonRoute;
     }
 
     private static Integer getMaxIt(String fileName) {

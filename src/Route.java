@@ -7,10 +7,10 @@ public class Route {
     private String stopAddress;
     private String routePoint;
     private Date date;
-    private Time startTime;
-    private Time stopTime;
+    private String startTime;
+    private String stopTime;
 
-    public Route(Integer id, String startAddress, String stopAddress, String routePoint, Date date, Time startTime, Time stopTime) {
+    public Route(Integer id, String startAddress, String stopAddress, String routePoint, Date date, String startTime, String stopTime) {
         this.id = id;
         this.startAddress = startAddress;
         this.stopAddress = stopAddress;
@@ -32,7 +32,7 @@ public class Route {
         return stopAddress;
     }
 
-    public String getroutePoint() {
+    public String getRoutePoint() {
         return routePoint;
     }
 
@@ -40,11 +40,11 @@ public class Route {
         return date;
     }
 
-    public Time getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public Time getStopTime() {
+    public String getStopTime() {
         return stopTime;
     }
 }
