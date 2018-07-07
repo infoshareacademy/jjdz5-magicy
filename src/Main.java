@@ -1,9 +1,7 @@
 import java.io.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -13,39 +11,12 @@ import org.json.simple.parser.ParseException;
 public class Main {
     public static void main(String[] args) {
 
-        start();
+        Menu.menu();
 
     }
 
-    public static void start(){
-            char choice;
-            Scanner sc = new Scanner(System.in);
 
-            System.out.println("-----MENU------");
-            do {
-                System.out.println("1 - Show adverts list");
-                System.out.println("2 - Add advert");
-                System.out.println("q - Exit");
-                System.out.println("Choice:");
-                choice = sc.nextLine().charAt(0);
-                switch (choice) {
-                    case '1':
-                       showAd();
-                        break;
-
-                    case '2':
-                       addAd();
-                        break;
-
-                    case 'q':
-                        System.out.println("Thank you!\n");
-                        break;
-                }
-            } while (choice != 'q');
-
-    }
-
-    public static void showAd(){
+    public static void showAd() {
         try {
             JSONParser parser = new JSONParser();
             JSONArray ads = (JSONArray) parser.parse(new FileReader("ad.json"));
@@ -58,19 +29,18 @@ public class Main {
             String startTime = null;
             String stopTime = null;
 
-            for (Object o : ads)
-            {
+            for (Object o : ads) {
                 JSONObject ad = (JSONObject) o;
 
                 String id = (String) ad.get("id");
                 String date = (String) ad.get("date");
                 String routeId = (String) ad.get("routeId");
 
-                for(Object a : routes){
+                for (Object a : routes) {
 
                     JSONObject route = (JSONObject) a;
 
-                    if(routeId.equals(route.get("id"))){
+                    if (routeId.equals(route.get("id"))) {
                         startAddress = (String) route.get("startAddress");
                         stopAddress = (String) route.get("stopAddress");
                         routePoint = (String) route.get("routePoint");
@@ -81,9 +51,8 @@ public class Main {
                 }
 
 
-
-                System.out.println("Ad number: "+id+"\n Date: " + dateR +"\n Start point: "+ startAddress+" at "+startTime+"\n Stop point: "+stopAddress+" at: "
-                        +stopTime +"\n routePoint: "+routePoint);
+                System.out.println("Ad number: " + id + "\n Date: " + dateR + "\n Start point: " + startAddress + " at " + startTime + "\n Stop point: " + stopAddress + " at: "
+                        + stopTime + "\n routePoint: " + routePoint);
 
                 System.out.println("------------");
 
@@ -95,7 +64,7 @@ public class Main {
 
     }
 
-    public static String getActualDate(){
+    public static String getActualDate() {
         Date date = new Date();
         String actualDate = null;
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -120,7 +89,7 @@ public class Main {
             for (Object o : array) {
                 JSONObject ob = (JSONObject) o;
 
-                if(Integer.valueOf((String) ob.get("id"))>idMax){
+                if (Integer.valueOf((String) ob.get("id")) > idMax) {
                     idMax = Integer.valueOf((String) ob.get("id"));
                 }
             }
@@ -131,13 +100,13 @@ public class Main {
             e.printStackTrace();
         }
 
-    return idMax;
+        return idMax;
     }
 
-    public static void addAd(){
+    public static void addAd() {
         String actualDate = getActualDate();
-        Integer id = getMaxIt("ad.json")+1;
-        Integer routeId = getMaxIt("route.json")+1;
+        Integer id = getMaxIt("ad.json") + 1;
+        Integer routeId = getMaxIt("route.json") + 1;
         String startAddress = getUserInput("Start point:");
         String startTime = getUserInput("At time:");
         String stopAddress = getUserInput("End point:");
@@ -152,7 +121,7 @@ public class Main {
         ad.put("routeId", routeId.toString());
 
         // add object to ad.json
-        writeToJsonFile("ad.json",ad.toJSONString());
+        writeToJsonFile("ad.json", ad.toJSONString());
 
         // create the route object
         JSONObject route = new JSONObject();
@@ -164,25 +133,25 @@ public class Main {
         route.put("startTime", startTime);
         route.put("stopTime", stopTime);
 
-        writeToJsonFile("route.json",route.toJSONString());
+        writeToJsonFile("route.json", route.toJSONString());
 
     }
 
-    public static String getUserInput(String text){
+    public static String getUserInput(String text) {
 
         String userInput = null;
 
-       do{
-           Scanner scanner = new Scanner(System.in);
-           System.out.println(text);
-           userInput = scanner.nextLine();
-       }while(userInput == null || userInput.equals("")|| userInput.equals(" "));
+        do {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(text);
+            userInput = scanner.nextLine();
+        } while (userInput == null || userInput.equals("") || userInput.equals(" "));
 
         return userInput;
 
     }
 
-    public static boolean dateValid(String date){
+    public static boolean dateValid(String date) {
 
         boolean valid = true;
         /// validation to write!!!!
@@ -190,8 +159,8 @@ public class Main {
         return valid;
     }
 
-    public static void writeToJsonFile(String jsonFile, String jsonString){
-        try{
+    public static void writeToJsonFile(String jsonFile, String jsonString) {
+        try {
             RandomAccessFile randomAccessFileRoute = new RandomAccessFile(jsonFile, "rw");
 
             long posR = randomAccessFileRoute.length();
@@ -207,7 +176,7 @@ public class Main {
             randomAccessFileRoute.writeBytes("," + jsonString + "\n]");
 
             randomAccessFileRoute.close();
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
