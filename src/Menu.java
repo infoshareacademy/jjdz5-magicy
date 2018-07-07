@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-public class Menu {
-    public Menu() {
+class Menu {
+    Menu() {
     }
 
     void menu() {
@@ -17,19 +17,19 @@ public class Menu {
             choice = sc.nextLine().charAt(0);
             switch (choice) {
                 case '1':
-                    Ad.showAd();
+                    AdManager.showAd();
                     break;
-
                 case '2':
-                    Ad.addAd();
+                    AdManager.addAd();
                     break;
-
+                case '3':
+                    UserInput user = new UserInput();
+                    user.askForDate("blah blah");
+                    break;
                 case 'q':
                     System.out.println("Thank you!\n");
                     break;
             }
         } while (choice != 'q');
-
     }
-
 }

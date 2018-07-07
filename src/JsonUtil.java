@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class JsonUtil {
+class JsonUtil {
     static void writeToJsonFile(String jsonFile, String jsonString) {
         try {
             RandomAccessFile randomAccessFileRoute = new RandomAccessFile(jsonFile, "rw");
