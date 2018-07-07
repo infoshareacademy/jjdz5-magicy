@@ -22,11 +22,7 @@ class Menu {
                 case '2':
                     AdManager adManager = new AdManager();
                     adManager.addAd();
-                    break;
-                case '3':
-                    UserInput user = new UserInput();
-                    user.askForDate("blah blah");
-                    break;
+                    break
                 case 'q':
                     System.out.println("Thank you!\n");
                     break;
