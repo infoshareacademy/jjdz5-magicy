@@ -1,43 +1,38 @@
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
-public class Ad {
+class Ad {
+    Long id;
+    Date date;
+    Long routeId;
 
-    private Integer id;
-    private Date date;
-    private Integer routeId;
-
-    public Ad() {
-    }
-
-    public Ad(Integer id, Date date, Integer routeId) {
+    public Ad(Long id, Date date, Long routeId) {
         this.id = id;
         this.date = date;
         this.routeId = routeId;
     }
 
-    public Integer getid() {
+    public Long getId() {
         return id;
     }
 
-    public Date getdate() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
         return date;
     }
 
-    public void setdate(Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public Integer getRouteId() {
+    public Long getRouteId() {
         return routeId;
     }
 
+    public void setRouteId(Long routeId) {
+        this.routeId = routeId;
+    }
 }
+
