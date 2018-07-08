@@ -52,8 +52,8 @@ public class AdvertManager {
                     }
                 }
 
-                System.out.println("AdManager number: " + id + "\n Date: " + dateR + "\n Start point: " + startAddress + " at " + startTime + "\n Stop point: " + stopAddress + " at: "
-                        + stopTime + "\n routePoint: " + routePoint);
+                System.out.println("Advert number: " + id + "\n Date: " + dateR + "\n Route start point: " + startAddress + " at " + startTime + "\n Route end point: " + stopAddress + " at "
+                        + stopTime + "\n Pick up point: " + routePoint);
 
                 System.out.println("------------");
             }
