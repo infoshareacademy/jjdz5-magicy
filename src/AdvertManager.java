@@ -8,18 +8,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AdManager {
+public class AdvertManager {
     private static final String AD_JSON = "ad.json";
     private static final String ROUTE_JSON = "route.json";
     private static final String DATE_FORMAT = "dd-MM-yyyy";
 
-    public AdManager() {
+    public AdvertManager() {
     }
 
-    static void showAds() {
+    static void showAdverts() {
         try {
             JSONParser parser = new JSONParser();
-            JSONArray ads = (JSONArray) parser.parse(new FileReader(AD_JSON));
+            JSONArray adverts = (JSONArray) parser.parse(new FileReader(AD_JSON));
             JSONArray routes = (JSONArray) parser.parse(new FileReader(ROUTE_JSON));
 
             String startAddress = null;
@@ -32,12 +32,12 @@ public class AdManager {
             String id;
             String date;
             String routeId;
-            for (Object o : ads) {
-                JSONObject ad = (JSONObject) o;
+            for (Object o : adverts) {
+                JSONObject advert = (JSONObject) o;
 
-                id = (String) ad.get("id");
-                date = (String) ad.get("date");
-                routeId = (String) ad.get("routeId");
+                id = (String) advert.get("id");
+                date = (String) advert.get("date");
+                routeId = (String) advert.get("routeId");
 
                 for (Object a : routes) {
                     JSONObject route = (JSONObject) a;
@@ -63,7 +63,7 @@ public class AdManager {
         }
     }
 
-    void addAd() {
+    void addAdvert() {
         final UserInput user = new UserInput();
 
         String startAddress = user.askForText("Start point");
@@ -73,14 +73,14 @@ public class AdManager {
         String routePoint = user.askForText("Enter intermediate city");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
-        Integer routeId = getMaxIt(ROUTE_JSON) + 1;
+        Integer routeId = getMaxId(ROUTE_JSON) + 1;
 
         // create the advert object
-        Ad ad = new Ad(Long.valueOf(getMaxIt(AD_JSON) + 1), new Date(), Long.valueOf(routeId));
-        JSONObject jsonAd = adToJson(ad);
+        Advert advert = new Advert(Long.valueOf(getMaxId(AD_JSON) + 1), new Date(), Long.valueOf(routeId));
+        JSONObject jsonAdvert = adToJson(advert);
 
         // add object to ad.json
-        JsonUtil.writeToJsonFile(AD_JSON, jsonAd.toJSONString());
+        JsonUtil.writeToJsonFile(AD_JSON, jsonAdvert.toJSONString());
 
         // create the route object
         Route route = new Route(routeId, startAddress, stopAddress, routePoint, date, startTime, stopTime);
@@ -89,15 +89,15 @@ public class AdManager {
         JsonUtil.writeToJsonFile(ROUTE_JSON, jsonRoute.toJSONString());
     }
 
-    private JSONObject adToJson(Ad ad) {
+    private JSONObject adToJson(Advert advert) {
         final DateFormat format = new SimpleDateFormat(DATE_FORMAT);
 
-        JSONObject jsonAd = new JSONObject();
-        jsonAd.put("id", ad.getId().toString());
-        jsonAd.put("date", format.format(ad.getDate()));
-        jsonAd.put("routeId", ad.getRouteId().toString());
+        JSONObject jsonAdvert = new JSONObject();
+        jsonAdvert.put("id", advert.getId().toString());
+        jsonAdvert.put("date", format.format(advert.getDate()));
+        jsonAdvert.put("routeId", advert.getRouteId().toString());
 
-        return jsonAd;
+        return jsonAdvert;
     }
 
     private JSONObject routeToJson(Route route) {
@@ -116,7 +116,7 @@ public class AdManager {
         return jsonRoute;
     }
 
-    private static Integer getMaxIt(String fileName) {
+    private static Integer getMaxId(String fileName) {
         JSONParser parser = new JSONParser();
         Integer idMax = 0;
         try {
