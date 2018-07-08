@@ -66,11 +66,11 @@ public class AdvertManager {
     void addAdvert() {
         final UserInput user = new UserInput();
 
-        String startAddress = user.askForText("Start point");
+        String startAddress = user.askForText("Route start point");
         String startTime = user.askForTime("At time (HH:mm)");
-        String stopAddress = user.askForText("End point");
+        String stopAddress = user.askForText("Route end point");
         String stopTime = user.askForText("At time (HH:mm)");
-        String routePoint = user.askForText("Enter intermediate city");
+        String routePoint = user.askForText("Enter pick up point");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
         Integer routeId = getMaxId(ROUTE_JSON) + 1;
