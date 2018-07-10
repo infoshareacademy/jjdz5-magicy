@@ -1,39 +1,48 @@
-import java.sql.Time;
 import java.util.Date;
 
 public class Route {
     private Integer id;
-    private String startAddress;
-    private String stopAddress;
-    private String routePoint;
     private Date date;
+    private String startCity;
+    private String startStreet;
+    private String endCity;
+    private String endStreet;
+    private String pickUpCity;
+    private String pickUpStreet;
     private String startTime;
-    private String stopTime;
+    private String endTime;
+    private String pickUpTime;
 
-    public Route(Integer id, String startAddress, String stopAddress, String routePoint, Date date, String startTime, String stopTime) {
+
+    public Route(Integer id, Date date, String startCity, String startStreet, String endCity,
+                 String endStreet, String pickUpCity, String pickUpStreet, String startTime, String endTime, String pickUpTime) {
         this.id = id;
-        this.startAddress = startAddress;
-        this.stopAddress = stopAddress;
-        this.routePoint = routePoint;
         this.date = date;
+        this.startCity = startCity;
+        this.startStreet = startStreet;
+        this.endCity = endCity;
+        this.endStreet = endStreet;
+        this.pickUpCity = pickUpCity;
+        this.pickUpStreet = pickUpStreet;
         this.startTime = startTime;
-        this.stopTime = stopTime;
+        this.endTime = endTime;
+        this.pickUpTime = pickUpTime;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getStartAddress() {
-        return startAddress;
+    public String getStartStreet() {
+        return startStreet;
     }
 
-    public String getStopAddress() {
-        return stopAddress;
+    public String getEndStreet() {
+        return endStreet;
     }
 
-    public String getRoutePoint() {
-        return routePoint;
+    public String getPickUpStreet() {
+        return pickUpStreet;
     }
 
     public Date getDate() {
@@ -44,7 +53,22 @@ public class Route {
         return startTime;
     }
 
-    public String getStopTime() {
-        return stopTime;
+    public String getEndTime() {
+        return endTime;
     }
+
+    public String getStartCity() {
+        return startCity;
+    }
+    public String getEndCity() {
+        return endCity;
+    }
+    public String getPickUpCity() {
+        return pickUpCity;
+    }
+
+    public String getPickUpTime() {
+        return pickUpTime;
+    }
+
 }

@@ -17,12 +17,12 @@ class Menu {
             choice = sc.nextLine().charAt(0);
             switch (choice) {
                 case '1':
-                    AdManager.showAds();
+                    AdvertManager.showAdverts();
                     break;
                 case '2':
-                    AdManager adManager = new AdManager();
-                    adManager.addAd();
-                    break
+                    AdvertManager AdvertManager = new AdvertManager();
+                    AdvertManager.addAdvert();
+                    break;
                 case 'q':
                     System.out.println("Thank you!\n");
                     break;
