@@ -10,12 +10,12 @@ public class Route {
     private String pickUpCity;
     private String pickUpStreet;
     private String startTime;
-    private String stopTime;
+    private String endTime;
     private String pickUpTime;
 
 
     public Route(Integer id, Date date, String startCity, String startStreet, String endCity,
-    String endStreet, String pickUpCity, String pickUpStreet, String startTime, String stopTime, String pickUpTime) {
+                 String endStreet, String pickUpCity, String pickUpStreet, String startTime, String endTime, String pickUpTime) {
         this.id = id;
         this.date = date;
         this.startCity = startCity;
@@ -25,7 +25,7 @@ public class Route {
         this.pickUpCity = pickUpCity;
         this.pickUpStreet = pickUpStreet;
         this.startTime = startTime;
-        this.stopTime = stopTime;
+        this.endTime = endTime;
         this.pickUpTime = pickUpTime;
     }
 
@@ -53,8 +53,8 @@ public class Route {
         return startTime;
     }
 
-    public String getStopTime() {
-        return stopTime;
+    public String getEndTime() {
+        return endTime;
     }
 
     public String getStartCity() {

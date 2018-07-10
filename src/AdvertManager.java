@@ -22,12 +22,16 @@ public class AdvertManager {
             JSONArray adverts = (JSONArray) parser.parse(new FileReader(AD_JSON));
             JSONArray routes = (JSONArray) parser.parse(new FileReader(ROUTE_JSON));
 
-            String startAddress = null;
-            String stopAddress = null;
-            String routePoint = null;
+            String startCity = null;
+            String startStreet = null;
+            String endCity = null;
+            String endStreet = null;
+            String pickUpCity = null;
+            String pickUpStreet = null;
             String dateR = null;
             String startTime = null;
-            String stopTime = null;
+            String endTime = null;
+            String pickUpTime = null;
 
             String id;
             String date;
@@ -43,17 +47,24 @@ public class AdvertManager {
                     JSONObject route = (JSONObject) a;
 
                     if (routeId.equals(route.get("id"))) {
-                        startAddress = (String) route.get("startAddress");
-                        stopAddress = (String) route.get("stopAddress");
-                        routePoint = (String) route.get("routePoint");
+                        startCity = (String) route.get("startCity");
+                        startStreet = (String) route.get("startStreet");
+                        endCity = (String) route.get("endCity");
+                        endStreet = (String) route.get("endStreet");
+                        pickUpCity = (String) route.get("pickUpCity");
+                        pickUpStreet = (String) route.get("pickUpStreet");
                         dateR = (String) route.get("date");
                         startTime = (String) route.get("startTime");
-                        stopTime = (String) route.get("stopTime");
+                        endTime = (String) route.get("endTime");
+                        pickUpTime = (String) route.get("pickUpTime");
                     }
                 }
 
-                System.out.println("Advert number: " + id + "\n Date: " + dateR + "\n Route start point: " + startAddress + " at " + startTime + "\n Route end point: " + stopAddress + " at "
-                        + stopTime + "\n Pick up point: " + routePoint);
+                System.out.println("Advert number: " + id +
+                        "\n Date: " + dateR +
+                        "\n Route start point: " + startCity + ", " + startStreet + " at " + startTime +
+                        "\n Route end point: " + endCity + ", " + endStreet + " at " + endTime +
+                        "\n Pick up point: " + pickUpCity + ", " + pickUpStreet + " at " + pickUpTime);
 
                 System.out.println("------------");
             }
@@ -66,11 +77,15 @@ public class AdvertManager {
     void addAdvert() {
         final UserInput user = new UserInput();
 
-        String startAddress = user.askForText("Route start point");
+        String startCity = user.askForText("Route start city");
+        String startStreet = user.askForText("Route start street");
         String startTime = user.askForTime("At time (HH:mm)");
-        String stopAddress = user.askForText("Route end point");
-        String stopTime = user.askForText("At time (HH:mm)");
-        String routePoint = user.askForText("Enter pick up point");
+        String endCity = user.askForText("Route end city");
+        String endStreet = user.askForText("Route end street");
+        String endTime = user.askForText("At time (HH:mm)");
+        String pickUpCity = user.askForText("Enter pick up city");
+        String pickUpStreet = user.askForText("Enter pick up street");
+        String pickUpTime = user.askForText("At time (HH:mm)");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
         Integer routeId = getMaxId(ROUTE_JSON) + 1;
@@ -83,7 +98,8 @@ public class AdvertManager {
         JsonUtil.writeToJsonFile(AD_JSON, jsonAdvert.toJSONString());
 
         // create the route object
-        Route route = new Route(routeId, startAddress, stopAddress, routePoint, date, startTime, stopTime);
+        Route route = new Route(routeId, date, startCity, startStreet, endCity,
+                endStreet, pickUpCity, pickUpStreet, startTime, endTime, pickUpTime);
         JSONObject jsonRoute = routeToJson(route);
 
         JsonUtil.writeToJsonFile(ROUTE_JSON, jsonRoute.toJSONString());
@@ -106,12 +122,16 @@ public class AdvertManager {
 
         JSONObject jsonRoute = new JSONObject();
         jsonRoute.put("id", route.getId().toString());
-        jsonRoute.put("startAddress", route.getStartAddress());
-        jsonRoute.put("stopAddress", route.getStopAddress());
-        jsonRoute.put("routePoint", route.getRoutePoint());
+        jsonRoute.put("startCity", route.getStartCity());
+        jsonRoute.put("startStreet", route.getStartStreet());
+        jsonRoute.put("endCity", route.getEndCity());
+        jsonRoute.put("endStreet", route.getEndStreet());
+        jsonRoute.put("pickUpCity", route.getPickUpCity());
+        jsonRoute.put("pickUpStreet", route.getPickUpStreet());
         jsonRoute.put("date", dateFormat.format(route.getDate()));
         jsonRoute.put("startTime", route.getStartTime());
-        jsonRoute.put("stopTime", route.getStopTime());
+        jsonRoute.put("endTime", route.getEndTime());
+        jsonRoute.put("pickUpTime", route.getPickUpTime());
 
         return jsonRoute;
     }
