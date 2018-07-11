@@ -32,16 +32,16 @@ public class Menu {
                     case EXIT:
                         System.out.println("Thank you!\n");
                         System.out.println("exit");
-                        
+
                         break;
                 }
 
 
             }catch (NullPointerException e){
-                System.out.println("Proszę wybrać poprawnie");
+                System.out.println("Please choose correctly");
                 continue;
             }catch (InputMismatchException e){
-                System.out.println("Proszę wybrać poprawnie");
+                System.out.println("Please choose correctly");
                 continue;
             }
 
