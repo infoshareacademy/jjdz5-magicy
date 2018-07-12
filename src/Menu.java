@@ -21,12 +21,12 @@ public class Menu {
 
                 switch (state) {
                     case SHOW_ADVERTS_LIST:
-                        AdManager.showAds();
+                        AdvertManager.showAdVerts();
 
                         break;
                     case ADD_ADVERT:
-                        AdManager adManager = new AdManager();
-                        adManager.addAd();
+                        AdvertManager advertManager = new AdvertManager();
+                        advertManager.addAdvert();
 
                         break;
                     case EXIT:
