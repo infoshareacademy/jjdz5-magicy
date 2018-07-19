@@ -13,7 +13,7 @@ public class Menu {
         do {
             System.out.println("1 - Show adverts list");
             System.out.println("2 - Add advert");
-            System.out.println("3 - Exit");
+            System.out.println("0 - Exit");
             System.out.println("Choice:");
 
             try {
