@@ -21,8 +21,10 @@ public class AdvertManager {
     public void showAdverts() {
         List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
         for (Advert advert: advertsList) {
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
             System.out.println("Advert number: " + advert.getId() +
-                    "\n Date: " + advert.getDate() +
+                    "\n Date: " + formatter.format(advert.getDate()) +
                     "\n Route start point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getStartStreet() + " at " + advert.getRoute().getStartTime() +
                     "\n Route end point: " + advert.getRoute().getEndCity() + ", " + advert.getRoute().getEndStreet() + " at " + advert.getRoute().getEndTime() +
                     "\n Pick up point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getPickUpStreet() + " at " + advert.getRoute().getPickUpTime());
