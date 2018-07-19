@@ -7,70 +7,27 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AdvertManager {
     private static final String AD_JSON = "ad.json";
     private static final String ROUTE_JSON = "route.json";
     private static final String DATE_FORMAT = "dd-MM-yyyy";
+    private final JsonToList jsonToList = new JsonToList();
 
     public AdvertManager() {
     }
 
-    static void showAdverts() {
-        try {
-            JSONParser parser = new JSONParser();
-            JSONArray adverts = (JSONArray) parser.parse(new FileReader(AD_JSON));
-            JSONArray routes = (JSONArray) parser.parse(new FileReader(ROUTE_JSON));
+    public void showAdverts() {
+        List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
+        for (Advert advert: advertsList) {
+            System.out.println("Advert number: " + advert.getId() +
+                    "\n Date: " + advert.getDate() +
+                    "\n Route start point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getStartStreet() + " at " + advert.getRoute().getStartTime() +
+                    "\n Route end point: " + advert.getRoute().getEndCity() + ", " + advert.getRoute().getEndStreet() + " at " + advert.getRoute().getEndTime() +
+                    "\n Pick up point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getPickUpStreet() + " at " + advert.getRoute().getPickUpTime());
 
-            String startCity = null;
-            String startStreet = null;
-            String endCity = null;
-            String endStreet = null;
-            String pickUpCity = null;
-            String pickUpStreet = null;
-            String dateR = null;
-            String startTime = null;
-            String endTime = null;
-            String pickUpTime = null;
-
-            String id;
-            String date;
-            String routeId;
-            for (Object o : adverts) {
-                JSONObject advert = (JSONObject) o;
-
-                id = (String) advert.get("id");
-                date = (String) advert.get("date");
-                routeId = (String) advert.get("routeId");
-
-                for (Object a : routes) {
-                    JSONObject route = (JSONObject) a;
-
-                    if (routeId.equals(route.get("id"))) {
-                        startCity = (String) route.get("startCity");
-                        startStreet = (String) route.get("startStreet");
-                        endCity = (String) route.get("endCity");
-                        endStreet = (String) route.get("endStreet");
-                        pickUpCity = (String) route.get("pickUpCity");
-                        pickUpStreet = (String) route.get("pickUpStreet");
-                        dateR = (String) route.get("date");
-                        startTime = (String) route.get("startTime");
-                        endTime = (String) route.get("endTime");
-                        pickUpTime = (String) route.get("pickUpTime");
-                    }
-                }
-
-                System.out.println("Advert number: " + id +
-                        "\n Date: " + dateR +
-                        "\n Route start point: " + startCity + ", " + startStreet + " at " + startTime +
-                        "\n Route end point: " + endCity + ", " + endStreet + " at " + endTime +
-                        "\n Pick up point: " + pickUpCity + ", " + pickUpStreet + " at " + pickUpTime);
-
-                System.out.println("------------");
-            }
-
-        } catch (IOException | org.json.simple.parser.ParseException e) {
-            e.printStackTrace();
+            System.out.println("------------");
         }
     }
 

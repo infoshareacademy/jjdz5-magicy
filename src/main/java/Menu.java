@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 class Menu {
+    AdvertManager advertManager = new AdvertManager();
     Menu() {
     }
 
@@ -17,11 +18,10 @@ class Menu {
             choice = sc.nextLine().charAt(0);
             switch (choice) {
                 case '1':
-                    AdvertManager.showAdverts();
+                    advertManager.showAdverts();
                     break;
                 case '2':
-                    AdvertManager AdvertManager = new AdvertManager();
-                    AdvertManager.addAdvert();
+                    advertManager.addAdvert();
                     break;
                 case 'q':
                     System.out.println("Thank you!\n");
