@@ -1,6 +1,6 @@
 [{
   "id": "1",
-  "date": "13-06-2018",
+  "date": "2018-06-22",
   "driver": {
     "id": "1",
     "name": "Jan",
@@ -12,7 +12,7 @@
   },
   "route": {
     "id": "1",
-    "date": "13-10-2018",
+    "date": "2018-10-13",
     "startCity": "Gdynia",
     "startStreet": "ul. Kwiatowa 2",
     "endCity": "Gdańsk",
@@ -20,12 +20,12 @@
     "pickUpCity": "Sopot",
     "pickUpStreet": "Centrum",
     "startTime": "7:00",
-    "stopTime": "8:00",
+    "endTime": "8:00",
     "pickUpTime": "7:30"
   }
 }, {
   "id": "2",
-  "date": "20-06-2018",
+  "date": "2018-06-07",
   "driver": {
     "id": "2",
     "name": "Józek",
@@ -35,6 +35,6 @@
     "city": "Bazin",
     "district": "Bazin"
   },
-  "route":{"startCity":"Sopot","date":"02-08-2018","startStreet":"Kpielowa 14","pickUpStreet":"Grunwaldzka","endStreet":"Cysters�w 3","pickUpTime":"07:45","startTime":"07:30","id":"3","endTime":"08:00","endCity":"GdaDsk","pickUpCity":"GdaDsk"}
+  "route":{"startCity":"Sopot","date":"2018-07-09","startStreet":"Kpielowa 14","pickUpStreet":"Grunwaldzka","endStreet":"Cysters�w 3","pickUpTime":"07:45","startTime":"07:30","id":"3","endTime":"08:00","endCity":"GdaDsk","pickUpCity":"GdaDsk"}
 }
 ]

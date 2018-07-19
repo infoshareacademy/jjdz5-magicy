@@ -3,20 +3,20 @@ import java.util.Date;
 class Advert {
     private Long id;
     private Date date;
-    private Long routeId;
     private Driver driver;
     private Route route;
 
-    public Advert(Long id, Date date, Long routeId) {
-        this.id = id;
-        this.date = date;
-        this.routeId = routeId;
+    public Advert(){
     }
 
-    public Advert(Long id, Date date, Long routeId, Driver driver, Route route) {
+    public Advert(Long id, Date date) {
         this.id = id;
         this.date = date;
-        this.routeId = routeId;
+    }
+
+    public Advert(Long id, Date date, Driver driver, Route route) {
+        this.id = id;
+        this.date = date;
         this.driver = driver;
         this.route = route;
     }
@@ -45,12 +45,15 @@ class Advert {
         this.date = date;
     }
 
-    public Long getRouteId() {
-        return routeId;
+    @Override
+    public String toString() {
+        return "Advert{" +
+                "id=" + id +
+                ", date=" + date +
+                ", driver=" + driver +
+                ", route=" + route +
+                '}';
     }
 
-    public void setRouteId(Long routeId) {
-        this.routeId = routeId;
-    }
 }
 

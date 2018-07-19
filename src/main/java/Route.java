@@ -13,6 +13,10 @@ public class Route {
     private String endTime;
     private String pickUpTime;
 
+    public Route(){
+
+    }
+
 
     public Route(Integer id, Date date, String startCity, String startStreet, String endCity,
                  String endStreet, String pickUpCity, String pickUpStreet, String startTime, String endTime, String pickUpTime) {
@@ -71,4 +75,20 @@ public class Route {
         return pickUpTime;
     }
 
+    @Override
+    public String toString() {
+        return "Route{" +
+                "id=" + id +
+                ", date=" + date +
+                ", startCity='" + startCity + '\'' +
+                ", startStreet='" + startStreet + '\'' +
+                ", endCity='" + endCity + '\'' +
+                ", endStreet='" + endStreet + '\'' +
+                ", pickUpCity='" + pickUpCity + '\'' +
+                ", pickUpStreet='" + pickUpStreet + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", pickUpTime='" + pickUpTime + '\'' +
+                '}';
+    }
 }

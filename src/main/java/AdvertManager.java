@@ -91,11 +91,11 @@ public class AdvertManager {
         Integer routeId = getMaxId(ROUTE_JSON) + 1;
 
         // create the advert object
-        Advert advert = new Advert(Long.valueOf(getMaxId(AD_JSON) + 1), new Date(), Long.valueOf(routeId));
-        JSONObject jsonAdvert = adToJson(advert);
+     //   Advert advert = new Advert(Long.valueOf(getMaxId(AD_JSON) + 1), new Date(), Long.valueOf(routeId));
+    //    JSONObject jsonAdvert = adToJson(advert);
 
         // add object to ad.json
-        JsonUtil.writeToJsonFile(AD_JSON, jsonAdvert.toJSONString());
+       // JsonUtil.writeToJsonFile(AD_JSON, jsonAdvert.toJSONString());
 
         // create the route object
         Route route = new Route(routeId, date, startCity, startStreet, endCity,
@@ -111,7 +111,7 @@ public class AdvertManager {
         JSONObject jsonAdvert = new JSONObject();
         jsonAdvert.put("id", advert.getId().toString());
         jsonAdvert.put("date", format.format(advert.getDate()));
-        jsonAdvert.put("routeId", advert.getRouteId().toString());
+ //       jsonAdvert.put("routeId", advert.getRouteId().toString());
 
         return jsonAdvert;
     }
