@@ -22,7 +22,7 @@ public class Menu {
 
                 switch (state) {
                     case SHOW_ADVERTS_LIST:
-                        AdvertManager.showAdVerts();
+                        AdvertManager.showAdverts();
 
                         break;
                     case ADD_ADVERT:
