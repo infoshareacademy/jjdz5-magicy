@@ -33,6 +33,10 @@ public class Menu {
                         advertManager.addAdvert();
 
                         break;
+
+                    case FILTER:
+                        FilterAdvert filterAdvert = new FilterAdvert(advertsList.getAdvertsList());
+
                     case EXIT:
                         System.out.println("Thank you!\n");
                         System.out.println("exit");
