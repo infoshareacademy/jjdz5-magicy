@@ -13,13 +13,11 @@ public class AdvertManager {
     private static final String AD_JSON = "ad.json";
     private static final String ROUTE_JSON = "route.json";
     private static final String DATE_FORMAT = "dd-MM-yyyy";
-    private final JsonToList jsonToList = new JsonToList();
 
     public AdvertManager() {
     }
 
-    public void showAdverts() {
-        List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
+    public void showAdverts(List<Advert> advertsList) {
         for (Advert advert: advertsList) {
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
