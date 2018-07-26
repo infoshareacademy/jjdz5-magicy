@@ -26,7 +26,7 @@ public class AdvertManager {
                     "\n Route start point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getStartStreet() + " at " + advert.getRoute().getStartTime() +
                     "\n Route end point: " + advert.getRoute().getEndCity() + ", " + advert.getRoute().getEndStreet() + " at " + advert.getRoute().getEndTime() +
                     "\n Pick up point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getPickUpStreet() + " at " + advert.getRoute().getPickUpTime() +
-                    "\n Driver: " +advert.getDriver().getname()+" "+advert.getDriver().getSurname()+", phone number: "+ advert.getDriver().getPhone());
+                    "\n Driver: " +advert.getDriver().getName()+" "+advert.getDriver().getSurname()+", phone number: "+ advert.getDriver().getPhone());
 
             System.out.println("------------");
         }

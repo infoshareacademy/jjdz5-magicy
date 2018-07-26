@@ -6,7 +6,7 @@
     "name": "Jan",
     "surname": "Kowalski",
     "phone": "12313242",
-    "rating": "5.6",
+    "rating":{"average":3.0,"persons":2},
     "city": "Gdańsk",
     "district": "Wrzeszcz"
   },
@@ -31,7 +31,7 @@
     "name": "Józek",
     "surname": "Rak",
     "phone": "1987898",
-    "rating": "2.6",
+    "rating":{"average":4.0,"persons":4},
     "city": "Bazin",
     "district": "Bazin"
   },
