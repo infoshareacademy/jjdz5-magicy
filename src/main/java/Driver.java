@@ -4,7 +4,7 @@ public class Driver extends User {
     private String city;
     private String district;
 
-    public Driver(String name, String surname, String phone, String city, String district, Double rating, Integer id) {
+    public Driver(String name, String surname, String phone, String city, String district, Rating rating, Integer id) {
         super(name, surname, phone, rating);
         this.city = city;
         this.district = district;

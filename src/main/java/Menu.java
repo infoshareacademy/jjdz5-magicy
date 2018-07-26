@@ -4,19 +4,22 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-  private final JsonToList jsonToList = new JsonToList();
-  private List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
+    private AdvertsList advertsList = new AdvertsList();
+    private DriversList driversList = new DriversList();
 
     void menu(){
         AdvertManager advertManager = new AdvertManager();
+        DriverManager driverManager = new DriverManager();
         State state = null;
-        System.out.println("-----MENU------");
-
 
         do {
-            System.out.println("1 - Show adverts list");
-            System.out.println("2 - Add advert");
-            System.out.println("0 - Exit");
+            System.out.println("-------MENU-----------");
+            System.out.println("1 - Show adverts list |");
+            System.out.println("2 - Add advert        |");
+            System.out.println("3 - Filter adverts    |");
+            System.out.println("4 - Driver's rating   |");
+            System.out.println("0 - Exit              |");
+            System.out.println("----------------------");
             System.out.println("Choice:");
 
             try {
@@ -25,13 +28,22 @@ public class Menu {
 
                 switch (state) {
                     case SHOW_ADVERTS_LIST:
-                        advertManager.showAdverts(advertsList);
+                        advertManager.showAdverts(advertsList.getAdvertsList());
 
                         break;
                     case ADD_ADVERT:
                         advertManager.addAdvert();
 
                         break;
+
+           //         case FILTER:
+             //           FilterAdvert filterAdvert = new FilterAdvert(advertsList.getAdvertsList());
+
+                    case RATING:
+                        driverManager.showDrivers(driversList.getDriversList());
+
+                        break;
+
                     case EXIT:
                         System.out.println("Thank you!\n");
                         System.out.println("exit");
