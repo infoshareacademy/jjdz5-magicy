@@ -35,4 +35,12 @@ public class Driver extends User {
         this.district = district;
     }
 
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                '}';
+    }
 }

@@ -46,4 +46,14 @@ public class User {
     public void setRating(Double rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
 }

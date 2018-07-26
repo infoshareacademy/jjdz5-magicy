@@ -1,0 +1,40 @@
+[{
+  "id": "1",
+  "date": "2018-06-22",
+  "driver": {
+    "id": "1",
+    "name": "Jan",
+    "surname": "Kowalski",
+    "phone": "12313242",
+    "rating": "5.6",
+    "city": "Gdańsk",
+    "district": "Wrzeszcz"
+  },
+  "route": {
+    "id": "1",
+    "date": "2018-10-13",
+    "startCity": "Gdynia",
+    "startStreet": "ul. Kwiatowa 2",
+    "endCity": "Gdańsk",
+    "endStreet": "ul. Fiołkowa 4",
+    "pickUpCity": "Sopot",
+    "pickUpStreet": "Centrum",
+    "startTime": "7:00",
+    "endTime": "8:00",
+    "pickUpTime": "7:30"
+  }
+}, {
+  "id": "2",
+  "date": "2018-06-07",
+  "driver": {
+    "id": "2",
+    "name": "Józek",
+    "surname": "Rak",
+    "phone": "1987898",
+    "rating": "2.6",
+    "city": "Bazin",
+    "district": "Bazin"
+  },
+  "route":{"startCity":"Sopot","date":"2018-07-09","startStreet":"Kpielowa 14","pickUpStreet":"Grunwaldzka","endStreet":"Cysters�w 3","pickUpTime":"07:45","startTime":"07:30","id":"3","endTime":"08:00","endCity":"GdaDsk","pickUpCity":"GdaDsk"}
+}
+]
