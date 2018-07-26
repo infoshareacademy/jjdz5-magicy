@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    private final JsonToList jsonToList = new JsonToList();
-    private final List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
+  private final JsonToList jsonToList = new JsonToList();
+  private List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
 
     void menu(){
         AdvertManager advertManager = new AdvertManager();

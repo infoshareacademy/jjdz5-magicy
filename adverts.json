@@ -35,6 +35,6 @@
     "city": "Bazin",
     "district": "Bazin"
   },
-  "route":{"startCity":"Sopot","date":"2018-07-09","startStreet":"Kpielowa 14","pickUpStreet":"Grunwaldzka","endStreet":"Cysters�w 3","pickUpTime":"07:45","startTime":"07:30","id":"3","endTime":"08:00","endCity":"GdaDsk","pickUpCity":"GdaDsk"}
+  "route":{"startCity":"Sopot","date":"2018-07-09","startStreet":"Kpielowa 14","pickUpStreet":"Grunwaldzka","endStreet":"Cystersów 3","pickUpTime":"07:45","startTime":"07:30","id":"3","endTime":"08:00","endCity":"GdaDsk","pickUpCity":"GdaDsk"}
 }
 ]
