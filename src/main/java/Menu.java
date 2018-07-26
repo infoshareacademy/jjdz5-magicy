@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-  private final JsonToList jsonToList = new JsonToList();
-  private List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
+    private AdvertsList advertsList = new AdvertsList();
+
 
     void menu(){
         AdvertManager advertManager = new AdvertManager();
@@ -25,7 +25,7 @@ public class Menu {
 
                 switch (state) {
                     case SHOW_ADVERTS_LIST:
-                        advertManager.showAdverts(advertsList);
+                        advertManager.showAdverts(advertsList.getAdvertsList());
 
                         break;
                     case ADD_ADVERT:
