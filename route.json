@@ -1,28 +1,14 @@
  [{
    "id": "1",
-    "startAddress": "Gdynia ul. Kwiatowa 2",
-    "stopAddress": "Gda≈Ñsk ul. Fio≈Çkowa 4",
-    "routePoint": "Sopot Centrum",
-    "date": "13-10-2018",
-    "startTime": "7:00",
-    "stopTime": "8:00"
-  }, {
-   "id": "2",
-    "startAddress": "Sopot ul. Kopernika 3",
-    "stopAddress": "Gda≈Ñsk ul. Miko≈Çaja 70",
-    "routePoint": "Gda≈Ñsk Przymorze SKM",
-    "date": "15-11-2018",
-    "startTime": "8:00",
-    "stopTime": "9:00"
-  },{
-   "id": "3",
-    "startAddress": "Gdynia ul. Kanciasta 66",
-    "stopAddress": "Gda≈Ñsk ul. Ko≈Çobrzeska 45",
-    "routePoint": "Gda≈Ñsk Matarnia",
-    "date": "16-10-2018",
-    "startTime": "7:00",
-    "stopTime": "8:00"
-  },{"date":"22-07-2018","stopAddress":"Sopot ul. GdaDska 8","startAddress":"Tczew ul. Morska 23","routePoint":"-","startTime":"6:00","stopTime":"6:45","id":"4"}
- ,{"date":"06-07-2018","stopAddress":"Gdynia ul. ZwitojaDska 234","startAddress":"Kosakowo ul. Kopernika1","routePoint":"Gdynia Grabowek","startTime":"6:20","stopTime":"7:10","id":"5"},{"date":"12-12-2018","stopAddress":"KoBobrzeg","startAddress":"GdaDsk","routePoint":"Koszalin","startTime":"13:30","stopTime":"20:40","id":"6"}
-,{"date":"12-12-2014","stopAddress":"sgsrg","startAddress":"srrs","routePoint":"fsrfhsrh","startTime":"12:12","stopTime":"12:56","id":"7"}
+   "date": "13-10-2018",
+   "startCity": "Gdynia",
+   "startStreet": "ul. Kwiatowa 2",
+   "endCity": "Gda≈Ñsk",
+   "endStreet": "ul. Fio≈Çkowa 4",
+   "pickUpCity": "Sopot",
+   "pickUpStreet": "Centrum",
+   "startTime": "7:00",
+   "stopTime": "8:00"
+   "pickUpTime": "7:30"
+ },{"startCity":"WejrowÚ","date":"21-07-2018","startStreet":"SobiesczÈgÚ 4","pickUpStreet":"Gd˘DskÙ, kÚl kÚscoBa","endStreet":"StarowieskÚ 76","pickUpTime":"07:15","startTime":"06:45","id":"2","endTime":"08:00","endCity":"RÎmiÙ","pickUpCity":"RÈda"}
 ]

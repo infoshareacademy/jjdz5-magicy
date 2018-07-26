@@ -1,11 +1,14 @@
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
+  private final JsonToList jsonToList = new JsonToList();
+  private List<Advert> advertsList = jsonToList.jsonToList("adverts.json");
 
     void menu(){
-
+        AdvertManager advertManager = new AdvertManager();
         State state = null;
         System.out.println("-----MENU------");
 
@@ -22,11 +25,10 @@ public class Menu {
 
                 switch (state) {
                     case SHOW_ADVERTS_LIST:
-                        AdvertManager.showAdverts();
+                        advertManager.showAdverts(advertsList);
 
                         break;
                     case ADD_ADVERT:
-                        AdvertManager advertManager = new AdvertManager();
                         advertManager.addAdvert();
 
                         break;
