@@ -38,7 +38,7 @@ class UserInput {
         return this.getUserInput(question);
     }
 
-    private String getUserInput(final String question) {
+     String getUserInput(final String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(question + "> ");
 

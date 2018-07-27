@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -49,18 +50,29 @@ public class FilterAdvert {
 
     private void showByDate(List<Advert> list){
 
-        Date date = user.askForDate("Input date: ");
+        String userDate = user.getUserInput("Input Date: ").trim();
         System.out.println("------------");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        int n=0;
 
         for (Advert advert: list
                 ) {
-            if (advert.getRoute().getDate().equals(date)){
 
+            String dateString = dateFormat.format(advert.getDate());
+            if (userDate.contains(dateString)){
 
                 advertManager.showOneAdvert(advert);
-
+                n++;
             }
+
         }
+        if (n==0){
+
+            System.out.println("No advert meets the criteria \n");
+
+        }
+
 
     }
 
