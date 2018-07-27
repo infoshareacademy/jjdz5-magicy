@@ -14,12 +14,7 @@ public class FilterAdvert {
 
         filterMenu(adverts);
 
-
     }
-
-
-
-
 
 
     private void showByCity(List<Advert> list){
@@ -103,7 +98,6 @@ public class FilterAdvert {
 
             System.out.println("No advert meets the criteria \n");
         }
-
 
 
 
