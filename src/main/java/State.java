@@ -6,6 +6,7 @@ import java.util.Map;
 public enum State {
     SHOW_ADVERTS_LIST(1),
     ADD_ADVERT(2),
+    FILTER(3),
     RATING(4),
     EXIT(0);
 
