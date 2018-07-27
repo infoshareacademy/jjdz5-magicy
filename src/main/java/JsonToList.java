@@ -32,5 +32,27 @@ public class JsonToList {
 
     }
 
+    public List<Driver> driversToList (String path) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        JSONParser parser = new JSONParser();
+        List<Driver> driversList = null;
+
+        try {
+            JSONArray drivers = (JSONArray) parser.parse(new FileReader(path));
+            String jsonDriverArray = drivers.toString();
+
+            driversList = objectMapper.readValue(jsonDriverArray, new TypeReference<List<Driver>>(){});
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return driversList;
+
+    }
+
 }
 

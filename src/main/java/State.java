@@ -6,6 +6,7 @@ import java.util.Map;
 public enum State {
     SHOW_ADVERTS_LIST(1),
     ADD_ADVERT(2),
+    RATING(4),
     EXIT(0);
 
     private int stateNumber;
@@ -35,4 +36,3 @@ public enum State {
         return (State) enumMap.get(stateNumber);
     }
 }
-
