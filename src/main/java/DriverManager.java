@@ -7,16 +7,21 @@ import java.io.IOException;
 import java.util.List;
 
 public class DriverManager {
-    private final DriversList driversList = new DriversList();
     private  final UserInput userInput = new UserInput();
 
     public void showDrivers(List<Driver> driversList) {
+        System.out.println("-------Drivers list-----------");
         for (Driver driver : driversList) {
             System.out.println(driver.getId() + " - " + driver.getName() + " " + driver.getSurname()
                     + ", " + driver.getCity() + ", rating: " + driver.getRating().getAverage() + "/" + driver.getRating().getPersons());
         }
-        giveRating(driversList, userInput.askForDriverId("Choose the driver you want to rate"));
-        writeDriverData(driversList);
+        System.out.println("0 - Back");
+        System.out.println("------------------------\n");
+        int result = userInput.askForDriverId("Choose the driver you want to rate");
+        if(result != 0){
+            giveRating(driversList, result);
+            writeDriverData(driversList);
+        }
 
     }
 
@@ -36,10 +41,10 @@ public class DriverManager {
 
                 driver.getRating().setAverage(driver.getRating().newAverage(userInput.askForRating("Give your rating from 0 to 5")));
                 driver.getRating().setPersons(driver.getRating().getPersons()+1);
-                System.out.println("---New Rating----");
+                System.out.println("\n--------- New rating for "+driver.getName()+" ---------");
                 System.out.println(driver.getId()+" - "+driver.getName()+" "+ driver.getSurname()
                         + ", "+ driver.getCity()+", rating: "+ driver.getRating().getAverage()+"/"+driver.getRating().getPersons());
-                System.out.println("-------");
+                System.out.println("------------------------------\n");
                 break;
             }
         }

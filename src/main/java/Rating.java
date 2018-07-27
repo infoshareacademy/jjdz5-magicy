@@ -23,7 +23,6 @@ public class Rating {
     }
 
     public double newAverage(Integer note){
-      //  DecimalFormat df = new DecimalFormat("###.##");
         Double result = (this.average * this.persons + note)/(this.persons+1);
         return Precision.round(result, 1);
     }

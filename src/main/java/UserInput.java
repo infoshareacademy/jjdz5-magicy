@@ -92,7 +92,7 @@ class UserInput {
         DriverManager driverManager = new DriverManager();
         DriversList driversList = new DriversList();
 
-        while(!driverId.matches("^?[1-"+driverManager.getMaxId(driversList.getDriversList())+"]")){
+        while(!driverId.matches("^?[0-"+driverManager.getMaxId(driversList.getDriversList())+"]")){
             System.out.println("Choose the driver's number:");
             driverId = getUserInput(driverId);
         }
