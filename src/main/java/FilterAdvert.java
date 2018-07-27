@@ -50,7 +50,7 @@ public class FilterAdvert {
 
     private void showByDate(List<Advert> list){
 
-        String userDate = user.getUserInput("Input Date: ").trim();
+        String userDate = user.getUserInput("Input Date (dd-mm-yyyy): ").trim();
         System.out.println("------------");
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -59,7 +59,7 @@ public class FilterAdvert {
         for (Advert advert: list
                 ) {
 
-            String dateString = dateFormat.format(advert.getDate());
+            String dateString = dateFormat.format(advert.getRoute().getDate());
             if (userDate.contains(dateString)){
 
                 advertManager.showOneAdvert(advert);
@@ -79,7 +79,7 @@ public class FilterAdvert {
 
     private void showByTime(List<Advert> list){
 
-        String time = user.askForTime("Input time: ").trim();
+        String time = user.askForTime("Input time (hh:mm): ").trim();
         System.out.println("------------");
         int n = 0;
 
