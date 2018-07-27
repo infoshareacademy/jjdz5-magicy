@@ -152,7 +152,7 @@ public class FilterAdvert {
                 showByTime(adverts);
                 break;
         }
-        ;
+        
     }
 
 
