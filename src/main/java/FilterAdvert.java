@@ -19,15 +19,15 @@ public class FilterAdvert {
 
     private void showByCity(List<Advert> list){
 
-        String startCity = user.askForText("Input start city ");
-        String endtCity = user.askForText("Input end city ");
+        String startCity = user.askForText("Input start city ").trim();
+        String endtCity = user.askForText("Input end city ").trim();
         System.out.println("------------");
         int n=0;
 
         for (Advert advert: list
                 ) {
-            if( advert.getRoute().getStartCity().contains(startCity) &&
-                    advert.getRoute().getEndCity().contains(endtCity)){
+            if( advert.getRoute().getStartCity().equalsIgnoreCase(startCity) &&
+                    advert.getRoute().getEndCity().equalsIgnoreCase(endtCity)){
 
                 advertManager.showOneAdvert(advert);
                 n++;
@@ -147,7 +147,7 @@ public class FilterAdvert {
         System.out.println("0 - back         |");
         System.out.println("-----------------");
         System.out.println("Choice:");
-        choice = sc.nextLine().charAt(0);
+        choice = sc.nextLine().trim().charAt(0);
         switch (choice) {
             case '1':
                 showByCity(adverts);

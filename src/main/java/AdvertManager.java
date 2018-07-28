@@ -30,7 +30,7 @@ public class AdvertManager {
 
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         System.out.println("Advert number: " + advert.getId() +
-                "\n Date: " + formatter.format(advert.getDate()) +
+                "\n Date: " + formatter.format(advert.getRoute().getDate()) +
                 "\n Route start point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getStartStreet() + " at " + advert.getRoute().getStartTime() +
                 "\n Route end point: " + advert.getRoute().getEndCity() + ", " + advert.getRoute().getEndStreet() + " at " + advert.getRoute().getEndTime() +
                 "\n Pick up point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getPickUpStreet() + " at " + advert.getRoute().getPickUpTime() +
