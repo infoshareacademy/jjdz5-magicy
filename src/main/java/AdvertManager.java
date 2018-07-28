@@ -1,8 +1,12 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,8 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 public class AdvertManager {
-    private static final String AD_JSON = "ad.json";
-    private static final String ROUTE_JSON = "route.json";
     private static final String DATE_FORMAT = "dd-MM-yyyy";
 
     public AdvertManager() {
@@ -54,74 +56,67 @@ public class AdvertManager {
         String pickUpTime = user.askForText("At time (HH:mm)");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
-        Integer routeId = getMaxId(ROUTE_JSON) + 1;
 
-        // create the advert object
-     //   Advert advert = new Advert(Long.valueOf(getMaxId(AD_JSON) + 1), new Date(), Long.valueOf(routeId));
-    //    JSONObject jsonAdvert = adToJson(advert);
+        AdvertsList advertsList = new AdvertsList();
+        List<Advert> newList = advertsList.getAdvertsList();
 
-        // add object to ad.json
-       // JsonUtil.writeToJsonFile(AD_JSON, jsonAdvert.toJSONString());
+        Integer routeId = getMaxIdList(advertsList.getAdvertsList(), 3) + 1;
 
-        // create the route object
+
         Route route = new Route(routeId, date, startCity, startStreet, endCity,
                 endStreet, pickUpCity, pickUpStreet, startTime, endTime, pickUpTime);
-        JSONObject jsonRoute = routeToJson(route);
 
-        JsonUtil.writeToJsonFile(ROUTE_JSON, jsonRoute.toJSONString());
+        Rating rating = new Rating(4.5, 2);
+
+        Driver driver = new Driver("Artur", "Moroz", "555000111", "Gdańsk", "Wrzeszcz", rating, 4);
+
+        Advert advert = new Advert(getMaxIdList(advertsList.getAdvertsList(), 1) + 1, new Date(), driver, route);
+
+        newList.add(advert);
+        advertsList.setAdvertsList(newList);
+
+        writeAdvertData(advertsList.getAdvertsList());
+
+        showAdverts(advertsList.getAdvertsList());
+
     }
 
-    private JSONObject adToJson(Advert advert) {
-        final DateFormat format = new SimpleDateFormat(DATE_FORMAT);
 
-        JSONObject jsonAdvert = new JSONObject();
-        jsonAdvert.put("id", advert.getId().toString());
-        jsonAdvert.put("date", format.format(advert.getDate()));
- //       jsonAdvert.put("routeId", advert.getRouteId().toString());
-
-        return jsonAdvert;
-    }
-
-    private JSONObject routeToJson(Route route) {
-        final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-        final DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-
-        JSONObject jsonRoute = new JSONObject();
-        jsonRoute.put("id", route.getId().toString());
-        jsonRoute.put("startCity", route.getStartCity());
-        jsonRoute.put("startStreet", route.getStartStreet());
-        jsonRoute.put("endCity", route.getEndCity());
-        jsonRoute.put("endStreet", route.getEndStreet());
-        jsonRoute.put("pickUpCity", route.getPickUpCity());
-        jsonRoute.put("pickUpStreet", route.getPickUpStreet());
-        jsonRoute.put("date", dateFormat.format(route.getDate()));
-        jsonRoute.put("startTime", route.getStartTime());
-        jsonRoute.put("endTime", route.getEndTime());
-        jsonRoute.put("pickUpTime", route.getPickUpTime());
-
-        return jsonRoute;
-    }
-
-    private static Integer getMaxId(String fileName) {
-        JSONParser parser = new JSONParser();
-        Integer idMax = 0;
+    public void writeAdvertData(List<Advert> advertList){
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            JSONArray array = (JSONArray) parser.parse(new FileReader(fileName));
+            String arrayToJson = objectMapper.writeValueAsString(advertList);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("adverts.json"));
+            writer.write(arrayToJson);
+            writer.close();
 
-            for (Object o : array) {
-                JSONObject ob = (JSONObject) o;
-
-                if (Integer.valueOf((String) ob.get("id")) > idMax) {
-                    idMax = Integer.valueOf((String) ob.get("id"));
-                }
-            }
-
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (org.json.simple.parser.ParseException e) {
-            e.printStackTrace();
         }
+    }
 
+
+
+
+    public static Integer getMaxIdList(List<Advert> adverts, Integer num) {
+        Integer idMax = 0;
+        for (Advert advert : adverts) {
+
+            if (num == 1 && advert.getId() > idMax) {
+                idMax = advert.getId();
+            }
+            if (num == 2 && advert.getDriver().getId() > idMax) {
+                idMax = advert.getDriver().getId();
+            }
+            if (num == 3 && advert.getRoute().getId() > idMax) {
+                idMax = advert.getRoute().getId();
+            }
+
+        }
         return idMax;
     }
 }
+
+

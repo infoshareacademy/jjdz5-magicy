@@ -1,7 +1,7 @@
 import java.util.Date;
 
 class Advert {
-    private Long id;
+    private Integer id;
     private Date date;
     private Driver driver;
     private Route route;
@@ -9,12 +9,12 @@ class Advert {
     public Advert(){
     }
 
-    public Advert(Long id, Date date) {
+    public Advert(Integer id, Date date) {
         this.id = id;
         this.date = date;
     }
 
-    public Advert(Long id, Date date, Driver driver, Route route) {
+    public Advert(Integer id, Date date, Driver driver, Route route) {
         this.id = id;
         this.date = date;
         this.driver = driver;
@@ -29,12 +29,8 @@ class Advert {
         return route;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getDate() {

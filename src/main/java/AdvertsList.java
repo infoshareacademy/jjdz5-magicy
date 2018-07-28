@@ -6,11 +6,12 @@ public class AdvertsList {
     private String path = readProperties.readFilePath();
     private List<Advert> advertsList = jsonToList.jsonToList(path);
 
-    public List<Advert> getAdvertsList() {
-        return advertsList;
-    }
 
     public void setAdvertsList(List<Advert> advertsList) {
         this.advertsList = advertsList;
+    }
+
+    public List<Advert> getAdvertsList() {
+        return advertsList;
     }
 }
