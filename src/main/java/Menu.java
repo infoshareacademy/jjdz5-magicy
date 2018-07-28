@@ -36,9 +36,10 @@ public class Menu {
 
                         break;
 
-           //         case FILTER:
-             //           FilterAdvert filterAdvert = new FilterAdvert(advertsList.getAdvertsList());
+                    case FILTER:
+                        FilterAdvert filterAdvert = new FilterAdvert(advertsList.getAdvertsList());
 
+                        break;
                     case RATING:
                         driverManager.showDrivers(driversList.getDriversList());
 

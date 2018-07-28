@@ -38,7 +38,7 @@ class UserInput {
         return this.getUserInput(question);
     }
 
-    private String getUserInput(final String question) {
+     String getUserInput(final String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(question + "> ");
 
@@ -66,7 +66,7 @@ class UserInput {
         return true;
     }
 
-    private boolean isDateValid(String date) {
+    public boolean isDateValid(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);
