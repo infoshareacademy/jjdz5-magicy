@@ -20,15 +20,13 @@ public class AdvertManager {
     }
 
 
-    public void showAdverts(List<Advert> advertsList) {
+    static void showAdverts(List<Advert> advertsList) {
         for (Advert advert: advertsList) {
-
             showOneAdvert(advert);
-
         }
     }
 
-    public void showOneAdvert(Advert advert){
+    static void showOneAdvert(Advert advert){
 
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         System.out.println("Advert number: " + advert.getId() +
@@ -42,7 +40,7 @@ public class AdvertManager {
 
     }
 
-    void addAdvert() {
+    static List<Advert> addAdvert(List<Advert> advertList) {
         final UserInput user = new UserInput();
 
         String startCity = user.askForText("Route start city");
@@ -57,32 +55,24 @@ public class AdvertManager {
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
 
-        AdvertsList advertsList = new AdvertsList();
-        List<Advert> newList = advertsList.getAdvertsList();
-
-        Integer routeId = getMaxIdList(advertsList.getAdvertsList(), 3) + 1;
-
-
-        Route route = new Route(routeId, date, startCity, startStreet, endCity,
+        Route route = new Route( getMaxIdList(advertList, 3) + 1, date, startCity, startStreet, endCity,
                 endStreet, pickUpCity, pickUpStreet, startTime, endTime, pickUpTime);
 
         Rating rating = new Rating(4.5, 2);
 
         Driver driver = new Driver("Artur", "Moroz", "555000111", "Gdańsk", "Wrzeszcz", rating, 4);
 
-        Advert advert = new Advert(getMaxIdList(advertsList.getAdvertsList(), 1) + 1, new Date(), driver, route);
+        Advert advert = new Advert(getMaxIdList(advertList, 1) + 1, new Date(), driver, route);
 
-        newList.add(advert);
-        advertsList.setAdvertsList(newList);
+        advertList.add(advert);
+        writeAdvertData(advertList);
 
-        writeAdvertData(advertsList.getAdvertsList());
+        showAdverts(advertList);
 
-        showAdverts(advertsList.getAdvertsList());
-
+        return advertList;
     }
 
-
-    public void writeAdvertData(List<Advert> advertList){
+    public static void writeAdvertData(List<Advert> advertList){
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String arrayToJson = objectMapper.writeValueAsString(advertList);

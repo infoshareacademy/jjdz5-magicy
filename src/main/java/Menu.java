@@ -8,9 +8,13 @@ public class Menu {
     private DriversList driversList = new DriversList();
 
     void menu(){
-        AdvertManager advertManager = new AdvertManager();
         DriverManager driverManager = new DriverManager();
         State state = null;
+
+       System.out.println("\n\n******************************************");
+       System.out.println("******** WELCOME TO GOTOGETHER! **********");
+       System.out.println("******************************************");
+       System.out.println("\n****** Go together with goTogether! ******\n");
 
         do {
             System.out.println("-------MENU-----------");
@@ -28,12 +32,11 @@ public class Menu {
 
                 switch (state) {
                     case SHOW_ADVERTS_LIST:
-                        advertManager.showAdverts(advertsList.getAdvertsList());
+                        AdvertManager.showAdverts(advertsList.getAdvertsList());
 
                         break;
                     case ADD_ADVERT:
-                        advertManager.addAdvert();
-
+                        advertsList.setAdvertsList(AdvertManager.addAdvert(advertsList.getAdvertsList()));
                         break;
 
                     case FILTER:

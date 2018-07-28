@@ -144,7 +144,7 @@ public class FilterAdvert {
         System.out.println("1 - City         |");
         System.out.println("2 - Date         |");
         System.out.println("3 - Sart time    |");
-        System.out.println("0 - back         |");
+        System.out.println("0 - Back         |");
         System.out.println("-----------------");
         System.out.println("Choice:");
         choice = sc.nextLine().trim().charAt(0);
@@ -161,7 +161,7 @@ public class FilterAdvert {
             case '0':
                 break;
             default:
-                System.out.println("choose again");
+                System.out.println("Select number form the list");
                 filterMenu(adverts);
         }
 
