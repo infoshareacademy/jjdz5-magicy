@@ -66,7 +66,7 @@ class UserInput {
         return true;
     }
 
-    private boolean isDateValid(String date) {
+    public boolean isDateValid(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);

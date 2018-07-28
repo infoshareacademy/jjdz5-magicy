@@ -46,6 +46,12 @@ public class FilterAdvert {
     private void showByDate(List<Advert> list){
 
         String userDate = user.getUserInput("Input Date (dd-mm-yyyy): ").trim();
+
+        while (!user.isDateValid(userDate)) {
+            System.out.println("Entered date is incorrect, please try again.");
+            userDate = user.getUserInput(userDate);
+        }
+
         System.out.println("------------");
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -138,6 +144,7 @@ public class FilterAdvert {
         System.out.println("1 - City         |");
         System.out.println("2 - Date         |");
         System.out.println("3 - Sart time    |");
+        System.out.println("0 - back         |");
         System.out.println("-----------------");
         System.out.println("Choice:");
         choice = sc.nextLine().charAt(0);
@@ -151,8 +158,13 @@ public class FilterAdvert {
             case '3':
                 showByTime(adverts);
                 break;
+            case '0':
+                break;
+            default:
+                System.out.println("choose again");
+                filterMenu(adverts);
         }
-        
+
     }
 
 
