@@ -2,9 +2,9 @@ public class User {
     private String name;
     private String surname;
     private String phone;
-    private Double rating;
+    private Rating rating;
 
-    public User(String name, String surname, String phone, Double rating) {
+    public User(String name, String surname, String phone, Rating rating) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -15,11 +15,11 @@ public class User {
 
     }
 
-    public String getname() {
+    public String getName() {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -39,11 +39,21 @@ public class User {
         this.phone = phone;
     }
 
-    public Double getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }

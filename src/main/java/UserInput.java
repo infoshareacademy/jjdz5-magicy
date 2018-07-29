@@ -38,7 +38,7 @@ class UserInput {
         return this.getUserInput(question);
     }
 
-    private String getUserInput(final String question) {
+     String getUserInput(final String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(question + "> ");
 
@@ -66,7 +66,7 @@ class UserInput {
         return true;
     }
 
-    private boolean isDateValid(String date) {
+    public boolean isDateValid(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);
@@ -75,5 +75,27 @@ class UserInput {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    Integer askForRating(final String question) {
+        String userInput = getUserInput(question).trim();
+        while(!userInput.matches("^?[0-5]")){
+            System.out.println("You can give rate from 0 to 5");
+            userInput = getUserInput(userInput);
+        }
+        Integer userRate = Integer.parseInt(userInput);
+        return userRate;
+    }
+
+    Integer askForDriverId(final String question){
+        String driverId = getUserInput(question).trim();
+        DriverManager driverManager = new DriverManager();
+        DriversList driversList = new DriversList();
+
+        while(!driverId.matches("^?[0-"+driverManager.getMaxId(driversList.getDriversList())+"]")){
+            System.out.println("Choose the driver's number:");
+            driverId = getUserInput(driverId);
+        }
+        return Integer.parseInt(driverId);
     }
 }
