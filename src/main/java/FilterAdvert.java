@@ -143,7 +143,7 @@ public class FilterAdvert {
         System.out.println("----Filter by----");
         System.out.println("1 - City         |");
         System.out.println("2 - Date         |");
-        System.out.println("3 - Sart time    |");
+        System.out.println("3 - Start time   |");
         System.out.println("0 - Back         |");
         System.out.println("-----------------");
         System.out.println("Choice:");

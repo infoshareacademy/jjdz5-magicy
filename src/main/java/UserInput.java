@@ -59,7 +59,7 @@ class UserInput {
         final Integer hours = Integer.parseInt(splittedTime[0]);
         final Integer minutes = Integer.parseInt(splittedTime[1]);
 
-        if (hours < 0 || hours > 24 || minutes < 0 || minutes > 59) {
+        if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
             return false;
         }
 
