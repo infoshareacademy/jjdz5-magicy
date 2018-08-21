@@ -17,7 +17,7 @@ public class DriverManager {
         }
         System.out.println("0 - Back");
         System.out.println("------------------------\n");
-        int result = userInput.askForDriverId("Choose th4e driver you want to rate");
+        int result = userInput.askForDriverId("Choose the driver you want to rate");
         if(result != 0){
             giveRating(driversList, result);
             writeDriverData(driversList);
