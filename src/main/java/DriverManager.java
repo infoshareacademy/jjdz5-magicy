@@ -13,7 +13,7 @@ public class DriverManager {
         System.out.println("-------Drivers list-----------");
         for (Driver driver : driversList) {
             System.out.println(driver.getId() + " - " + driver.getName() + " " + driver.getSurname()
-                    + ", " + driver.getCity() + ", rating: " + driver.getRating().getAverage() + "/" + driver.getRating().getPersons());
+                    + ", " + driver.getCity() + ", " + driver.getRating().toString());
         }
         System.out.println("0 - Back");
         System.out.println("------------------------\n");
