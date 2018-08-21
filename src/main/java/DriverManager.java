@@ -13,11 +13,11 @@ public class DriverManager {
         System.out.println("-------Drivers list-----------");
         for (Driver driver : driversList) {
             System.out.println(driver.getId() + " - " + driver.getName() + " " + driver.getSurname()
-                    + ", " + driver.getCity() + ", Average Rating: " + driver.getRating().getAverage() + "/5.0  Number of ratings: " + driver.getRating().getPersons());
+                    + ", " + driver.getCity() + ", " + driver.getRating().toString());
         }
         System.out.println("0 - Back");
         System.out.println("------------------------\n");
-        int result = userInput.askForDriverId("Choose the driver you want to rate");
+        int result = userInput.askForDriverId("Choose th4e driver you want to rate");
         if(result != 0){
             giveRating(driversList, result);
             writeDriverData(driversList);
