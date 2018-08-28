@@ -33,6 +33,13 @@ public class Rating {
         this.average = average;
         this.persons = persons;
     }
+
+    @Override
+    public String toString() {
+        return "Average Rating: " + average +
+                "/5.0  Number of ratings: " + persons;
+    }
+
     public Rating(){
 
     }
