@@ -77,6 +77,50 @@ public class Route {
         return pickUpTime;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setStartCity(String startCity) {
+        this.startCity = startCity;
+    }
+
+    public void setStartStreet(String startStreet) {
+        this.startStreet = startStreet;
+    }
+
+    public void setEndCity(String endCity) {
+        this.endCity = endCity;
+    }
+
+    public void setEndStreet(String endStreet) {
+        this.endStreet = endStreet;
+    }
+
+    public void setPickUpCity(String pickUpCity) {
+        this.pickUpCity = pickUpCity;
+    }
+
+    public void setPickUpStreet(String pickUpStreet) {
+        this.pickUpStreet = pickUpStreet;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setPickUpTime(String pickUpTime) {
+        this.pickUpTime = pickUpTime;
+    }
+
     @Override
     public String toString() {
         return "Route{" +
