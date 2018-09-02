@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdvertsList {
@@ -14,6 +15,8 @@ public class AdvertsList {
     }
 
     public List<Advert> getAdvertsList() {
-        return advertsList;
+        System.out.println(path);
+   //     return new ArrayList<>();
+       return advertsList;
     }
 }

@@ -1,9 +1,6 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.infoshareacademy.Advert;
-import com.infoshareacademy.Driver;
-import com.infoshareacademy.Rating;
-import com.infoshareacademy.Route;
+import com.infoshareacademy.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +18,7 @@ public class AddAdvertServlet extends HttpServlet {
 
     Advert advert = new Advert();
     Route route = new Route();
+    AdvertsList advertsList = new AdvertsList();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
