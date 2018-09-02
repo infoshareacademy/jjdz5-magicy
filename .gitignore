@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/maven,intellij
 
 ### Intellij ###
@@ -76,6 +75,8 @@ modules.xml
 
 ### Maven ###
 target/
+console-app/target/
+web-app/target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -88,4 +89,4 @@ buildNumber.properties
 .idea/**
 
 # End of https://www.gitignore.io/api/maven,intellij
-.idea/
+

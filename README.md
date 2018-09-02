@@ -1,3 +1,2 @@
-# jjdz5-magicy
-
+jjdz5-magicy
 Application goTogether
