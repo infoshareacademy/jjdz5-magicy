@@ -2,3 +2,5 @@
 out
 *.iml
 target/*
+console-app/target/*
+web-app/target/*
