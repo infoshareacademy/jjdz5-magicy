@@ -35,15 +35,24 @@
   </dependencies>
 
 <build>
-    <plugins>
-
-      <plugin>
-        <groupId>org.wildfly.plugins</groupId>
-        <artifactId>wildfly-maven-plugin</artifactId>
-        <version>1.2.1.Final</version>
-      </plugin>
-
-    </plugins>
+ <plugins>
+  <plugin>
+    <groupId>org.wildfly.plugins</groupId>
+    <artifactId>wildfly-maven-plugin</artifactId>
+    <version>1.2.1.Final</version>
+    <configuration>
+      <name>jjdz5-magicy.war</name>
+    </configuration>
+    <executions>
+      <execution>
+        <phase>install</phase>
+        <goals>
+          <goal>deploy</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+ </plugins>
 
 </build>
 
