@@ -3,8 +3,12 @@ package com.infoshareacademy;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 class UserInput {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
@@ -52,20 +56,12 @@ class UserInput {
             return false;
         }
 
-        String[] splittedTime = time.split(":");
-
-        if (splittedTime.length != 2) {
+        try {
+            LocalTime.parse(time);
+            return true;
+        } catch (DateTimeParseException e) {
             return false;
         }
-
-        final Integer hours = Integer.parseInt(splittedTime[0]);
-        final Integer minutes = Integer.parseInt(splittedTime[1]);
-
-        if (hours < 0 || hours > 24 || minutes < 0 || minutes > 59) {
-            return false;
-        }
-
-        return true;
     }
 
     public boolean isDateValid(String date) {
