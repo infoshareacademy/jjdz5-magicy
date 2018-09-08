@@ -21,15 +21,15 @@ public class FilterAdvert {
 
     private void showByCity(List<Advert> list){
 
-        String startCity = user.askForText("Input start city ").trim();
-        String endtCity = user.askForText("Input end city ").trim();
+        String startCity = user.askForCity("Input start city ").trim();
+        String endCity = user.askForCity("Input end city ").trim();
         System.out.println("------------");
         int n=0;
 
         for (Advert advert: list
                 ) {
             if( advert.getRoute().getStartCity().equalsIgnoreCase(startCity) &&
-                    advert.getRoute().getEndCity().equalsIgnoreCase(endtCity)){
+                    advert.getRoute().getEndCity().equalsIgnoreCase(endCity)){
 
                 advertManager.showOneAdvert(advert);
                 n++;

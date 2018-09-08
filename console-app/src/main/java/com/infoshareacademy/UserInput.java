@@ -3,12 +3,10 @@ package com.infoshareacademy;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.zip.DataFormatException;
 
 class UserInput {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
@@ -17,7 +15,7 @@ class UserInput {
         String userDate = getUserInput(question).trim();
         while (!isDateValid(userDate)) {
             System.out.println("Entered date is incorrect, please try again.");
-            userDate = getUserInput(userDate);
+            userDate = getUserInput(question);
         }
 
         Date result = null;
@@ -34,17 +32,31 @@ class UserInput {
         String userTime = getUserInput(question).trim();
         while (!isTimeValid(userTime)) {
             System.out.println("Entered time is incorrect, please try again.");
-            userTime = getUserInput(userTime);
+            userTime = getUserInput(question);
         }
 
         return userTime;
     }
 
-    String askForText(final String question) {
-        return this.getUserInput(question);
+    String askForCity(final String question) {
+        String userText = getUserInput(question).trim();
+        while (!isCityValid(userText)) {
+            System.out.println("Entered city is incorrect, please try again.");
+            userText = getUserInput(question).trim();
+        }
+        return userText;
     }
 
-     String getUserInput(final String question) {
+    String askForStreet(final String question) {
+        String userText = getUserInput(question).trim();
+        while (!isStreetValid(userText)) {
+            System.out.println("Entered street is incorrect, please try again.");
+            userText = getUserInput(question).trim();
+        }
+        return userText;
+    }
+
+    String getUserInput(final String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(question + "> ");
 
@@ -55,7 +67,6 @@ class UserInput {
         if (time.isEmpty()) {
             return false;
         }
-
         try {
             LocalTime.parse(time);
             return true;
@@ -71,6 +82,21 @@ class UserInput {
             df.parse(date);
             return true;
         } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public boolean isCityValid(String city) {
+        if (city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isStreetValid(String street) {
+        if (street.matches("^[a-zA-ZĄąĆćĘęŁłŃńÓóŚśŹźŻż]+[ ]?[0-9]*$")) {
+            return true;
+        } else {
             return false;
         }
     }
