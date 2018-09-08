@@ -94,11 +94,10 @@ class UserInput {
     }
 
     public boolean isStreetValid(String street) {
-        if (street.matches("^[a-zA-ZĄąĆćĘęŁłŃńÓóŚśŹźŻż]+[ ]?[0-9]*$")) {
+        if (street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9]*[a-z]*$")) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     Integer askForRating(final String question) {
