@@ -87,17 +87,14 @@ class UserInput {
     }
 
     public boolean isCityValid(String city) {
-        if (city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$")) {
-            return true;
-        }
-        return false;
+        Boolean cityResult = city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$");
+            return cityResult;
     }
 
+
     public boolean isStreetValid(String street) {
-        if (street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9]*[a-z]*$")) {
-            return true;
-        }
-        return false;
+        Boolean streetResult = street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9]*[a-z]*$");
+            return streetResult;
     }
 
     Integer askForRating(final String question) {
