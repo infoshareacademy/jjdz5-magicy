@@ -43,14 +43,14 @@ public class AdvertManager {
      List<Advert> addAdvert(List<Advert> advertList) {
         final UserInput user = new UserInput();
 
-        String startCity = user.askForText("Route start city");
-        String startStreet = user.askForText("Route start street");
+        String startCity = user.askForCity("Route start city");
+        String startStreet = user.askForStreet("Route start street");
         String startTime = user.askForTime("At time (HH:mm)");
-        String endCity = user.askForText("Route end city");
-        String endStreet = user.askForText("Route end street");
+        String endCity = user.askForCity("Route end city");
+        String endStreet = user.askForStreet("Route end street");
         String endTime = user.askForTime("At time (HH:mm)");
-        String pickUpCity = user.askForText("Enter pick up city");
-        String pickUpStreet = user.askForText("Enter pick up street");
+        String pickUpCity = user.askForCity("Enter pick up city");
+        String pickUpStreet = user.askForStreet("Enter pick up street");
         String pickUpTime = user.askForTime("At time (HH:mm)");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
