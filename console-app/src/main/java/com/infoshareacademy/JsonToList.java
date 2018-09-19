@@ -18,21 +18,19 @@ public class JsonToList {
 
         JSONParser parser = new JSONParser();
         List<Advert> advertList = new ArrayList<>();
-        System.out.println("PATH222: " + path);
-//        try {
-//
-////            JSONArray adverts = (JSONArray) parser.parse(new FileReader(path));
-////            String jsonAdvertArray = adverts.toString();
-////
-////            advertList = objectMapper.readValue(jsonAdvertArray, new TypeReference<List<Advert>>(){});
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        try {
 
-        System.out.println("RETURN: " + advertList);
+            JSONArray adverts = (JSONArray) parser.parse(new FileReader(path));
+            String jsonAdvertArray = adverts.toString();
+
+            advertList = objectMapper.readValue(jsonAdvertArray, new TypeReference<List<Advert>>(){});
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         return advertList;
 
     }

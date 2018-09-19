@@ -1,7 +1,11 @@
 package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.*;
+import com.infoshareacademy.usersengine.adverts.AdvertsManager;
+import com.infoshareacademy.usersengine.adverts.AdvertsValidation;
 
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,13 +22,37 @@ public class AddAdvertServlet extends HttpServlet {
 
     Advert advert = new Advert();
     Route route = new Route();
-    AdvertsList advertsList = new AdvertsList();
+
+    @Inject
+    AdvertsManager advertsManager;
+
+    @Inject
+    AdvertsValidation advertsValidation;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter writer = resp.getWriter();
-        advert.setId(5);
+        resp.setCharacterEncoding("UTF-8");
+
+        advertsManager.setAdverts(advertsManager.jsonToList(getPath()));
+        advert.setId(advertsManager.getNextAdvertId());
         advert.setDate(new Date());
+        String advertDate = req.getParameter("date");
+
+        if(!advertsValidation.askForDate(resp, advertDate)){
+            return;
+        }
+
+        String startCity = req.getParameter("startCity").trim();
+        String startStreet = req.getParameter("startStreet").trim();
+        String startTime = req.getParameter("startTime");
+
+        String endCity = req.getParameter("endCity").trim();
+        String endStreet = req.getParameter("endStreet").trim();
+        String endTime = req.getParameter("endTime");
+
+        String pickUpCity = req.getParameter("pickUpCity").trim();
+        String pickUpStreet = req.getParameter("pickUpStreet").trim();
+        String pickUpTime = req.getParameter("pickUpTime");
 
         try {
             route.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(req.getParameter("date")));
@@ -32,17 +60,37 @@ public class AddAdvertServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        route.setStartCity(req.getParameter("startCity"));
-        route.setStartStreet(req.getParameter("startStreet"));
-        route.setStartTime(req.getParameter("startTime"));
+        if(!advertsValidation.askForCity(resp, startCity, "start")){
+            return;
+        }
+        if(!advertsValidation.askForStreet(resp, startStreet, "start")){
+            return;
+        }
+        if(!advertsValidation.askForCity(resp, endCity, "end")){
+            return;
+        }
+        if(!advertsValidation.askForStreet(resp, endStreet, "end")){
+            return;
+        }
+        if(!pickUpCity.isEmpty() && !advertsValidation.askForCity(resp, pickUpCity, "pick up")){
+            return;
+        }
+        if(!pickUpStreet.isEmpty() && !advertsValidation.askForStreet(resp, pickUpStreet, "pick up")){
+            return;
+        }
 
-        route.setEndCity(req.getParameter("endCity"));
-        route.setEndStreet(req.getParameter("endStreet"));
-        route.setEndTime(req.getParameter("endTime"));
+        route.setId(advertsManager.getNextRouteId());
+        route.setStartCity(startCity);
+        route.setStartStreet(startStreet);
+        route.setStartTime(startTime);
 
-        route.setPickUpCity(req.getParameter("pickUpCity"));
-        route.setPickUpStreet(req.getParameter("pickUpCity"));
-        route.setPickUpTime(req.getParameter("pickUpTime"));
+        route.setEndCity(endCity);
+        route.setEndStreet(endCity);
+        route.setEndTime(endTime);
+
+        route.setPickUpCity(pickUpCity);
+        route.setPickUpStreet(pickUpStreet);
+        route.setPickUpTime(pickUpTime);
 
         advert.setRoute(route);
 
@@ -50,11 +98,14 @@ public class AddAdvertServlet extends HttpServlet {
         Driver driver = new Driver("Artur", "Moroz", "555000111", "Gdańsk", "Wrzeszcz", rating, 4);
 
         advert.setDriver(driver);
+        advertsManager.setAdverts(advertsManager.addAdvert(advert));
+        advertsManager.listToJson();
 
-        // advertsList.getAdvertsList().add(advert);
-        //  advertManager.writeAdvertData(advertsList.getAdvertsList());
+        resp.sendRedirect("/index.jsp");
 
-        writer.println("<!DOCTYPE html><body>Well done"+advert.toString()+"</body></html>");
-
+    }
+    private String getPath(){
+        ServletContext application = getServletConfig().getServletContext();
+        return application.getRealPath("/adverts.json");
     }
 }
