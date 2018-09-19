@@ -51,7 +51,7 @@
         <artifactId>wildfly-maven-plugin</artifactId>
         <version>1.2.2.Final</version>
       </plugin>
-             <plugin>
+       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>1.7</version>
@@ -67,7 +67,10 @@
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
               <!-- Optional End -->
-      </plugin>                
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
