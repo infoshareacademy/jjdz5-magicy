@@ -17,7 +17,7 @@
         .view {
             background-repeat: no-repeat;
             background-position: center;
-            background-image: url("../../img/background.jpg");
+            background-image: url("img/background.jpg");
             background-size: cover;
         }
 
@@ -79,15 +79,15 @@
 
                 <div class="row">
                     <div class="col-4 text-center white-text">
-                        <img class="imgCenter" src="../../img/dolar.png" alt="..." width="95" hight="95" class="rounded-circle">
+                        <img class="imgCenter" src="img/dolar.png" alt="..." width="95" hight="95" class="rounded-circle">
                         <h3>save money</h3>
                     </div>
                     <div class="col-4 text-center white-text">
-                        <img class="imgCenter" src="../../img/ecology.png" alt="..." width="95" hight="95" class="rounded-circle">
+                        <img class="imgCenter" src="img/ecology.png" alt="..." width="95" hight="95" class="rounded-circle">
                         <h3>care about ecology</h3>
                     </div>
                     <div class="col-4 text-center white-text">
-                        <img class="imgCenter" src="../../img/friends.png" alt="..." width="95" hight="95" class="rounded-circle">
+                        <img class="imgCenter" src="img/friends.png" alt="..." width="95" hight="95" class="rounded-circle">
                         <h3>meet new friends</h3>
                     </div>
                 </div>

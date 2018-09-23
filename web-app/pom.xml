@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.infoshareacademy</groupId>
-            <artifactId>console-app</artifactId>
+            <artifactId>web-app</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- freemaker -->
@@ -29,10 +29,8 @@
     <packaging>war</packaging>
     <name>web-app</name>
 
-
-
     <build>
-        <finalName>jjdz5-magicy-web</finalName>
+        <finalName>jjdz5-magicy</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
