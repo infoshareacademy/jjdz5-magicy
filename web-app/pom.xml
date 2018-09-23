@@ -17,12 +17,6 @@
             <artifactId>console-app</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-    </dependencies>
-    <packaging>war</packaging>
-    <name>web-app</name>
-
-    <dependencies>
-
         <!-- freemaker -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -30,7 +24,12 @@
             <version>2.3.28</version>
         </dependency>
 
+
     </dependencies>
+    <packaging>war</packaging>
+    <name>web-app</name>
+
+
 
     <build>
         <finalName>jjdz5-magicy-web</finalName>
