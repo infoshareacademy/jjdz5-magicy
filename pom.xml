@@ -43,8 +43,6 @@
     </dependency>
   </dependencies>
 
-
-
   <build>
     <finalName>magicy-app</finalName>
     <plugins>
@@ -108,5 +106,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
 </project>
