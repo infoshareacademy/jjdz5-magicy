@@ -23,10 +23,10 @@
 
     <build>
         <plugins>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-            </plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+        </plugins>
     </build>
 </project>
