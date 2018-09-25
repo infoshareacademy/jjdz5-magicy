@@ -1,9 +1,7 @@
 package com.infoshareacademy.usersengine.servlets;
-
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,29 +15,17 @@ import java.util.Map;
 
 @WebServlet("/home")
 public class HelloServlet extends HttpServlet {
-
     @Inject
     private TemplateProvider templateProvider;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         Map<String, Object> dataModel = new HashMap<>();
-
         Template template = templateProvider.getTemplate(getServletContext(), "home");
-
         try{
-
             template.process(dataModel, resp.getWriter());
-
         }catch (TemplateException e){
-
             e.printStackTrace();
         }
-
-
-
-
     }
 }
