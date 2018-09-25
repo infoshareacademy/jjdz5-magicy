@@ -16,12 +16,10 @@
             background-image: url("img/background.jpg");
             background-size: cover;
         }
-
         .imgCenter {
             display: block;
             margin: auto;
         }
-
     </style>
 </head>
 <body>
