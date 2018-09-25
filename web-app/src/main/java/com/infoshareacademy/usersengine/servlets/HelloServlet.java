@@ -19,7 +19,6 @@ public class HelloServlet extends HttpServlet {
     private TemplateProvider templateProvider;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Map<String, Object> dataModel = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "home");
         try{
