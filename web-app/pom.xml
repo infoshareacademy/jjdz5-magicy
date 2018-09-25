@@ -22,7 +22,7 @@
     <name>web-app</name>
 
     <build>
-        <finalName>jjdz5-magicy-web</finalName>
+        <finalName>jjdz5-magicy</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
