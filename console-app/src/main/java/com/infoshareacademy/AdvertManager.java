@@ -33,7 +33,7 @@ public class AdvertManager {
                 "\n Date: " + formatter.format(advert.getRoute().getDate()) +
                 "\n Route start point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getStartStreet() + " at " + advert.getRoute().getStartTime() +
                 "\n Route end point: " + advert.getRoute().getEndCity() + ", " + advert.getRoute().getEndStreet() + " at " + advert.getRoute().getEndTime() +
-                "\n Pick up point: " + advert.getRoute().getStartCity() + ", " + advert.getRoute().getPickUpStreet() + " at " + advert.getRoute().getPickUpTime() +
+                "\n Pick up point: " + advert.getRoute().getPickUpCity() + ", " + advert.getRoute().getPickUpStreet() + " at " + advert.getRoute().getPickUpTime() +
                 "\n Driver: " +advert.getDriver().getName()+" "+advert.getDriver().getSurname()+", phone number: "+ advert.getDriver().getPhone());
 
         System.out.println("------------");
@@ -43,15 +43,15 @@ public class AdvertManager {
      List<Advert> addAdvert(List<Advert> advertList) {
         final UserInput user = new UserInput();
 
-        String startCity = user.askForText("Route start city");
-        String startStreet = user.askForText("Route start street");
+        String startCity = user.askForCity("Route start city");
+        String startStreet = user.askForStreet("Route start street");
         String startTime = user.askForTime("At time (HH:mm)");
-        String endCity = user.askForText("Route end city");
-        String endStreet = user.askForText("Route end street");
-        String endTime = user.askForText("At time (HH:mm)");
-        String pickUpCity = user.askForText("Enter pick up city");
-        String pickUpStreet = user.askForText("Enter pick up street");
-        String pickUpTime = user.askForText("At time (HH:mm)");
+        String endCity = user.askForCity("Route end city");
+        String endStreet = user.askForStreet("Route end street");
+        String endTime = user.askForTime("At time (HH:mm)");
+        String pickUpCity = user.askForCity("Enter pick up city");
+        String pickUpStreet = user.askForStreet("Enter pick up street");
+        String pickUpTime = user.askForTime("At time (HH:mm)");
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
 

@@ -1,30 +1,23 @@
 package com.infoshareacademy.usersengine.adverts;
 
+import com.infoshareacademy.UserInput;
+
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Stateless
 public class AdvertsValidationBean implements AdvertsValidation {
-
-    public boolean checkStreet(String street){
-        return street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+[0-9 /]*[a-z]*$");
-    }
-
-    public boolean checkCity(String city){
-        return city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$");
-    }
+    UserInput userInput = new UserInput();
 
     public boolean checkDate(String date){
         LocalDate advertDate = LocalDate.parse(date);
-        return LocalDate.now().isBefore(advertDate);
+        return LocalDate.now().isBefore(advertDate) && LocalDate.now().plusMonths(1).isAfter(advertDate);
     }
     public boolean askForStreet(HttpServletResponse resp, String street, String position) {
-        if(!checkStreet(street)){
+        if(street == null || street.isEmpty()|| !userInput.isStreetValid(street)){
             try {
                 response(resp, "Enter correct "+position+" street");
                 return false;
@@ -35,7 +28,7 @@ public class AdvertsValidationBean implements AdvertsValidation {
         return true;
     }
     public boolean askForCity(HttpServletResponse resp, String city, String position) {
-        if(!checkCity(city)){
+        if(city == null || city.isEmpty() ||!userInput.isCityValid(city)){
             try {
                 response(resp, "Enter correct "+position+" city");
                 return false;
@@ -46,9 +39,9 @@ public class AdvertsValidationBean implements AdvertsValidation {
         return true;
     }
     public boolean askForDate(HttpServletResponse resp, String date) {
-        if(!checkDate(date)){
+        if(date == null || date.isEmpty()|| !checkDate(date)){
             try {
-                response(resp, "The entered date is earlier than today. Enter correct date");
+                response(resp, "The entered date must be later than today and no later than a month after today. Enter correct date");
                 return false;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -56,6 +49,18 @@ public class AdvertsValidationBean implements AdvertsValidation {
         }
         return true;
     }
+    public boolean askForTime(HttpServletResponse resp, String time, String position) {
+        if(time == null || time.isEmpty()|| !userInput.isTimeValid(time)){
+            try {
+                response(resp, "Enter correct "+position+" time");
+                return false;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
+
     private void response(HttpServletResponse resp, String msg)
             throws IOException {
         resp.setContentType("text/html;charset=UTF-8");

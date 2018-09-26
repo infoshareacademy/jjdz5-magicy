@@ -1,5 +1,4 @@
 package com.infoshareacademy.usersengine.adverts;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,24 +8,51 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Stateful
 public class AdvertsManagerBean implements AdvertsManager {
-    public List<Advert> adverts = new ArrayList<>();
 
-    public List<Advert> getAdverts() {
+    public List<Advert> addAdvert(Advert advert, List<Advert> adverts){
+        adverts.add(advert);
         return adverts;
     }
 
-    public void setAdverts(List<Advert> adverts) {
-        this.adverts = adverts;
+    public Integer getNextAdvertId(List<Advert> adverts){
+        Integer idMax = 0;
+        for(Advert advert: adverts){
+            if (advert.getId() > idMax) {
+                idMax = advert.getId();
+            }
+        }
+        return idMax+1;
+    }
+    public Integer getNextRouteId(List<Advert> adverts){
+        Integer idMax = 0;
+        for(Advert advert: adverts){
+            if (advert.getRoute().getId() > idMax) {
+                idMax = advert.getId();
+            }
+        }
+        return idMax+1;
+    }
+
+    public void advertsToJson(List<Advert> advertList, String path){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String arrayToJson = objectMapper.writeValueAsString(advertList);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            writer.write(arrayToJson);
+            writer.close();
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Advert> jsonToList (String path) {
@@ -48,45 +74,7 @@ public class AdvertsManagerBean implements AdvertsManager {
         }
 
         return advertList;
-    }
 
-    public List<Advert> addAdvert(Advert advert){
-        this.adverts.add(advert);
-        return this.adverts;
-    }
-
-    public void listToJson(){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            String arrayToJson = objectMapper.writeValueAsString(this.adverts);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("/adverts.json"));
-            writer.write(arrayToJson);
-            writer.close();
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Integer getNextAdvertId(){
-        Integer idMax = 0;
-        for(Advert advert: this.adverts){
-            if (advert.getId() > idMax) {
-                idMax = advert.getId();
-            }
-        }
-        return idMax+1;
-    }
-    public Integer getNextRouteId(){
-        Integer idMax = 0;
-        for(Advert advert: this.adverts){
-            if (advert.getRoute().getId() > idMax) {
-                idMax = advert.getId();
-            }
-        }
-        return idMax+1;
     }
 
 }
