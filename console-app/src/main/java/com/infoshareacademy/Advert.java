@@ -26,6 +26,13 @@ public class Advert {
         this.promo = promo;
     }
 
+    public Advert(Integer id, Date date, Driver driver, Route route) {
+        this.id = id;
+        this.date = date;
+        this.driver = driver;
+        this.route = route;
+    }
+
     public Driver getDriver() {
         return driver;
     }
