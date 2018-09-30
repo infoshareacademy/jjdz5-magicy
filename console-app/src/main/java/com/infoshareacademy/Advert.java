@@ -7,6 +7,8 @@ public class Advert {
     private Date date;
     private Driver driver;
     private Route route;
+    private Boolean promo;
+
 
     public Advert(){
     }
@@ -16,11 +18,12 @@ public class Advert {
         this.date = date;
     }
 
-    public Advert(Integer id, Date date, Driver driver, Route route) {
+    public Advert(Integer id, Date date, Driver driver, Route route, Boolean promo) {
         this.id = id;
         this.date = date;
         this.driver = driver;
         this.route = route;
+        this.promo = promo;
     }
 
     public Driver getDriver() {
@@ -55,6 +58,15 @@ public class Advert {
         this.route = route;
     }
 
+    public Boolean getPromo() {
+        return promo;
+    }
+
+    public void setPromo(Boolean promo) {
+        this.promo = promo;
+    }
+
+
     @Override
     public String toString() {
         return "Advert{" +
@@ -62,8 +74,8 @@ public class Advert {
                 ", date=" + date +
                 ", driver=" + driver +
                 ", route=" + route +
+                ", promo=" + promo +
                 '}';
     }
-
 }
 
