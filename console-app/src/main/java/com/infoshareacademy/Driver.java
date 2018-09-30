@@ -37,6 +37,10 @@ public class Driver extends User {
         this.district = district;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Driver{" +

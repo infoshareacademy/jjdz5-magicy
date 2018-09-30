@@ -2,7 +2,7 @@ package com.infoshareacademy;
 
 import java.util.Date;
 
-class Advert {
+public class Advert {
     private Integer id;
     private Date date;
     private Driver driver;
@@ -41,6 +41,18 @@ class Advert {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
     @Override

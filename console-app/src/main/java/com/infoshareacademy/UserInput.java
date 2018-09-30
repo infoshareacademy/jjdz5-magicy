@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-class UserInput {
+public class UserInput {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
 
     Date askForDate(final String question) {
@@ -63,7 +63,7 @@ class UserInput {
         return scanner.nextLine();
     }
 
-    private boolean isTimeValid(String time) {
+    public boolean isTimeValid(String time) {
         if (time.isEmpty()) {
             return false;
         }
@@ -87,12 +87,12 @@ class UserInput {
     }
 
     public boolean isCityValid(String city) {
-        return city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+$");
+        return city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$");
     }
 
 
     public boolean isStreetValid(String street) {
-        return street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9]*[a-z]*$");
+        return street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$");
     }
 
     Integer askForRating(final String question) {
