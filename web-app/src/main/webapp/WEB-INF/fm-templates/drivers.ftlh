@@ -12,6 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
 
     <style>
         .filterable {
@@ -89,7 +90,7 @@ $(document).ready(function(){
 });
 </script>
 
-<div class="container">
+<header style="height: 100px">
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="#"><img src="logo.png" width="30"
                                               hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
@@ -102,13 +103,13 @@ $(document).ready(function(){
                 <li class="nav-item">
                     <a class="nav-link" href="home">Home</a>
                 </li>
-                <li class="nav-item" active>
+                <li class="nav-item">
                     <a class="nav-link" href="adverts">Adverts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="add-advert">Add advert</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" active>
                     <a class="nav-link" href="drivers">Drivers</a>
                 </li>
                 <li class="nav-item">
@@ -120,12 +121,12 @@ $(document).ready(function(){
             </ul>
         </div>
     </nav>
-    <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
-    <hr>
+</header>
+<main class="container">
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
-                <h3 class="panel-title">Adverts</h3>
+                <h3 class="panel-title">Drivers</h3>
                 <div class="pull-right">
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
 
@@ -136,38 +137,29 @@ $(document).ready(function(){
                 <thead>
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="#" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th class="blue-column"><input type="text" class="form-control" placeholder="Start time" disabled></th>
-                        <th class="blue-column"><input type="text" class="form-control" placeholder="Start" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Pick up time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Pick up" disabled></th>
-                        <th class="blue-column"><input type="text" class="form-control" placeholder="End time" disabled></th>
-                        <th class="blue-column"><input type="text" class="form-control" placeholder="End" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Phone" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="City" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Rating" disabled></th>
                     </tr>
                 </thead>
 	<tbody>
-	<#list adverts as a>
+	<#list drivers as d>
 		<tr>
-			<td>${a.id}</td>
-
-			<td>${a.getRoute().getDate()?datetime?string('dd-MM-yyyy')}</td>
-			<td class="blue-column">${a.getRoute().getStartTime()}</td>
-			<td class="blue-column">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
-			<td>${a.getRoute().getPickUpTime()}</td>
-			<td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
-			<td class="blue-column">${a.getRoute().getEndTime()}</td>
-			<td class="blue-column">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
-			<td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
+            <td>${d.getId()}</td>
+			<td>${d.getName()} ${d.getSurname()}</td>
+			<td>${d.getPhone()}</td>
+			<td>${d.getCity()}</td>
+			<td>Average Rating: ${d.getRating().getAverage()}/5.0  Number of ratings: ${d.getRating().getAverage()}</td>
 		</tr>
 		</#list>
 	</tbody>
             </table>
         </div>
     </div>
-</div>
+</main>
 
-<footer class="page-footer font-small indigo">
+<footer class="page-footer font-small indigo footer" style="bottom:0;">
     <div class="footer-copyright text-center py-3">
         © 2018 Copyright: Magicians
     </div>

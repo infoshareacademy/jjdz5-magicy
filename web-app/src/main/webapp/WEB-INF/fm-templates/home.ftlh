@@ -44,6 +44,12 @@
                     <a class="nav-link" href="add-advert">Add advert</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="drivers">Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Add driver</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Driver's rating</a>
                 </li>
             </ul>
