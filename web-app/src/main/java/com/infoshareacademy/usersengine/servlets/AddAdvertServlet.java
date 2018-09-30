@@ -59,7 +59,6 @@ public class AddAdvertServlet extends HttpServlet {
         advertsList.setAdvertsList(adverts);
 
         Map<String, String[]> map = req.getParameterMap();
-        System.out.println("Adverts przed "+adverts);
         redirect(resp, advertPreparation.validateAdvertData(advertPreparation.mapReader(map)), adverts);
     }
 
@@ -75,7 +74,6 @@ public class AddAdvertServlet extends HttpServlet {
         }
         else{
             advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
-            System.out.println("Adverts po "+adverts);
             advertsManager.advertsToJson(adverts, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");
         }

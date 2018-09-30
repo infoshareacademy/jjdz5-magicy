@@ -37,6 +37,9 @@
         .filterable .filters input[disabled]:-ms-input-placeholder {
             color: #333;
         }
+        .blue-column{
+        background: #f2f2f2;
+        }
 
     </style>
 </head>
@@ -86,8 +89,8 @@ $(document).ready(function(){
 });
 </script>
 
-<header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+<div class="container">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="#"><img src="logo.png" width="30"
                                               hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -111,8 +114,6 @@ $(document).ready(function(){
             </ul>
         </div>
     </nav>
-
-<div class="container">
     <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
     <hr>
     <div class="row">
@@ -130,9 +131,12 @@ $(document).ready(function(){
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="#" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Start" disabled></th>
+                        <th class="blue-column"><input type="text" class="form-control" placeholder="Start time" disabled></th>
+                        <th class="blue-column"><input type="text" class="form-control" placeholder="Start" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Pick up time" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Pick up" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="End" disabled></th>
+                        <th class="blue-column"><input type="text" class="form-control" placeholder="End time" disabled></th>
+                        <th class="blue-column"><input type="text" class="form-control" placeholder="End" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
                     </tr>
                 </thead>
@@ -142,9 +146,12 @@ $(document).ready(function(){
 			<td>${a.id}</td>
 
 			<td>${a.getRoute().getDate()?datetime?string('dd-MM-yyyy')}</td>
-			<td>${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+			<td class="blue-column">${a.getRoute().getStartTime()}</td>
+			<td class="blue-column">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+			<td>${a.getRoute().getPickUpTime()}</td>
 			<td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
-			<td>${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+			<td class="blue-column">${a.getRoute().getEndTime()}</td>
+			<td class="blue-column">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
 			<td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
 		</tr>
 		</#list>
@@ -159,7 +166,7 @@ $(document).ready(function(){
         © 2018 Copyright: Magicians
     </div>
 </footer>
-</header>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>

@@ -21,41 +21,39 @@
             margin: auto;
         }
               .margin{
-              margin-bottom:20px;
+              margin-bottom:40px;
               margin-top:20px;
               }
     </style>
 </head>
 <body>
 
-<header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="#"><img src="logo.png" width="30"
-                                              hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adverts">Adverts</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="add-advert">Add advert</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Driver's rating</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
   <div class="container">
-      <div class="row text-center margin"><h1 class="text-center">Add new advert</h1></div>
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+          <a class="navbar-brand" href="#"><img src="logo.png" width="30"
+                                                hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="adverts">Adverts</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="add-advert">Add advert</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Driver's rating</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+      <div class="row text-center margin"><h1 class="text-center"></h1></div>
       <form method="post" action="/jjdz5-magicy/add-advert">
           <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">Start point</h3></div></div>
           <div class="row margin">
@@ -175,7 +173,6 @@
         © 2018 Copyright: Magicians
     </div>
 </footer>
-</header>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
