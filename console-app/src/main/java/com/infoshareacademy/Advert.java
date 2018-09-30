@@ -7,16 +7,16 @@ public class Advert {
     private Date date;
     private Driver driver;
     private Route route;
-    private Boolean promo;
+    private Boolean promo = false;
 
 
     public Advert(){
     }
 
-    public Advert(Integer id, Date date) {
-        this.id = id;
-        this.date = date;
-    }
+//    public Advert(Integer id, Date date) {
+//        this.id = id;
+//        this.date = date;
+//    }
 
     public Advert(Integer id, Date date, Driver driver, Route route, Boolean promo) {
         this.id = id;

@@ -108,8 +108,7 @@ public class AdvertManager {
         return idMax;
     }
 
-    public void promoAdvert()
-        return;
+
 }
 
 
