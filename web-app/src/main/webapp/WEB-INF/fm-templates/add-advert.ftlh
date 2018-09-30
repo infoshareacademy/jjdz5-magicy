@@ -42,7 +42,7 @@
                     <a class="nav-link" href="home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Adverts</a>
+                    <a class="nav-link" href="adverts">Adverts</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="add-advert">Add advert</a>
@@ -175,6 +175,7 @@
         © 2018 Copyright: Magicians
     </div>
 </footer>
+</header>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
