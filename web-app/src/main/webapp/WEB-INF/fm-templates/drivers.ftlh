@@ -59,7 +59,7 @@ var inputOptions = new Promise(function(resolve) {
     }, 1)
   })
   swal({
-      title: 'Give Your rating for '+name+' '+surname,
+      title: 'Your rating for '+name+' '+surname,
       input: 'radio',
        confirmButtonText: "Add",
        showCloseButton: true,
@@ -132,7 +132,7 @@ var inputOptions = new Promise(function(resolve) {
 		<tr>
             <td style="width:10%; vertical-align: middle">${d.getId()}</td>
             <td style="width:50%; vertical-align: middle">${d.getName()} ${d.getSurname()} ${d.getPhone()} ${d.getCity()}</td>
-			<td style="width:30%; vertical-align: middle">Rating: ${d.getRating().getAverage()}/5,0  People: ${d.getRating().getPersons()}</td>
+			<td style="width:30%; vertical-align: middle">Rating: ${d.getRating().getAverage()}/5,0  <br/> ${d.getRating().getPersons()} reviews</td>
             <td style="width:20%"><button onclick="myAlertFunction(${d.getId()}, '${d.getName()}', '${d.getSurname()}')" id="add-button" type="button" class="btn btn-info" style="width:100%">Add rating</button></td>
 		</tr>
 		</#list>
