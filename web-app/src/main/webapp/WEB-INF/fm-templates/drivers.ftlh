@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="full-height">
+<html lang="en" class="full-height" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
 
     <style>
         .filterable {
@@ -46,48 +46,37 @@
 </head>
 <body>
 <script>
-$(document).ready(function(){
-    $('.filterable .btn-filter').click(function(){
-        var $panel = $(this).parents('.filterable'),
-        $filters = $panel.find('.filters input'),
-        $tbody = $panel.find('.table tbody');
-        if ($filters.prop('disabled') == true) {
-            $filters.prop('disabled', false);
-            $filters.first().focus();
-        } else {
-            $filters.val('').prop('disabled', true);
-            $tbody.find('.no-result').remove();
-            $tbody.find('tr').show();
+function myAlertFunction(id, name, surname) {
+var inputOptions = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve({
+        '1': '1',
+        '2': '2',
+        '3': '3',
+        '4': '4',
+        '5': '5',
+      })
+    }, 1)
+  })
+  swal({
+      title: 'Give Your rating for '+name+' '+surname,
+      input: 'radio',
+       confirmButtonText: "Add",
+       showCloseButton: true,
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+          return !value && 'You need to choose something!'
         }
-    });
-
-    $('.filterable .filters input').keyup(function(e){
-        /* Ignore tab key */
-        var code = e.keyCode || e.which;
-        if (code == '9') return;
-        /* Useful DOM data and selectors */
-        var $input = $(this),
-        inputContent = $input.val().toLowerCase(),
-        $panel = $input.parents('.filterable'),
-        column = $panel.find('.filters th').index($input.parents('th')),
-        $table = $panel.find('.table'),
-        $rows = $table.find('tbody tr');
-        /* Dirtiest filter function ever ;) */
-        var $filteredRows = $rows.filter(function(){
-            var value = $(this).find('td').eq(column).text().toLowerCase();
-            return value.indexOf(inputContent) === -1;
-        });
-        /* Clean previous no-result if exist */
-        $table.find('tbody .no-result').remove();
-        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-        $rows.show();
-        $filteredRows.hide();
-        /* Prepend no-result row if all rows are filtered */
-        if ($filteredRows.length === $rows.length) {
-            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
-        }
-    });
-});
+    }).then((result) => {
+  if (result.value) {
+    $('#rating').val(result.value);
+    $('#id').val(id);
+    $('#sub').click();
+  }
+  else{
+  }
+})
+}
 </script>
 
 <header style="height: 100px">
@@ -123,40 +112,38 @@ $(document).ready(function(){
     </nav>
 </header>
 <main class="container">
+    <form method="post" action="/jjdz5-magicy/drivers">
     <div class="row">
-        <div class="panel panel-primary filterable">
+        <div class="panel panel-primary filterable" style="width:100%">
             <div class="panel-heading">
                 <h3 class="panel-title">Drivers</h3>
-                <div class="pull-right">
-                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-
-
-                </div>
             </div>
-            <table class="table">
+            <table class="table" style="width: 100%; text-align: center">
                 <thead>
                     <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="#" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Name" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Phone" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="City" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Rating" disabled></th>
+                        <th style="width:10%">Number</th>
+                        <th style="width:50%">Driver</th>
+                        <th style="width:30%">Rating</th>
+                        <th style="width:20%"></th>
                     </tr>
                 </thead>
 	<tbody>
 	<#list drivers as d>
 		<tr>
-            <td>${d.getId()}</td>
-			<td>${d.getName()} ${d.getSurname()}</td>
-			<td>${d.getPhone()}</td>
-			<td>${d.getCity()}</td>
-			<td>Average Rating: ${d.getRating().getAverage()}/5.0  Number of ratings: ${d.getRating().getAverage()}</td>
+            <td style="width:10%; vertical-align: middle">${d.getId()}</td>
+            <td style="width:50%; vertical-align: middle">${d.getName()} ${d.getSurname()} ${d.getPhone()} ${d.getCity()}</td>
+			<td style="width:30%; vertical-align: middle">Rating: ${d.getRating().getAverage()}/5,0  People: ${d.getRating().getPersons()}</td>
+            <td style="width:20%"><button onclick="myAlertFunction(${d.getId()}, '${d.getName()}', '${d.getSurname()}')" id="add-button" type="button" class="btn btn-info" style="width:100%">Add rating</button></td>
 		</tr>
 		</#list>
 	</tbody>
             </table>
         </div>
     </div>
+    <input type="hidden" id="id" name="id" value="0"/>
+    <input type="hidden" id="rating" name="rating" value="0"/>
+        <button type="submit" id="sub"></button>
+    </form>
 </main>
 
 <footer class="page-footer font-small indigo footer" style="bottom:0;">
