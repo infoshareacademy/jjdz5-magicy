@@ -12,15 +12,14 @@ public class DriverPreparation {
         String name = map.get("name")[0].trim();
         String surname = map.get("surname")[0].trim();
         String phone = map.get("phone")[0].trim();
-        String rating = map.get("rating")[0].trim();
         String city = map.get("city")[0].trim();
         String district = map.get("district")[0].trim();
-        Integer id = Integer.parseInt(map.get("id")[0].trim());
 
         driver.setName(name);
         driver.setSurname(surname);
         driver.setPhone(phone);
-        driver.setRating(rating);
+        driver.setCity(city);
+        driver.setDistrict(district);
 
         return driver;
     }
