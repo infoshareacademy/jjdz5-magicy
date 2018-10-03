@@ -2,11 +2,9 @@ package com.infoshareacademy.usersengine.servlets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infoshareacademy.Driver;
-import com.infoshareacademy.DriversList;
-import com.infoshareacademy.JsonToList;
-import com.infoshareacademy.Rating;
+import com.infoshareacademy.*;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
+import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +31,8 @@ public class DriversServlet extends HttpServlet {
     private TemplateProvider templateProvider;
     @Inject
     private DriversManager driversManager;
+    @Inject
+    private DriversValidation driversValidation;
     private DriversList driversList = new DriversList();
 
     @Override
@@ -56,18 +57,26 @@ public class DriversServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        String id = req.getParameter("id");
+        String rating = req.getParameter("rating");
 
-        Integer id = Integer.parseInt(req.getParameter("id"));
-        Integer rating = Integer.parseInt(req.getParameter("rating"));
-
-        driversList.setDriversList(driversManager.setNewRating(driversList.getDriversList(), id, rating));
-        driversManager.writeDriverData(driversList.getDriversList(),getPath());
-        resp.sendRedirect("/jjdz5-magicy/drivers");
+        redirect(resp,driversValidation.validateAdvertData(id, rating, driversList.getDriversList()), id, rating);
     }
 
-    public String getPath(){
+    private String getPath(){
         ServletContext application = getServletConfig().getServletContext();
         return application.getRealPath("WEB-INF/driver.json");
+    }
 
+    private void redirect(HttpServletResponse resp, String message, String id, String rating) throws IOException {
+        if(!message.isEmpty()){
+            PrintWriter writer = resp.getWriter();
+            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
+        }
+        else{
+            driversList.setDriversList(driversManager.setNewRating(driversList.getDriversList(), Integer.parseInt(id), Integer.parseInt(rating)));
+            driversManager.writeDriverData(driversList.getDriversList(),getPath());
+            resp.sendRedirect("/jjdz5-magicy/drivers");
+        }
     }
 }
