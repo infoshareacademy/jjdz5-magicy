@@ -90,9 +90,17 @@ public class UserInput {
         return city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$");
     }
 
+    public boolean isInputValid(String input) {
+        return input.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$");
+    }
+
 
     public boolean isStreetValid(String street) {
         return street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$");
+    }
+
+    public boolean isNumberValid(String number){
+        return number.matches("^?(?:\\(?\\+?48)?(?:[-\\.\\(\\)\\s]*(\\d)){9}\\)?+$");
     }
 
     Integer askForRating(final String question) {
