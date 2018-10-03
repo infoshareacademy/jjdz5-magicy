@@ -11,7 +11,7 @@ public class DriversValidationBean implements DriversValidation{
     UserInput userInput = new UserInput();
 
     public boolean checkRating(String rating) {
-        return rating.matches("^?[0-5]");
+        return rating.matches("^?[1-5]");
     }
 
     public boolean checkDriverId(List<Driver> drivers, String id){
@@ -31,10 +31,6 @@ public class DriversValidationBean implements DriversValidation{
         return !(inputIsEmpty(id) || !checkDriverId(drivers, id));
     }
 
-    private boolean inputIsEmpty(String input){
-        return input==null || input.isEmpty();
-    }
-
     public String validateAdvertData(String id, String rating, List<Driver> drivers){
         String message = "";
         if(askForDriverId(drivers, id)){
@@ -44,5 +40,9 @@ public class DriversValidationBean implements DriversValidation{
             message = message + "Ups! Something went wrong. Add rating using alert";
         }
         return message;
+    }
+
+    private boolean inputIsEmpty(String input){
+        return input==null || input.isEmpty();
     }
 }

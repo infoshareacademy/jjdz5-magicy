@@ -69,14 +69,14 @@ public class DriversServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, String id, String rating) throws IOException {
-        if(!message.isEmpty()){
-            PrintWriter writer = resp.getWriter();
-            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
-        }
-        else{
-            driversList.setDriversList(driversManager.setNewRating(driversList.getDriversList(), Integer.parseInt(id), Integer.parseInt(rating)));
+        if(message.isEmpty()){
+            driversList.setDriversList(driversManager.updateDriversList(driversList.getDriversList(),driversManager.setNewRating(driversManager.getUserById(driversList.getDriversList(), Integer.parseInt(id)).get(), Integer.parseInt(rating)), Integer.parseInt(id)));
             driversManager.writeDriverData(driversList.getDriversList(),getPath());
             resp.sendRedirect("/jjdz5-magicy/drivers");
+        }
+        else{
+            PrintWriter writer = resp.getWriter();
+            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
     }
 }
