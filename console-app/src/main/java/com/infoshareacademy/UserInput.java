@@ -100,7 +100,7 @@ public class UserInput {
     }
 
     public boolean isNumberValid(String number){
-        return number.matches("^?(?:\\(?\\+?48)?(?:[-\\.\\(\\)\\s]*(\\d)){9}\\)?+$");
+        return number.matches("^?(?:\\?(?:[-\\.\\(\\)\\s]*(\\d)){9}\\)?+$)");
     }
 
     Integer askForRating(final String question) {

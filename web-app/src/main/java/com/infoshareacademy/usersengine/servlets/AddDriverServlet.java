@@ -67,18 +67,18 @@ public class AddDriverServlet extends HttpServlet {
 
     private String getPath() {
         ServletContext application = getServletConfig().getServletContext();
-        return application.getRealPath("WEB-INF/driver.json");
+        return application.getRealPath("webapp/driver.json");
     }
 
     private void redirect(HttpServletResponse resp, String message, List<Driver> drivers) throws IOException {
-        if (!message.isEmpty()) {
-            PrintWriter writer = resp.getWriter();
-            writer.println("<!DOCTYPE html><body><form><t1>" + message + "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
-
-        }else{
+        if (message.isEmpty()) {
             driversList.setDriversList(driverManager.addDriver(driverPreparation.getNewDriver(drivers), drivers));
             driverManager.driverToJson(drivers, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");
+
+        }else{
+            PrintWriter writer = resp.getWriter();
+            writer.println("<!DOCTYPE html><body><form><t1>" + message + "  " + "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
     }
 }

@@ -1,20 +1,15 @@
 package com.infoshareacademy.usersengine.driver;
 
 import com.infoshareacademy.Driver;
-import com.infoshareacademy.usersengine.adverts.AdvertData;
-
 import javax.ejb.Stateful;
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @Stateful
 public class DriverPreparation {
     Driver driver = new Driver();
-    @Inject
-    private DriverValidation driverValidation;
-    @Inject
-    private DriverManager driverManager;
+    private DriverValidation driverValidation = new DriverValidationBean();
+    private DriverManager driverManager = new DriverManagerBean();
 
     public Driver mapReader(Map<String, String[]> map){
         String name = map.get("name")[0].trim();
@@ -45,7 +40,7 @@ public class DriverPreparation {
             message = message + "Enter correct phone number";
         }
         if (!driverValidation.askForText(driver.getCity())){
-            message = message + "Enter correct phone number";
+            message = message + "Enter correct City";
         }
         if (!driverValidation.askForText(driver.getDistrict())){
             message = message + "Enter correct phone number";
