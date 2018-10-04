@@ -9,8 +9,7 @@ import java.util.Optional;
 
 @Local
 public interface DriversManager {
-    Rating setNewRating(Driver d, Integer rating);
     void writeDriverData(List<Driver> drivers, String path);
-    Optional<Driver> getUserById(List<Driver> drivers, Integer id);
-    List<Driver> updateDriversList(List<Driver> drivers, Rating rating, Integer id);
+    Optional<Driver> getDriverById(List<Driver> drivers, Integer id);
+    List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Integer id);
 }

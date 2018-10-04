@@ -8,10 +8,11 @@ import java.util.List;
 
 @Stateful
 public class DriversValidationBean implements DriversValidation{
+    private static final String ratingRegex = "^?[1-5]";
     UserInput userInput = new UserInput();
 
     public boolean checkRating(String rating) {
-        return rating.matches("^?[1-5]");
+        return rating.matches(ratingRegex);
     }
 
     public boolean checkDriverId(List<Driver> drivers, String id){

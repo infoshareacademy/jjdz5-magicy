@@ -29,22 +29,22 @@ public class DriversManagerBean implements DriversManager{
             e.printStackTrace();
         }
     }
-    public Optional<Driver> getUserById(List<Driver> drivers, Integer id){
+    public Optional<Driver> getDriverById(List<Driver> drivers, Integer id){
         return drivers.stream().filter(d -> d.getId().equals(id)).findAny();
     }
 
-    public Rating setNewRating(Driver d, Integer rating){
-        d.getRating().setAverage(d.getRating().newAverage(rating));
-        d.getRating().setPersons(d.getRating().getPersons()+1);
-        return d.getRating();
-    }
-
-    public List<Driver> updateDriversList(List<Driver> drivers, Rating rating, Integer id){
+    public List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Integer id){
         for(Driver d: drivers){
             if(d.getId().equals(id)){
-                d.setRating(rating);
+                d.setRating(createNewRating(d, rating));
             }
         }
         return drivers;
+    }
+
+    private Rating createNewRating(Driver d, Integer rating){
+        d.getRating().setAverage(d.getRating().newAverage(rating));
+        d.getRating().setPersons(d.getRating().getPersons()+1);
+        return d.getRating();
     }
 }
