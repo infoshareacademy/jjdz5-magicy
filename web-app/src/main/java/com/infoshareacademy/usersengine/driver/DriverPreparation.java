@@ -31,19 +31,19 @@ public class DriverPreparation {
         String message ="";
 
         if (!driverValidation.askForText(driver.getName())){
-            message = message + "Enter correct name";
+            message = message + "Enter correct name </br>";
         }
         if (!driverValidation.askForText(driver.getSurname())){
-            message = message + "Enter correct Surname";
+            message = message + "Enter correct Surname </br>";
         }
         if (!driverValidation.askForNumber(driver.getPhone())){
-            message = message + "Enter correct phone number";
+            message = message + "Enter correct phone number </br>";
         }
         if (!driverValidation.askForText(driver.getCity())){
-            message = message + "Enter correct City";
+            message = message + "Enter correct City <br>";
         }
         if (!driverValidation.askForText(driver.getDistrict())){
-            message = message + "Enter correct phone number";
+            message = message + "Enter correct district <br>";
         }
 
         return message;
