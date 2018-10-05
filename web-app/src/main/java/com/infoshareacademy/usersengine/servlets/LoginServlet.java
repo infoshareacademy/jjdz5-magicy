@@ -108,8 +108,7 @@ public class LoginServlet extends HttpServlet {
 
             req.getServletContext()
 
-                    .getRequestDispatcher("/welcome-page.jsp").forward(req, resp);
-
+                    .getRequestDispatcher("/home").forward(req, resp);
 
 
         } catch (Exception e) {

@@ -48,7 +48,7 @@
      //do not post above info to the server because that is not safe.
      //just send the id_token
 
-      var redirectUrl = 'login';
+      var redirectUrl = 'home';
       //using jquery to post data dynamically
       var form = $('<form action="' + redirectUrl + '" method="post">' +
                           '<input type="text" name="id_token" value="' +
