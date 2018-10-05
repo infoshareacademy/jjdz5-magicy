@@ -41,3 +41,4 @@ public class AdvertsServlet extends HttpServlet {
         return application.getRealPath("WEB-INF/adverts.json");
     }
 }
+

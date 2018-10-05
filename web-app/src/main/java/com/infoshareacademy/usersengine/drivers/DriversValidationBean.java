@@ -50,7 +50,7 @@ public class DriversValidationBean implements DriversValidation {
     }
 
     public boolean askForNumber(String number) {
-        return (inputIsEmpty(number) || !userInput.isNumberValid(number));
+        return (inputIsEmpty(number) || userInput.isNumberValid(number));
     }
 
 }
