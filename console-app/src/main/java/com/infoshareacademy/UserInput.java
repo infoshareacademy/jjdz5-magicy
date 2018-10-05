@@ -86,21 +86,28 @@ public class UserInput {
         }
     }
 
+    private static final String cityRegex = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
+
+    private static final String inputRegex = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
+
+    private static final String streetRegex = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
+
+    private static final String numberRegex = "^\\d{3}\\-?\\d{3}\\-?\\d{3}$";
+
     public boolean isCityValid(String city) {
-        return city.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$");
+        return city.matches(cityRegex);
     }
 
     public boolean isInputValid(String input) {
-        return input.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$");
+        return input.matches(inputRegex);
     }
 
-
     public boolean isStreetValid(String street) {
-        return street.matches("^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$");
+        return street.matches(streetRegex);
     }
 
     public boolean isNumberValid(String number){
-       return number.matches("^\\d{3}\\-?\\d{3}\\-?\\d{3}$");
+       return number.matches(numberRegex);
     }
 
     Integer askForRating(final String question) {
