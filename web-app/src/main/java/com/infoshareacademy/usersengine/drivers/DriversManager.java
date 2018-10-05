@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.drivers;
 
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.Rating;
+
 import javax.ejb.Local;
 import java.util.List;
 import java.util.Optional;

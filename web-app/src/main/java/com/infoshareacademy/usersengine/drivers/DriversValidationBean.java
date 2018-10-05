@@ -2,10 +2,12 @@ package com.infoshareacademy.usersengine.drivers;
 
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.UserInput;
-
+import javax.ejb.Stateful;
 import java.util.List;
 
-public class DriversValidationBean implements DriversValidation {
+@Stateful
+public class DriversValidationBean implements DriversValidation{
+
     private static final String ratingRegex = "^?[1-5]";
     UserInput userInput = new UserInput();
 
@@ -52,5 +54,4 @@ public class DriversValidationBean implements DriversValidation {
     public boolean askForNumber(String number) {
         return (inputIsEmpty(number) || userInput.isNumberValid(number));
     }
-
 }

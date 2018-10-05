@@ -29,19 +29,18 @@
 </head>
 <body>
 
-<div class="container">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="#"><img src="logo.png" width="30"
-                                              hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+  <div class="container">
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+          <a class="navbar-brand" href="#"><img src="logo.png" width="30"
+                                                hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                       <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="adverts">Adverts</a>
@@ -55,21 +54,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="add-driver">Add driver</a>
                     </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="row text-center margin"><h1 class="text-center"></h1></div>
-    <form method="post" action="/jjdz5-magicy/add-advert">
-        <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">Start point</h3></div></div>
-        <div class="row margin">
-            <div class="col-5 form-group">
-                <label for="startCity">City:</label>
-                <input id="startCity"
-                       required
-                       type="text"
-                       name="startCity"
-                       placeholder="Enter start city"
-                       class="form-control" />
+              </ul>
+          </div>
+      </nav>
+      <div class="row text-center margin"><h1 class="text-center"></h1></div>
+      <form method="post" action="/jjdz5-magicy/add-advert">
+          <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">Start point</h3></div></div>
+          <div class="row margin">
+              <div class="col-5 form-group">
+                  <label for="startCity">City:</label>
+                  <input id="startCity"
+                         required
+                         type="text"
+                         name="startCity"
+                         placeholder="Enter start city"
+                         class="form-control" />
             </div>
 
             <div class="col-5 form-group">

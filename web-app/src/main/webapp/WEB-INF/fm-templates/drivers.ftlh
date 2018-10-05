@@ -39,48 +39,49 @@
             color: #333;
         }
         .blue-column{
-            background: #f2f2f2;
+        background: #f2f2f2;
         }
 
     </style>
 </head>
 <body>
 <script>
-    function myAlertFunction(id, name, surname) {
-        var inputOptions = new Promise(function(resolve) {
-            setTimeout(function() {
-                resolve({
-                    '1': '1',
-                    '2': '2',
-                    '3': '3',
-                    '4': '4',
-                    '5': '5',
-                })
-            }, 1)
-        })
-        swal({
-            title: 'Your rating for '+name+' '+surname,
-            input: 'radio',
-            confirmButtonText: "Add",
-            showCloseButton: true,
-            inputOptions: inputOptions,
-            inputValidator: (value) => {
-            return !value && 'You need to choose something!'
+
+function myAlertFunction(id, name, surname) {
+var inputOptions = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve({
+        '1': '1',
+        '2': '2',
+        '3': '3',
+        '4': '4',
+        '5': '5',
+      })
+    }, 1)
+  })
+  swal({
+      title: 'Your rating for '+name+' '+surname,
+      input: 'radio',
+       confirmButtonText: "Add",
+       showCloseButton: true,
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+          return !value && 'You need to choose something!'
         }
     }).then((result) => {
-            if (result.value) {
-            $('#rating').val(result.value);
-            $('#id').val(id);
-            $('#sub').click();
-        }
-    else{
-        }
-    })
-    }
+  if (result.value) {
+    $('#rating').val(result.value);
+    $('#id').val(id);
+    $('#sub').click();
+  }
+  else{
+  }
+})
+}
 </script>
 
 <header style="height: 100px">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="#"><img src="logo.png" width="30"
                                               hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -89,8 +90,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="adverts">Adverts</a>
@@ -98,7 +99,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="add-advert">Add advert</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="drivers">Drivers</a>
                 </li>
                 <li class="nav-item">
@@ -110,35 +111,36 @@
 </header>
 <main class="container">
     <form method="post" action="/jjdz5-magicy/drivers">
-        <div class="row">
-            <div class="panel panel-primary filterable" style="width:100%">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Drivers</h3>
-                </div>
-                <table class="table" style="width: 100%; text-align: center">
-                    <thead>
+    <div class="row">
+        <div class="panel panel-primary filterable" style="width:100%">
+            <div class="panel-heading">
+                <h3 class="panel-title">Drivers</h3>
+            </div>
+            <table class="table" style="width: 100%; text-align: center">
+                <thead>
                     <tr class="filters">
                         <th style="width:10%">Number</th>
                         <th style="width:50%">Driver</th>
                         <th style="width:30%">Rating</th>
                         <th style="width:20%"></th>
                     </tr>
-                    </thead>
-                    <tbody>
+
+                </thead>
+	<tbody>
 	<#list drivers as d>
-    <tr>
-        <td style="width:10%; vertical-align: middle">${d.getId()}</td>
-        <td style="width:50%; vertical-align: middle">${d.getName()} ${d.getSurname()} ${d.getPhone()} ${d.getCity()}</td>
-        <td style="width:30%; vertical-align: middle">Rating: ${d.getRating().getAverage()}/5,0  <br/> ${d.getRating().getPersons()} reviews</td>
-        <td style="width:20%"><button onclick="myAlertFunction(${d.getId()}, '${d.getName()}', '${d.getSurname()}')" id="add-button" type="button" class="btn btn-info" style="width:100%">Add rating</button></td>
-    </tr>
-    </#list>
-                    </tbody>
-                </table>
-            </div>
+		<tr>
+            <td style="width:10%; vertical-align: middle">${d.getId()}</td>
+            <td style="width:50%; vertical-align: middle">${d.getName()} ${d.getSurname()} ${d.getPhone()} ${d.getCity()}</td>
+			<td style="width:30%; vertical-align: middle">Rating: ${d.getRating().getAverage()}/5,0  <br/> ${d.getRating().getPersons()} reviews</td>
+            <td style="width:20%"><button onclick="myAlertFunction(${d.getId()}, '${d.getName()}', '${d.getSurname()}')" id="add-button" type="button" class="btn btn-info" style="width:100%">Add rating</button></td>
+		</tr>
+		</#list>
+	</tbody>
+            </table>
         </div>
-        <input type="hidden" id="id" name="id" value="0"/>
-        <input type="hidden" id="rating" name="rating" value="0"/>
+    </div>
+    <input type="hidden" id="id" name="id" value="0"/>
+    <input type="hidden" id="rating" name="rating" value="0"/>
         <button type="submit" id="sub"></button>
     </form>
 </main>
@@ -150,4 +152,5 @@
 <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
 </body>
-</html
+</html>
+
