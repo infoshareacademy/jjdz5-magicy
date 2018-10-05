@@ -1,9 +1,8 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.infoshareacademy.Driver;
-import com.infoshareacademy.DriversList;
-import com.infoshareacademy.JsonToList;
-import com.infoshareacademy.usersengine.drivers.DriverPreparation;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infoshareacademy.*;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
@@ -17,37 +16,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/add-driver")
-public class AddDriverServlet extends HttpServlet {
-
+@WebServlet("/drivers")
+public class DriversServlet extends HttpServlet {
     private JsonToList jsonToList = new JsonToList();
-    private DriversList driversList = new DriversList();
-
     @Inject
     private TemplateProvider templateProvider;
-
     @Inject
     private DriversManager driversManager;
-
-    @Inject
-    private DriverPreparation driverPreparation;
-
     @Inject
     private DriversValidation driversValidation;
+    private DriversList driversList = new DriversList();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
+
         Map<String, Object> dataModel = new HashMap<>();
-        Template template = templateProvider.getTemplate(getServletContext(), "add-driver");
-        try {
+        driversList.setDriversList(jsonToList.driversToList(getPath()));
+        dataModel.put("drivers", driversList.getDriversList());
+        Template template = templateProvider.getTemplate(getServletContext(), "drivers");
+        try{
             template.process(dataModel, resp.getWriter());
-        } catch (TemplateException e) {
+        }catch (TemplateException e){
             e.printStackTrace();
         }
     }
@@ -57,28 +57,26 @@ public class AddDriverServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
+        String id = req.getParameter("id");
+        String rating = req.getParameter("rating");
 
-        List<Driver> drivers = jsonToList.driversToList(getPath());
-        driversList.setDriversList(drivers);
-
-        Map<String, String[]> map = req.getParameterMap();
-        redirect(resp, driverPreparation.validateDriver(driverPreparation.mapReader(map)), drivers);
+        redirect(resp,driversValidation.validateAdvertData(id, rating, driversList.getDriversList()), id, rating);
     }
 
-    private String getPath() {
+    private String getPath(){
         ServletContext application = getServletConfig().getServletContext();
         return application.getRealPath("WEB-INF/driver.json");
     }
 
-    private void redirect(HttpServletResponse resp, String message, List<Driver> drivers) throws IOException {
-        if (message.isEmpty()) {
-            driversList.setDriversList(driversManager.addDriver(driverPreparation.getNewDriver(drivers), drivers));
-            driversManager.writeDriverData(drivers, getPath());
-            resp.sendRedirect("/jjdz5-magicy/home");
-
-        }else{
+    private void redirect(HttpServletResponse resp, String message, String id, String rating) throws IOException {
+        if(message.isEmpty()){
+            driversList.setDriversList(driversManager.updateDriversList(driversList.getDriversList(), Integer.parseInt(rating), Integer.parseInt(id)));
+            driversManager.writeDriverData(driversList.getDriversList(),getPath());
+            resp.sendRedirect("/jjdz5-magicy/drivers");
+        }
+        else{
             PrintWriter writer = resp.getWriter();
-            writer.println("<!DOCTYPE html><body><form><t1>" + message + "</t1><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
+            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
     }
 }

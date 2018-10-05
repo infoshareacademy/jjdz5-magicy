@@ -1,6 +1,7 @@
-package com.infoshareacademy.usersengine.driver;
+package com.infoshareacademy.usersengine.drivers;
 
 import com.infoshareacademy.Driver;
+
 import javax.ejb.Stateful;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,8 @@ import java.util.Map;
 @Stateful
 public class DriverPreparation {
     Driver driver = new Driver();
-    private DriverValidation driverValidation = new DriverValidationBean();
-    private DriverManager driverManager = new DriverManagerBean();
+    private DriversValidation driversValidation = new DriversValidationBean();
+    private DriversManager driversManager = new DriversManagerBean();
 
     public Driver mapReader(Map<String, String[]> map){
         String name = map.get("name")[0].trim();
@@ -30,19 +31,19 @@ public class DriverPreparation {
     public String validateDriver(Driver driver){
         String message ="";
 
-        if (!driverValidation.askForText(driver.getName())){
+        if (!driversValidation.askForText(driver.getName())){
             message = message + "Enter correct name </br>";
         }
-        if (!driverValidation.askForText(driver.getSurname())){
+        if (!driversValidation.askForText(driver.getSurname())){
             message = message + "Enter correct Surname </br>";
         }
-        if (!driverValidation.askForNumber(driver.getPhone())){
+        if (!driversValidation.askForNumber(driver.getPhone())){
             message = message + "Enter correct phone number </br>";
         }
-        if (!driverValidation.askForText(driver.getCity())){
+        if (!driversValidation.askForText(driver.getCity())){
             message = message + "Enter correct City <br>";
         }
-        if (!driverValidation.askForText(driver.getDistrict())){
+        if (!driversValidation.askForText(driver.getDistrict())){
             message = message + "Enter correct district <br>";
         }
 
@@ -50,7 +51,7 @@ public class DriverPreparation {
     }
 
     public Driver getNewDriver(List<Driver> drivers){
-        driver.setId(driverManager.getNextDriverId(drivers));
+        driver.setId(driversManager.getNextDriverId(drivers));
         return driver;
     }
 }
