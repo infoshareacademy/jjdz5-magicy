@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Stateless
-public class DriversManagerBean implements DriversManager {
+public class DriversManagerBean implements DriversManager{
 
     public void writeDriverData(List<Driver> drivers, String path){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -48,13 +48,10 @@ public class DriversManagerBean implements DriversManager {
         return d.getRating();
     }
 
-
-
     public List<Driver> addDriver(Driver driver, List<Driver> drivers) {
         drivers.add(driver);
         return drivers;
     }
-
 
     public Integer getNextDriverId(List<Driver> drivers) {
         Integer idMax = 0;
@@ -63,9 +60,7 @@ public class DriversManagerBean implements DriversManager {
             if (driver.getId() > idMax){
                 idMax = driver.getId();
             }
-
         }
-
         return idMax+1;
     }
  }
