@@ -48,24 +48,17 @@ public class DriversManagerBean implements DriversManager {
         return d.getRating();
     }
 
-
-
-    public List<Driver> addDriver(Driver driver, List<Driver> drivers) {
+    public void addDriver(Driver driver, List<Driver> drivers) {
         drivers.add(driver);
-        return drivers;
     }
-
 
     public Integer getNextDriverId(List<Driver> drivers) {
         Integer idMax = 0;
-        for (Driver driver: drivers
-             ) {
+        for (Driver driver: drivers){
             if (driver.getId() > idMax){
                 idMax = driver.getId();
             }
-
         }
-
         return idMax+1;
     }
  }
