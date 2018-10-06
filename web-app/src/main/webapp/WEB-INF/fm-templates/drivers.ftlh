@@ -82,8 +82,8 @@ var inputOptions = new Promise(function(resolve) {
 
 <header style="height: 100px">
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="home"><img src="logo.png" width="30"
-                                              hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
+      <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
+                                               hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
