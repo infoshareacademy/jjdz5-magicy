@@ -132,9 +132,9 @@ $(document).ready(function(){
                 </div>
             </div>
             <table class="table">
-                <thead>
-                    <tr class="filters", style="background: aquamarine">
-                        <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                <tr>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Advert no." disabled></th>
                         <th><input type="text" class="form-control" placeholder="Date" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Start time" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Start" disabled></th>
@@ -144,36 +144,34 @@ $(document).ready(function(){
                         <th><input type="text" class="form-control" placeholder="End" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
                     </tr>
-                </thead>
+
 	<tbody>
 	<#list adverts as a>
     <#if a.getPromo() == true>
-         <tr style="background: #ffff99">
-    		<#--<tr>-->
+        <tr style="background: #ffffcc">
                 <td>${a.id}</td>
                 <td>${a.getRoute().getDate()?datetime?string('dd-MM-yyyy')}</td>
-                <td>${a.getRoute().getStartTime()}</td>
-                <td>${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
                 <td>${a.getRoute().getPickUpTime()}</td>
                 <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
-                <td>${a.getRoute().getEndTime()}</td>
-                <td>${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
                 <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
-         </tr>
+        </tr>
     </#if>
     </#list>
     <#list adverts as a>
         <#if a.getPromo() == false>
          <tr>
-         <#--<tr>-->
              <td>${a.id}</td>
              <td>${a.getRoute().getDate()?datetime?string('dd-MM-yyyy')}</td>
-             <td>${a.getRoute().getStartTime()}</td>
-             <td>${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
+             <td style="background: #cceeff">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
              <td>${a.getRoute().getPickUpTime()}</td>
              <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
-             <td>${a.getRoute().getEndTime()}</td>
-             <td>${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
+             <td style="background: #cceeff">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
              <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
          </tr>
         </#if>
