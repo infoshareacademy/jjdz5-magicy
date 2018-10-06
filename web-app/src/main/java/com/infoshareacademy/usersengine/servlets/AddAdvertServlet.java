@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-@WebServlet("/add-advert")
+@WebServlet("add-advert")
 public class AddAdvertServlet extends HttpServlet {
 
    private JsonToList jsonToList = new JsonToList();

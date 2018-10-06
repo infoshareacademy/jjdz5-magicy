@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/adverts")
+@WebServlet("adverts")
 public class AdvertsServlet extends HttpServlet {
     private JsonToList jsonToList = new JsonToList();
     @Inject

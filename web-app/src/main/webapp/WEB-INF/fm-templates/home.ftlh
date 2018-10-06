@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-scope" content="profile email">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <meta name="google-signin-client_id"
+          content="176776774224-o5k7gckft8lg5oc4qbf9t6ps0aet9vjc.apps.googleusercontent.com">
 
     <style>
         .view {
@@ -25,6 +31,20 @@
 <body>
 
 <header>
+    <script>
+        function myFunction() {
+              var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+       }
+
+       function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+    </script>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="#"><img src="logo.png" width="30"
                                               hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
@@ -53,6 +73,9 @@
                     <a class="nav-link" href="#">Driver's rating</a>
                 </li>
             </ul>
+            <div class="nav-item" style="float:right">
+                <a class="nav-link" onclick="myFunction()">Sing out</a>
+            </div>
         </div>
     </nav>
 

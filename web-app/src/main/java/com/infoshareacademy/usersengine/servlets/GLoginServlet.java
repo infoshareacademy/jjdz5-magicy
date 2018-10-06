@@ -1,8 +1,7 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.infoshareacademy.User;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
-import com.infoshareacademy.usersengine.repository.UsersRepository;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -16,16 +15,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
-@WebServlet(urlPatterns = "/jijiji")
-public class LoginServlet extends HttpServlet {
-    private UsersRepository userRepositroy;
+@WebServlet(urlPatterns = "login")
+public class GLoginServlet extends HttpServlet {
 
-    @Inject
-    public LoginServlet(UsersRepository userRepositroy) {
-        this.userRepositroy = userRepositroy;
-    }
+
 
     @Inject
     private TemplateProvider templateProvider;
@@ -43,24 +37,25 @@ public class LoginServlet extends HttpServlet {
         }catch (TemplateException e){
             e.printStackTrace();
         }
-    }
+    }@Override
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("user");
-        String password = request.getParameter("password");
+        resp.setContentType("text/html");
 
-        Optional<User> user = userRepositroy.findUserByUsernameAndPassword(username, password);
+        try {
+            String idToken = req.getParameter("id_token");
+            GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
+            String name = (String) payLoad.get("name");
+            String email = payLoad.getEmail();
+            System.out.println("User name: " + name);
+            System.out.println("User email: " + email);
 
-        request.getSession(true).setAttribute("logged", user.isPresent());
-        HttpSession session = request.getSession(true);
-        session.setAttribute("userName", username);
+            HttpSession session = req.getSession(true);
+            session.setAttribute("userName", name);
+            resp.sendRedirect("/jjdz5-magicy//home");
 
-        if(user.isPresent()){
-            response.sendRedirect("/jjdz5-magicy/home");
-
-        } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
