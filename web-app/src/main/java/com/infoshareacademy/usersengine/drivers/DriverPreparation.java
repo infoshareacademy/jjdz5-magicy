@@ -30,8 +30,11 @@ public class DriverPreparation {
         return driver;
     }
 
-    public String validateDriver(Driver driver){
+    public String validateDriver(Driver driver, List<Driver> drivers){
         String message ="";
+        if (driversValidation.isPhoneNumberExist(driver.getPhone(), drivers)){
+            message = message + "User already exist <br>";
+        } else
 
         if (!driversValidation.askForText(driver.getName())){
             message = message + "Enter correct name </br>";
@@ -48,6 +51,7 @@ public class DriverPreparation {
         if (!driversValidation.askForText(driver.getDistrict())){
             message = message + "Enter correct district <br>";
         }
+
 
         return message;
     }

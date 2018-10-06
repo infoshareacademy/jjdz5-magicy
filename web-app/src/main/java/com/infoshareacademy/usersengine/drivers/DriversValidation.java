@@ -13,4 +13,5 @@ public interface DriversValidation {
     boolean askForRating(String rating);
     boolean askForDriverId(List<Driver> drivers, String id);
     String validateAdvertData(String id, String rating, List<Driver> drivers);
+    boolean isPhoneNumberExist(String number, List<Driver> drivers);
 }

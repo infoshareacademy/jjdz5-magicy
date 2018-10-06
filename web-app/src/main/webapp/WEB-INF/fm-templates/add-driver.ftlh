@@ -105,12 +105,12 @@
 
         <div class="row">
             <div class="col-5 form-group">
-                <label for="phone">Your phone number:</label>
+                <label for="phone">Your phone number (xxx xxx xxx)</label>
                 <input id="phone"
                        required
                        type="phone"
                        name="phone"
-                       placeholder="xxx-xxx-xxx"
+                       placeholder="xxx xxx xxx"
                        class="form-control" />
             </div>
         </div>

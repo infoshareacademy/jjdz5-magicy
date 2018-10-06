@@ -8,11 +8,11 @@ import java.util.List;
 @Stateful
 public class DriversValidationBean implements DriversValidation{
 
-    private static final String ratingRegex = "^?[1-5]";
+    private static final String RATING_REGEX = "^?[1-5]";
     UserInput userInput = new UserInput();
 
     public boolean checkRating(String rating) {
-        return rating.matches(ratingRegex);
+        return rating.matches(RATING_REGEX);
     }
 
     public boolean checkDriverId(List<Driver> drivers, String id){
@@ -53,5 +53,23 @@ public class DriversValidationBean implements DriversValidation{
 
     public boolean askForNumber(String number) {
         return (inputIsEmpty(number) || userInput.isNumberValid(number));
+    }
+
+    public boolean isPhoneNumberExist(String number, List<Driver> drivers){
+
+        String newNumber = removeWhiteSigns(number);
+
+        for (Driver driver: drivers){
+            String driversPhoneNumber = removeWhiteSigns(driver.getPhone());
+            if(newNumber.equals(driversPhoneNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String removeWhiteSigns(String text){
+        text = text.replaceAll(" ", "");
+        return text;
     }
 }

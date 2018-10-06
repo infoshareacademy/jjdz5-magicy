@@ -92,7 +92,7 @@ public class UserInput {
 
     private static final String STREET_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
 
-    private static final String NUMBER_REGEX = "^\\d{3}\\-?\\d{3}\\-?\\d{3}$";
+    private static final String NUMBER_REGEX = "^\\d{3}\\ \\d{3}\\ \\d{3}$";
 
     public boolean isCityValid(String city) {
         return city.matches(CITY_REGEX);

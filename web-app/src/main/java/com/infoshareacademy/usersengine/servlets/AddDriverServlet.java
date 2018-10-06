@@ -60,7 +60,7 @@ public class AddDriverServlet extends HttpServlet {
         driversList.setDriversList(drivers);
 
         Map<String, String[]> map = req.getParameterMap();
-        redirect(resp, driverPreparation.validateDriver(driverPreparation.mapReader(map)), drivers);
+        redirect(resp, driverPreparation.validateDriver(driverPreparation.mapReader(map), drivers), drivers);
     }
 
     private String getPath() {
