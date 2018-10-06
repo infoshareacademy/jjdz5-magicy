@@ -14,18 +14,6 @@ public class Advert {
         promo = false;
     }
 
-//    public Advert(Integer id, Date date) {
-//        this.id = id;
-//        this.date = date;
-//    }
-
-//    public Advert(Integer id, Date date, Driver driver, Route route, Boolean promo) {
-//        this.id = id;
-//        this.date = date;
-//        this.driver = driver;
-//        this.route = route;
-//        this.promo = false;
-//    }
 
     public Advert(Integer id, Date date, Driver driver, Route route) {
         this.id = id;
