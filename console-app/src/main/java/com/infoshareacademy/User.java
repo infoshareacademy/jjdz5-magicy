@@ -5,6 +5,7 @@ public class User {
     private String surname;
     private String phone;
     private Rating rating;
+    private String password;
 
     public User(String name, String surname, String phone, Rating rating) {
         this.name = name;
@@ -15,6 +16,19 @@ public class User {
 
     public User(){
 
+    }
+
+    public User(String name, String password){
+        this.name = name;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
