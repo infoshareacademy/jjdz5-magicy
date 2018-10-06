@@ -69,6 +69,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="add-driver">Add driver</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about-us">About us</a>
+                </li>
             </ul>
             <div class="nav-item" style="float:right">
                 <a class="nav-link" onclick="myFunction()">Sing out</a>

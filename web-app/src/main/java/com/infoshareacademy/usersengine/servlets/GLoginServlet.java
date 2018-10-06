@@ -52,7 +52,7 @@ public class GLoginServlet extends HttpServlet {
 
             HttpSession session = req.getSession(true);
             session.setAttribute("userName", name);
-            resp.sendRedirect("/jjdz5-magicy//home");
+            resp.sendRedirect("/jjdz5-magicy/home");
 
         } catch (Exception e) {
             throw new RuntimeException(e);

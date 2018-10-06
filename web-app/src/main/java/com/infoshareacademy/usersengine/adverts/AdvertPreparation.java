@@ -46,34 +46,34 @@ public class AdvertPreparation {
     public String validateAdvertData(AdvertData advertData){
         String message = "";
         if(!advertsValidation.askForDate(advertData.getDate())){
-            message = message + "The entered date must be later than today and no later than a month after today. Enter correct date";
+            message = message + "The entered date must be later than today and no later than a month after today. Enter correct date<br>";
         }
         if(!advertsValidation.askForCity(advertData.getStartCity())){
-            message = message + "Enter correct start city  ";
+            message = message + "Enter correct start city  <br>";
         }
         if(!advertsValidation.askForStreet(advertData.getStartStreet())){
-            message = message + "Enter correct start street ";
+            message = message + "Enter correct start street <br>";
         }
         if(!advertsValidation.askForTime(advertData.getStartTime())){
-            message = message + "Enter correct start time ";
+            message = message + "Enter correct start time <br>";
         }
         if(!advertsValidation.askForCity(advertData.getEndCity())){
-            message = message + "Enter correct end city ";
+            message = message + "Enter correct end city <br>";
         }
         if(!advertsValidation.askForStreet(advertData.getEndStreet())){
-            message = message + "Enter correct end street ";
+            message = message + "Enter correct end street <br>";
         }
         if(!advertsValidation.askForTime(advertData.getEndTime())){
-            message = message + "Enter correct end time ";
+            message = message + "Enter correct end time <br>";
         }
         if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(advertData.getPickUpCity())){
-            message = message + "Enter correct pick up city ";
+            message = message + "Enter correct pick up city <br>";
         }
         if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(advertData.getPickUpStreet())){
-            message = message + "Enter correct pick up street ";
+            message = message + "Enter correct pick up street <br>";
         }
         if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(advertData.getPickUpTime())){
-            message = message + "Enter correct pick up time ";
+            message = message + "Enter correct pick up time <br>";
         }
         return message;
     }

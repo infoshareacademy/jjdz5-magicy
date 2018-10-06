@@ -46,23 +46,24 @@
 
    </script>
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 10%">
         <div class="col-4"></div>
-        <div class="col-4"><h1>goTogether</h1></div>
+        <div class="col-4" style="text-align: center"><img src="img/logo.png" width="100"
+                                                           hight="100" class="display-inline-block" alt=""></div>
         <div class="col-4"></div>
         </div>
 
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4" style="text-align: center"><h1>goTogether</h1></div>
+        <div class="col-4"></div>
+    </div>
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4"> <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                <div class="col-xs-4 col-sm-2">
-                    <div data-onsuccess="onSignIn">
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    </div>
-                </div>
+            <div class="col-5"></div>
+            <div class="col-2 col-centered">
+                <div style="margin-right:20%"></div><div syle="margin-top:10px" class="g-signin2" data-onsuccess="onSignIn"></div>
             </div>
-            </div>
-            <div class="col-4"></div>
+            <div class="col-5"></div>
         </div>
     </div>
 </div>
