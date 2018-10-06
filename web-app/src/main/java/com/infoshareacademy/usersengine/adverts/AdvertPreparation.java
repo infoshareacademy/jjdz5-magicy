@@ -1,7 +1,6 @@
 package com.infoshareacademy.usersengine.adverts;
 
 import com.infoshareacademy.*;
-
 import javax.ejb.Stateful;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

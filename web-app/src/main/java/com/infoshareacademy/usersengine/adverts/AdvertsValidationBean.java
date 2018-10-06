@@ -1,7 +1,6 @@
 package com.infoshareacademy.usersengine.adverts;
 
 import com.infoshareacademy.UserInput;
-
 import javax.ejb.Stateful;
 import java.time.LocalDate;
 
@@ -23,7 +22,7 @@ public class AdvertsValidationBean implements AdvertsValidation {
     }
 
     public boolean askForDate(String date) {
-      return !(inputIsEmpty(date) || !checkDate(date));
+        return !(inputIsEmpty(date) || !checkDate(date));
     }
 
     public boolean askForTime(String time) {

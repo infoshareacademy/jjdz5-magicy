@@ -46,6 +46,7 @@
 </head>
 <body>
 <script>
+
 function myAlertFunction(id, name, surname) {
 var inputOptions = new Promise(function(resolve) {
     setTimeout(function() {
@@ -81,8 +82,8 @@ var inputOptions = new Promise(function(resolve) {
 
 <header style="height: 100px">
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="#"><img src="logo.png" width="30"
-                                              hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
+      <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
+                                               hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -98,14 +99,11 @@ var inputOptions = new Promise(function(resolve) {
                 <li class="nav-item">
                     <a class="nav-link" href="add-advert">Add advert</a>
                 </li>
-                <li class="nav-item" active>
+                <li class="nav-item active">
                     <a class="nav-link" href="drivers">Drivers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add driver</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Driver's rating</a>
+                    <a class="nav-link" href="add-driver">Add driver</a>
                 </li>
             </ul>
         </div>
@@ -126,6 +124,7 @@ var inputOptions = new Promise(function(resolve) {
                         <th style="width:30%">Rating</th>
                         <th style="width:20%"></th>
                     </tr>
+
                 </thead>
 	<tbody>
 	<#list drivers as d>
@@ -154,3 +153,4 @@ var inputOptions = new Promise(function(resolve) {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
 </body>
 </html>
+

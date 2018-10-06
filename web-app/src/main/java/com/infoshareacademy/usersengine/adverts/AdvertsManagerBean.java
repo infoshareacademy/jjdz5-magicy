@@ -1,4 +1,5 @@
 package com.infoshareacademy.usersengine.adverts;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.Advert;
 import javax.ejb.Stateful;
@@ -46,3 +47,4 @@ public class AdvertsManagerBean implements AdvertsManager {
         }
     }
 }
+
