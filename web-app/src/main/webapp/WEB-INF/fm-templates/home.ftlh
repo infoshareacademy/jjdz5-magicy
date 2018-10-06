@@ -46,8 +46,8 @@
     }
     </script>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="#"><img src="logo.png" width="30"
-                                              hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
+        <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
+                                              hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -67,10 +67,7 @@
                     <a class="nav-link" href="drivers">Drivers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add driver</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Driver's rating</a>
+                    <a class="nav-link" href="add-driver">Add driver</a>
                 </li>
             </ul>
             <div class="nav-item" style="float:right">

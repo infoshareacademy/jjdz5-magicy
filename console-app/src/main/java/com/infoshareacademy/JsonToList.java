@@ -30,7 +30,7 @@ public class JsonToList {
     public List<Driver> driversToList (String path) {
         ObjectMapper objectMapper = new ObjectMapper();
         JSONParser parser = new JSONParser();
-        List<Driver> driversList = null;
+        List<Driver> driversList = new ArrayList<>();
         try {
             JSONArray drivers = (JSONArray) parser.parse(new FileReader(path));
             String jsonDriverArray = drivers.toString();

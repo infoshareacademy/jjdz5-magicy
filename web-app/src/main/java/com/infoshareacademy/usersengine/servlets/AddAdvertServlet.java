@@ -23,8 +23,8 @@ import java.util.*;
 @WebServlet("add-advert")
 public class AddAdvertServlet extends HttpServlet {
 
-   private JsonToList jsonToList = new JsonToList();
-   private AdvertsList advertsList = new AdvertsList();
+    private JsonToList jsonToList = new JsonToList();
+    private AdvertsList advertsList = new AdvertsList();
 
     @Inject
     private TemplateProvider templateProvider;
@@ -69,8 +69,8 @@ public class AddAdvertServlet extends HttpServlet {
 
     private void redirect(HttpServletResponse resp, String message, List<Advert> adverts) throws IOException {
         if(!message.isEmpty()){
-               PrintWriter writer = resp.getWriter();
-             writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
+            PrintWriter writer = resp.getWriter();
+            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
         else{
             advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
