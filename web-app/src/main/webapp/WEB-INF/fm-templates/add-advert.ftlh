@@ -31,7 +31,7 @@
 
   <div class="container">
      <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-          <a class="navbar-brand" href="#"><img src="logo.png" width="30"
+          <a class="navbar-brand" href="home"><img src="logo.png" width="30"
                                                 hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,17 +158,11 @@
                        class="form-control" />
             </div>
         </div>
-        <div class="row margin">
-            <div class="col-3"></div>
-            <div class="col-3">
-                <button type="button" class="btn btn-secondary btn-block">Cancel</button>
-            </div>
-            <div class="col-3">
-                <button type="submit" class="btn btn-primary btn-block">Add</button>
-            </div>
-            <div class="col-3"></div>
-        </div>
-
+          <div class="row margin">
+              <div class="col-3 imgCenter">
+                  <button type="submit" class="btn btn-primary btn-block">Add</button>
+              </div>
+          </div>
     </form>
 </div>
 

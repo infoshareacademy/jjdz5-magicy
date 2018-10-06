@@ -34,7 +34,8 @@ public class DriverPreparation {
         String message ="";
         if (driversValidation.isPhoneNumberExist(driver.getPhone(), drivers)){
             message = message + "User already exist <br>";
-        } else
+            return message;
+        }
 
         if (!driversValidation.askForText(driver.getName())){
             message = message + "Enter correct name </br>";
