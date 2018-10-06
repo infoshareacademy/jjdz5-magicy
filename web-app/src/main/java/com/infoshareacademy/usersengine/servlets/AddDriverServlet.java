@@ -38,8 +38,6 @@ public class AddDriverServlet extends HttpServlet {
     @Inject
     private DriverPreparation driverPreparation;
 
-    @Inject
-    private DriversValidation driversValidation;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -71,8 +69,9 @@ public class AddDriverServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, List<Driver> drivers) throws IOException {
+        driversManager.addDriver(driverPreparation.getNewDriver(drivers), drivers);
         if (message.isEmpty()) {
-            driversList.setDriversList(driversManager.addDriver(driverPreparation.getNewDriver(drivers), drivers));
+            driversList.setDriversList(drivers);
             driversManager.writeDriverData(drivers, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");
 

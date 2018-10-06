@@ -1,6 +1,7 @@
 package com.infoshareacademy.usersengine.drivers;
 
 import com.infoshareacademy.Driver;
+import com.infoshareacademy.Rating;
 
 import javax.ejb.Stateful;
 import java.util.List;
@@ -24,6 +25,7 @@ public class DriverPreparation {
         driver.setPhone(phone);
         driver.setCity(city);
         driver.setDistrict(district);
+        driver.setRating(new Rating(0.0,0));
 
         return driver;
     }
