@@ -108,6 +108,22 @@ public class AdvertManager {
         return idMax;
     }
 
+    public void promoteAdvert(List<Advert> adverts, Integer advertId) {
+        for (Advert advert: adverts) {
+            if (advertId > adverts.size() || advertId <= 0) {
+                System.out.println("Advert ID is not correct.");
+                continue;
+            }
+            if (advertId == advert.getId()) {
+                advert.setPromo(true);
+
+                System.out.println("Promo flag is changed");
+                break;
+            }
+
+        }
+
+    }
 
 }
 

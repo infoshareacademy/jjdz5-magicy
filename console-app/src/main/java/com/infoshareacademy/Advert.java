@@ -7,10 +7,11 @@ public class Advert {
     private Date date;
     private Driver driver;
     private Route route;
-    private Boolean promo = false;
+    private Boolean promo;
 
 
     public Advert(){
+        promo = false;
     }
 
 //    public Advert(Integer id, Date date) {
@@ -18,19 +19,20 @@ public class Advert {
 //        this.date = date;
 //    }
 
-    public Advert(Integer id, Date date, Driver driver, Route route, Boolean promo) {
-        this.id = id;
-        this.date = date;
-        this.driver = driver;
-        this.route = route;
-        this.promo = promo;
-    }
+//    public Advert(Integer id, Date date, Driver driver, Route route, Boolean promo) {
+//        this.id = id;
+//        this.date = date;
+//        this.driver = driver;
+//        this.route = route;
+//        this.promo = false;
+//    }
 
     public Advert(Integer id, Date date, Driver driver, Route route) {
         this.id = id;
         this.date = date;
         this.driver = driver;
         this.route = route;
+        promo = false;
     }
 
     public Driver getDriver() {
@@ -81,7 +83,6 @@ public class Advert {
                 ", date=" + date +
                 ", driver=" + driver +
                 ", route=" + route +
-                ", promo=" + promo +
                 '}';
     }
 }
