@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
 
     <style>
         .view {
@@ -21,41 +22,45 @@
             margin: auto;
         }
               .margin{
-              margin-bottom:20px;
+              margin-bottom:40px;
               margin-top:20px;
               }
     </style>
 </head>
 <body>
 
-<header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="#"><img src="logo.png" width="30"
-                                              hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Adverts</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="add-advert">Add advert</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Driver's rating</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
   <div class="container">
-      <div class="row text-center margin"><h1 class="text-center">Add new advert</h1></div>
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+          <a class="navbar-brand" href="#"><img src="logo.png" width="30"
+                                                hight="30" class="display-inline-block" alt=""><strong>goTogether</strong></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="adverts">Adverts</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="add-advert">Add advert</a>
+                  </li>
+                  <li class="nav-item" >
+                      <a class="nav-link" href="drivers">Drivers</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Add driver</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Driver's rating</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+      <div class="row text-center margin"><h1 class="text-center"></h1></div>
       <form method="post" action="/jjdz5-magicy/add-advert">
           <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">Start point</h3></div></div>
           <div class="row margin">
@@ -170,11 +175,7 @@
       </form>
   </div>
 
-<footer class="page-footer font-small indigo">
-    <div class="footer-copyright text-center py-3">
-        © 2018 Copyright: Magicians
-    </div>
-</footer>
+  <#include "footer.ftlh">
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
