@@ -94,7 +94,6 @@ public class AdvertPreparation {
         route.setPickUpCity(advertData.getPickUpCity());
         route.setPickUpStreet(advertData.getPickUpStreet());
         route.setPickUpTime(advertData.getPickUpTime());
-        System.out.println("Route to jest route "+route.toString());
         return route;
     }
 
