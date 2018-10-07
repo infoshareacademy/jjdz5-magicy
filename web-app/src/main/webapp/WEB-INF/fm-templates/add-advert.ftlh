@@ -70,7 +70,7 @@
                          required
                          type="text"
                          name="startCity"
-                         placeholder="Enter start city"
+                         placeholder="Enter departure city"
                          class="form-control" />
             </div>
 
@@ -80,7 +80,7 @@
                        type="text"
                        required
                        name="startStreet"
-                       placeholder="Enter start street"
+                       placeholder="Enter departure street"
                        class="form-control" />
             </div>
             <div class="col-2 form-group">
@@ -89,7 +89,7 @@
                        type="time"
                        required
                        name="startTime"
-                       placeholder="Enter start time"
+                       placeholder="Enter departure time"
                        class="form-control" />
             </div></div>
 
@@ -101,7 +101,7 @@
                        type="text"
                        required
                        name="endCity"
-                       placeholder="Enter end city"
+                       placeholder="Enter arrival city"
                        class="form-control" />
             </div>
 
@@ -111,7 +111,7 @@
                        type="text"
                        required
                        name="endStreet"
-                       placeholder="Enter end street"
+                       placeholder="Enter arrival street"
                        class="form-control" />
             </div>
             <div class="col-2 form-group">
@@ -120,7 +120,7 @@
                        type="time"
                        required
                        name="endTime"
-                       placeholder="Enter end time"
+                       placeholder="Enter arrival time"
                        class="form-control" />
             </div></div>
 
@@ -131,7 +131,7 @@
                 <input id="pickUpCity"
                        type="text"
                        name="pickUpCity"
-                       placeholder="Enter pick up city"
+                       placeholder="Enter city where you stop"
                        class="form-control" />
             </div>
 
@@ -140,7 +140,7 @@
                 <input id="pickUpStreet"
                        type="text"
                        name="pickUpStreet"
-                       placeholder="Enter pick up street"
+                       placeholder="Enter street where you stop"
                        class="form-control" />
             </div>
             <div class="col-2 form-group">
@@ -148,7 +148,7 @@
                 <input id="pickUpTime"
                        type="time"
                        name="pickUpTime"
-                       placeholder="Enter pick up time"
+                       placeholder="Enter time of your stop"
                        class="form-control" />
             </div></div>
         <div class="row">

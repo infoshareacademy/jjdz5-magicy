@@ -151,13 +151,13 @@
         <tr style="background: #ffffcc">
                 <td>${a.id}</td>
                 <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
-                <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
+                <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
                 <td>${a.getRoute().getPickUpTime()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
-                <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
+                <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
         </tr>
     </#if>
     </#list>
@@ -166,13 +166,13 @@
          <tr>
              <td>${a.id}</td>
              <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
              <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
-             <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
+             <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
              <td>${a.getRoute().getPickUpTime()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
              <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
-             <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
+             <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
          </tr>
         </#if>
     </#list>
