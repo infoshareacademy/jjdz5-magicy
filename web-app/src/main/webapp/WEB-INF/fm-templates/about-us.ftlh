@@ -8,26 +8,43 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-scope" content="profile email">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <meta name="google-signin-client_id"
+          content="176776774224-o5k7gckft8lg5oc4qbf9t6ps0aet9vjc.apps.googleusercontent.com">
 
     <style>
         .view {
             background-repeat: no-repeat;
             background-position: center;
-            background-image: url("img/background.jpg");
+            background-image: url("img/fantastic_four.jpg");
             background-size: cover;
         }
         .imgCenter {
             display: block;
             margin: auto;
         }
-        .margin{
-            margin-bottom:40px;
-            margin-top:20px;
-        }
     </style>
 </head>
 <body>
-<div class="container">
+
+<header>
+    <script>
+        function myFunction() {
+              var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+       }
+
+       function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+    </script>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
                                                  hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
@@ -49,10 +66,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="drivers">Drivers</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="add-driver">Add driver</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="about-us">About us</a>
                 </li>
             </ul>
@@ -61,71 +78,15 @@
             </div>
         </div>
     </nav>
-    <div class="row text-center margin"><h1 class="text-center"></h1></div>
-    <form method="post" action="/jjdz5-magicy/add-driver">
-        <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">New Driver</h3></div></div>
-        <div class="row margin">
-            <div class="col-5 form-group">
-                <label for="name">Name:</label>
-                <input id="name"
-                       required
-                       type="text"
-                       name="name"
-                       placeholder="Enter your name"
-                       class="form-control" />
-            </div>
 
-            <div class="col-5 form-group">
-                <label for="surname">Surname:</label>
-                <input id="surname"
-                       type="text"
-                       required
-                       name="surname"
-                       placeholder="Enter your surname"
-                       class="form-control" />
-            </div>
-            </div>
+    <div class="view intro-2">
+        <div class="mask rgba-black-light flex-center ">
+            <div class="container" style="margin: auto;">
 
-        <div class="row margin">
-            <div class="col-5 form-group">
-                <label for="city">City:</label>
-                <input id="city"
-                       type="text"
-                       required
-                       name="city"
-                       placeholder="Enter your city"
-                       class="form-control" />
-            </div>
-
-            <div class="col-5 form-group">
-                <label for="district">District:</label>
-                <input id="district"
-                       type="text"
-                       required
-                       name="district"
-                       placeholder="Enter your district"
-                       class="form-control" />
-            </div>
-            </div>
-
-        <div class="row">
-            <div class="col-5 form-group">
-                <label for="phone">Your phone number (xxx xxx xxx)</label>
-                <input id="phone"
-                       required
-                       type="phone"
-                       name="phone"
-                       placeholder="xxx xxx xxx"
-                       class="form-control" />
             </div>
         </div>
-        <div class="row margin">
-            <div class="col-3 imgCenter">
-                <button type="submit" class="btn btn-primary btn-block">Add</button>
-            </div>
-        </div>
-    </form>
-</div>
+    </div>
+</header>
 
 <#include "footer.ftlh">
 

@@ -105,7 +105,13 @@ var inputOptions = new Promise(function(resolve) {
                 <li class="nav-item">
                     <a class="nav-link" href="add-driver">Add driver</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about-us">About us</a>
+                </li>
             </ul>
+            <div class="nav-item" style="float:right">
+                <a class="nav-link" onclick="myFunction()">Sing out</a>
+            </div>
         </div>
     </nav>
 </header>
@@ -141,7 +147,7 @@ var inputOptions = new Promise(function(resolve) {
     </div>
     <input type="hidden" id="id" name="id" value="0"/>
     <input type="hidden" id="rating" name="rating" value="0"/>
-        <button type="submit" id="sub"></button>
+        <button type="submit" id="sub" hidden="hidden"></button>
     </form>
 </main>
 

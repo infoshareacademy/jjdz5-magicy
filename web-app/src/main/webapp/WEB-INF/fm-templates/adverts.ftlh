@@ -99,7 +99,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                     </li>
@@ -115,7 +114,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="add-driver">Add driver</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about-us">About us</a>
+                    </li>
             </ul>
+                <div class="nav-item" style="float:right">
+                    <a class="nav-link" onclick="myFunction()">Sing out</a>
+                </div>
         </div>
     </nav>
     <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
@@ -148,7 +153,7 @@
     <#if a.getPromo() == true>
         <tr style="background: #ffffcc">
                 <td>${a.id}</td>
-                <td>${a.getRoute().getDate()?datetime?string('dd-MM-yyyy')}</td>
+                <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
                 <td style="background: #ffcc66">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
                 <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
@@ -163,7 +168,7 @@
         <#if a.getPromo() == false>
          <tr>
              <td>${a.id}</td>
-             <td>${a.getRoute().getDate()?datetime?string('dd-MM-yyyy')}</td>
+             <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
              <td style="background: #cceeff">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
              <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
              <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>

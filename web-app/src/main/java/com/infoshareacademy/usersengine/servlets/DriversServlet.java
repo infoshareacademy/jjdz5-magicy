@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/drivers")
+@WebServlet("drivers")
 public class DriversServlet extends HttpServlet {
     private JsonToList jsonToList = new JsonToList();
     @Inject
