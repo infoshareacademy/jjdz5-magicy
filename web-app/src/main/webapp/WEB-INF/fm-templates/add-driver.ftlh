@@ -56,9 +56,6 @@
                     <a class="nav-link" href="about-us">About us</a>
                 </li>
             </ul>
-            <div class="nav-item" style="float:right">
-                <a class="nav-link" onclick="myFunction()">Sing out</a>
-            </div>
         </div>
     </nav>
     <div class="row text-center margin"><h1 class="text-center"></h1></div>

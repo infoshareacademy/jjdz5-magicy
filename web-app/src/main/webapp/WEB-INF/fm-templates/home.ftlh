@@ -73,9 +73,6 @@
                     <a class="nav-link" href="about-us">About us</a>
                 </li>
             </ul>
-            <div class="nav-item" style="float:right">
-                <a class="nav-link" onclick="myFunction()">Sing out</a>
-            </div>
         </div>
     </nav>
 
@@ -85,10 +82,8 @@
                 <div class="row">
                     <div class="container white-text">
                         <div class="white-text text-center wow fadeInUp" style="font-size:30px; margin: 100px;">
-                            <h2>GoTogether</h2>
-                            application is used to arrange a common car trip in the same direction to work.
-                            A person who runs a car every day and has, for example,
-                            three vacancies, can take someone else with him.
+                            <p style="font-size:60px;">goTogether</p>
+                            car pooling made easy
                         </div>
                     </div>
                 </div>
@@ -99,11 +94,21 @@
                     </div>
                     <div class="col-4 text-center white-text">
                         <img class="imgCenter" src="img/ecology.png" alt="..." width="95" hight="95" class="rounded-circle">
-                        <h3>care about ecology</h3>
+                        <h3>care about environment</h3>
                     </div>
                     <div class="col-4 text-center white-text">
                         <img class="imgCenter" src="img/friends.png" alt="..." width="95" hight="95" class="rounded-circle">
                         <h3>meet new friends</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container white-text">
+                        <div class="white-text text-center" style="font-size:25px; margin: 30px;">
+                            <br>This application is dedicated to a car pooling arrangement.
+                            <br>
+                            <br>Looking for a nice & easy trip to work? Select 'Adverts'.
+                            <br>Have a free seat in your car? Select 'Add advert'.
+                        </div>
                     </div>
                 </div>
             </div>

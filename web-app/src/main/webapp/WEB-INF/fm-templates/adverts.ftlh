@@ -118,9 +118,6 @@
                         <a class="nav-link" href="about-us">About us</a>
                     </li>
             </ul>
-                <div class="nav-item" style="float:right">
-                    <a class="nav-link" onclick="myFunction()">Sing out</a>
-                </div>
         </div>
     </nav>
     <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
@@ -137,14 +134,14 @@
 
                 <thead>
                     <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="Advert no." disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Advert" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Start time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Start" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Pick up time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Pick up" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="End time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="End" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="From" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Via" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="To" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
                     </tr>
                 </thead>
@@ -154,12 +151,12 @@
         <tr style="background: #ffffcc">
                 <td>${a.id}</td>
                 <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
-                <td>${a.getRoute().getPickUpTime()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
                 <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
+                <td>${a.getRoute().getPickUpTime()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
                 <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
         </tr>
     </#if>
@@ -169,12 +166,12 @@
          <tr>
              <td>${a.id}</td>
              <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
              <td style="background: #cceeff">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
-             <td>${a.getRoute().getPickUpTime()}</td>
+             <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
              <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
+             <td>${a.getRoute().getPickUpTime()}</td>
              <td style="background: #cceeff">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
              <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
          </tr>
         </#if>

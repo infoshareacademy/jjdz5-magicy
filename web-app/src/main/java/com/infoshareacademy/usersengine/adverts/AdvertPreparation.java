@@ -49,31 +49,31 @@ public class AdvertPreparation {
             message = message + "The entered date must be later than today and no later than a month after today. Enter correct date<br>";
         }
         if(!advertsValidation.askForCity(advertData.getStartCity())){
-            message = message + "Enter correct start city  <br>";
+            message = message + "Enter correct departure city <br>";
         }
         if(!advertsValidation.askForStreet(advertData.getStartStreet())){
-            message = message + "Enter correct start street <br>";
+            message = message + "Enter correct departure street <br>";
         }
         if(!advertsValidation.askForTime(advertData.getStartTime())){
-            message = message + "Enter correct start time <br>";
+            message = message + "Enter correct departure time <br>";
         }
         if(!advertsValidation.askForCity(advertData.getEndCity())){
-            message = message + "Enter correct end city <br>";
+            message = message + "Enter correct arrival city <br>";
         }
         if(!advertsValidation.askForStreet(advertData.getEndStreet())){
-            message = message + "Enter correct end street <br>";
+            message = message + "Enter correct arrival street <br>";
         }
         if(!advertsValidation.askForTime(advertData.getEndTime())){
-            message = message + "Enter correct end time <br>";
+            message = message + "Enter correct arrival time <br>";
         }
         if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(advertData.getPickUpCity())){
-            message = message + "Enter correct pick up city <br>";
+            message = message + "Enter correct city where you can make a stop <br>";
         }
         if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(advertData.getPickUpStreet())){
-            message = message + "Enter correct pick up street <br>";
+            message = message + "Enter correct street where you can make a stop <br>";
         }
         if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(advertData.getPickUpTime())){
-            message = message + "Enter correct pick up time <br>";
+            message = message + "Enter correct time when you can make a stop <br>";
         }
         return message;
     }
@@ -94,7 +94,6 @@ public class AdvertPreparation {
         route.setPickUpCity(advertData.getPickUpCity());
         route.setPickUpStreet(advertData.getPickUpStreet());
         route.setPickUpTime(advertData.getPickUpTime());
-        System.out.println("Route to jest route "+route.toString());
         return route;
     }
 
@@ -102,9 +101,9 @@ public class AdvertPreparation {
         driver.setCity("Gdańsk");
         driver.setDistrict("Wrzeszcz");
         driver.setId(4);
-        driver.setName("Artur");
-        driver.setSurname("Moroz");
-        driver.setPhone("555000111");
+        driver.setName("Krzysztof");
+        driver.setSurname("Gotowała");
+        driver.setPhone("555 555 555");
         driver.setRating(setRatingData());
         return driver;
     }

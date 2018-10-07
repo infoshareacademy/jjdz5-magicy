@@ -58,14 +58,11 @@
                       <a class="nav-link" href="about-us">About us</a>
                   </li>
               </ul>
-              <div class="nav-item" style="float:right">
-                  <a class="nav-link" onclick="myFunction()">Sing out</a>
-              </div>
           </div>
       </nav>
       <div class="row text-center margin"><h1 class="text-center"></h1></div>
       <form method="post" action="/jjdz5-magicy/add-advert">
-          <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">Start point</h3></div></div>
+          <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">From</h3></div></div>
           <div class="row margin">
               <div class="col-5 form-group">
                   <label for="startCity">City:</label>
@@ -96,7 +93,7 @@
                        class="form-control" />
             </div></div>
 
-        <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">End point</h3></div></div>
+        <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">To</h3></div></div>
         <div class="row margin">
             <div class="col-5 form-group">
                 <label for="endCity">City:</label>
@@ -127,7 +124,7 @@
                        class="form-control" />
             </div></div>
 
-        <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">Pick up point</h3></div></div>
+        <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">Via</h3></div></div>
         <div class="row margin">
             <div class="col-5 form-group">
                 <label for="pickUpCity">City:</label>
@@ -155,8 +152,8 @@
                        class="form-control" />
             </div></div>
         <div class="row">
-            <div class="col-12 form-group">
-                <label for="date">Date:</label>
+            <div class="col-12 form-group text-muted">
+                <h3><label for="date">Date</label></h3>
                 <input id="date"
                        required
                        type="date"

@@ -109,9 +109,6 @@ var inputOptions = new Promise(function(resolve) {
                     <a class="nav-link" href="about-us">About us</a>
                 </li>
             </ul>
-            <div class="nav-item" style="float:right">
-                <a class="nav-link" onclick="myFunction()">Sing out</a>
-            </div>
         </div>
     </nav>
 </header>
