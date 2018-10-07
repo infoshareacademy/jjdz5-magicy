@@ -102,9 +102,9 @@ public class AdvertPreparation {
         driver.setCity("Gdańsk");
         driver.setDistrict("Wrzeszcz");
         driver.setId(4);
-        driver.setName("Artur");
-        driver.setSurname("Moroz");
-        driver.setPhone("555000111");
+        driver.setName("Krzysztof");
+        driver.setSurname("Gotowała");
+        driver.setPhone("555 555 555");
         driver.setRating(setRatingData());
         return driver;
     }
