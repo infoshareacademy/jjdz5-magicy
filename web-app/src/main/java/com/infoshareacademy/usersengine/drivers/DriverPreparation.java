@@ -41,13 +41,13 @@ public class DriverPreparation {
             message = message + "Enter correct name </br>";
         }
         if (!driversValidation.askForText(driver.getSurname())){
-            message = message + "Enter correct Surname </br>";
+            message = message + "Enter correct surname </br>";
         }
         if (!driversValidation.askForNumber(driver.getPhone())){
             message = message + "Enter correct phone number </br>";
         }
         if (!driversValidation.askForText(driver.getCity())){
-            message = message + "Enter correct City <br>";
+            message = message + "Enter correct city <br>";
         }
         if (!driversValidation.askForText(driver.getDistrict())){
             message = message + "Enter correct district <br>";
