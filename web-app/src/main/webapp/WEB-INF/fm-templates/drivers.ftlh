@@ -147,7 +147,7 @@ var inputOptions = new Promise(function(resolve) {
     </div>
     <input type="hidden" id="id" name="id" value="0"/>
     <input type="hidden" id="rating" name="rating" value="0"/>
-        <button type="submit" id="sub"></button>
+        <button type="submit" id="sub" hidden="hidden"></button>
     </form>
 </main>
 

@@ -80,7 +80,7 @@ public class AdvertPreparation {
 
     private Route setRouteData(List<Advert> adverts){
         try {
-            route.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(advertData.getDate()));
+            route.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(advertData.getDate()));
         } catch (ParseException e) {
             e.printStackTrace();
         }

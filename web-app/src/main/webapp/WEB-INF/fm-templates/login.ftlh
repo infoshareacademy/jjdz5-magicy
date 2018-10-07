@@ -58,6 +58,8 @@
         <div class="col-4" style="text-align: center"><h1>goTogether</h1></div>
         <div class="col-4"></div>
     </div>
+    <br>
+    <br>
         <div class="row">
             <div class="col-5"></div>
             <div class="col-2 col-centered">

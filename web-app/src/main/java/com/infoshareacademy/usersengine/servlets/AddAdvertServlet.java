@@ -74,6 +74,7 @@ public class AddAdvertServlet extends HttpServlet {
         }
         else{
             advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
+            System.out.println("adverts po "+advertsList.getAdvertsList().toString());
             advertsManager.advertsToJson(adverts, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");
         }

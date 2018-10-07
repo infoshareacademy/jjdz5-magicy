@@ -3,10 +3,11 @@ package com.infoshareacademy.usersengine.adverts;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.Advert;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import java.io.*;
 import java.util.List;
 
-@Stateful
+@Stateless
 public class AdvertsManagerBean implements AdvertsManager {
 
     public List<Advert> addAdvert(Advert advert, List<Advert> adverts){
