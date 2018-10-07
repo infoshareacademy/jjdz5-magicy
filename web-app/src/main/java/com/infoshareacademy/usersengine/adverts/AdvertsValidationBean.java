@@ -2,9 +2,10 @@ package com.infoshareacademy.usersengine.adverts;
 
 import com.infoshareacademy.UserInput;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import java.time.LocalDate;
 
-@Stateful
+@Stateless
 public class AdvertsValidationBean implements AdvertsValidation {
     UserInput userInput = new UserInput();
 
