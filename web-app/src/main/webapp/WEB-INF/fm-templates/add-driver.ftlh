@@ -58,9 +58,14 @@
             </ul>
         </div>
     </nav>
-    <div class="row text-center margin"><h1 class="text-center"></h1></div>
+    <h3>---</h3>
+    <hr>
+    <div class="row">
+        <div class="mt-3">
+            <h3>Add new driver</h3>
+        </div>
+    </div>
     <form method="post" action="/jjdz5-magicy/add-driver">
-        <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">New Driver</h3></div></div>
         <div class="row margin">
             <div class="col-5 form-group">
                 <label for="name">Name:</label>

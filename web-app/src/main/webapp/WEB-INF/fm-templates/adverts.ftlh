@@ -123,9 +123,11 @@
     <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
     <hr>
     <div class="row">
+        <div class="mt-3">
+            <h3>Adverts</h3>
+        </div>
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
-                <h3 class="panel-title">Adverts</h3>
                 <div class="pull-right">
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 </div>
