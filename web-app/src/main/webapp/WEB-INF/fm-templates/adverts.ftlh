@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
 
+    <link rel="stylesheet" href="css/overall.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
@@ -120,10 +121,9 @@
             </ul>
         </div>
     </nav>
-    <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
-    <hr>
+<#--The columns titles are merged with the filters inputs thanks to the placeholders attributes-->
     <div class="row">
-        <div class="mt-3">
+        <div class="mt-5">
             <h3>Adverts</h3>
         </div>
         <div class="panel panel-primary filterable">

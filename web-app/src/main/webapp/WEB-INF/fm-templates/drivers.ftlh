@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
 
+    <link rel="stylesheet" href="css/overall.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
@@ -111,10 +112,8 @@ var inputOptions = new Promise(function(resolve) {
             </ul>
         </div>
     </nav>
-    <h3>---</h3>
-    <hr>
     <div class="row">
-        <div class="mt-3">
+        <div class="mt-5 mb-5">
             <h3>Drivers</h3>
         </div>
     </div>
