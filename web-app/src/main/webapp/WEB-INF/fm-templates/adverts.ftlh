@@ -158,6 +158,7 @@
                 <td style="background: #ffcc66">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
                 <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
+                <td style="width:10%; vertical-align: middle">Rating: ${a.getDriver().getRating().getAverage()}/5,0  <br/> ${a.getDriver().getRating().getPersons()} reviews</td>
         </tr>
     </#if>
     </#list>
@@ -173,6 +174,7 @@
              <td style="background: #cceeff">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
              <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
              <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
+             <td style="width:10%; vertical-align: middle">Rating: ${a.getDriver().getRating().getAverage()}/5,0  <br/> ${a.getDriver().getRating().getPersons()} reviews</td>
          </tr>
         </#if>
     </#list>
