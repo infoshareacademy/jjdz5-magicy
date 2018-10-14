@@ -126,7 +126,7 @@
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
                 <h3 class="panel-title">Adverts</h3>
-                <div class="pull-right">
+                <div class="pull-left">
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 </div>
             </div>
@@ -143,6 +143,12 @@
                         <th><input type="text" class="form-control" placeholder="To" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Time" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
+                        <th style="font-size: 16px">Rating</th>
+                    </tr>
+                    <tr>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-primary" aria-pressed="false">Sort by rating</button>
+                        </div>
                     </tr>
                 </thead>
 	<tbody>
