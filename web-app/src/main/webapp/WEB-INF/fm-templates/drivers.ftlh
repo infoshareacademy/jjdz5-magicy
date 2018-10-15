@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
 
+    <link rel="stylesheet" href="css/overall.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
@@ -80,7 +81,7 @@ var inputOptions = new Promise(function(resolve) {
 }
 </script>
 
-<header style="height: 100px">
+<div class="container">
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
       <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
                                                hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
@@ -111,14 +112,14 @@ var inputOptions = new Promise(function(resolve) {
             </ul>
         </div>
     </nav>
-</header>
-<main class="container">
+    <div class="row">
+        <div class="mt-5 mb-5">
+            <h3>Drivers</h3>
+        </div>
+    </div>
     <form method="post" action="/jjdz5-magicy/drivers">
     <div class="row">
         <div class="panel panel-primary filterable" style="width:100%">
-            <div class="panel-heading">
-                <h3 class="panel-title">Drivers</h3>
-            </div>
             <table class="table" style="width: 100%; text-align: center">
                 <thead>
                     <tr class="filters">
@@ -146,7 +147,7 @@ var inputOptions = new Promise(function(resolve) {
     <input type="hidden" id="rating" name="rating" value="0"/>
         <button type="submit" id="sub" hidden="hidden"></button>
     </form>
-</main>
+</div>
 
 <#include "footer.ftlh">
 
