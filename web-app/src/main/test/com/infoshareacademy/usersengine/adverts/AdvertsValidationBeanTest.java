@@ -9,7 +9,6 @@ import java.time.temporal.ChronoField;
 import java.util.Random;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("AdvertsValidation Test")
 class AdvertsValidationBeanTest {
@@ -17,7 +16,6 @@ class AdvertsValidationBeanTest {
     private static final LocalDate TODAY = LocalDate.now();
     private static final LocalDate INCORRECT_DATE_PAST = LocalDate.now().minusDays(1);
     private static final LocalDate INCORRECT_DATE_TOO_LATE = LocalDate.now().plusMonths(1);
-
     private static final String EMPTY_INPUT = "";
     private static final String CORRECT_STREET = "Grunwaldzka 472";
     private static final String INCORRECT_STREET = "472 Grunwaldzka";
@@ -57,6 +55,18 @@ class AdvertsValidationBeanTest {
     @DisplayName("Should return false when input date is too late.")
     void returnsFalseWhenInputDateIsTooLate() {
         assertThat(advertsValidation.checkDate(INCORRECT_DATE_TOO_LATE.toString())).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return false when date is empty.")
+    void returnsFalseWhenDateIsEmpty() {
+        assertThat(advertsValidation.askForDate(EMPTY_INPUT)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return false when date is a null.")
+    void returnsFalseWhenDateIsNull() {
+        assertThat(advertsValidation.askForDate(null)).isFalse();
     }
 
     @Test
@@ -106,6 +116,41 @@ class AdvertsValidationBeanTest {
     @DisplayName("Should return false when city is a null.")
     void returnsFalseWhenCityIsNull() {
         assertThat(advertsValidation.askForCity(null)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return true when time is correct.")
+    void returnsTrueWhenTimeIsCorrect() {
+        // arrange
+        String hour = String.valueOf(new Random().ints(1, 0, 23).sum());
+        String minute = String.valueOf(new Random().ints(1, 0, 59).sum());
+        if (hour.length() == 1) {
+            hour = "0" + hour;
+        }
+        String correctTimeToParse = hour + ":" + minute;
+        //assert
+        assertThat(advertsValidation.askForTime(correctTimeToParse)).isTrue();
+    }
+
+    @Test
+    @DisplayName("Should return true when time is correct.")
+    void returnsFalseWhenTimeIsIncorrect() {
+        // arrange
+        String incorrectTime = String.valueOf(new Random().nextInt());
+        // assert
+        assertThat(advertsValidation.askForTime(incorrectTime)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return false when time is empty.")
+    void returnsFalseWhenTimeIsEmpty() {
+        assertThat(advertsValidation.askForTime(EMPTY_INPUT)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return false when time is a null.")
+    void returnsFalseWhenTimeIsNull() {
+        assertThat(advertsValidation.askForTime(null)).isFalse();
     }
 
 }
