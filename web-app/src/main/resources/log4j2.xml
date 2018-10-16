@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS} - %-6level] in %logger - %msg%n"/>
+        </Console>
+        <File name="LogFile" fileName="app.log">
+            <PatternLayout>
+                <Pattern>[%d{HH:mm:ss.SSS} - %-6level] in %logger - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <Async name="Async">
+            <AppenderRef ref="LogFile"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="Console" level="ALL"/>
+            <AppenderRef ref="Async" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>
