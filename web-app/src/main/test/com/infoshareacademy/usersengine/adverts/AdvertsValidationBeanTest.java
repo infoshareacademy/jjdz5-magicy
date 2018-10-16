@@ -21,6 +21,7 @@ class AdvertsValidationBeanTest {
     private static final String EMPTY_INPUT = "";
     private static final String CORRECT_STREET = "Grunwaldzka 472";
     private static final String INCORRECT_STREET = "472 Grunwaldzka";
+    private static final String CORRECT_CITY = "Gdańsk";
 
     private AdvertsValidation advertsValidation;
 
@@ -80,6 +81,31 @@ class AdvertsValidationBeanTest {
     @DisplayName("Should return false when street is a null.")
     void returnsFalseWhenStreetIsNull() {
         assertThat(advertsValidation.askForStreet(null)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return true when city is correct.")
+    void returnsTrueWhenCityIsCorrect() {
+        assertThat(advertsValidation.askForCity(CORRECT_CITY)).isTrue();
+    }
+
+    @Test
+    @DisplayName("Should return false when city is incorrect.")
+    void returnsFalseWhenCityIsIncorrect() {
+        String incorrectCity = String.valueOf(new Random().nextInt());
+        assertThat(advertsValidation.askForCity(incorrectCity)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return false when city is empty.")
+    void returnsFalseWhenCityIsEmpty() {
+        assertThat(advertsValidation.askForCity(EMPTY_INPUT)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should return false when city is a null.")
+    void returnsFalseWhenCityIsNull() {
+        assertThat(advertsValidation.askForCity(null)).isFalse();
     }
 
 }
