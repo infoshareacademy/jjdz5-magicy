@@ -29,7 +29,7 @@ public class AdvertsManagerBean implements AdvertsManager {
         Integer idMax = 0;
         for(Advert advert: adverts){
             if (advert.getRoute().getId() > idMax) {
-                idMax = advert.getId();
+                idMax = advert.getRoute().getId();
             }
         }
         return idMax+1;
