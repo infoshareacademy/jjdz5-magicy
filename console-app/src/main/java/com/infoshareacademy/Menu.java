@@ -8,10 +8,10 @@ public class Menu {
     private AdvertsList advertsList = new AdvertsList();
     private DriversList driversList = new DriversList();
     private AdvertManager advertManager = new AdvertManager();
+    State state = null;
 
     void menu(){
         DriverManager driverManager = new DriverManager();
-        State state = null;
 
        System.out.println("\n\n******************************************");
        System.out.println("******** WELCOME TO GOTOGETHER! **********");
