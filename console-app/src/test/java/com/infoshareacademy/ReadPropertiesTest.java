@@ -5,7 +5,8 @@ import static org.junit.Assert.assertEquals;
 class ReadPropertiesTest {
 
     @Test
-    void loadProperties() {
+    @DisplayName("should return valid properties")
+    void returnValidProperties() {
         String validCityProperty = "Gdańsk";
         String validFilePathProperty = "console-app/src/main/resources/com/infoshareacademy/adverts.json";
         String validDriversListProperty = "console-app/src/main/resources/com/infoshareacademy/driver.json";
