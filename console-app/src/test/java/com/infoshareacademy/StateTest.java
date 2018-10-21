@@ -18,5 +18,4 @@ class StateTest {
 
         assertEquals(validState, stateFromUser);
     }
-
 }
