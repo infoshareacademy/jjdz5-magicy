@@ -19,6 +19,20 @@ public class Rating {
     @Column(name = "persons")
     private Integer persons;
 
+    public Rating(Double average, Integer persons) {
+        this.average = average;
+        this.persons = persons;
+    }
+
+    public Rating(Double average, Integer persons, Integer id) {
+        this.average = average;
+        this.persons = persons;
+        this.id = id;
+    }
+
+    public Rating(){
+    }
+
     public Double getAverage() {
         return average;
     }
@@ -40,18 +54,13 @@ public class Rating {
         return Precision.round(result, 1);
     }
 
-    public Rating(Double average, Integer persons) {
-        this.average = average;
-        this.persons = persons;
+    public Integer getId() {
+        return id;
     }
 
     @Override
     public String toString() {
         return "Average Rating: " + average +
                 "/5.0  Number of ratings: " + persons;
-    }
-
-    public Rating(){
-
     }
 }

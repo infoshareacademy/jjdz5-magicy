@@ -17,6 +17,8 @@ public class Advert {
     @NotNull
     private Date date;
 
+    @OneToOne
+
     @Column(name = "driver_id")
     @NotNull
     private Driver driver;

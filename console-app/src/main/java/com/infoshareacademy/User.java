@@ -37,8 +37,20 @@ public class User {
         this.rating = rating;
     }
 
+    public User(String name, String surname, String phone, Rating rating, Integer id) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.rating = rating;
+        this.id = id;
+    }
+
     public User(){
 
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public User(String name, String password){
