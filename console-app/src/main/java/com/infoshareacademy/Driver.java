@@ -1,9 +1,20 @@
 package com.infoshareacademy;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "drivers")
 public class Driver extends User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "district")
     private String district;
 
     public Driver(String name, String surname, String phone, String city, String district, Rating rating, Integer id) {

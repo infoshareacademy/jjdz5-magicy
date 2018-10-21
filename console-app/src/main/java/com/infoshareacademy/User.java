@@ -1,10 +1,33 @@
 package com.infoshareacademy;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "name")
+    @NotNull
     private String name;
+
+    @Column(name = "surname")
+    @NotNull
     private String surname;
+
+    @Column(name = "phone")
+    @NotNull
     private String phone;
+
+    @Column(name = "rating_id")
     private Rating rating;
+
+    @Column(name = "password")
     private String password;
 
     public User(String name, String surname, String phone, Rating rating) {

@@ -2,10 +2,21 @@ package com.infoshareacademy;
 
 import org.apache.commons.math3.util.Precision;
 
-import java.text.DecimalFormat;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "ratings")
 public class Rating {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "average")
     private Double average;
+
+    @Column(name = "persons")
     private Integer persons;
 
     public Double getAverage() {

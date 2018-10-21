@@ -1,18 +1,53 @@
 package com.infoshareacademy;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "routes")
 public class Route {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+
+    @Column(name = "start_at")
+    @NotNull
     private Date date;
+
+    @Column(name = "start_city")
+    @NotNull
     private String startCity;
+
+    @Column(name = "start_street")
+    @NotNull
     private String startStreet;
+
+    @Column(name = "end_city")
+    @NotNull
     private String endCity;
+
+    @Column(name = "ent_street")
+    @NotNull
     private String endStreet;
+
+    @Column(name = "pick_up_city")
     private String pickUpCity;
+
+    @Column(name = "pick_up_street")
     private String pickUpStreet;
+
+    @Column(name = "start_time")
+    @NotNull
     private String startTime;
+
+    @Column(name = "end_time")
+    @NotNull
     private String endTime;
+
+    @Column(name = "pick_up_time")
     private String pickUpTime;
 
     public Route(){

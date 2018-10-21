@@ -1,6 +1,7 @@
 package com.infoshareacademy;
 
 public class Passenger extends User{
+
     private Integer idPassenger;
 
 

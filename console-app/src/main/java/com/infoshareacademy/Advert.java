@@ -1,14 +1,32 @@
 package com.infoshareacademy;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "adverts")
 public class Advert {
-    private Integer id;
-    private Date date;
-    private Driver driver;
-    private Route route;
-    private Boolean promo;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "add_at")
+    @NotNull
+    private Date date;
+
+    @Column(name = "driver_id")
+    @NotNull
+    private Driver driver;
+
+    @Column(name = "route_id")
+    @NotNull
+    private Route route;
+
+    @Column(name = "promo")
+    private Boolean promo;
 
     public Advert(){
         promo = false;
