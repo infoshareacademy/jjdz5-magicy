@@ -18,12 +18,12 @@ public class Advert {
     private Date date;
 
     @OneToOne
-
-    @Column(name = "driver_id")
+    @JoinColumn(name = "driver_id", unique = true)
     @NotNull
     private Driver driver;
 
-    @Column(name = "route_id")
+    @OneToOne
+    @JoinColumn(name = "route_id", unique = true)
     @NotNull
     private Route route;
 

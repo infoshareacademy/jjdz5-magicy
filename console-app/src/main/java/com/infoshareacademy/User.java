@@ -24,7 +24,8 @@ public class User {
     @NotNull
     private String phone;
 
-    @Column(name = "rating_id")
+    @OneToOne
+    @JoinColumn(name = "rating_id", unique = true)
     private Rating rating;
 
     @Column(name = "password")
