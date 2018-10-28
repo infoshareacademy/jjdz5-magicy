@@ -23,9 +23,11 @@ class UsersRepositoryTest {
 
     @Test
     @DisplayName("Should return appropriate User by given name and password.")
-    void returnsAppropriateUserByGivenNameAndPassword() {
+    void returnsAppropriateUserByGivenNameAndPasswordInFindUserByUsernameAndPasswordMethod() {
+
         // act
         User userFromRepository = usersRepository.findUserByUsernameAndPassword(TEST_NAME, TEST_PASSWORD).get();
+
         // assert
         assertThat(userFromRepository.getName()).isEqualTo(TEST_NAME);
         assertThat(userFromRepository.getPassword()).isEqualTo(TEST_PASSWORD);

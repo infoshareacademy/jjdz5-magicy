@@ -39,6 +39,7 @@ class AdvertPreparationTest {
 
     private AdvertPreparation advertPreparation;
     private AdvertData advertDataFromSetters;
+    private Map<String, String[]> parametersMap;
 
     @BeforeEach
     void setUp() {
@@ -58,9 +59,48 @@ class AdvertPreparationTest {
 
     @Test
     @DisplayName("Should return AdvertData object, based on given Map<String, String[]> with parameters.")
-    void returnsAdvertDataObjectBasedOnGivenMap() {
+    void returnsAdvertDataObjectBasedOnGivenMapInMapReaderMethod() {
+
         // arrange
-        Map<String, String[]> parametersMap = new HashMap<>();
+        prepareParametersMap();
+
+        // act
+        AdvertData advertDataFromAdvertPreparation =  advertPreparation.mapReader(parametersMap);
+
+        // assert
+        assertThat(advertDataFromAdvertPreparation).isEqualToComparingFieldByField(advertDataFromSetters);
+    }
+
+    @Test
+    @DisplayName("Should return empty message if all of main values are correct.")
+    void returnsEmptyMessageWhenMainValuesAreCorrectInValidateAdvertDataMethod() {
+
+        // act
+        String message = advertPreparation.validateAdvertData(advertDataFromSetters);
+
+        // assert
+        assertThat(message).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Should return message if any of main values are incorrect.")
+    void returnsAppropriateMessageWhenAnyOfMainValuesAreIncorrectInValidateAdvertDataMethod() {
+
+        // arrange
+        AdvertData advertData = new AdvertData();
+        advertData.setPickUpCity("");
+        advertData.setPickUpStreet("");
+        advertData.setPickUpTime("");
+
+        // act
+        String message = advertPreparation.validateAdvertData(advertData);
+
+        // assert
+        assertThat(message).isNotEmpty().isNotEqualToIgnoringCase("");
+    }
+
+    private void prepareParametersMap() {
+        parametersMap = new HashMap<>();
         parametersMap.put(START_CITY_KEY, new String[] {START_CITY_VALUE});
         parametersMap.put(START_STREET_KEY, new String[] {START_STREET_VALUE});
         parametersMap.put(START_TIME_KEY, new String[] {START_TIME_VALUE});
@@ -71,34 +111,6 @@ class AdvertPreparationTest {
         parametersMap.put(PICK_UP_STREET_KEY, new String[] {PICK_UP_STREET_VALUE});
         parametersMap.put(PICK_UP_TIME_KEY, new String[] {PICK_UP_TIME_VALUE});
         parametersMap.put(DATE_KEY, new String[] {DATE_VALUE});
-
-        // act
-        AdvertData advertDataFromAdvertPreparation =  advertPreparation.mapReader(parametersMap);
-        // assert
-        assertThat(advertDataFromAdvertPreparation).isEqualToComparingFieldByField(advertDataFromSetters);
-    }
-
-    @Test
-    @DisplayName("Should return empty message if all of main values are correct.")
-    void returnsEmptyMessageWhenMainValuesAreCorrect() {
-        // act
-        String message = advertPreparation.validateAdvertData(advertDataFromSetters);
-        // assert
-        assertThat(message).isEmpty();
-    }
-
-    @Test
-    @DisplayName("Should return message if any of main values are incorrect.")
-    void returnsAppropriateMessageWhenAnyOfMainValuesAreIncorrect() {
-        // arrange
-        AdvertData advertData = new AdvertData();
-        advertData.setPickUpCity("");
-        advertData.setPickUpStreet("");
-        advertData.setPickUpTime("");
-        // act
-        String message = advertPreparation.validateAdvertData(advertData);
-        // assert
-        assertThat(message).isNotEmpty().isNotEqualToIgnoringCase("");
     }
 
 }

@@ -30,97 +30,100 @@ class AdvertsValidationBeanTest {
 
     @Test
     @DisplayName("Should return true when date is correct.")
-    void returnsTrueWhenDateIsCorrect() {
+    void returnsTrueWhenDateIsCorrectCheckDateMethod() {
+
         // arrange
         Integer currentMonthRange = Math.toIntExact(TODAY.range(ChronoField.DAY_OF_MONTH).getMaximum());
         LocalDate correctDate = TODAY.plusDays(new Random()
                 .ints(1, 1, (currentMonthRange - 1)).sum());
+
         // assert
         assertThat(advertsValidation.checkDate(correctDate.toString())).isTrue();
     }
 
     @Test
     @DisplayName("Should return false when input date is same as today's date.")
-    void returnsFalseWhenInputDateIsSameAsTodaysDate() {
+    void returnsFalseWhenInputDateIsSameAsTodaysDateInCheckDateMethod() {
         assertThat(advertsValidation.checkDate(TODAY.toString())).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when input date is past.")
-    void returnsFalseWhenInputDateIsPast() {
+    void returnsFalseWhenInputDateIsPastInCheckDateMethod() {
         assertThat(advertsValidation.checkDate(INCORRECT_DATE_PAST.toString())).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when input date is too late.")
-    void returnsFalseWhenInputDateIsTooLate() {
+    void returnsFalseWhenInputDateIsTooLateInCheckDateMethod() {
         assertThat(advertsValidation.checkDate(INCORRECT_DATE_TOO_LATE.toString())).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when date is empty.")
-    void returnsFalseWhenDateIsEmpty() {
+    void returnsFalseWhenDateIsEmptyInAskForDateMethod() {
         assertThat(advertsValidation.askForDate(EMPTY_INPUT)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when date is a null.")
-    void returnsFalseWhenDateIsNull() {
+    void returnsFalseWhenDateIsNullInAskForDateMethod() {
         assertThat(advertsValidation.askForDate(null)).isFalse();
     }
 
     @Test
     @DisplayName("Should return true when street is correct.")
-    void returnsTrueWhenStreetIsCorrect() {
+    void returnsTrueWhenStreetIsCorrectInAskForStreetMethod() {
         assertThat(advertsValidation.askForStreet(CORRECT_STREET)).isTrue();
     }
 
     @Test
     @DisplayName("Should return false when street is incorrect.")
-    void returnsFalseWhenStreetIsIncorrect() {
+    void returnsFalseWhenStreetIsIncorrectInAskForStreetMethod() {
         assertThat(advertsValidation.askForStreet(INCORRECT_STREET)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when street is empty.")
-    void returnsFalseWhenStreetIsEmpty() {
+    void returnsFalseWhenStreetIsEmptyInAskForStreetMethod() {
         assertThat(advertsValidation.askForStreet(EMPTY_INPUT)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when street is a null.")
-    void returnsFalseWhenStreetIsNull() {
+    void returnsFalseWhenStreetIsNullInAskForStreetMethod() {
         assertThat(advertsValidation.askForStreet(null)).isFalse();
     }
 
     @Test
     @DisplayName("Should return true when city is correct.")
-    void returnsTrueWhenCityIsCorrect() {
+    void returnsTrueWhenCityIsCorrectInAskForCityMethod() {
         assertThat(advertsValidation.askForCity(CORRECT_CITY)).isTrue();
     }
 
     @Test
     @DisplayName("Should return false when city is incorrect.")
-    void returnsFalseWhenCityIsIncorrect() {
+    void returnsFalseWhenCityIsIncorrectInAskForCityMethod() {
         String incorrectCity = String.valueOf(new Random().nextInt());
         assertThat(advertsValidation.askForCity(incorrectCity)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when city is empty.")
-    void returnsFalseWhenCityIsEmpty() {
+    void returnsFalseWhenCityIsEmptyInAskForCityMethod() {
         assertThat(advertsValidation.askForCity(EMPTY_INPUT)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when city is a null.")
-    void returnsFalseWhenCityIsNull() {
+    void returnsFalseWhenCityIsNullInAskForCityMethod() {
         assertThat(advertsValidation.askForCity(null)).isFalse();
     }
 
     @Test
     @DisplayName("Should return true when time is correct.")
-    void returnsTrueWhenTimeIsCorrect() {
+    void returnsTrueWhenTimeIsCorrectInAskForTimeMethod() {
+
         // arrange
         String hour = String.valueOf(new Random().ints(1, 0, 23).sum());
         String minute = String.valueOf(new Random().ints(1, 0, 59).sum());
@@ -128,28 +131,31 @@ class AdvertsValidationBeanTest {
             hour = "0" + hour;
         }
         String correctTimeToParse = hour + ":" + minute;
+
         //assert
         assertThat(advertsValidation.askForTime(correctTimeToParse)).isTrue();
     }
 
     @Test
     @DisplayName("Should return true when time is correct.")
-    void returnsFalseWhenTimeIsIncorrect() {
+    void returnsFalseWhenTimeIsIncorrectInAskForTimeMethod() {
+
         // arrange
         String incorrectTime = String.valueOf(new Random().nextInt());
+
         // assert
         assertThat(advertsValidation.askForTime(incorrectTime)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when time is empty.")
-    void returnsFalseWhenTimeIsEmpty() {
+    void returnsFalseWhenTimeIsEmptyInAskForTimeMethod() {
         assertThat(advertsValidation.askForTime(EMPTY_INPUT)).isFalse();
     }
 
     @Test
     @DisplayName("Should return false when time is a null.")
-    void returnsFalseWhenTimeIsNull() {
+    void returnsFalseWhenTimeIsNullInAskForTimeMethod() {
         assertThat(advertsValidation.askForTime(null)).isFalse();
     }
 

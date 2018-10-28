@@ -37,31 +37,38 @@ class AdvertsManagerBeanTest {
 
     @Test
     @DisplayName("Should return list of adverts with added advert.")
-    void returnsListOfAdvertsWithAddedAdvert() {
+    void returnsListOfAdvertsWithAddedAdvertInAddAdvertMethod() {
+
         // arrange
         Advert advertToAdd = new Advert(0, Date.from(Instant.now()), new Driver(), testRoute);
+
         // act
         advertsManager.addAdvert(advertToAdd, adverts);
+
         // assert
         assertThat(adverts).contains(advertToAdd);
     }
 
     @Test
     @DisplayName("Should return the highest of adverts id, increased by 1.")
-    void returnsHighestOfAdvertsIdIncreasedBy1() {
+    void returnsHighestOfAdvertsIdIncreasedBy1InGetNextAdvertIdMethod() {
+
         // arrange
         adverts.add(new Advert(LOWEST_ID, Date.from(Instant.now()), new Driver(), testRoute));
         adverts.add(new Advert(HIGHEST_ID, Date.from(Instant.now()), new Driver(), testRoute));
         adverts.add(new Advert(MIDDLE_ID, Date.from(Instant.now()), new Driver(), testRoute));
+
         // act
         Integer nextId = advertsManager.getNextAdvertId(adverts);
+
         // assert
         assertThat(nextId).isEqualTo(HIGHEST_ID + ID_INCREASE_VALUE);
     }
 
     @Test
     @DisplayName("Should return the highest of routes id, increased by 1.")
-    void returnsHighestOfRoutesIdIncreasedBy1() {
+    void returnsHighestOfRoutesIdIncreasedBy1InGetNextRouteIdMethod() {
+
         // arrange
         Route lowestIdRoute = new Route();
         lowestIdRoute.setId(LOWEST_ID);
@@ -72,8 +79,10 @@ class AdvertsManagerBeanTest {
         adverts.add(new Advert(0, Date.from(Instant.now()), new Driver(), highestIdRoute));
         adverts.add(new Advert(0, Date.from(Instant.now()), new Driver(), middleIdRoute));
         adverts.add(new Advert(0, Date.from(Instant.now()), new Driver(), lowestIdRoute));
+
         // act
         Integer nextId = advertsManager.getNextRouteId(adverts);
+
         // assert
         assertThat(nextId).isEqualTo(HIGHEST_ID + ID_INCREASE_VALUE);
     }
