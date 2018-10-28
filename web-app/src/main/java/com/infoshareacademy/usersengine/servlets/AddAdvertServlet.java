@@ -68,15 +68,15 @@ public class AddAdvertServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, List<Advert> adverts) throws IOException {
+        PrintWriter writer = resp.getWriter();
         if(!message.isEmpty()){
-            PrintWriter writer = resp.getWriter();
-            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
+            writer.println(message);
         }
         else{
             advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
             System.out.println("adverts po "+advertsList.getAdvertsList().toString());
             advertsManager.advertsToJson(adverts, getPath());
-            resp.sendRedirect("/jjdz5-magicy/home");
+            writer.println(message);
         }
     }
 
