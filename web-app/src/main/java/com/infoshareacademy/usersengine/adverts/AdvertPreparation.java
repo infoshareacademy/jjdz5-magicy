@@ -1,6 +1,12 @@
 package com.infoshareacademy.usersengine.adverts;
 
-import com.infoshareacademy.*;
+import com.infoshareacademy.Advert;
+import com.infoshareacademy.Driver;
+import com.infoshareacademy.Rating;
+import com.infoshareacademy.Route;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.Stateful;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +16,9 @@ import java.util.Map;
 
 @Stateful
 public class AdvertPreparation {
+
+    private static final Integer PARAMETER_INDEX = 0;
+    private static final Logger LOG = LoggerFactory.getLogger(AdvertPreparation.class);
     private Advert advert = new Advert();
     private Route route = new Route();
     private Driver driver = new Driver();
@@ -19,16 +28,16 @@ public class AdvertPreparation {
     private AdvertData advertData = new AdvertData();
 
     public AdvertData mapReader(Map<String, String[]> map){
-        String startCity = map.get("startCity")[0].trim();
-        String startStreet = map.get("startStreet")[0].trim();
-        String startTime = map.get("startTime")[0].trim();
-        String endCity = map.get("endCity")[0].trim();
-        String endStreet = map.get("endStreet")[0].trim();
-        String endTime = map.get("endTime")[0].trim();
-        String pickUpCity = map.get("pickUpCity")[0].trim();
-        String pickUpStreet = map.get("pickUpStreet")[0].trim();
-        String pickUpTime = map.get("pickUpTime")[0].trim();
-        String date = map.get("date")[0].trim();
+        String startCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_CITY);
+        String startStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_STREET);
+        String startTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_TIME);
+        String endCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_END_CITY);
+        String endStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_END_STREET);
+        String endTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_END_TIME);
+        String pickUpCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_CITY);
+        String pickUpStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_STREET);
+        String pickUpTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_TIME);
+        String date = getSpecificParameter(map, AdvertsConstants.PARAMETER_DATE);
 
         advertData.setStartCity(startCity);
         advertData.setStartStreet(startStreet);
@@ -46,6 +55,7 @@ public class AdvertPreparation {
     public String validateAdvertData(AdvertData advertData){
         String message = "";
         if(!advertsValidation.askForDate(advertData.getDate())){
+
             message = message + "The entered date must be later than today and no later than a month after today. Enter correct date<br>";
         }
         if(!advertsValidation.askForCity(advertData.getStartCity())){
@@ -76,6 +86,10 @@ public class AdvertPreparation {
             message = message + "Enter correct time when you can make a stop <br>";
         }
         return message;
+    }
+
+    private String getSpecificParameter (Map<String, String[]> map, String parameter) {
+        return map.get(parameter)[PARAMETER_INDEX].trim();
     }
 
     private Route setRouteData(List<Advert> adverts){
