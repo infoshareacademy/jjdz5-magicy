@@ -18,6 +18,7 @@ import java.util.Map;
 public class AdvertPreparation {
 
     private static final Integer PARAMETER_INDEX = 0;
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final Logger LOG = LoggerFactory.getLogger(AdvertPreparation.class);
     private Advert advert = new Advert();
     private Route route = new Route();
@@ -27,7 +28,7 @@ public class AdvertPreparation {
     private AdvertsManager advertsManager = new AdvertsManagerBean();
     private AdvertData advertData = new AdvertData();
 
-    public AdvertData mapReader(Map<String, String[]> map){
+    public AdvertData mapReader(Map<String, String[]> map) {
         String startCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_CITY);
         String startStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_STREET);
         String startTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_TIME);
@@ -52,51 +53,71 @@ public class AdvertPreparation {
         return advertData;
     }
 
-    public String validateAdvertData(AdvertData advertData){
+    public String validateAdvertData(AdvertData advertData) {
         String message = "";
-        if(!advertsValidation.askForDate(advertData.getDate())){
-
-            message = message + "The entered date must be later than today and no later than a month after today. Enter correct date<br>";
+        if(!advertsValidation.askForDate(advertData.getDate())) {
+            LOG.info("Date from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_DATA;
         }
-        if(!advertsValidation.askForCity(advertData.getStartCity())){
-            message = message + "Enter correct departure city <br>";
+        if(!advertsValidation.askForCity(advertData.getStartCity())) {
+            LOG.info("Start city from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_START_CITY;
         }
-        if(!advertsValidation.askForStreet(advertData.getStartStreet())){
-            message = message + "Enter correct departure street <br>";
+        if(!advertsValidation.askForStreet(advertData.getStartStreet())) {
+            LOG.info("Start street from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_START_STREET;
         }
-        if(!advertsValidation.askForTime(advertData.getStartTime())){
-            message = message + "Enter correct departure time <br>";
+        if(!advertsValidation.askForTime(advertData.getStartTime())) {
+            LOG.info("Start time from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_START_TIME;
         }
-        if(!advertsValidation.askForCity(advertData.getEndCity())){
-            message = message + "Enter correct arrival city <br>";
+        if(!advertsValidation.askForCity(advertData.getEndCity())) {
+            LOG.info("End city from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_END_CITY;
         }
-        if(!advertsValidation.askForStreet(advertData.getEndStreet())){
-            message = message + "Enter correct arrival street <br>";
+        if(!advertsValidation.askForStreet(advertData.getEndStreet())) {
+            LOG.info("End street from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_END_STREET;
         }
-        if(!advertsValidation.askForTime(advertData.getEndTime())){
-            message = message + "Enter correct arrival time <br>";
+        if(!advertsValidation.askForTime(advertData.getEndTime())) {
+            LOG.info("End time from user input is incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_END_TIME;
         }
-        if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(advertData.getPickUpCity())){
-            message = message + "Enter correct city where you can make a stop <br>";
+        if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(
+                advertData.getPickUpCity())) {
+            LOG.info("Pick up city from user input is present but incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_CITY;
         }
-        if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(advertData.getPickUpStreet())){
-            message = message + "Enter correct street where you can make a stop <br>";
+        if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(
+                advertData.getPickUpStreet())) {
+            LOG.info("Pick up street from user input is present but incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_STREET;
         }
-        if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(advertData.getPickUpTime())){
-            message = message + "Enter correct time when you can make a stop <br>";
+        if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(
+                advertData.getPickUpTime())) {
+            LOG.info("Pick up time from user input is present but incorrect.");
+            message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_TIME;
         }
         return message;
+    }
+
+    public Advert getNewAdvert(List<Advert> adverts) {
+        advert.setId(advertsManager.getNextAdvertId(adverts));
+        advert.setDriver(setDriverData());
+        advert.setRoute(setRouteData(adverts));
+        advert.setDate(new Date());
+        return advert;
     }
 
     private String getSpecificParameter (Map<String, String[]> map, String parameter) {
         return map.get(parameter)[PARAMETER_INDEX].trim();
     }
 
-    private Route setRouteData(List<Advert> adverts){
+    private Route setRouteData(List<Advert> adverts) {
         try {
-            route.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(advertData.getDate()));
+            route.setDate(new SimpleDateFormat(DATE_FORMAT).parse(advertData.getDate()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOG.warn("ParseException in setRouteData method.");
         }
         route.setId(advertsManager.getNextRouteId(adverts));
         route.setStartCity(advertData.getStartCity());
@@ -126,13 +147,5 @@ public class AdvertPreparation {
         rating.setAverage(4.5);
         rating.setPersons(2);
         return rating;
-    }
-
-    public Advert getNewAdvert(List<Advert> adverts){
-        advert.setId(advertsManager.getNextAdvertId(adverts));
-        advert.setDriver(setDriverData());
-        advert.setRoute(setRouteData(adverts));
-        advert.setDate(new Date());
-        return advert;
     }
 }
