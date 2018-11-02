@@ -15,7 +15,8 @@ import java.util.List;
 public class AdvertsManagerBean implements AdvertsManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(AdvertsManagerBean.class);
-    private final Integer valueToAdd = 1;
+    private static final Integer START_ID = 0;
+    private static final Integer VALUE_TO_ADD = 1;
 
     public List<Advert> addAdvert(Advert advert, List<Advert> adverts){
         adverts.add(advert);
@@ -23,14 +24,15 @@ public class AdvertsManagerBean implements AdvertsManager {
     }
 
     public Integer getNextAdvertId(List<Advert> adverts){
-        Integer nextAdvertId = adverts.stream().mapToInt(Advert::getId).max().getAsInt() + valueToAdd;
+        Integer nextAdvertId = adverts.stream().mapToInt(Advert::getId).max()
+                .orElse(START_ID) + VALUE_TO_ADD;
         LOG.debug("Next advert id value: " + nextAdvertId + ".");
         return nextAdvertId;
     }
 
     public Integer getNextRouteId(List<Advert> adverts){
         Integer nextRouteId = adverts.stream().mapToInt(advert -> advert.getRoute().getId()).max()
-                .getAsInt() + valueToAdd;
+                .orElse(START_ID) + VALUE_TO_ADD;
         LOG.debug("Next route id value: " + nextRouteId + ".");
         return nextRouteId;
     }
@@ -42,6 +44,7 @@ public class AdvertsManagerBean implements AdvertsManager {
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             writer.write(arrayToJson);
             writer.close();
+            LOG.info("Writing adverts to JSON file successful.");
         } catch (IOException e) {
             LOG.warn("IOException in advertsToJson method.");
         }

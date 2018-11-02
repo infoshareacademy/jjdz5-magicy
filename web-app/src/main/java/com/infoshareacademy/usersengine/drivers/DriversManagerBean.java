@@ -1,9 +1,10 @@
 package com.infoshareacademy.usersengine.drivers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.Rating;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import java.io.BufferedWriter;
@@ -15,21 +16,25 @@ import java.util.Optional;
 @Stateless
 public class DriversManagerBean implements DriversManager {
 
-    public void writeDriverData(List<Driver> drivers, String path){
+    private static final Logger LOG = LoggerFactory.getLogger(DriversManagerBean.class);
+    private static final Integer START_ID = 0;
+    private static final Integer VALUE_TO_ADD = 1;
+
+    public void writeDriverData(List<Driver> drivers, String path) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String arrayToJson = objectMapper.writeValueAsString(drivers);
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             writer.write(arrayToJson);
             writer.close();
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOG.info("Writing drivers to JSON file successful.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.warn("IOException in writeDriverData method.");
         }
     }
-    public Optional<Driver> getDriverById(List<Driver> drivers, Integer id){
+
+    public Optional<Driver> getDriverById(List<Driver> drivers, Integer id) {
+        LOG.debug("Searching specify driver by id: " + id + ".");
         return drivers.stream().filter(d -> d.getId().equals(id)).findAny();
     }
 
@@ -42,9 +47,10 @@ public class DriversManagerBean implements DriversManager {
         return drivers;
     }
 
-    private Rating createNewRating(Driver d, Integer rating){
+    private Rating createNewRating(Driver d, Integer rating) {
         d.getRating().setAverage(d.getRating().newAverage(rating));
-        d.getRating().setPersons(d.getRating().getPersons()+1);
+        d.getRating().setPersons(d.getRating().getPersons() + VALUE_TO_ADD);
+        LOG.debug("Added new rating (" + rating + ") for driver: " + d.getName() + " " + d.getSurname() + ".");
         return d.getRating();
     }
 
@@ -56,13 +62,9 @@ public class DriversManagerBean implements DriversManager {
 
 
     public Integer getNextDriverId(List<Driver> drivers) {
-        Integer idMax = 0;
-        for (Driver driver: drivers){
-            if (driver.getId() > idMax){
-                idMax = driver.getId();
-            }
-        }
-        return idMax+1;
+        Integer nextDriverId = drivers.stream().mapToInt(Driver::getId).max().orElse(START_ID) + VALUE_TO_ADD;
+        LOG.debug("Next driver id value: " + nextDriverId + ".");
+        return nextDriverId;
     }
  }
 
