@@ -4,6 +4,7 @@ import com.infoshareacademy.Advert;
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.Rating;
 import com.infoshareacademy.Route;
+import com.infoshareacademy.usersengine.services.PreparationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,6 @@ import java.util.Map;
 @Stateful
 public class AdvertPreparation {
 
-    private static final Integer PARAMETER_INDEX = 0;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final Logger LOG = LoggerFactory.getLogger(AdvertPreparation.class);
     private Advert advert = new Advert();
@@ -29,16 +29,16 @@ public class AdvertPreparation {
     private AdvertData advertData = new AdvertData();
 
     public AdvertData mapReader(Map<String, String[]> map) {
-        String startCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_CITY);
-        String startStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_STREET);
-        String startTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_START_TIME);
-        String endCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_END_CITY);
-        String endStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_END_STREET);
-        String endTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_END_TIME);
-        String pickUpCity = getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_CITY);
-        String pickUpStreet = getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_STREET);
-        String pickUpTime = getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_TIME);
-        String date = getSpecificParameter(map, AdvertsConstants.PARAMETER_DATE);
+        String startCity = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_START_CITY);
+        String startStreet = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_START_STREET);
+        String startTime = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_START_TIME);
+        String endCity = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_END_CITY);
+        String endStreet = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_END_STREET);
+        String endTime = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_END_TIME);
+        String pickUpCity = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_CITY);
+        String pickUpStreet = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_STREET);
+        String pickUpTime = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_TIME);
+        String date = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_DATE);
 
         advertData.setStartCity(startCity);
         advertData.setStartStreet(startStreet);
@@ -50,11 +50,12 @@ public class AdvertPreparation {
         advertData.setPickUpStreet(pickUpStreet);
         advertData.setPickUpTime(pickUpTime);
         advertData.setDate(date);
+
         return advertData;
     }
 
     public String validateAdvertData(AdvertData advertData) {
-        String message = "";
+        String message = PreparationService.EMPTY_MESSAGE;
         if(!advertsValidation.askForDate(advertData.getDate())) {
             LOG.info("Date from user input is incorrect.");
             message += AdvertsConstants.MESSAGE_INCORRECT_DATA;
@@ -107,10 +108,6 @@ public class AdvertPreparation {
         advert.setRoute(setRouteData(adverts));
         advert.setDate(new Date());
         return advert;
-    }
-
-    private String getSpecificParameter (Map<String, String[]> map, String parameter) {
-        return map.get(parameter)[PARAMETER_INDEX].trim();
     }
 
     private Route setRouteData(List<Advert> adverts) {
