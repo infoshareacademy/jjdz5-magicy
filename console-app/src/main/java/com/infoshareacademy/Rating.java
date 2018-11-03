@@ -24,7 +24,7 @@ public class Rating {
         this.persons = persons;
     }
 
-    public double newAverage(Integer note){
+    public double computeNewAverage(Integer note){
         Double result = (this.average * this.persons + note)/(this.persons+1);
         return Precision.round(result, 1);
     }
