@@ -34,7 +34,6 @@ class RatingTest {
     void  newAverageGivenNullParamThenException(){
         //arrange
         Integer noteFromUser = null;
-        //act
         //assert
         assertThrows(NullPointerException.class, () ->
                 rating.computeNewAverage(noteFromUser) );
