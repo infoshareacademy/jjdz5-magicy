@@ -6,7 +6,7 @@ import javax.ejb.Local;
 public interface AdvertsValidation {
     boolean checkDate(String date);
     boolean askForStreet(String street);
-    boolean askForCity(String street);
+    boolean askForCity(String city);
     boolean askForDate(String date);
     boolean askForTime(String time);
 }
