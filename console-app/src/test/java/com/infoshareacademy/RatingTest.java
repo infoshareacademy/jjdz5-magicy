@@ -31,7 +31,7 @@ class RatingTest {
 
     @Test
     @DisplayName("throws null pointer exception when param is null")
-    void  newAverageGivenNullParamThenException(){ //throws Exception{
+    void  newAverageGivenNullParamThenException(){
         //arrange
         Integer noteFromUser = null;
         //act
