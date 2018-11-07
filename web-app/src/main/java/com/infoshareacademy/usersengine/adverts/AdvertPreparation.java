@@ -4,6 +4,7 @@ import com.infoshareacademy.Advert;
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.Rating;
 import com.infoshareacademy.Route;
+import com.infoshareacademy.usersengine.drivers.DriversConstants;
 import com.infoshareacademy.usersengine.services.PreparationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,7 @@ public class AdvertPreparation {
     }
 
     public String validateAdvertData(AdvertData advertData) {
-        String message = PreparationService.EMPTY_MESSAGE;
+        String message = DriversConstants.EMPTY_FIELD;
         if(!advertsValidation.askForDate(advertData.getDate())) {
             LOG.info("Date from user input is incorrect.");
             message += AdvertsConstants.MESSAGE_INCORRECT_DATA;

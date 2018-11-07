@@ -1,7 +1,5 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.*;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.drivers.DriversValidation;
@@ -16,12 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("drivers")
@@ -60,7 +55,7 @@ public class DriversServlet extends HttpServlet {
         String id = req.getParameter("id");
         String rating = req.getParameter("rating");
 
-        redirect(resp,driversValidation.validateAdvertData(id, rating, driversList.getDriversList()), id, rating);
+        redirect(resp,driversValidation.validateDriverData(id, rating, driversList.getDriversList()), id, rating);
     }
 
     private String getPath(){

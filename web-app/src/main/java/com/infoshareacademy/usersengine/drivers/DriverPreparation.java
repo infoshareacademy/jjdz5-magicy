@@ -36,7 +36,7 @@ public class DriverPreparation {
     }
 
     public String validateDriver(Driver driver, List<Driver> drivers) {
-        String message = PreparationService.EMPTY_MESSAGE;
+        String message = DriversConstants.EMPTY_FIELD;
         if (driversValidation.isPhoneNumberExist(driver.getPhone(), drivers)) {
             LOG.info("Driver with this phone number already exist.");
             message += DriversConstants.MESSAGE_DRIVER_ALREADY_EXIST;
