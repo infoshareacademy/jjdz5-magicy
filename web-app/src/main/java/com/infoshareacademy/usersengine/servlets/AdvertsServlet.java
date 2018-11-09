@@ -40,7 +40,7 @@ public class AdvertsServlet extends HttpServlet {
             template.process(dataModel, resp.getWriter());
             LOG.debug("Template created successfully.");
         } catch (TemplateException e) {
-            LOG.warn("TemplateException. Template cannot be created.");
+            LOG.error("TemplateException. Template cannot be created.");
         }
     }
 

@@ -44,7 +44,7 @@ public class AddAdvertServlet extends HttpServlet {
             template.process(dataModel, resp.getWriter());
             LOG.debug("Template created successfully.");
         }catch (TemplateException e){
-            LOG.warn("TemplateException. Template cannot be created.");
+            LOG.error("TemplateException. Template cannot be created.");
         }
     }
 
@@ -68,12 +68,12 @@ public class AddAdvertServlet extends HttpServlet {
 
     private void redirect(HttpServletResponse resp, String message, List<Advert> adverts) throws IOException {
         if(!message.isEmpty()){
-            LOG.debug("AdvertData is not valid. Redirecting to messages page.");
+            LOG.debug("Advert data is not valid.");
             PrintWriter writer = resp.getWriter();
             writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         } else {
             advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
-            LOG.debug("AdvertData is valid.");
+            LOG.debug("Advert data is valid.");
             LOG.debug("Updated adverts list: " + advertsList.getAdvertsList().toString());
             advertsManager.advertsToJson(adverts, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");
