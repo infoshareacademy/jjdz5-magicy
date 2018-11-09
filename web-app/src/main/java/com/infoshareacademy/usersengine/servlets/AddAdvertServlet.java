@@ -41,10 +41,10 @@ public class AddAdvertServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         Template template = templateProvider.getTemplate(getServletContext(), "add-advert");
         try{
-            LOG.debug("Template created successfully.");
             template.process(dataModel, resp.getWriter());
+            LOG.debug("Template created successfully.");
         }catch (TemplateException e){
-            LOG.warn("TemplateException in doGet method.");
+            LOG.warn("TemplateException. Template cannot be created.");
         }
     }
 
