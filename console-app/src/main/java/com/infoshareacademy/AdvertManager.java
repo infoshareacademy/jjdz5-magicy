@@ -2,6 +2,8 @@ package com.infoshareacademy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,6 +17,7 @@ public class AdvertManager {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private final ReadProperties readProperties = new ReadProperties();
     private String path = readProperties.readFilePath();
+    private Logger LOG = LoggerFactory.getLogger(AdvertManager.class);
 
     public AdvertManager() {
     }
@@ -81,9 +84,9 @@ public class AdvertManager {
             writer.close();
 
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOG.warn("JsonProcessingException in writeAdvertData method.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.warn("IOException in writeAdvertData method.");
         }
     }
 
@@ -111,13 +114,13 @@ public class AdvertManager {
     public void promoteAdvert(List<Advert> adverts, Integer advertId) {
         for (Advert advert: adverts) {
             if (advertId > adverts.size() || advertId <= 0) {
-                System.out.println("Advert ID is not correct.");
+                LOG.debug("Advert ID is not correct.");
                 continue;
             }
             if (advertId == advert.getId()) {
                 advert.setPromo(true);
 
-                System.out.println("Promo flag is changed");
+                LOG.debug("Promo flag is changed");
                 break;
             }
 
