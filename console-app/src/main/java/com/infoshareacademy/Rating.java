@@ -2,6 +2,10 @@ package com.infoshareacademy;
 
 import org.apache.commons.math3.util.Precision;
 
+import java.text.DecimalFormat;
+
+import static java.lang.StrictMath.abs;
+
 public class Rating {
 
     private static final Double STARTING_AVERAGE = 0.0;
@@ -35,8 +39,8 @@ public class Rating {
         this.persons = persons;
     }
 
-    public double newAverage(Integer note) {
-        Double result = (this.average * this.persons + note) / (this.persons + 1);
+    public double computeNewAverage(Integer note){
+        Double result = (this.average * this.persons + abs(note))/(this.persons+1);
         return Precision.round(result, 1);
     }
 
