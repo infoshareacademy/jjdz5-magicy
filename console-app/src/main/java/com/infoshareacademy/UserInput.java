@@ -1,5 +1,8 @@
 package com.infoshareacademy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +12,10 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class UserInput {
+
     private static final String DATE_FORMAT = "dd-MM-yyyy";
+
+    private Logger LOG = LoggerFactory.getLogger(UserInput.class);
 
     Date askForDate(final String question) {
         String userDate = getUserInput(question).trim();
@@ -69,8 +75,10 @@ public class UserInput {
         }
         try {
             LocalTime.parse(time);
+            LOG.debug("Given time is correct.");
             return true;
         } catch (DateTimeParseException e) {
+            LOG.warn("DateTimeParseException in isTimeValid method. Given time is not correct");
             return false;
         }
     }
