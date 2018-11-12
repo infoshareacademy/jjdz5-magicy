@@ -34,7 +34,7 @@ public class DriversManagerBean implements DriversManager {
     }
 
     public Optional<Driver> getDriverById(List<Driver> drivers, Integer id) {
-        LOG.debug("Searching specify driver by id: " + id + ".");
+        LOG.debug("Searching specify driver by id: {}.", id);
         return drivers.stream().filter(d -> d.getId().equals(id)).findAny();
     }
 
@@ -48,9 +48,10 @@ public class DriversManagerBean implements DriversManager {
     }
 
     private Rating createNewRating(Driver d, Integer rating) {
-        d.getRating().setAverage(d.getRating().newAverage(rating));
+        d.getRating().setAverage(d.getRating().computeNewAverage(rating));
         d.getRating().setPersons(d.getRating().getPersons() + VALUE_TO_ADD);
-        LOG.debug("Added new rating (" + rating + ") for driver: " + d.getName() + " " + d.getSurname() + ".");
+        LOG.debug("Added new rating ({}) for driver: {} {}.",
+                rating, d.getName(), d.getSurname());
         return d.getRating();
     }
 
@@ -59,8 +60,9 @@ public class DriversManagerBean implements DriversManager {
     }
 
     public Integer getNextDriverId(List<Driver> drivers) {
-        Integer nextDriverId = drivers.stream().mapToInt(Driver::getId).max().orElse(START_ID) + VALUE_TO_ADD;
-        LOG.debug("Next driver id value: " + nextDriverId + ".");
+        Integer nextDriverId = drivers.stream().mapToInt(Driver::getId).max()
+                .orElse(START_ID) + VALUE_TO_ADD;
+        LOG.debug("Next driver id value: {}.", nextDriverId);
         return nextDriverId;
     }
  }

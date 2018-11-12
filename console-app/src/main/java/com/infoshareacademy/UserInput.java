@@ -79,7 +79,7 @@ public class UserInput {
         }
         try {
             LocalTime.parse(time);
-            LOG.debug("Given time is correct.");
+            LOG.debug("Given time \"{}\" is correct.", time);
             return true;
         } catch (DateTimeParseException e) {
             LOG.warn("DateTimeParseException in isTimeValid method. Given time is not correct");

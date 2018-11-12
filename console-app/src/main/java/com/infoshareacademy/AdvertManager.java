@@ -114,13 +114,13 @@ public class AdvertManager {
     public void promoteAdvert(List<Advert> adverts, Integer advertId) {
         for (Advert advert: adverts) {
             if (advertId > adverts.size() || advertId <= 0) {
-                LOG.debug("Advert ID is not correct.");
+                LOG.debug("Advert ID \"{}\" is not correct.", advertId);
                 continue;
             }
             if (advertId == advert.getId()) {
                 advert.setPromo(true);
 
-                LOG.debug("Promo flag is changed");
+                LOG.debug("Promotion flag for advert {} is now active.", advertId);
                 break;
             }
 

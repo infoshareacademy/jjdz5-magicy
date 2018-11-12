@@ -58,46 +58,49 @@ public class AdvertPreparation {
     public String validateAdvertData(AdvertData advertData) {
         String message = DriversConstants.EMPTY_FIELD;
         if(!advertsValidation.askForDate(advertData.getDate())) {
-            LOG.info("Date from user input is incorrect.");
+            LOG.info("Incorrect date from user input: {}.", advertData.getDate());
             message += AdvertsConstants.MESSAGE_INCORRECT_DATA;
         }
         if(!advertsValidation.askForCity(advertData.getStartCity())) {
-            LOG.info("Start city from user input is incorrect.");
+            LOG.info("Incorrect start city from user input: {}.", advertData.getStartCity());
             message += AdvertsConstants.MESSAGE_INCORRECT_START_CITY;
         }
         if(!advertsValidation.askForStreet(advertData.getStartStreet())) {
-            LOG.info("Start street from user input is incorrect.");
+            LOG.info("Incorrect start street from user input: {}.", advertData.getStartStreet());
             message += AdvertsConstants.MESSAGE_INCORRECT_START_STREET;
         }
         if(!advertsValidation.askForTime(advertData.getStartTime())) {
-            LOG.info("Start time from user input is incorrect.");
+            LOG.info("Incorrect start time from user input: {}.", advertData.getStartTime());
             message += AdvertsConstants.MESSAGE_INCORRECT_START_TIME;
         }
         if(!advertsValidation.askForCity(advertData.getEndCity())) {
-            LOG.info("End city from user input is incorrect.");
+            LOG.info("Incorrect end city from user input: {}.", advertData.getEndCity());
             message += AdvertsConstants.MESSAGE_INCORRECT_END_CITY;
         }
         if(!advertsValidation.askForStreet(advertData.getEndStreet())) {
-            LOG.info("End street from user input is incorrect.");
+            LOG.info("Incorrect end street from user input: {}.", advertData.getEndStreet());
             message += AdvertsConstants.MESSAGE_INCORRECT_END_STREET;
         }
         if(!advertsValidation.askForTime(advertData.getEndTime())) {
-            LOG.info("End time from user input is incorrect.");
+            LOG.info("Incorrect end time from user input: {}.", advertData.getEndTime());
             message += AdvertsConstants.MESSAGE_INCORRECT_END_TIME;
         }
         if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(
                 advertData.getPickUpCity())) {
-            LOG.info("Pick up city from user input is present but incorrect.");
+            LOG.info("Pick up city from user input is present but incorrect: {}.",
+                    advertData.getPickUpCity());
             message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_CITY;
         }
         if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(
                 advertData.getPickUpStreet())) {
-            LOG.info("Pick up street from user input is present but incorrect.");
+            LOG.info("Pick up street from user input is present but incorrect: {}.",
+                    advertData.getPickUpStreet());
             message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_STREET;
         }
         if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(
                 advertData.getPickUpTime())) {
-            LOG.info("Pick up time from user input is present but incorrect.");
+            LOG.info("Pick up time from user input is present but incorrect: {}.",
+                    advertData.getPickUpTime());
             message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_TIME;
         }
         return message;

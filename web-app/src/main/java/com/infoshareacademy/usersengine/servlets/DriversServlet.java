@@ -73,12 +73,12 @@ public class DriversServlet extends HttpServlet {
 
     private void redirect(HttpServletResponse resp, String message, String id, String rating) throws IOException {
         if(message.isEmpty()) {
-            LOG.debug("Rating correct.");
+            LOG.debug("Rating \"{}\" is correct.", rating);
             driversList.setDriversList(driversManager.updateDriversList(driversList.getDriversList(), Integer.parseInt(rating), Integer.parseInt(id)));
             driversManager.writeDriverData(driversList.getDriversList(),getPath());
             resp.sendRedirect("/jjdz5-magicy/drivers");
         } else {
-            LOG.debug("Rating is not correct");
+            LOG.debug("Rating \"{}\" is not correct.", rating);
             PrintWriter writer = resp.getWriter();
             writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }

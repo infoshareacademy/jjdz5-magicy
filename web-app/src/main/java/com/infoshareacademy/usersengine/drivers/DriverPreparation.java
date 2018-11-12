@@ -38,28 +38,28 @@ public class DriverPreparation {
     public String validateDriver(Driver driver, List<Driver> drivers) {
         String message = DriversConstants.EMPTY_FIELD;
         if (driversValidation.isPhoneNumberExist(driver.getPhone(), drivers)) {
-            LOG.info("Driver with this phone number already exist.");
+            LOG.info("Driver with phone number {} already exist.", driver.getPhone());
             message += DriversConstants.MESSAGE_DRIVER_ALREADY_EXIST;
             return message;
         }
         if (!driversValidation.askForText(driver.getName())) {
-            LOG.info("Name from user input is incorrect.");
+            LOG.info("Incorrect name from user input: {}.", driver.getName());
             message += DriversConstants.MESSAGE_INCORRECT_NAME;
         }
         if (!driversValidation.askForText(driver.getSurname())) {
-            LOG.info("Surname from user input is incorrect.");
+            LOG.info("Incorrect surname from user input: {}.", driver.getSurname());
             message += DriversConstants.MESSAGE_INCORRECT_SURNAME;
         }
         if (!driversValidation.askForNumber(driver.getPhone())) {
-            LOG.info("Phone number from user input is incorrect.");
+            LOG.info("Incorrect phone number from user input: {}.", driver.getPhone());
             message += DriversConstants.MESSAGE_INCORRECT_PHONE_NUMBER;
         }
         if (!driversValidation.askForText(driver.getCity())) {
-            LOG.info("City from user input is incorrect.");
+            LOG.info("Incorrect city from user input: {}.", driver.getCity());
             message += DriversConstants.MESSAGE_INCORRECT_CITY;
         }
         if (!driversValidation.askForText(driver.getDistrict())) {
-            LOG.info("District from user input is incorrect.");
+            LOG.info("Incorrect district from user input: {}.", driver.getDistrict());
             message += DriversConstants.MESSAGE_INCORRECT_DISTRICT;
         }
         return message;

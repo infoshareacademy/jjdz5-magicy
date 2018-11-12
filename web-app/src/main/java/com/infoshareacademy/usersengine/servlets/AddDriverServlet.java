@@ -72,9 +72,10 @@ public class AddDriverServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, List<Driver> drivers) throws IOException {
-        driversManager.addDriver(driverPreparation.getNewDriver(drivers), drivers);
+        Driver driverToAdd = driverPreparation.getNewDriver(drivers);
+        driversManager.addDriver(driverToAdd, drivers);
         if (message.isEmpty()) {
-            LOG.debug("Driver data is valid.");
+            LOG.debug("Driver data is valid: {}.", driverToAdd);
             driversList.setDriversList(drivers);
             driversManager.writeDriverData(drivers, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");

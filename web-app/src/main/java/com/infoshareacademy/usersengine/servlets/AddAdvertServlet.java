@@ -72,8 +72,9 @@ public class AddAdvertServlet extends HttpServlet {
             PrintWriter writer = resp.getWriter();
             writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         } else {
-            advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
-            LOG.debug("Advert data is valid.");
+            Advert advertToAdd = advertPreparation.getNewAdvert(adverts);
+            advertsList.setAdvertsList(advertsManager.addAdvert(advertToAdd, adverts));
+            LOG.debug("Advert data is valid: {}.", advertToAdd);
             LOG.debug("Updated adverts list: " + advertsList.getAdvertsList().toString());
             advertsManager.advertsToJson(adverts, getPath());
             resp.sendRedirect("/jjdz5-magicy/home");

@@ -29,11 +29,11 @@ public class DriversValidationBean implements DriversValidation{
     }
 
     public boolean askForRating(String rating) {
-        return !(inputIsEmpty(rating) || !checkIsDriverRatingValid(rating));
+        return !(isInputEmpty(rating) || !checkIsDriverRatingValid(rating));
     }
 
     public boolean askForDriverId(List<Driver> drivers, String id) {
-        return !(inputIsEmpty(id) || !checkIsDriverIdAlreadyUsed(drivers, id));
+        return !(isInputEmpty(id) || !checkIsDriverIdAlreadyUsed(drivers, id));
     }
 
     public boolean checkIsDriverRatingValid(String rating) {
@@ -47,11 +47,11 @@ public class DriversValidationBean implements DriversValidation{
     }
 
     public boolean askForText(String text) {
-        return !(inputIsEmpty(text) || !userInput.isInputValid(text));
+        return !(isInputEmpty(text) || !userInput.isInputValid(text));
     }
 
     public boolean askForNumber(String number) {
-        return (inputIsEmpty(number) || userInput.isNumberValid(number));
+        return !(isInputEmpty(number) || !userInput.isNumberValid(number));
     }
 
     public boolean isPhoneNumberExist(String number, List<Driver> drivers){
@@ -67,7 +67,7 @@ public class DriversValidationBean implements DriversValidation{
         return false;
     }
 
-    private boolean inputIsEmpty(String input){
+    private boolean isInputEmpty(String input){
         return input==null || input.isEmpty();
     }
 

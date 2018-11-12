@@ -26,14 +26,14 @@ public class AdvertsManagerBean implements AdvertsManager {
     public Integer getNextAdvertId(List<Advert> adverts){
         Integer nextAdvertId = adverts.stream().mapToInt(Advert::getId).max()
                 .orElse(START_ID) + VALUE_TO_ADD;
-        LOG.debug("Next advert id value: " + nextAdvertId + ".");
+        LOG.debug("Next advert id value: {}.", nextAdvertId);
         return nextAdvertId;
     }
 
     public Integer getNextRouteId(List<Advert> adverts){
         Integer nextRouteId = adverts.stream().mapToInt(advert -> advert.getRoute().getId()).max()
                 .orElse(START_ID) + VALUE_TO_ADD;
-        LOG.debug("Next route id value: " + nextRouteId + ".");
+        LOG.debug("Next route id value: {}.", nextRouteId);
         return nextRouteId;
     }
 

@@ -14,28 +14,28 @@ public class AdvertsValidationBean implements AdvertsValidation {
     private UserInput userInput = new UserInput();
 
     public boolean checkDate(String date){
-        LOG.debug("Checking that date from user input (" + date + ") is parsable.");
+        LOG.debug("Checking that date from user input ({}) is parsable.", date);
         LocalDate advertDate = LocalDate.parse(date);
         return LocalDate.now().isBefore(advertDate) && LocalDate.now().plusMonths(1).isAfter(advertDate);
     }
 
     public boolean askForStreet(String street) {
-        LOG.debug("Validating street from user input (" + street + ") and checking that it is not empty.");
+        LOG.debug("Validating street from user input ({}) and checking that it is not empty.", street);
         return !(inputIsEmpty(street) || !userInput.isStreetValid(street));
     }
 
     public boolean askForCity(String city) {
-        LOG.debug("Validating city from user input (" + city + ") and checking that it is not empty.");
+        LOG.debug("Validating city from user input ({}) and checking that it is not empty.", city);
         return !(inputIsEmpty(city) || !userInput.isCityValid(city));
     }
 
     public boolean askForDate(String date) {
-        LOG.debug("Validating date from user input (" + date + ") and checking that it is not empty.");
+        LOG.debug("Validating date from user input ({}) and checking that it is not empty.", date);
         return !(inputIsEmpty(date) || !checkDate(date));
     }
 
     public boolean askForTime(String time) {
-        LOG.debug("Validating time from user input (" + time + ") and checking that it is not empty.");
+        LOG.debug("Validating time from user input ({}) and checking that it is not empty.", time);
         return !(inputIsEmpty(time) || !userInput.isTimeValid(time));
     }
 
