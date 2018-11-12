@@ -1,6 +1,14 @@
 package com.infoshareacademy.usersengine.adverts;
 
-import com.infoshareacademy.*;
+import com.infoshareacademy.Advert;
+import com.infoshareacademy.Driver;
+import com.infoshareacademy.Rating;
+import com.infoshareacademy.Route;
+import com.infoshareacademy.usersengine.drivers.DriversConstants;
+import com.infoshareacademy.usersengine.services.PreparationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.Stateful;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +18,9 @@ import java.util.Map;
 
 @Stateful
 public class AdvertPreparation {
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final Logger LOG = LoggerFactory.getLogger(AdvertPreparation.class);
     private Advert advert = new Advert();
     private Route route = new Route();
     private Driver driver = new Driver();
@@ -18,17 +29,17 @@ public class AdvertPreparation {
     private AdvertsManager advertsManager = new AdvertsManagerBean();
     private AdvertData advertData = new AdvertData();
 
-    public AdvertData mapReader(Map<String, String[]> map){
-        String startCity = map.get("startCity")[0].trim();
-        String startStreet = map.get("startStreet")[0].trim();
-        String startTime = map.get("startTime")[0].trim();
-        String endCity = map.get("endCity")[0].trim();
-        String endStreet = map.get("endStreet")[0].trim();
-        String endTime = map.get("endTime")[0].trim();
-        String pickUpCity = map.get("pickUpCity")[0].trim();
-        String pickUpStreet = map.get("pickUpStreet")[0].trim();
-        String pickUpTime = map.get("pickUpTime")[0].trim();
-        String date = map.get("date")[0].trim();
+    public AdvertData mapReader(Map<String, String[]> map) {
+        String startCity = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_START_CITY);
+        String startStreet = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_START_STREET);
+        String startTime = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_START_TIME);
+        String endCity = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_END_CITY);
+        String endStreet = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_END_STREET);
+        String endTime = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_END_TIME);
+        String pickUpCity = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_CITY);
+        String pickUpStreet = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_STREET);
+        String pickUpTime = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_PICK_UP_TIME);
+        String date = PreparationService.getSpecificParameter(map, AdvertsConstants.PARAMETER_DATE);
 
         advertData.setStartCity(startCity);
         advertData.setStartStreet(startStreet);
@@ -40,49 +51,74 @@ public class AdvertPreparation {
         advertData.setPickUpStreet(pickUpStreet);
         advertData.setPickUpTime(pickUpTime);
         advertData.setDate(date);
+
         return advertData;
     }
 
-    public String validateAdvertData(AdvertData advertData){
-        String message = "";
-        if(!advertsValidation.askForDate(advertData.getDate())){
-            message = message + "The entered date must be later than today and no later than a month after today. Enter correct date<br>";
+    public String validateAdvertData(AdvertData advertData) {
+        String message = DriversConstants.EMPTY_FIELD;
+        if(!advertsValidation.askForDate(advertData.getDate())) {
+            LOG.info("Incorrect date from user input: {}.", advertData.getDate());
+            message += AdvertsConstants.MESSAGE_INCORRECT_DATA;
         }
-        if(!advertsValidation.askForCity(advertData.getStartCity())){
-            message = message + "Enter correct departure city <br>";
+        if(!advertsValidation.askForCity(advertData.getStartCity())) {
+            LOG.info("Incorrect start city from user input: {}.", advertData.getStartCity());
+            message += AdvertsConstants.MESSAGE_INCORRECT_START_CITY;
         }
-        if(!advertsValidation.askForStreet(advertData.getStartStreet())){
-            message = message + "Enter correct departure street <br>";
+        if(!advertsValidation.askForStreet(advertData.getStartStreet())) {
+            LOG.info("Incorrect start street from user input: {}.", advertData.getStartStreet());
+            message += AdvertsConstants.MESSAGE_INCORRECT_START_STREET;
         }
-        if(!advertsValidation.askForTime(advertData.getStartTime())){
-            message = message + "Enter correct departure time <br>";
+        if(!advertsValidation.askForTime(advertData.getStartTime())) {
+            LOG.info("Incorrect start time from user input: {}.", advertData.getStartTime());
+            message += AdvertsConstants.MESSAGE_INCORRECT_START_TIME;
         }
-        if(!advertsValidation.askForCity(advertData.getEndCity())){
-            message = message + "Enter correct arrival city <br>";
+        if(!advertsValidation.askForCity(advertData.getEndCity())) {
+            LOG.info("Incorrect end city from user input: {}.", advertData.getEndCity());
+            message += AdvertsConstants.MESSAGE_INCORRECT_END_CITY;
         }
-        if(!advertsValidation.askForStreet(advertData.getEndStreet())){
-            message = message + "Enter correct arrival street <br>";
+        if(!advertsValidation.askForStreet(advertData.getEndStreet())) {
+            LOG.info("Incorrect end street from user input: {}.", advertData.getEndStreet());
+            message += AdvertsConstants.MESSAGE_INCORRECT_END_STREET;
         }
-        if(!advertsValidation.askForTime(advertData.getEndTime())){
-            message = message + "Enter correct arrival time <br>";
+        if(!advertsValidation.askForTime(advertData.getEndTime())) {
+            LOG.info("Incorrect end time from user input: {}.", advertData.getEndTime());
+            message += AdvertsConstants.MESSAGE_INCORRECT_END_TIME;
         }
-        if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(advertData.getPickUpCity())){
-            message = message + "Enter correct city where you can make a stop <br>";
+        if(!advertData.getPickUpCity().isEmpty() && !advertsValidation.askForCity(
+                advertData.getPickUpCity())) {
+            LOG.info("Pick up city from user input is present but incorrect: {}.",
+                    advertData.getPickUpCity());
+            message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_CITY;
         }
-        if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(advertData.getPickUpStreet())){
-            message = message + "Enter correct street where you can make a stop <br>";
+        if(!advertData.getPickUpStreet().isEmpty() && !advertsValidation.askForStreet(
+                advertData.getPickUpStreet())) {
+            LOG.info("Pick up street from user input is present but incorrect: {}.",
+                    advertData.getPickUpStreet());
+            message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_STREET;
         }
-        if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(advertData.getPickUpTime())){
-            message = message + "Enter correct time when you can make a stop <br>";
+        if(!advertData.getPickUpTime().isEmpty() && !advertsValidation.askForTime(
+                advertData.getPickUpTime())) {
+            LOG.info("Pick up time from user input is present but incorrect: {}.",
+                    advertData.getPickUpTime());
+            message += AdvertsConstants.MESSAGE_INCORRECT_PICK_UP_TIME;
         }
         return message;
     }
 
-    private Route setRouteData(List<Advert> adverts){
+    public Advert getNewAdvert(List<Advert> adverts) {
+        advert.setId(advertsManager.getNextAdvertId(adverts));
+        advert.setDriver(setDriverData());
+        advert.setRoute(setRouteData(adverts));
+        advert.setDate(new Date());
+        return advert;
+    }
+
+    private Route setRouteData(List<Advert> adverts) {
         try {
-            route.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(advertData.getDate()));
+            route.setDate(new SimpleDateFormat(DATE_FORMAT).parse(advertData.getDate()));
         } catch (ParseException e) {
-            e.printStackTrace();
+            LOG.warn("ParseException in setRouteData method.");
         }
         route.setId(advertsManager.getNextRouteId(adverts));
         route.setStartCity(advertData.getStartCity());
@@ -112,13 +148,5 @@ public class AdvertPreparation {
         rating.setAverage(4.5);
         rating.setPersons(2);
         return rating;
-    }
-
-    public Advert getNewAdvert(List<Advert> adverts){
-        advert.setId(advertsManager.getNextAdvertId(adverts));
-        advert.setDriver(setDriverData());
-        advert.setRoute(setRouteData(adverts));
-        advert.setDate(new Date());
-        return advert;
     }
 }

@@ -7,8 +7,21 @@ import java.text.DecimalFormat;
 import static java.lang.StrictMath.abs;
 
 public class Rating {
+
+    private static final Double STARTING_AVERAGE = 0.0;
+    private static final Integer STARTING_PERSONS = 0;
     private Double average;
     private Integer persons;
+
+    public Rating() {
+        this.average = STARTING_AVERAGE;
+        this.persons = STARTING_PERSONS;
+    }
+
+    public Rating(Double average, Integer persons) {
+        this.average = average;
+        this.persons = persons;
+    }
 
     public Double getAverage() {
         return average;
@@ -31,18 +44,10 @@ public class Rating {
         return Precision.round(result, 1);
     }
 
-    public Rating(Double average, Integer persons) {
-        this.average = average;
-        this.persons = persons;
-    }
-
     @Override
     public String toString() {
         return "Average Rating: " + average +
                 "/5.0  Number of ratings: " + persons;
     }
 
-    public Rating(){
-
-    }
 }
