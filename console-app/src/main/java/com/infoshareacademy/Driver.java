@@ -1,6 +1,9 @@
 package com.infoshareacademy;
 
 import javax.persistence.*;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
 @Table(name = "drivers")
@@ -16,6 +19,9 @@ public class Driver extends User {
 
     @Column(name = "district")
     private String district;
+
+    @OneToMany(mappedBy = "advert", fetch = FetchType.LAZY)
+    private List<Advert> adverts;
 
     public Driver(String name, String surname, String phone, String city, String district, Rating rating, Integer id) {
         super(name, surname, phone, rating);
@@ -52,12 +58,22 @@ public class Driver extends User {
         this.id = id;
     }
 
+    public List<Advert> getAdverts() {
+        return adverts;
+    }
+
+    public void setAdverts(List<Advert> adverts) {
+        this.adverts = adverts;
+    }
+
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", city='" + city + '\'' +
-                ", district='" + district + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Driver{");
+        sb.append("id=").append(id);
+        sb.append(", city='").append(city).append('\'');
+        sb.append(", district='").append(district).append('\'');
+        sb.append(", adverts=").append(adverts.stream().map(Advert::getId).collect(toList()));
+        sb.append('}');
+        return sb.toString();
     }
 }

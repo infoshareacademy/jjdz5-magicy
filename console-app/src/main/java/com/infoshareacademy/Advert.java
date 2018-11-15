@@ -17,7 +17,7 @@ public class Advert {
     @NotNull
     private Date date;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "driver_id", unique = true)
     @NotNull
     private Driver driver;
