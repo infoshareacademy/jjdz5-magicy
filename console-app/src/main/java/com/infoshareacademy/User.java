@@ -1,6 +1,13 @@
 package com.infoshareacademy;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -10,7 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     @NotNull
@@ -38,7 +45,7 @@ public class User {
         this.rating = rating;
     }
 
-    public User(String name, String surname, String phone, Rating rating, Integer id) {
+    public User(String name, String surname, String phone, Rating rating, Long id) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -50,7 +57,7 @@ public class User {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

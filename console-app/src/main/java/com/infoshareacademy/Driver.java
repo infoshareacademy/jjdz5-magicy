@@ -12,7 +12,7 @@ public class Driver extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "city")
     private String city;
@@ -23,7 +23,7 @@ public class Driver extends User {
     @OneToMany(mappedBy = "advert", fetch = FetchType.LAZY)
     private List<Advert> adverts;
 
-    public Driver(String name, String surname, String phone, String city, String district, Rating rating, Integer id) {
+    public Driver(String name, String surname, String phone, String city, String district, Rating rating, Long id) {
         super(name, surname, phone, rating);
         this.city = city;
         this.district = district;
@@ -45,7 +45,7 @@ public class Driver extends User {
         return district;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -54,7 +54,7 @@ public class Driver extends User {
         this.district = district;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

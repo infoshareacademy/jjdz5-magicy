@@ -2,7 +2,12 @@ package com.infoshareacademy;
 
 import org.apache.commons.math3.util.Precision;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "ratings")
@@ -11,7 +16,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "average")
     private Double average;
@@ -24,7 +29,7 @@ public class Rating {
         this.persons = persons;
     }
 
-    public Rating(Double average, Integer persons, Integer id) {
+    public Rating(Double average, Integer persons, Long id) {
         this.average = average;
         this.persons = persons;
         this.id = id;
@@ -54,7 +59,7 @@ public class Rating {
         return Precision.round(result, 1);
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

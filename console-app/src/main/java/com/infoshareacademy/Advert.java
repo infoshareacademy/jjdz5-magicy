@@ -1,6 +1,14 @@
 package com.infoshareacademy;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -11,7 +19,7 @@ public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "add_at")
     @NotNull
@@ -35,7 +43,7 @@ public class Advert {
     }
 
 
-    public Advert(Integer id, Date date, Driver driver, Route route) {
+    public Advert(Long id, Date date, Driver driver, Route route) {
         this.id = id;
         this.date = date;
         this.driver = driver;
@@ -51,7 +59,7 @@ public class Advert {
         return route;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -63,7 +71,7 @@ public class Advert {
         this.date = date;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
