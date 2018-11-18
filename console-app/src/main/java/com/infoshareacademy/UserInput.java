@@ -1,5 +1,8 @@
 package com.infoshareacademy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +12,14 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class UserInput {
+
     private static final String DATE_FORMAT = "dd-MM-yyyy";
+    private static final String CITY_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
+    private static final String INPUT_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
+    private static final String STREET_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
+    private static final String NUMBER_REGEX = "^\\d{3}\\ \\d{3}\\ \\d{3}$";
+
+    private Logger LOG = LoggerFactory.getLogger(UserInput.class);
 
     Date askForDate(final String question) {
         String userDate = getUserInput(question).trim();
@@ -69,8 +79,10 @@ public class UserInput {
         }
         try {
             LocalTime.parse(time);
+            LOG.debug("Given time \"{}\" is correct.", time);
             return true;
         } catch (DateTimeParseException e) {
+            LOG.warn("DateTimeParseException in isTimeValid method. Given time is not correct");
             return false;
         }
     }
@@ -85,14 +97,6 @@ public class UserInput {
             return false;
         }
     }
-
-    private static final String CITY_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
-
-    private static final String INPUT_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
-
-    private static final String STREET_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
-
-    private static final String NUMBER_REGEX = "^\\d{3}\\ \\d{3}\\ \\d{3}$";
 
     public boolean isCityValid(String city) {
         return city.matches(CITY_REGEX);

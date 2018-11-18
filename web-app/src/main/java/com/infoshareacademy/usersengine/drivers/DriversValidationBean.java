@@ -2,57 +2,56 @@ package com.infoshareacademy.usersengine.drivers;
 
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.UserInput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.Stateful;
 import java.util.List;
 
 @Stateful
 public class DriversValidationBean implements DriversValidation{
 
+    private static final Logger LOG = LoggerFactory.getLogger(DriversValidationBean.class);
     private static final String RATING_REGEX = "^?[1-5]";
-    UserInput userInput = new UserInput();
+    private static final String WHITESPACE = " ";
 
-    public boolean checkRating(String rating) {
-        return rating.matches(RATING_REGEX);
-    }
+    private UserInput userInput = new UserInput();
 
-    public boolean checkDriverId(List<Driver> drivers, String id){
-        for(Driver d: drivers){
-            if(d.getId().equals(id)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean askForRating(String rating) {
-        return !(inputIsEmpty(rating) || !checkRating(rating));
-    }
-
-    public boolean askForDriverId(List<Driver> drivers, String id) {
-        return !(inputIsEmpty(id) || !checkDriverId(drivers, id));
-    }
-
-    public String validateAdvertData(String id, String rating, List<Driver> drivers){
-        String message = "";
+    public String validateDriverData(String id, String rating, List<Driver> drivers){
+        String message = DriversConstants.EMPTY_FIELD;
         if(askForDriverId(drivers, id)){
-            message = message + "Ups! Something went wrong :( Try again";
+            message += DriversConstants.MESSAGE_SOMETHING_WENT_WRONG;
         }
         if(!askForRating(rating)){
-            message = message + "Ups! Something went wrong. Add rating using alert";
+            message += DriversConstants.MESSAGE_ADD_RATING_USING_ALERT;
         }
         return message;
     }
 
-    private boolean inputIsEmpty(String input){
-        return input==null || input.isEmpty();
+    public boolean askForRating(String rating) {
+        return !(isInputEmpty(rating) || !checkIsDriverRatingValid(rating));
+    }
+
+    public boolean askForDriverId(List<Driver> drivers, String id) {
+        return !(isInputEmpty(id) || !checkIsDriverIdAlreadyUsed(drivers, id));
+    }
+
+    public boolean checkIsDriverRatingValid(String rating) {
+        LOG.debug("Checking rating: {}.", rating);
+        return rating.matches(RATING_REGEX);
+    }
+
+    public boolean checkIsDriverIdAlreadyUsed(List<Driver> drivers, String id){
+        LOG.debug("Checking id: {}.", id);
+        return drivers.stream().anyMatch(driver -> driver.getId().equals(id));
     }
 
     public boolean askForText(String text) {
-        return !(inputIsEmpty(text) || !userInput.isInputValid(text));
+        return !(isInputEmpty(text) || !userInput.isInputValid(text));
     }
 
     public boolean askForNumber(String number) {
-        return (inputIsEmpty(number) || userInput.isNumberValid(number));
+        return !(isInputEmpty(number) || !userInput.isNumberValid(number));
     }
 
     public boolean isPhoneNumberExist(String number, List<Driver> drivers){
@@ -68,8 +67,12 @@ public class DriversValidationBean implements DriversValidation{
         return false;
     }
 
+    private boolean isInputEmpty(String input){
+        return input==null || input.isEmpty();
+    }
+
     private String removeWhiteSigns(String text){
-        text = text.replaceAll(" ", "");
+        text = text.replaceAll(WHITESPACE, DriversConstants.EMPTY_FIELD);
         return text;
     }
 }
