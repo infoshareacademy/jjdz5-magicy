@@ -59,8 +59,8 @@ public class DriversManagerBean implements DriversManager {
         drivers.add(driver);
     }
 
-    public Integer getNextDriverId(List<Driver> drivers) {
-        Integer nextDriverId = drivers.stream().mapToInt(Driver::getId).max()
+    public Long getNextDriverId(List<Driver> drivers) {
+        Long nextDriverId = drivers.stream().mapToLong(Driver::getId).max()
                 .orElse(START_ID) + VALUE_TO_ADD;
         LOG.debug("Next driver id value: {}.", nextDriverId);
         return nextDriverId;

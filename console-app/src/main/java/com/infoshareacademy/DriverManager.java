@@ -29,8 +29,8 @@ public class DriverManager {
 
     }
 
-    Integer getMaxId(List<Driver> driversList){
-        Integer maxId = 2;
+    Long getMaxId(List<Driver> driversList){
+        Long maxId = 2L;
         for(Driver driver: driversList){
             if(driver.getId()> maxId){
                 maxId = driver.getId();
@@ -43,7 +43,7 @@ public class DriverManager {
         for(Driver driver: driversList){
             if(driverNum.equals(driver.getId())){
 
-                driver.getRating().setAverage(driver.getRating().newAverage(userInput.askForRating("Give your rating from 0 to 5")));
+                driver.getRating().setAverage(driver.getRating().computeNewAverage(userInput.askForRating("Give your rating from 0 to 5")));
                 driver.getRating().setPersons(driver.getRating().getPersons()+1);
                 System.out.println("\n--------- New rating for "+driver.getName()+" ---------");
                 System.out.println(driver.getId()+" - "+driver.getName()+" "+ driver.getSurname()

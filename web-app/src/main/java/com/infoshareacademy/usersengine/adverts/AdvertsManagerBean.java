@@ -23,15 +23,15 @@ public class AdvertsManagerBean implements AdvertsManager {
         return adverts;
     }
 
-    public Integer getNextAdvertId(List<Advert> adverts){
-        Integer nextAdvertId = adverts.stream().mapToInt(Advert::getId).max()
+    public Long getNextAdvertId(List<Advert> adverts){
+        Long nextAdvertId = adverts.stream().mapToLong(Advert::getId).max()
                 .orElse(START_ID) + VALUE_TO_ADD;
         LOG.debug("Next advert id value: {}.", nextAdvertId);
         return nextAdvertId;
     }
 
-    public Integer getNextRouteId(List<Advert> adverts){
-        Integer nextRouteId = adverts.stream().mapToInt(advert -> advert.getRoute().getId()).max()
+    public Long getNextRouteId(List<Advert> adverts){
+        Long nextRouteId = adverts.stream().mapToLong(advert -> advert.getRoute().getId()).max()
                 .orElse(START_ID) + VALUE_TO_ADD;
         LOG.debug("Next route id value: {}.", nextRouteId);
         return nextRouteId;
