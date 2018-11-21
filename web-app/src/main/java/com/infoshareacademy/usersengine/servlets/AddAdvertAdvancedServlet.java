@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +39,16 @@ public class AddAdvertAdvancedServlet extends AppInitServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
-
         Map<String, String[]> map = req.getParameterMap();
 
+        map.entrySet().stream().forEach(e ->
+        {
+            try {
+                resp.getWriter().write(e.getKey() + " " + e.getValue()[0] + "<br>");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
 
     }
 

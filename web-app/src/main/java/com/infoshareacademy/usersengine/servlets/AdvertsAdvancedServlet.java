@@ -15,10 +15,12 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/adverts-advanced")
+@Transactional
 public class AdvertsAdvancedServlet extends AppInitServlet {
 
     @Inject

@@ -37,21 +37,25 @@ public class MapsAddress {
     @NotNull
     private Double longitude;
 
-    @Column(name = "map_id", unique = true)
+    @Column(name = "map_id")
     @NotNull
     private String addressMapId;
+
+    @Column(name = "info")
+    private String info;
 
     public MapsAddress() {
     }
 
     public MapsAddress(String city, String streetName, String streetNumber, Double latitude,
-                       Double longitude, String addressMapId) {
+                       Double longitude, String addressMapId, String info) {
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.latitude = latitude;
         this.longitude = longitude;
         this.addressMapId = addressMapId;
+        this.info = info;
     }
 
     public Long getId() {
@@ -108,6 +112,14 @@ public class MapsAddress {
 
     public void setAddressMapId(String addressMapId) {
         this.addressMapId = addressMapId;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     @Override

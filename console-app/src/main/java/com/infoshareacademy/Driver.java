@@ -30,6 +30,7 @@ public class Driver extends User {
     @OneToMany(mappedBy = "advert", fetch = FetchType.LAZY)
     private List<Advert> adverts;
 
+
     public Driver(String name, String surname, String phone, String city, String district, Rating rating, Long id) {
         super(name, surname, phone, rating);
         this.city = city;

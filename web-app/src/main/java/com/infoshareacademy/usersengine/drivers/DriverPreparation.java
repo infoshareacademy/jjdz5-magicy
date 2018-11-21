@@ -2,7 +2,7 @@ package com.infoshareacademy.usersengine.drivers;
 
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.Rating;
-import com.infoshareacademy.usersengine.services.PreparationService;
+import com.infoshareacademy.usersengine.services.ParametersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,11 +19,11 @@ public class DriverPreparation {
     private DriversManager driversManager = new DriversManagerBean();
 
     public Driver mapReader(Map<String, String[]> map) {
-        String name = PreparationService.getSpecificParameter(map, DriversConstants.PARAMETER_NAME);
-        String surname = PreparationService.getSpecificParameter(map, DriversConstants.PARAMETER_SURNAME);
-        String phone = PreparationService.getSpecificParameter(map, DriversConstants.PARAMETER_PHONE);
-        String city = PreparationService.getSpecificParameter(map, DriversConstants.PARAMETER_CITY);
-        String district = PreparationService.getSpecificParameter(map, DriversConstants.PARAMETER_DISTRICT);
+        String name = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_NAME);
+        String surname = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_SURNAME);
+        String phone = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_PHONE);
+        String city = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CITY);
+        String district = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_DISTRICT);
 
         driver.setName(name);
         driver.setSurname(surname);

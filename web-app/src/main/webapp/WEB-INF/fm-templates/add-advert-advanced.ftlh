@@ -100,12 +100,12 @@
               </div>
           </div>
 
-          <input type="hidden" id="start_route" name="startStreetName">
+          <input type="hidden" id="start_route" name="startStreet">
           <input type="hidden" id="start_street_number" name="startStreetNumber">
           <input type="hidden" id="start_locality" name="startCity"><br>
           <input type="hidden" id="start_lat" name="startLatitude">
           <input type="hidden" id="start_lng" name="startLongitude">
-          <input type="hidden" id="start_place_id" name="startPlaceId">
+          <input type="hidden" id="start_place_id" name="startMapsPointId">
 
         <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">To</h3></div></div>
         <div class="row margin-t">
@@ -130,12 +130,12 @@
               </div>
           </div>
 
-          <input type="hidden" id="end_route" name="endStreetName">
+          <input type="hidden" id="end_route" name="endStreet">
           <input type="hidden" id="end_street_number" name="endStreetNumber">
           <input type="hidden" id="end_locality" name="endCity"><br>
           <input type="hidden" id="end_lat" name="endLatitude">
           <input type="hidden" id="end_lng" name="endLongitude">
-          <input type="hidden" id="end_place_id" name="endPlaceId">
+          <input type="hidden" id="end_place_id" name="endMapsPointId">
 
           <div class="row margin pb-5">
               <div class="col-3 imgCenter">
