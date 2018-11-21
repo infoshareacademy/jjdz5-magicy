@@ -11,6 +11,10 @@ public class AppInitServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        PropertiesService.loadProperties(getServletContext());
+        try {
+            PropertiesService.loadProperties(getServletContext());
+        } catch (NullPointerException e) {
+            // TODO obsłużyć to!!!
+        }
     }
 }

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertiesService {
 
-    private static final String PROPERTIES_FILEPATH = "WEB-INF/configuration/app.properties";
+    private static final String PROPERTIES_FILEPATH = "WEB-INF/properties/webapp.properties";
     public static final String PROPERTY_API_KEY = "API_KEY";
     private static Properties properties = new Properties();
 

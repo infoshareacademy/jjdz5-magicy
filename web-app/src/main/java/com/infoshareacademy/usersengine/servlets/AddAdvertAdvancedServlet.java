@@ -25,14 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("maps-add-advert")
-public class MapsAddAdvertServlet extends AppInitServlet {
+@WebServlet("/add-advert-advanced")
+public class AddAdvertAdvancedServlet extends AppInitServlet {
 
-    private static final String TEMPLATE_NAME = "maps-add-advert";
+    private static final String TEMPLATE_NAME = "add-advert-advanced";
 
     private JsonToList jsonToList = new JsonToList();
     private AdvertsList advertsList = new AdvertsList();
-    private Logger LOG = LoggerFactory.getLogger(MapsAddAdvertServlet.class);
+    private Logger LOG = LoggerFactory.getLogger(AddAdvertAdvancedServlet.class);
 
     @Inject
     private TemplateProvider templateProvider;
