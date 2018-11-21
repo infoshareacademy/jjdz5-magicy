@@ -83,16 +83,12 @@
               <div class="col-10 form-group">
                   <label for="start_autocomplete">Departure address:</label>
                   <input id="start_autocomplete" placeholder="Please enter your departure address here."
-                            onFocus="geolocate()" type="text" class="form-control">
+                            onFocus="geolocate()" type="text" class="form-control" required>
               </div>
               <div class="col-2 form-group">
                   <label for="startTime">At time (HH:mm):</label>
-                  <input id="startTime"
-                         type="time"
-                         required
-                         name="startTime"
-                         placeholder="Enter departure time"
-                         class="form-control" />
+                  <input id="startTime" type="time" name="startTime"
+                         placeholder="Enter departure time" class="form-control" required>
               </div>
           </div>
           <div class="row margin-b">
@@ -104,32 +100,24 @@
               </div>
           </div>
 
-          <div class="row margin">
-              <div class="col-12">
-                  <input type="text" id="start_route" name="startStreetName" disabled="disabled">
-                  <input type="text" id="start_street_number" name="startStreetNumber" disabled="disabled">
-                  <input type="text" id="start_locality" name="startCity" disabled="disabled"><br>
-                  <input type="text" id="start_lat" name="startLatitude" disabled="disabled">
-                  <input type="text" id="start_lng" name="startLongitude" disabled="disabled">
-                  <input type="text" id="start_place_id" name="startPlaceId" disabled="disabled">
-              </div>
-          </div>
+          <input type="hidden" id="start_route" name="startStreetName">
+          <input type="hidden" id="start_street_number" name="startStreetNumber">
+          <input type="hidden" id="start_locality" name="startCity"><br>
+          <input type="hidden" id="start_lat" name="startLatitude">
+          <input type="hidden" id="start_lng" name="startLongitude">
+          <input type="hidden" id="start_place_id" name="startPlaceId">
 
         <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">To</h3></div></div>
         <div class="row margin-t">
             <div class="col-10 form-group">
                 <label for="end_autocomplete">Destination address:</label>
                 <input id="end_autocomplete" placeholder="Please enter your destination address here."
-                       onFocus="geolocate()" type="text" class="form-control">
+                       onFocus="geolocate()" type="text" class="form-control" required>
             </div>
             <div class="col-2 form-group">
                 <label for="endTime">At time (HH:mm):</label>
-                <input id="endTime"
-                       type="time"
-                       required
-                       name="endTime"
-                       placeholder="Enter arrival time"
-                       class="form-control" />
+                <input id="endTime" type="time" name="endTime"
+                       placeholder="Enter arrival time" class="form-control" required>
             </div>
         </div>
 
@@ -142,54 +130,13 @@
               </div>
           </div>
 
-          <div class="row margin">
-              <div class="col-12">
-                  <input type="text" id="end_route" name="endStreetName" disabled="disabled">
-                  <input type="text" id="end_street_number" name="endStreetNumber" disabled="disabled">
-                  <input type="text" id="end_locality" name="endCity" disabled="disabled"><br>
-                  <input type="text" id="end_lat" name="endLatitude" disabled="disabled">
-                  <input type="text" id="end_lng" name="endLongitude" disabled="disabled">
-                  <input type="text" id="end_place_id" name="endPlaceId" disabled="disabled">
-              </div>
-          </div>
+          <input type="hidden" id="end_route" name="endStreetName">
+          <input type="hidden" id="end_street_number" name="endStreetNumber">
+          <input type="hidden" id="end_locality" name="endCity"><br>
+          <input type="hidden" id="end_lat" name="endLatitude">
+          <input type="hidden" id="end_lng" name="endLongitude">
+          <input type="hidden" id="end_place_id" name="endPlaceId">
 
-        <#--<div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">Via</h3></div></div>-->
-        <#--<div class="row margin">-->
-            <#--<div class="col-5 form-group">-->
-                <#--<label for="pickUpCity">City:</label>-->
-                <#--<input id="pickUpCity"-->
-                       <#--type="text"-->
-                       <#--name="pickUpCity"-->
-                       <#--placeholder="Enter city where you stop"-->
-                       <#--class="form-control" />-->
-            <#--</div>-->
-
-            <#--<div class="col-5 form-group">-->
-                <#--<label for="pickUpStreet">Street:</label>-->
-                <#--<input id="pickUpStreet"-->
-                       <#--type="text"-->
-                       <#--name="pickUpStreet"-->
-                       <#--placeholder="Enter street where you stop"-->
-                       <#--class="form-control" />-->
-            <#--</div>-->
-            <#--<div class="col-2 form-group">-->
-                <#--<label for="pickUpTime">At time (HH:mm):</label>-->
-                <#--<input id="pickUpTime"-->
-                       <#--type="time"-->
-                       <#--name="pickUpTime"-->
-                       <#--placeholder="Enter time of your stop"-->
-                       <#--class="form-control" />-->
-            <#--</div></div>-->
-        <#--<div class="row">-->
-            <#--<div class="col-12 form-group text-muted">-->
-                <#--<h3><label for="date">Date</label></h3>-->
-                <#--<input id="date"-->
-                       <#--required-->
-                       <#--type="date"-->
-                       <#--name="date"-->
-                       <#--class="form-control" />-->
-            <#--</div>-->
-        <#--</div>-->
           <div class="row margin pb-5">
               <div class="col-3 imgCenter">
                   <button type="submit" class="btn btn-primary btn-block">Add</button>
