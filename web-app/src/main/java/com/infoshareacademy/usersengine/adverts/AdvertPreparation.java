@@ -136,7 +136,7 @@ public class AdvertPreparation {
     private Driver setDriverData(){
         driver.setCity("Gdańsk");
         driver.setDistrict("Wrzeszcz");
-        driver.setId(4);
+        driver.setId(4L);
         driver.setName("Krzysztof");
         driver.setSurname("Gotowała");
         driver.setPhone("555 555 555");

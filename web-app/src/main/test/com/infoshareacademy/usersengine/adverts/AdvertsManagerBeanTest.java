@@ -18,13 +18,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AdvertsManagerBeanTest {
 
     private static final Integer ID_INCREASE_VALUE = 1;
-    private static final Integer LOWEST_ID = 2;
-    private static final Integer MIDDLE_ID = 5;
-    private static final Integer HIGHEST_ID = 7;
+    private static final Long LOWEST_ID = 2L;
+    private static final Long MIDDLE_ID = 5L;
+    private static final Long HIGHEST_ID = 7L;
 
     private AdvertsManager advertsManager;
     private List<Advert> adverts;
-    private Route testRoute = new Route(0, Date.from(Instant.now()),
+    private Route testRoute = new Route(0L, Date.from(Instant.now()),
             "Start City", "Start Street", "End City", "End Street",
             "Pickup City", "Pickup Street", "08:00", "10:00",
             "09:00");
@@ -40,7 +40,7 @@ class AdvertsManagerBeanTest {
     void returnsListOfAdvertsWithAddedAdvertInAddAdvertMethod() {
 
         // arrange
-        Advert advertToAdd = new Advert(0, Date.from(Instant.now()), new Driver(), testRoute);
+        Advert advertToAdd = new Advert(0L, Date.from(Instant.now()), new Driver(), testRoute);
 
         // act
         advertsManager.addAdvert(advertToAdd, adverts);
@@ -59,7 +59,7 @@ class AdvertsManagerBeanTest {
         adverts.add(new Advert(MIDDLE_ID, Date.from(Instant.now()), new Driver(), testRoute));
 
         // act
-        Integer nextId = advertsManager.getNextAdvertId(adverts);
+        Long nextId = advertsManager.getNextAdvertId(adverts);
 
         // assert
         assertThat(nextId).isEqualTo(HIGHEST_ID + ID_INCREASE_VALUE);
@@ -76,12 +76,12 @@ class AdvertsManagerBeanTest {
         highestIdRoute.setId(HIGHEST_ID);
         Route middleIdRoute = new Route();
         middleIdRoute.setId(MIDDLE_ID);
-        adverts.add(new Advert(0, Date.from(Instant.now()), new Driver(), highestIdRoute));
-        adverts.add(new Advert(0, Date.from(Instant.now()), new Driver(), middleIdRoute));
-        adverts.add(new Advert(0, Date.from(Instant.now()), new Driver(), lowestIdRoute));
+        adverts.add(new Advert(0L, Date.from(Instant.now()), new Driver(), highestIdRoute));
+        adverts.add(new Advert(0L, Date.from(Instant.now()), new Driver(), middleIdRoute));
+        adverts.add(new Advert(0L, Date.from(Instant.now()), new Driver(), lowestIdRoute));
 
         // act
-        Integer nextId = advertsManager.getNextRouteId(adverts);
+        Long nextId = advertsManager.getNextRouteId(adverts);
 
         // assert
         assertThat(nextId).isEqualTo(HIGHEST_ID + ID_INCREASE_VALUE);
