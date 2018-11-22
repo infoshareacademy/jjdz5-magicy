@@ -59,7 +59,7 @@ public class AdvertPreparation {
         String message = DriversConstants.EMPTY_FIELD;
         if(!advertsValidation.askForDate(advertData.getDate())) {
             LOG.info("Incorrect date from user input: {}.", advertData.getDate());
-            message += AdvertsConstants.MESSAGE_INCORRECT_DATA;
+            message += AdvertsConstants.MESSAGE_INCORRECT_DATE;
         }
         if(!advertsValidation.askForCity(advertData.getStartCity())) {
             LOG.info("Incorrect start city from user input: {}.", advertData.getStartCity());
