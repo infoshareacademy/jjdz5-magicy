@@ -1,8 +1,6 @@
 package com.infoshareacademy.usersengine.adverts;
 
 import com.infoshareacademy.usersengine.services.ParametersService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.Singleton;
 import java.util.Map;
@@ -10,8 +8,6 @@ import java.util.Map;
 @Singleton
 public class MapsAdvertParametersPreparation {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MapsAdvertParametersPreparation.class);
-    private final String WHITESPACE = " ";
     private AdvertData advertData;
 
     public AdvertData prepareMapsAdvertData(Map<String, String[]> map) {
@@ -73,18 +69,5 @@ public class MapsAdvertParametersPreparation {
         advertData.setEndMapsPointId(endMapsPointId);
         advertData.setEndTime(endTime);
         advertData.setEndInfo(endInfo);
-    }
-
-    private String prepareStreet(Map<String, String[]> map, String streetNameParameter,
-                                 String streetNumberParameter) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            sb.append(ParametersService.getSpecificParameter(map, streetNameParameter));
-            sb.append(WHITESPACE);
-            sb.append(ParametersService.getSpecificParameter(map, streetNumberParameter));
-        } catch (NullPointerException e) {
-            LOG.warn("Unable to build Street from parameters.");
-        }
-        return sb.toString();
     }
 }
