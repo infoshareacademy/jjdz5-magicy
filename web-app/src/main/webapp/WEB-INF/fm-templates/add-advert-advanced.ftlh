@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="full-height">
+<html lang="en" class="full-height" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -136,6 +136,17 @@
           <input type="hidden" id="end_lat" name="endLatitude">
           <input type="hidden" id="end_lng" name="endLongitude">
           <input type="hidden" id="end_place_id" name="endMapsPointId">
+
+          <div class="row">
+              <div class="col-10 form-group text-muted">
+                  <h3><label for="date">Date</label></h3>
+                  <input id="date" type="date" name="date" class="form-control" required/>
+              </div>
+
+              <div class="col-2 form-group text-muted">
+                  <h3><label for="driverId">Driver</label></h3>
+                  <input id="driverId" type="text" name="driverId" class="form-control" required/>
+              </div>
 
           <div class="row margin pb-5">
               <div class="col-3 imgCenter">

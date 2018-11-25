@@ -2,11 +2,11 @@ package com.infoshareacademy.usersengine.adverts;
 
 import com.infoshareacademy.usersengine.services.ParametersService;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import java.util.Map;
 
-@Singleton
-public class MapsAdvertParametersPreparation {
+@Stateless
+public class MapsAdvertParametersReader {
 
     private AdvertData advertData;
 
@@ -14,6 +14,7 @@ public class MapsAdvertParametersPreparation {
         advertData = new AdvertData();
         prepareStartParameters(map);
         prepareEndParameters(map);
+        prepareOverallParameters(map);
         return advertData;
     }
 
@@ -69,5 +70,14 @@ public class MapsAdvertParametersPreparation {
         advertData.setEndMapsPointId(endMapsPointId);
         advertData.setEndTime(endTime);
         advertData.setEndInfo(endInfo);
+    }
+
+    private void prepareOverallParameters(Map<String, String[]> map) {
+        String date = ParametersService.getSpecificParameter(map,
+                AdvertsConstants.PARAMETER_DATE);
+        String driverId = ParametersService.getSpecificParameter(map,
+                AdvertsConstants.PARAMETER_DRIVER_ID);
+        advertData.setDate(date);
+        advertData.setDriverId(driverId);
     }
 }

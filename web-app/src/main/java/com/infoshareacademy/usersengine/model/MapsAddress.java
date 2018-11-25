@@ -39,7 +39,7 @@ public class MapsAddress {
 
     @Column(name = "map_id")
     @NotNull
-    private String addressMapId;
+    private String addressMapsPointId;
 
     @Column(name = "info")
     private String info;
@@ -48,13 +48,13 @@ public class MapsAddress {
     }
 
     public MapsAddress(String city, String streetName, String streetNumber, Double latitude,
-                       Double longitude, String addressMapId, String info) {
+                       Double longitude, String addressMapsPointId, String info) {
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.addressMapId = addressMapId;
+        this.addressMapsPointId = addressMapsPointId;
         this.info = info;
     }
 
@@ -106,12 +106,12 @@ public class MapsAddress {
         this.longitude = longitude;
     }
 
-    public String getAddressMapId() {
-        return addressMapId;
+    public String getAddressMapsPointId() {
+        return addressMapsPointId;
     }
 
-    public void setAddressMapId(String addressMapId) {
-        this.addressMapId = addressMapId;
+    public void setAddressMapsPointId(String addressMapsPointId) {
+        this.addressMapsPointId = addressMapsPointId;
     }
 
     public String getInfo() {
@@ -131,7 +131,7 @@ public class MapsAddress {
         sb.append(", streetNumber='").append(streetNumber).append('\'');
         sb.append(", latitude=").append(latitude);
         sb.append(", longitude=").append(longitude);
-        sb.append(", addressMapId='").append(addressMapId).append('\'');
+        sb.append(", addressMapsPointId='").append(addressMapsPointId).append('\'');
         sb.append('}');
         return sb.toString();
     }

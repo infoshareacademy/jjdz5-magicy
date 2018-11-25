@@ -1,22 +1,30 @@
 package com.infoshareacademy.usersengine.adverts;
 
 import com.infoshareacademy.UserInput;
+import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.model.AddressType;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
+@Stateless
 public class MapsAdvertValidation {
 
     private static final Logger LOG = LoggerFactory.getLogger(MapsAdvertValidation.class);
-    private AdvertsValidation advertsValidation = new AdvertsValidationBean();
     private UserInput userInput = new UserInput();
     private List<String> checkingMessages;
+
+    @Inject
+    private AdvertsValidation advertsValidation;
+
+    @Inject
+    private MapsDriverDao mapsDriverDao;
 
     public void checkAdvertDataCorrection(AdvertData advertData) {
         checkingMessages = new ArrayList<>();
@@ -26,6 +34,7 @@ public class MapsAdvertValidation {
             checkTimePeriodCorrection(advertData);
         }
         checkDateCorrection(advertData.getDate());
+        checkDriverIdCorrection(advertData.getDriverId());
     }
 
     public List<String> getCheckingMessages() {
@@ -71,7 +80,7 @@ public class MapsAdvertValidation {
     }
 
     private void checkStreetNumberCorrection(String streetNumber, AddressType type) {
-        if (!userInput.isStreetNumberValid(streetNumber) || isInputEmpty(streetNumber)) {
+        if (isInputEmpty(streetNumber)) {
             LOG.info("Incorrect {} street number from user input: {}.",
                     type.name().toLowerCase(), streetNumber);
             selectMessage(type, AdvertsConstants.MESSAGE_INCORRECT_START_STREET_NUMBER,
@@ -133,6 +142,16 @@ public class MapsAdvertValidation {
         }
     }
 
+    private void checkDriverIdCorrection(String driverId) {
+        Long parsedId = parseDriverId(driverId);
+        if (parsedId == null) {
+            LOG.info("Cannot parse given driver id: {}.", driverId);
+            checkingMessages.add(AdvertsConstants.MESSAGE_INCORRECT_DRIVER_ID);
+        } else {
+            checkDriverInDatabase(parsedId);
+        }
+    }
+
     private Boolean areTimesCorrect() {
         return !checkingMessages.contains(AdvertsConstants.MESSAGE_INCORRECT_START_TIME) ||
                !checkingMessages.contains(AdvertsConstants.MESSAGE_INCORRECT_END_TIME);
@@ -168,6 +187,27 @@ public class MapsAdvertValidation {
             return longitude < minLat || longitude > maxLat;
         } catch (NullPointerException e) {
             return true;
+        }
+    }
+
+    private Long parseDriverId(String driverId) {
+        try {
+            return Long.valueOf(driverId);
+        } catch (NumberFormatException e) {
+            LOG.info("Cannot parse given driver id: {}.", driverId);
+        }
+        return null;
+    }
+
+    private Boolean isDriverInDatabase(Long driverId) {
+        final MapsDriver driver = mapsDriverDao.findById(driverId);
+        return driver != null;
+    }
+
+    private void checkDriverInDatabase(Long driverId) {
+        if (!isDriverInDatabase(driverId)) {
+            LOG.info("There is no driver with given id: {}.", driverId);
+            checkingMessages.add(AdvertsConstants.MESSAGE_INCORRECT_DRIVER_ID);
         }
     }
 

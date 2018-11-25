@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,33 +64,22 @@ public class HelloServlet extends HttpServlet {
 
     private void fillDatabaseWithAdvancedDefaults() {
 
-        MapsAddress address1 = new MapsAddress("Gdańsk", "Olsztyńska", "8A",
-                -54.00, 18.00, "uniqueId", "");
-        mapsAddressDao.save(address1);
-        MapsAddress address2 = new MapsAddress("Gdańsk", "Grunwaldzka", "472A",
-                -54.00, 18.00, "uniqueId1", "");
-        mapsAddressDao.save(address2);
-        MapsAddress address3 = new MapsAddress("Gdańsk", "Łąkowa", "10",
-                -54.00, 18.00, "uniqueId2", "");
-        mapsAddressDao.save(address3);
-        MapsAddress address4 = new MapsAddress("Sopot", "Monte Casino", "777",
-                1.00, -21.34, "unikalny", "");
-        mapsAddressDao.save(address4);
+        MapsAddress testStartAddress = new MapsAddress("Gdańsk", "Olsztyńska",
+                "8A", -54.00, 18.00, "uniqueId", "");
+        mapsAddressDao.save(testStartAddress);
+        MapsAddress testEndAddress = new MapsAddress("Gdańsk", "Grunwaldzka",
+                "472A", -54.00, 18.00, "uniqueId1", "");
+        mapsAddressDao.save(testEndAddress);
 
-        MapsDriver driver1 = new MapsDriver("Kuba", "Jurek", "000-111-222");
-        mapsDriverDao.save(driver1);
-        MapsDriver driver2 = new MapsDriver("Pjoter", "Wiochacz", "0-700-123-123");
-        mapsDriverDao.save(driver2);
+        MapsDriver testDriver = new MapsDriver("Kuba", "Jurek", "000-111-222");
+        mapsDriverDao.save(testDriver);
 
-        Car car1 = new Car("GD 12345", "Opel", "Vectra", driver1);
-        carDao.save(car1);
-        Car car2 = new Car("G0 KOZAK", "Opel", "Calibra", driver2);
-        carDao.save(car2);
+        Car testCar = new Car("GD 12345", "Opel", "Vectra", testDriver);
+        carDao.save(testCar);
 
-        MapsAdvert advert1 = new MapsAdvert(driver1, address1, address2, LocalTime.now(), LocalTime.now());
-        mapsAdvertDao.save(advert1);
-        MapsAdvert advert2 = new MapsAdvert(driver2, address3, address4, LocalTime.now(), LocalTime.now());
-        mapsAdvertDao.save(advert2);
+        MapsAdvert testAdvert = new MapsAdvert(testDriver, testStartAddress, testEndAddress,
+                LocalTime.now(), LocalTime.now(), LocalDate.now().plusDays(2));
+        mapsAdvertDao.save(testAdvert);
 
     }
 }

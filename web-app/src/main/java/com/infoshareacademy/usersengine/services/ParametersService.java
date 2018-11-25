@@ -11,7 +11,11 @@ public class ParametersService {
     }
 
     public static String getSpecificParameter (Map<String, String[]> map, String parameter) {
-        return map.get(parameter)[PARAMETER_INDEX].trim();
+        try {
+            return map.get(parameter)[PARAMETER_INDEX].trim();
+        } catch (NullPointerException e) {
+            return "";
+        }
     }
 
 }
