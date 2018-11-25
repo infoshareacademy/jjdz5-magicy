@@ -49,7 +49,14 @@ public class AddAdvertAdvancedServlet extends AppInitServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
-        buildNewAdvert(req.getParameterMap(), resp);
+        req.getParameterMap().entrySet().forEach(e ->
+        {
+            try {
+                resp.getWriter().write(e.getKey() + "=" + e.getValue()[0] + "<br>");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     private void buildNewAdvert(Map<String, String[]> parametersMap, HttpServletResponse resp)

@@ -80,4 +80,13 @@ public class MapsAdvertParametersReader {
         advertData.setDate(date);
         advertData.setDriverId(driverId);
     }
+
+    private void checkMajorParameters(Map<String, String[]> map) {
+        ParametersService.isParameterCorrect(map, AdvertsConstants.PARAMETER_START_MAPS_POINT_ID);
+        ParametersService.isParameterCorrect(map, AdvertsConstants.PARAMETER_END_MAPS_POINT_ID);
+        ParametersService.isParameterCorrect(map, AdvertsConstants.PARAMETER_START_TIME);
+        ParametersService.isParameterCorrect(map, AdvertsConstants.PARAMETER_END_TIME);
+        ParametersService.isParameterCorrect(map, AdvertsConstants.PARAMETER_DATE);
+        ParametersService.isParameterCorrect(map, AdvertsConstants.PARAMETER_DRIVER_ID);
+    }
 }
