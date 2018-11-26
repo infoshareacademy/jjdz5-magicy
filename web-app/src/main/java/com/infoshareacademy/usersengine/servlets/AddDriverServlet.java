@@ -73,7 +73,7 @@ public class AddDriverServlet extends HttpServlet {
         if (message.isEmpty()) {
             driversList.setDriversList(drivers);
             driversManager.writeDriverData(drivers, getPath());
-            resp.sendRedirect("/jjdz5-magicy/home");
+            resp.sendRedirect("/jjdz5-magicy/drivers");
 
         }else{
             PrintWriter writer = resp.getWriter();

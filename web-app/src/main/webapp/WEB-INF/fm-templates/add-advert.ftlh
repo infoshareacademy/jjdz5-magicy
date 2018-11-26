@@ -68,7 +68,6 @@
               <h3>Add new advert</h3>
           </div>
       </div>
-      <form method="post" action="/jjdz5-magicy/add-advert">
           <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">From</h3></div></div>
           <div class="row margin">
               <div class="col-5 form-group">
@@ -170,10 +169,9 @@
         </div>
           <div class="row margin">
               <div class="col-3 imgCenter">
-                  <button type="submit" id="add_button" class="btn btn-primary btn-block">Add</button>
+                  <button type="submit" id="add_button" class="btn btn-primary btn-block" onclick="addAdvert()">Add</button>
               </div>
           </div>
-    </form>
 </div>
 
   <#include "footer.ftlh">

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.*;
 
 @WebServlet("add-advert")
@@ -68,15 +69,14 @@ public class AddAdvertServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, List<Advert> adverts) throws IOException {
-        PrintWriter writer = resp.getWriter();
-        if(!message.isEmpty()){
-            writer.println(message);
+        if(message.isEmpty()){
+            advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
+            advertsManager.advertsToJson(adverts, getPath());
+            resp.sendRedirect("/jjdz5-magicy/adverts");
         }
         else{
-            advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts), adverts));
-            System.out.println("adverts po "+advertsList.getAdvertsList().toString());
-            advertsManager.advertsToJson(adverts, getPath());
-            writer.println(message);
+            PrintWriter writer = resp.getWriter();
+            writer.println("<!DOCTYPE html><body><form><t1>" + message + "</t1><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
     }
 
