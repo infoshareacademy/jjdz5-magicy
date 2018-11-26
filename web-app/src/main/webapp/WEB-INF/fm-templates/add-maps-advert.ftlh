@@ -57,7 +57,7 @@
                         <a class="nav-link" href="adverts">Adverts</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="add-advert">Add advert</a>
+                        <a class="nav-link" href="add-maps-advert">Add advert</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="drivers">Drivers</a>
@@ -76,7 +76,20 @@
               <h3>Add new advert</h3>
           </div>
       </div>
-      <form method="post" action="/jjdz5-magicy/add-advert-advanced">
+
+      <#if SUMMARY?has_content>
+
+      <div class="row">
+          <div class="col-12">
+              <#list SUMMARY as msg>
+                  <h4>${msg}</h4>
+              </#list>
+          </div>
+      </div>
+
+      </#if>
+
+      <form method="post" action="/jjdz5-magicy/add-maps-advert">
           <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">From</h3></div></div>
 
           <div class="row margin-t">
@@ -147,11 +160,13 @@
                   <h3><label for="driverId">Driver</label></h3>
                   <input id="driverId" type="text" name="driverId" class="form-control" required/>
               </div>
-
+          </div>
           <div class="row margin pb-5">
+              <div class="col-4"></div>
               <div class="col-3 imgCenter">
-                  <button type="submit" class="btn btn-primary btn-block">Add</button>
+                  <button type="submit" class="btn btn-primary btn-block">Submit</button>
               </div>
+              <div class="col-4"></div>
           </div>
     </form>
 </div>
@@ -255,6 +270,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initAutocomplete" async defer></script>
+<#assign apikey = API_KEY[0]>
+<script src="https://maps.googleapis.com/maps/api/js?key=${apikey}&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>

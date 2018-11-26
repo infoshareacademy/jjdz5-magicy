@@ -2,8 +2,6 @@ package com.infoshareacademy.usersengine.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -13,9 +11,9 @@ import javax.validation.constraints.NotNull;
 public class MapsAddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    @NotNull
+    private String mapsPointId;
 
     @Column(name = "city")
     @NotNull
@@ -37,33 +35,29 @@ public class MapsAddress {
     @NotNull
     private Double longitude;
 
-    @Column(name = "map_id")
-    @NotNull
-    private String addressMapsPointId;
-
     @Column(name = "info")
     private String info;
 
     public MapsAddress() {
     }
 
-    public MapsAddress(String city, String streetName, String streetNumber, Double latitude,
-                       Double longitude, String addressMapsPointId, String info) {
+    public MapsAddress(String mapsPointId, String city, String streetName, String streetNumber, Double latitude,
+                       Double longitude, String info) {
+        this.mapsPointId = mapsPointId;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.addressMapsPointId = addressMapsPointId;
         this.info = info;
     }
 
-    public Long getId() {
-        return id;
+    public String getMapsPointId() {
+        return mapsPointId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMapsPointId(String mapsPointId) {
+        this.mapsPointId = mapsPointId;
     }
 
     public String getCity() {
@@ -106,14 +100,6 @@ public class MapsAddress {
         this.longitude = longitude;
     }
 
-    public String getAddressMapsPointId() {
-        return addressMapsPointId;
-    }
-
-    public void setAddressMapsPointId(String addressMapsPointId) {
-        this.addressMapsPointId = addressMapsPointId;
-    }
-
     public String getInfo() {
         return info;
     }
@@ -125,13 +111,13 @@ public class MapsAddress {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapsAddress{");
-        sb.append("id=").append(id);
+        sb.append(", mapsPointId='").append(mapsPointId).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", streetName='").append(streetName).append('\'');
         sb.append(", streetNumber='").append(streetNumber).append('\'');
         sb.append(", latitude=").append(latitude);
         sb.append(", longitude=").append(longitude);
-        sb.append(", addressMapsPointId='").append(addressMapsPointId).append('\'');
+        sb.append(", info='").append(info).append('\'');
         sb.append('}');
         return sb.toString();
     }

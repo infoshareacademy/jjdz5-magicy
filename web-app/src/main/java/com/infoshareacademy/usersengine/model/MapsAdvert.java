@@ -1,14 +1,6 @@
 package com.infoshareacademy.usersengine.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -121,13 +113,13 @@ public class MapsAdvert {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapsAdvert{");
-        sb.append("id=").append(id);
-        sb.append(", driver=").append(driver);
-        sb.append(", startAddress=").append(startAddress);
-        sb.append(", endAddress=").append(endAddress);
-        sb.append(", startTime=").append(startTime);
-        sb.append(", endTime=").append(endTime);
-        sb.append(", date=").append(date);
+        sb.append("id=").append(id).append("\n");
+        sb.append(", driver=").append(driver.getName()).append(driver.getSurname()).append("\n");
+        sb.append(", startAddress=").append(startAddress).append("\n");
+        sb.append(", endAddress=").append(endAddress).append("\n");
+        sb.append(", startTime=").append(startTime).append("\n");
+        sb.append(", endTime=").append(endTime).append("\n");
+        sb.append(", date=").append(date).append("\n");
         sb.append('}');
         return sb.toString();
     }

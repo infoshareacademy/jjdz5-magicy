@@ -5,5 +5,5 @@ import com.infoshareacademy.usersengine.model.MapsAddress;
 import javax.ejb.Stateless;
 
 @Stateless
-public class MapsAddressDao extends GenericDao<MapsAddress, Long> {
+public class MapsAddressDao extends GenericDao<MapsAddress, String> {
 }

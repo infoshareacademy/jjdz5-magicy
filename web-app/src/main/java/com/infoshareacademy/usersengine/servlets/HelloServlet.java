@@ -5,8 +5,6 @@ import com.infoshareacademy.usersengine.dao.MapsAdvertDao;
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.Car;
-import com.infoshareacademy.usersengine.model.MapsAddress;
-import com.infoshareacademy.usersengine.model.MapsAdvert;
 import com.infoshareacademy.usersengine.model.MapsDriver;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -20,8 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,22 +60,11 @@ public class HelloServlet extends HttpServlet {
 
     private void fillDatabaseWithAdvancedDefaults() {
 
-        MapsAddress testStartAddress = new MapsAddress("Gdańsk", "Olsztyńska",
-                "8A", -54.00, 18.00, "uniqueId", "");
-        mapsAddressDao.save(testStartAddress);
-        MapsAddress testEndAddress = new MapsAddress("Gdańsk", "Grunwaldzka",
-                "472A", -54.00, 18.00, "uniqueId1", "");
-        mapsAddressDao.save(testEndAddress);
-
         MapsDriver testDriver = new MapsDriver("Kuba", "Jurek", "000-111-222");
         mapsDriverDao.save(testDriver);
 
         Car testCar = new Car("GD 12345", "Opel", "Vectra", testDriver);
         carDao.save(testCar);
-
-        MapsAdvert testAdvert = new MapsAdvert(testDriver, testStartAddress, testEndAddress,
-                LocalTime.now(), LocalTime.now(), LocalDate.now().plusDays(2));
-        mapsAdvertDao.save(testAdvert);
 
     }
 }

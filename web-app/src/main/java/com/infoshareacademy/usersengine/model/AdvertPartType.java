@@ -1,6 +1,6 @@
 package com.infoshareacademy.usersengine.model;
 
-public enum AddressType {
+public enum AdvertPartType {
 
     START("departure"),
     VIA("indirect"),
@@ -8,7 +8,7 @@ public enum AddressType {
 
     private String messageType;
 
-    AddressType(String messageType) {
+    AdvertPartType(String messageType) {
         this.messageType = messageType;
     }
 

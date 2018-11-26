@@ -1,6 +1,7 @@
 package com.infoshareacademy.usersengine.api.googlemaps.datamodel;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceRestResponse {

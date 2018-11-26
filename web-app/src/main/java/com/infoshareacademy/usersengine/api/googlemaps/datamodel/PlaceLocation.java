@@ -1,6 +1,6 @@
 package com.infoshareacademy.usersengine.api.googlemaps.datamodel;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlaceLocation {
 
