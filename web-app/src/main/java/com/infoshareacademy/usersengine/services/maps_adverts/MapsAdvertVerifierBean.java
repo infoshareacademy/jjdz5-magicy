@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,11 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
         errorMessages = new ArrayList<>();
         verifyStartAddressParameters(parameters);
         verifyEndAddressParameters(parameters);
-        verifyStartTimeParameter(parameters);
-        verifyEndTimeParameter(parameters);
-        verifyDate(parameters);
+        verifyAddressesEquality(parameters);
+        LocalTime startTime = verifyStartTimeParameter(parameters);
+        LocalTime endTime = verifyEndTimeParameter(parameters);
+        LocalDate date = verifyDate(parameters);
+        verifyTimePeriod(startTime, endTime, date);
         verifyDriver(parameters);
     }
 
@@ -83,33 +86,50 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
         }
     }
 
-    private void verifyStartTimeParameter(Map<String, String[]> parameters) {
+    private void verifyAddressesEquality(Map<String, String[]> parameters) {
+        if (areAddressesEqual(parameters)) {
+            errorMessages.add(PropertiesService.getMsgEqualAddresses());
+        }
+    }
+
+    private LocalTime verifyStartTimeParameter(Map<String, String[]> parameters) {
         if (verifier.isTimeParameterCorrect(parameters, AdvertPartType.START)) {
             LocalTime parsedTime = parseTime(ParametersService.getSpecificParameter(parameters,
                     AdvertsConstants.PARAMETER_START_TIME));
             startTimeValidation(parsedTime);
+            return parsedTime;
         } else {
             errorMessages.add(PropertiesService.getMsgBadStartTime());
+            return null;
         }
     }
 
-    private void verifyEndTimeParameter(Map<String, String[]> parameters) {
+    private LocalTime verifyEndTimeParameter(Map<String, String[]> parameters) {
         if (verifier.isTimeParameterCorrect(parameters, AdvertPartType.END)) {
             LocalTime parsedTime = parseTime(ParametersService.getSpecificParameter(parameters,
                     AdvertsConstants.PARAMETER_END_TIME));
             endTimeValidation(parsedTime);
+            return parsedTime;
         } else {
             errorMessages.add(PropertiesService.getMsgBadEndTime());
+            return null;
         }
     }
 
-    private void verifyDate(Map<String, String[]> parameters) {
+    private void verifyTimePeriod(LocalTime startTime, LocalTime endTime, LocalDate date) {
+        if (areDateTimesNotNull(startTime, endTime, date)) {
+            timeValidation(startTime, endTime, date);
+        }
+    }
+
+    private LocalDate verifyDate(Map<String, String[]> parameters) {
         if (verifier.isOverallParameterCorrect(parameters, AdvertOverallType.DATE)) {
-            dateValidation(ParametersService.getSpecificParameter(parameters,
+            return dateValidation(ParametersService.getSpecificParameter(parameters,
                     AdvertsConstants.PARAMETER_DATE));
         } else {
             LOG.debug("Date is probably missing.");
             errorMessages.add(PropertiesService.getMsgBadDate());
+            return null;
         }
     }
 
@@ -120,6 +140,14 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
         } else {
             errorMessages.add(PropertiesService.getMsgBadDriver());
         }
+    }
+
+    private Boolean areAddressesEqual(Map<String, String[]> parameters) {
+        String startAddress = ParametersService.getSpecificParameter(parameters,
+                AdvertsConstants.PARAMETER_START_MAPS_POINT_ID);
+        String endAddress = ParametersService.getSpecificParameter(parameters,
+                AdvertsConstants.PARAMETER_END_MAPS_POINT_ID);
+        return startAddress.equals(endAddress);
     }
     
     private void startTimeValidation(LocalTime time) {
@@ -150,13 +178,38 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
         }
     }
 
-    private void dateValidation(String date) {
+    private void timeValidation(LocalTime startTime, LocalTime endTime, LocalDate date) {
+        if (isStartTimeNotTooEarly(startTime, date)) {
+            checkTimePeriod(startTime, endTime);
+        } else {
+            errorMessages.add(PropertiesService.getMsgEarlyStartTime());
+        }
+    }
+
+    private Boolean isStartTimeNotTooEarly(LocalTime startTime, LocalDate date) {
+        return LocalDateTime.now().plusHours(PropertiesService.getAdvertMinHoursToStart())
+                .isBefore(LocalDateTime.of(date, startTime));
+    }
+
+    private void checkTimePeriod(LocalTime startTime, LocalTime endTime) {
+        if (isStartTimeNotBeforeEndTime(startTime, endTime)) {
+            errorMessages.add(PropertiesService.getMsgStartAfterEndTime());
+        }
+    }
+
+    private Boolean isStartTimeNotBeforeEndTime(LocalTime startTime, LocalTime endTime) {
+        return startTime.isAfter(endTime);
+    }
+
+    private LocalDate dateValidation(String date) {
         LocalDate parsedDate = parseDate(date);
         if (isNotNull(parsedDate) && isDateInCorrectPeriod(parsedDate)) {
             LOG.debug("Date {} is parsable and correct.", date);
+            return parsedDate;
         } else {
             LOG.debug("Date {} is not parsable or in correct period of time.", date);
             errorMessages.add(PropertiesService.getMsgBadDate());
+            return null;
         }
     }
 
@@ -176,11 +229,11 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
     }
 
     private Boolean isDateNotBeforeNow(LocalDate date) {
-        return date.isAfter(LocalDate.now());
+        return date.isAfter(LocalDate.now()) || date.isEqual(LocalDate.now());
     }
 
     private Boolean isDateNotTooDistant(LocalDate date) {
-        return date.isBefore(LocalDate.now().plusDays(PropertiesService.getAdvertPeriodDays()));
+        return date.isBefore(LocalDate.now().plusDays(PropertiesService.getAdvertMaxPeriodDays()));
     }
 
     private void driverValidation(String driverId) {
@@ -212,5 +265,9 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
 
     private <T> Boolean isNotNull(T objectToAnalyze) {
         return objectToAnalyze != null;
+    }
+
+    private Boolean areDateTimesNotNull(LocalTime startTime, LocalTime endTime, LocalDate date) {
+        return isNotNull(startTime) && isNotNull(endTime) && isNotNull(date);
     }
 }

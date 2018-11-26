@@ -14,6 +14,8 @@ import java.util.Map;
 @Stateless
 public class AddMapsAdvertDataModel {
 
+    private static final String DRIVERS_KEY = "DRIVERS";
+
     private Map<String, List> dataModel;
 
     @Inject
@@ -25,7 +27,7 @@ public class AddMapsAdvertDataModel {
 
     public void fillDataModelWithGetData() {
         dataModel.put(Property.API_KEY.name(), getMapsApiKeyAsList());
-        dataModel.put("DRIVERS", mapsDriverDao.findAll());
+        dataModel.put(DRIVERS_KEY, mapsDriverDao.findAll());
     }
 
     public void fillDataModelWithPostData(String key, List value) {

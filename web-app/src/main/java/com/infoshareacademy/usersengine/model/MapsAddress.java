@@ -2,16 +2,19 @@ package com.infoshareacademy.usersengine.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "maps_addresses")
 public class MapsAddress {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     @NotNull
     private String mapsPointId;
 
@@ -37,6 +40,12 @@ public class MapsAddress {
 
     @Column(name = "info")
     private String info;
+
+    @OneToMany(mappedBy = "startAddress", fetch = FetchType.LAZY)
+    private Set<MapsAdvert> starting;
+
+    @OneToMany(mappedBy = "endAddress", fetch = FetchType.LAZY)
+    private Set<MapsAdvert> ending;
 
     public MapsAddress() {
     }
@@ -106,6 +115,22 @@ public class MapsAddress {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public Set<MapsAdvert> getStarting() {
+        return starting;
+    }
+
+    public void setStarting(Set<MapsAdvert> starting) {
+        this.starting = starting;
+    }
+
+    public Set<MapsAdvert> getEnding() {
+        return ending;
+    }
+
+    public void setEnding(Set<MapsAdvert> ending) {
+        this.ending = ending;
     }
 
     @Override

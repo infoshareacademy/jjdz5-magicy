@@ -79,11 +79,15 @@
 
       <#if SUMMARY?has_content>
 
-      <div class="row">
+      <div class="row mb-4">
           <div class="col-12">
-              <#list SUMMARY as msg>
-                  <h4>${msg}</h4>
-              </#list>
+              <div class="alert alert-primary">
+                  <ul>
+                      <#list SUMMARY as msg>
+                          <li>${msg}</li>
+                      </#list>
+                  </ul>
+              </div>
           </div>
       </div>
 
@@ -104,7 +108,7 @@
                          placeholder="Enter departure time" class="form-control" required>
               </div>
           </div>
-          <div class="row margin-b">
+          <div class="row margin-t">
               <div class="col-12 form-group">
                   <label for="start_premise">Optional information about departure point.</label>
                   <input id="start_premise" name="startInfo"
@@ -115,7 +119,7 @@
 
           <input type="hidden" id="start_route" name="startStreet">
           <input type="hidden" id="start_street_number" name="startStreetNumber">
-          <input type="hidden" id="start_locality" name="startCity"><br>
+          <input type="hidden" id="start_locality" name="startCity">
           <input type="hidden" id="start_lat" name="startLatitude">
           <input type="hidden" id="start_lng" name="startLongitude">
           <input type="hidden" id="start_place_id" name="startMapsPointId">
@@ -134,7 +138,7 @@
             </div>
         </div>
 
-          <div class="row margin-b">
+          <div class="row margin-t">
               <div class="col-12 form-group">
                   <label for="end_premise">Optional information about destination point.</label>
                   <input id="end_premise" name="endInfo"
@@ -145,20 +149,24 @@
 
           <input type="hidden" id="end_route" name="endStreet">
           <input type="hidden" id="end_street_number" name="endStreetNumber">
-          <input type="hidden" id="end_locality" name="endCity"><br>
+          <input type="hidden" id="end_locality" name="endCity">
           <input type="hidden" id="end_lat" name="endLatitude">
           <input type="hidden" id="end_lng" name="endLongitude">
           <input type="hidden" id="end_place_id" name="endMapsPointId">
 
           <div class="row">
-              <div class="col-10 form-group text-muted">
-                  <h3><label for="date">Date</label></h3>
-                  <input id="date" type="date" name="date" class="form-control" required/>
+              <div class="col-6 form-group text-muted">
+                  <h3 class="border-bottom"><label for="date">Date</label></h3>
+                  <input id="date" type="date" name="date" class="form-control mt-4" required/>
               </div>
 
-              <div class="col-2 form-group text-muted">
-                  <h3><label for="driverId">Driver</label></h3>
-                  <input id="driverId" type="text" name="driverId" class="form-control" required/>
+              <div class="col-6 form-group text-muted">
+                  <h3 class="border-bottom"><label for="driverId">Driver</label></h3>
+                  <select id="driverId" class="form-control mt-4" name="driverId" required>
+                      <#list DRIVERS as driver>
+                        <option value="${driver.id}">${driver.name} ${driver.surname}</option>
+                      </#list>
+                  </select>
               </div>
           </div>
           <div class="row margin pb-5">

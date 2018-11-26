@@ -11,7 +11,8 @@ import java.util.Properties;
 public class PropertiesService {
 
     private static final String PROPERTIES_FILEPATH = "WEB-INF/properties/webapp.properties";
-    private static final Integer DEFAULT_PERIOD = 30;
+    private static final Integer DEFAULT_MAX_PERIOD_DAYS = 30;
+    private static final Integer DEFAULT_MIN_HOURS_TO_START = 2;
     private static final Properties PROPERTIES = new Properties();
     private static final Logger LOG = LoggerFactory.getLogger(PropertiesService.class);
 
@@ -19,14 +20,12 @@ public class PropertiesService {
         return PROPERTIES.getProperty(Property.API_KEY.name());
     }
 
-    public static Integer getAdvertPeriodDays() {
-        Integer period;
-        try {
-            period = Integer.valueOf(PROPERTIES.getProperty(Property.ADVERT_PERIOD_DAYS.name()));
-        } catch (NumberFormatException e) {
-            period = DEFAULT_PERIOD;
-        }
-        return period;
+    public static Integer getAdvertMaxPeriodDays() {
+        return parseNumericValue(Property.ADVERT_MAX_PERIOD_DAYS, DEFAULT_MAX_PERIOD_DAYS);
+    }
+
+    public static Integer getAdvertMinHoursToStart() {
+        return parseNumericValue(Property.ADVERT_MIN_HOURS_TO_START, DEFAULT_MIN_HOURS_TO_START);
     }
 
     public static String getMsgAdvertAddOk() {
@@ -49,12 +48,24 @@ public class PropertiesService {
         return PROPERTIES.getProperty(Property.MSG_BAD_DETAIL_END_ADDRESS.name());
     }
 
+    public static String getMsgEqualAddresses() {
+        return PROPERTIES.getProperty(Property.MSG_EQUAL_ADDRESSES.name());
+    }
+
     public static String getMsgBadStartTime() {
         return PROPERTIES.getProperty(Property.MSG_BAD_START_TIME.name());
     }
 
     public static String getMsgBadEndTime() {
         return PROPERTIES.getProperty(Property.MSG_BAD_END_TIME.name());
+    }
+
+    public static String getMsgEarlyStartTime() {
+        return PROPERTIES.getProperty(Property.MSG_EARLY_START_TIME.name());
+    }
+
+    public static String getMsgStartAfterEndTime() {
+        return PROPERTIES.getProperty(Property.MSG_START_AFTER_END_TIME.name());
     }
 
     public static String getMsgBadDate() {
@@ -77,6 +88,16 @@ public class PropertiesService {
         } catch (IOException e) {
             LOG.error("Cannot load properties file");
         }
+    }
+
+    private static Integer parseNumericValue(Property property, Integer defaultValue) {
+        Integer value;
+        try {
+            value = Integer.valueOf(PROPERTIES.getProperty(property.name()));
+        } catch (NumberFormatException e) {
+            value = defaultValue;
+        }
+        return value;
     }
 
 }

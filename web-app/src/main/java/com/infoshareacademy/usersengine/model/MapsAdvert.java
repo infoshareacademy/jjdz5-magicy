@@ -19,13 +19,13 @@ public class MapsAdvert {
     @NotNull
     private MapsDriver driver;
 
-    @OneToOne
-    @JoinColumn(name = "start_address_id", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "start_address_id")
     @NotNull
     private MapsAddress startAddress;
 
-    @OneToOne
-    @JoinColumn(name = "end_address_id", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "end_address_id")
     @NotNull
     private MapsAddress endAddress;
 

@@ -51,7 +51,7 @@ public class AddMapsAdvertServlet extends AppInitServlet {
 
     private void proceed(HttpServletResponse resp, List<String> summary) throws IOException {
         if (ifSummaryIsSuccess(summary)) {
-            resp.sendRedirect("/adverts");
+            resp.sendRedirect("/jjdz5-magicy/adverts");
         } else {
             dataModel.fillDataModelWithPostData(SUMMARY_KEY, processing.getSummary());
             templateProvider.build(getServletContext(), TEMPLATE_NAME,

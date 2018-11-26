@@ -38,8 +38,7 @@ public class MapsAddressBuilderBean implements MapsAddressBuilder {
                 AdvertsConstants.PARAMETER_END_MAPS_POINT_ID);
         final String info = ParametersService.getSpecificParameter(parameters,
                 AdvertsConstants.PARAMETER_END_INFO);
-//        return provideMapsAddress(placeId, info);
-        return buildMapsAddress(client.getPlaceById(placeId), info);
+        return provideMapsAddress(placeId, info);
     }
 
     private MapsAddress provideMapsAddress(String placeId, String info) {
