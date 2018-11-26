@@ -5,10 +5,11 @@ import com.infoshareacademy.DriversList;
 import com.infoshareacademy.JsonToList;
 import com.infoshareacademy.usersengine.drivers.DriverPreparation;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
-import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -28,6 +29,7 @@ public class AddDriverServlet extends HttpServlet {
 
     private JsonToList jsonToList = new JsonToList();
     private DriversList driversList = new DriversList();
+    private Logger LOG = LoggerFactory.getLogger(AddDriverServlet.class);
 
     @Inject
     private TemplateProvider templateProvider;
@@ -45,8 +47,9 @@ public class AddDriverServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "add-driver");
         try {
             template.process(dataModel, resp.getWriter());
+            LOG.debug("Template created successfully.");
         } catch (TemplateException e) {
-            e.printStackTrace();
+            LOG.error("TemplateException. Template cannot be created.");
         }
     }
 
@@ -69,13 +72,17 @@ public class AddDriverServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, List<Driver> drivers) throws IOException {
-        driversManager.addDriver(driverPreparation.getNewDriver(drivers), drivers);
+        Driver driverToAdd = driverPreparation.getNewDriver(drivers);
+        driversManager.addDriver(driverToAdd, drivers);
         if (message.isEmpty()) {
+            LOG.debug("Driver data is valid: {}.", driverToAdd);
             driversList.setDriversList(drivers);
             driversManager.writeDriverData(drivers, getPath());
             resp.sendRedirect("/jjdz5-magicy/drivers");
 
-        }else{
+        } else {
+            LOG.debug("Driver data is not valid.");
+
             PrintWriter writer = resp.getWriter();
             writer.println("<!DOCTYPE html><body><form><t1>" + message + "</t1><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }

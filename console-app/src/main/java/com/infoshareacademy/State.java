@@ -1,5 +1,4 @@
 package com.infoshareacademy;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,15 +11,10 @@ public enum State {
     EXIT(0);
 
     private int stateNumber;
-
     private static final Map enumMap = new HashMap();
-
     State(int stateNumber) {
         this.stateNumber = stateNumber;
     }
-
-
-
     static{
 
         for (State s: EnumSet.allOf(State.class)
@@ -29,7 +23,6 @@ public enum State {
         }
 
     }
-
     public int getStateNumber() {
         return stateNumber;
     }

@@ -2,6 +2,8 @@ package com.infoshareacademy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,6 +17,7 @@ public class AdvertManager {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private final ReadProperties readProperties = new ReadProperties();
     private String path = readProperties.readFilePath();
+    private Logger LOG = LoggerFactory.getLogger(AdvertManager.class);
 
     public AdvertManager() {
     }
@@ -55,14 +58,14 @@ public class AdvertManager {
         Date date = user.askForDate("Enter date in format (dd-mm-yyyy)");
 
 
-        Route route = new Route( getMaxIdList(advertList, 3) + 1, date, startCity, startStreet, endCity,
+        Route route = new Route( getMaxIdList(advertList, 3) + 1L, date, startCity, startStreet, endCity,
                 endStreet, pickUpCity, pickUpStreet, startTime, endTime, pickUpTime);
 
         Rating rating = new Rating(4.5, 2);
 
-        Driver driver = new Driver("Artur", "Moroz", "555000111", "Gdańsk", "Wrzeszcz", rating, 4);
+        Driver driver = new Driver("Artur", "Moroz", "555000111", "Gdańsk", "Wrzeszcz", rating, 4L);
 
-        Advert advert = new Advert(getMaxIdList(advertList, 1) + 1, new Date(), driver, route);
+        Advert advert = new Advert(getMaxIdList(advertList, 1) + 1L, new Date(), driver, route);
 
         advertList.add(advert);
         writeAdvertData(advertList);
@@ -81,17 +84,17 @@ public class AdvertManager {
             writer.close();
 
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOG.warn("JsonProcessingException in writeAdvertData method.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.warn("IOException in writeAdvertData method.");
         }
     }
 
 
 
 
-    public static Integer getMaxIdList(List<Advert> adverts, Integer num) {
-        Integer idMax = 0;
+    public static Long getMaxIdList(List<Advert> adverts, Integer num) {
+        Long idMax = 0L;
         for (Advert advert : adverts) {
 
             if (num == 1 && advert.getId() > idMax) {
@@ -108,16 +111,16 @@ public class AdvertManager {
         return idMax;
     }
 
-    public void promoteAdvert(List<Advert> adverts, Integer advertId) {
+    public void promoteAdvert(List<Advert> adverts, Long advertId) {
         for (Advert advert: adverts) {
             if (advertId > adverts.size() || advertId <= 0) {
-                System.out.println("Advert ID is not correct.");
+                LOG.debug("Advert ID \"{}\" is not correct.", advertId);
                 continue;
             }
-            if (advertId == advert.getId()) {
+            if (advertId.equals(advert.getId())) {
                 advert.setPromo(true);
 
-                System.out.println("Promo flag is changed");
+                LOG.debug("Promotion flag for advert {} is now active.", advertId);
                 break;
             }
 

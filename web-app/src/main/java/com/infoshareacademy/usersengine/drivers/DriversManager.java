@@ -13,5 +13,5 @@ public interface DriversManager {
     Optional<Driver> getDriverById(List<Driver> drivers, Integer id);
     List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Integer id);
     void addDriver(Driver driver, List<Driver> drivers);
-    Integer getNextDriverId(List<Driver> drivers);
+    Long getNextDriverId(List<Driver> drivers);
 }

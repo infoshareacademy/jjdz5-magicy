@@ -1,13 +1,13 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.*;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -16,24 +16,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("drivers")
 public class DriversServlet extends HttpServlet {
+
     private JsonToList jsonToList = new JsonToList();
+    private DriversList driversList = new DriversList();
+    private Logger LOG = LoggerFactory.getLogger(DriversServlet.class);
+
     @Inject
     private TemplateProvider templateProvider;
+
     @Inject
     private DriversManager driversManager;
+
     @Inject
     private DriversValidation driversValidation;
-    private DriversList driversList = new DriversList();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,10 +47,11 @@ public class DriversServlet extends HttpServlet {
         driversList.setDriversList(jsonToList.driversToList(getPath()));
         dataModel.put("drivers", driversList.getDriversList());
         Template template = templateProvider.getTemplate(getServletContext(), "drivers");
-        try{
+        try {
             template.process(dataModel, resp.getWriter());
-        }catch (TemplateException e){
-            e.printStackTrace();
+            LOG.debug("Template created successfully.");
+        } catch (TemplateException e) {
+            LOG.error("TemplateException. Template cannot be created.");
         }
     }
 
@@ -60,7 +63,7 @@ public class DriversServlet extends HttpServlet {
         String id = req.getParameter("id");
         String rating = req.getParameter("rating");
 
-        redirect(resp,driversValidation.validateAdvertData(id, rating, driversList.getDriversList()), id, rating);
+        redirect(resp,driversValidation.validateDriverData(id, rating, driversList.getDriversList()), id, rating);
     }
 
     private String getPath(){
@@ -69,12 +72,13 @@ public class DriversServlet extends HttpServlet {
     }
 
     private void redirect(HttpServletResponse resp, String message, String id, String rating) throws IOException {
-        if(message.isEmpty()){
+        if(message.isEmpty()) {
+            LOG.debug("Rating \"{}\" is correct.", rating);
             driversList.setDriversList(driversManager.updateDriversList(driversList.getDriversList(), Integer.parseInt(rating), Integer.parseInt(id)));
             driversManager.writeDriverData(driversList.getDriversList(),getPath());
             resp.sendRedirect("/jjdz5-magicy/drivers");
-        }
-        else{
+        } else {
+            LOG.debug("Rating \"{}\" is not correct.", rating);
             PrintWriter writer = resp.getWriter();
             writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
