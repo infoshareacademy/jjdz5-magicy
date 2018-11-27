@@ -5,6 +5,8 @@ import com.infoshareacademy.usersengine.dao.MapsAdvertDao;
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.Car;
+import com.infoshareacademy.usersengine.model.MapsAddress;
+import com.infoshareacademy.usersengine.model.MapsAdvert;
 import com.infoshareacademy.usersengine.model.MapsDriver;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,6 +69,27 @@ public class HelloServlet extends HttpServlet {
 
         Car testCar = new Car("GD 12345", "Opel", "Vectra", testDriver);
         carDao.save(testCar);
+
+        MapsAddress testFirstAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
+                "Gdańsk", "Kołobrzeska", "41c",
+                54.4043415, 18.5880136,"");
+        mapsAddressDao.save(testFirstAddress);
+        MapsAddress testSecondAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
+                "Gdańsk", "aleja Grunwaldzka", "472A",
+                54.4024308, 18.5704119, "Olivia Point");
+        mapsAddressDao.save(testSecondAddress);
+        MapsAddress testThirdAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
+                "Gdynia", "Łużycka", "6A",
+                54.4949626, 18.5337226, "Łużycka Office Park - Budynek A");
+        mapsAddressDao.save(testThirdAddress);
+
+        MapsAdvert testFirstAdvert = new MapsAdvert(testDriver, testFirstAddress, testSecondAddress,
+                LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
+        mapsAdvertDao.save(testFirstAdvert);
+
+        MapsAdvert testSecondAdvert = new MapsAdvert(testDriver, testThirdAddress, testSecondAddress,
+                LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
+        mapsAdvertDao.save(testSecondAdvert);
 
     }
 }

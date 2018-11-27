@@ -13,7 +13,7 @@ public class GenericClient {
         Response response = webTarget.request().get();
 
         T result = response.readEntity(clazz);
-        response.close(); // !!!
+        response.close();
         return result;
     }
 

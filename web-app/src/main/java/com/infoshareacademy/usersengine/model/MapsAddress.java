@@ -136,7 +136,7 @@ public class MapsAddress {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapsAddress{");
-        sb.append(", mapsPointId='").append(mapsPointId).append('\'');
+        sb.append(" mapsPointId='").append(mapsPointId).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", streetName='").append(streetName).append('\'');
         sb.append(", streetNumber='").append(streetNumber).append('\'');
