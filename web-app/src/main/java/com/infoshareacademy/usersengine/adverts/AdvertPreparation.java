@@ -8,6 +8,7 @@ import com.infoshareacademy.usersengine.drivers.DriversConstants;
 import com.infoshareacademy.usersengine.services.PreparationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.ejb.Stateful;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Stateful
 public class AdvertPreparation {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
