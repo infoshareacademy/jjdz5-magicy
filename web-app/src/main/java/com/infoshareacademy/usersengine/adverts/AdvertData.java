@@ -1,10 +1,8 @@
 package com.infoshareacademy.usersengine.adverts;
 
-import javax.ejb.Stateful;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Stateful
 public class AdvertData {
     @NotNull @NotEmpty
     private String startCity;
