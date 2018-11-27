@@ -1,7 +1,7 @@
 function addAdvert(){
 
     $.ajax({
-        url : 'addAdvertAjax',
+        url : 'addAdvertValidation',
         data : {
             startCity : $('#startCity').val(),
             startStreet : $('#startStreet').val(),

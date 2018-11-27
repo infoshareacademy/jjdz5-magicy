@@ -33,12 +33,12 @@ public class DriversManagerBean implements DriversManager {
         }
     }
 
-    public Optional<Driver> getDriverById(List<Driver> drivers, Integer id) {
+    public Optional<Driver> getDriverById(List<Driver> drivers, Long id) {
         LOG.debug("Searching specify driver by id: {}.", id);
         return drivers.stream().filter(d -> d.getId().equals(id)).findAny();
     }
 
-    public List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Integer id){
+    public List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Long id){
         for(Driver d: drivers){
             if(d.getId().equals(id)){
                 d.setRating(createNewRating(d, rating));

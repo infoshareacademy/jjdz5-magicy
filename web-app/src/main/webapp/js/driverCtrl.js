@@ -1,7 +1,7 @@
 function addDriver(){
 
     $.ajax({
-        url : 'addDriverAjax',
+        url : 'addDriverValidation',
         data : {
             name : $('#name').val(),
             surname : $('#surname').val(),

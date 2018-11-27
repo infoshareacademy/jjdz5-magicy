@@ -1,6 +1,10 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.infoshareacademy.usersengine.adverts.AdvertPreparation;
+import com.infoshareacademy.DriversList;
+
+import com.infoshareacademy.usersengine.drivers.DriverPreparation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -12,11 +16,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-@WebServlet("/addAdvertAjax")
-public class AddAdvertAjaxServlet extends HttpServlet{
+@WebServlet("/addDriverValidation")
+public class AddDriverValidationServlet extends HttpServlet{
+
+    private DriversList driversList = new DriversList();
+    private Logger LOG = LoggerFactory.getLogger(AddDriverValidationServlet.class);
 
     @Inject
-    AdvertPreparation advertPreparation;
+    DriverPreparation driverPreparation;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,11 +33,13 @@ public class AddAdvertAjaxServlet extends HttpServlet{
 
        Map<String, String[]> map = req.getParameterMap();
         PrintWriter writer = resp.getWriter();
-        String message = advertPreparation.validateAdvertData(advertPreparation.mapReader(map));
+        String message = driverPreparation.validateDriver(driverPreparation.mapReader(map), driversList.getDriversList());
         if(message.isEmpty()){
+            LOG.debug("Driver data is valid: {}.", driverPreparation.mapReader(map));
             writer.println("OK");
         }
         else{
+            LOG.debug("Driver data is not valid.");
             writer.println(message);
         }
 

@@ -74,7 +74,7 @@ public class DriversServlet extends HttpServlet {
     private void redirect(HttpServletResponse resp, String message, String id, String rating) throws IOException {
         if(message.isEmpty()) {
             LOG.debug("Rating \"{}\" is correct.", rating);
-            driversList.setDriversList(driversManager.updateDriversList(driversList.getDriversList(), Integer.parseInt(rating), Integer.parseInt(id)));
+            driversList.setDriversList(driversManager.updateDriversList(driversList.getDriversList(), Integer.parseInt(rating), Long.parseLong(id)));
             driversManager.writeDriverData(driversList.getDriversList(),getPath());
             resp.sendRedirect("/jjdz5-magicy/drivers");
         } else {

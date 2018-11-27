@@ -65,7 +65,7 @@ public class DriverPreparation {
         return message;
     }
 
-    public Driver getNewDriver(List<Driver> drivers) {
+    public Driver getNewDriver(List<Driver> drivers, Driver driver) {
         driver.setId(driversManager.getNextDriverId(drivers));
         return driver;
     }
