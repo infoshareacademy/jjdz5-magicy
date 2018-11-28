@@ -88,8 +88,44 @@
         </div>
     </nav>
     <div class="row">
-        <div class="mt-5">
-            <h3>Advert ${advert.id}</h3>
+        <div class="mt-5 mb-5">
+            <h3>Advert details</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h3>${advert.date}</h3>
+            <hr>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-6">
+            <h3 class="text-muted text-center">Departure</h3>
+            <hr>
+            <h5>${advert.startAddress.city}</h5>
+            <h5>${advert.startAddress.streetName} ${advert.startAddress.streetNumber}</h5>
+            <#if advert.startAddress.info?length &gt; 0>
+                <h5>${advert.startAddress.info}</h5>
+            </#if>
+            <hr>
+        </div>
+        <div class="col-6">
+            <h3 class="text-muted text-center">Destination</h3>
+            <hr>
+            <h5>${advert.endAddress.city}</h5>
+            <h5>${advert.endAddress.streetName} ${advert.endAddress.streetNumber}</h5>
+            <#if advert.endAddress.info?length &gt; 0>
+                <h5>${advert.endAddress.info}</h5>
+            </#if>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+
         </div>
     </div>
 
