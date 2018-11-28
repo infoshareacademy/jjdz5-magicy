@@ -10,8 +10,8 @@ import java.util.Optional;
 @Local
 public interface DriversManager {
     void writeDriverData(List<Driver> drivers, String path);
-    Optional<Driver> getDriverById(List<Driver> drivers, Integer id);
-    List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Integer id);
+    Optional<Driver> getDriverById(List<Driver> drivers, Long id);
+    List<Driver> updateDriversList(List<Driver> drivers, Integer rating, Long id);
     void addDriver(Driver driver, List<Driver> drivers);
     Long getNextDriverId(List<Driver> drivers);
 }
