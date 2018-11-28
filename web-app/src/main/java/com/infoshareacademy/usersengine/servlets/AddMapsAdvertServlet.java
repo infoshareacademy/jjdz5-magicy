@@ -21,6 +21,7 @@ public class AddMapsAdvertServlet extends AppInitServlet {
 
     private static final String TEMPLATE_NAME = "add-maps-advert";
     private static final String SUMMARY_KEY = "SUMMARY";
+    private static final String REDIRECTION_URL = "/jjdz5-magicy/maps-adverts";
 
     @Inject
     private TemplateProvider templateProvider;
@@ -51,7 +52,7 @@ public class AddMapsAdvertServlet extends AppInitServlet {
 
     private void proceed(HttpServletResponse resp, List<String> summary) throws IOException {
         if (ifSummaryIsSuccess(summary)) {
-            resp.sendRedirect("/jjdz5-magicy/adverts");
+            resp.sendRedirect(REDIRECTION_URL);
         } else {
             dataModel.fillDataModelWithPostData(SUMMARY_KEY, processing.getSummary());
             templateProvider.build(getServletContext(), TEMPLATE_NAME,

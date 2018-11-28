@@ -54,7 +54,7 @@
                        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="adverts">Adverts</a>
+                        <a class="nav-link" href="maps-adverts">Adverts</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="add-maps-advert">Add advert</a>

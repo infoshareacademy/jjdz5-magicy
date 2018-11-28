@@ -21,35 +21,12 @@
             height: 100%;
             width: 100%;
         }
-        .filterable {
-            margin-top: 15px;
-        }
-        .filterable .panel-heading .pull-right {
-            margin-top: -20px;
-        }
-        .filterable .filters input[disabled] {
-            background-color: transparent;
-            border: none;
-            cursor: auto;
-            box-shadow: none;
-            padding: 0;
-            height: auto;
-        }
-        .filterable .filters input[disabled]::-webkit-input-placeholder {
-            color: #333;
-        }
-        .filterable .filters input[disabled]::-moz-placeholder {
-            color: #333;
-        }
-        .filterable .filters input[disabled]:-ms-input-placeholder {
-            color: #333;
-        }
-        .blue-column{
-            background: #f2f2f2;
-        }
         .margin{
             margin-bottom:40px;
             margin-top:20px;
+        }
+        .separator-left {
+            border-left: 1px solid rgba(0,0,0,.1);
         }
     </style>
 </head>
@@ -94,50 +71,91 @@
     </div>
 
     <div class="row">
-        <div class="col-12">
-            <h3>${advert.date}</h3>
-            <hr>
+        <div class="col-3">
+            <div class="alert alert-primary text-center">
+                <h3>${advert.date}</h3>
+            </div>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-3">
+            <a href="maps-adverts" class="btn btn-primary float-right">Go back</a>
         </div>
     </div>
     
     <div class="row">
+
         <div class="col-6">
-            <h3 class="text-muted text-center">Departure</h3>
-            <hr>
-            <h5>${advert.startAddress.city}</h5>
-            <h5>${advert.startAddress.streetName} ${advert.startAddress.streetNumber}</h5>
-            <#if advert.startAddress.info?length &gt; 0>
-                <h5>${advert.startAddress.info}</h5>
-            </#if>
-            <hr>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-muted">Departure</h3>
+                </div>
+                <div class="card-body">
+                    <h5 style="color: #747373">${advert.startAddress.city}</h5>
+                    <h5 style="color: #747373">${advert.startAddress.streetName} ${advert.startAddress.streetNumber}</h5>
+                    <#if advert.startAddress.info?length &gt; 0>
+                        <h5 style="color: #747373">${advert.startAddress.info}</h5>
+                    </#if>
+                </div>
+            </div>
         </div>
+
         <div class="col-6">
-            <h3 class="text-muted text-center">Destination</h3>
-            <hr>
-            <h5>${advert.endAddress.city}</h5>
-            <h5>${advert.endAddress.streetName} ${advert.endAddress.streetNumber}</h5>
-            <#if advert.endAddress.info?length &gt; 0>
-                <h5>${advert.endAddress.info}</h5>
-            </#if>
-            <hr>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-muted">Destination</h3>
+                </div>
+                <div class="card-body">
+                    <h5 style="color: #747373">${advert.endAddress.city}</h5>
+                    <h5 style="color: #747373">${advert.endAddress.streetName} ${advert.endAddress.streetNumber}</h5>
+                    <#if advert.endAddress.info?length &gt; 0>
+                        <h5 style="color: #747373">${advert.endAddress.info}<h5>
+                    </#if>
+                </div>
+            </div>
         </div>
+
     </div>
 
-    <div class="row">
+    <div class="row margin">
+
         <div class="col-6">
-
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-muted">Pick up points</h3>
+                </div>
+                <div class="card-body">
+                    <h5 style="color: #747373">Free seats: 0/0</h5><a href="#" class="btn btn-primary">Reserve</a>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="row mt-5">
-        <div class="col-12">
-
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-muted">Driver</h3>
+                </div>
+                <div class="card-body">
+                    <h5 style="color: #747373">${advert.driver.name} ${advert.driver.surname}</h5>
+                    <h5 style="color: #747373">${advert.driver.phoneNumber}</h5>
+                    <hr style="margin: 10px">
+                    <#assign car = advert.driver.cars?first>
+                    <h5 style="color: #747373">${car.carBrand} ${car.carModel}</h5>
+                    <h5 style="color: #747373">${car.licensePlate}</h5>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row margin">
         <div class="col-12">
-            <div id="map" style="width: 100%; min-height: 720px"></div>
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-muted">Route</h3>
+                </div>
+                <div class="card-body">
+                    <div id="map" style="width: 100%; min-height: 720px"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row margin"></div>
@@ -163,7 +181,7 @@
             draggable: true,
             fullscreenControl: false,
             streetViewControl: false,
-            scrollwheel: true,
+            scrollwheel: false,
             zoomControl: true
         });
         directionsDisplay.setMap(map);
