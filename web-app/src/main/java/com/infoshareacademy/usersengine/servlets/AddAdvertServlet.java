@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 @WebServlet("add-advert")
@@ -58,27 +57,13 @@ public class AddAdvertServlet extends HttpServlet {
         advertsList.setAdvertsList(adverts);
 
         Map<String, String[]> map = req.getParameterMap();
-        redirect(resp, advertPreparation.validateAdvertData(advertPreparation.mapReader(map)), adverts);
-    }
+
+        advertsList.setAdvertsList(advertsManager.addAdvert(advertPreparation.getNewAdvert(adverts, advertPreparation.mapReader(map)), adverts));
+        advertsManager.advertsToJson(adverts, getPath());
+   }
 
     private String getPath(){
         ServletContext application = getServletConfig().getServletContext();
         return application.getRealPath("WEB-INF/adverts.json");
     }
-
-    private void redirect(HttpServletResponse resp, String message, List<Advert> adverts) throws IOException {
-        if(!message.isEmpty()){
-            LOG.debug("Advert data is not valid.");
-            PrintWriter writer = resp.getWriter();
-            writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
-        } else {
-            Advert advertToAdd = advertPreparation.getNewAdvert(adverts);
-            advertsList.setAdvertsList(advertsManager.addAdvert(advertToAdd, adverts));
-            LOG.debug("Advert data is valid: {}.", advertToAdd);
-            LOG.debug("Updated adverts list: " + advertsList.getAdvertsList().toString());
-            advertsManager.advertsToJson(adverts, getPath());
-            resp.sendRedirect("/jjdz5-magicy/home");
-        }
-    }
-
 }

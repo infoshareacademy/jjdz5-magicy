@@ -10,6 +10,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="js/advertCtrl.js" type="text/javascript"></script>
 
     <style>
         .view {
@@ -66,7 +68,6 @@
               <h3>Add new advert</h3>
           </div>
       </div>
-      <form method="post" action="/jjdz5-magicy/add-advert">
           <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">From</h3></div></div>
           <div class="row margin">
               <div class="col-5 form-group">
@@ -168,10 +169,9 @@
         </div>
           <div class="row margin">
               <div class="col-3 imgCenter">
-                  <button type="submit" class="btn btn-primary btn-block">Add</button>
+                  <button type="submit" id="add_button" class="btn btn-primary btn-block" onclick="addAdvert()">Add</button>
               </div>
           </div>
-    </form>
 </div>
 
   <#include "footer.ftlh">
