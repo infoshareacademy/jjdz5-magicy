@@ -79,17 +79,17 @@
 
       <#if SUMMARY?has_content>
 
-      <div class="row mb-4">
-          <div class="col-12">
-              <div class="alert alert-primary">
-                  <ul>
-                      <#list SUMMARY as msg>
-                          <li>${msg}</li>
-                      </#list>
-                  </ul>
+          <div class="row mb-4">
+              <div class="col-12">
+                  <div class="alert alert-primary">
+                      <ul>
+                          <#list SUMMARY as msg>
+                              <li>${msg}</li>
+                          </#list>
+                      </ul>
+                  </div>
               </div>
           </div>
-      </div>
 
       </#if>
 

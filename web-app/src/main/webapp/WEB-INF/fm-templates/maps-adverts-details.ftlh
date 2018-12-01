@@ -184,6 +184,7 @@
             scrollwheel: false,
             zoomControl: true
         });
+
         directionsDisplay.setMap(map);
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -193,10 +194,18 @@
         directionsService.route({
             origin: {lat: ${sLat}, lng: ${sLng}},
             destination: {lat: ${eLat}, lng: ${eLng}},
+            waypoints: [
+                {
+                    location: {lat: 54.4007959, lng: 18.5822041},
+                    stopover: true
+                }
+            ],
             travelMode: google.maps.TravelMode["DRIVING"]
         }, function(response, status) {
             if (status == 'OK') {
                 directionsDisplay.setDirections(response);
+                var legs = response.routes.legs;
+
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
