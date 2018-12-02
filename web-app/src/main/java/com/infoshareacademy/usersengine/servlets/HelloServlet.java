@@ -64,11 +64,30 @@ public class HelloServlet extends HttpServlet {
 
     private void fillDatabaseWithAdvancedDefaults() {
 
-        MapsDriver testDriver = new MapsDriver("Kuba", "Jurek", "000-111-222");
-        mapsDriverDao.save(testDriver);
+        MapsDriver driverKuba = new MapsDriver("Kuba", "Jurek",
+                "000-111-222");
+        mapsDriverDao.save(driverKuba);
 
-        Car testCar = new Car("GD 12345", "Opel", "Vectra", testDriver);
-        carDao.save(testCar);
+        MapsDriver driverMarysia = new MapsDriver("Marysia", "Wicherkiewicz",
+                "000-333-444");
+        mapsDriverDao.save(driverMarysia);
+
+        MapsDriver driverKrzysiu = new MapsDriver("Krzysztof", "Gotowała",
+                "000-555-666");
+        mapsDriverDao.save(driverKrzysiu);
+
+        MapsDriver driverGrzesiu = new MapsDriver("Grzegorz", "Ruchniewicz",
+                "000-777-888");
+        mapsDriverDao.save(driverGrzesiu);
+
+        Car kubaCar = new Car("GD 12345", "Opel", "Vectra", driverKuba);
+        carDao.save(kubaCar);
+
+        Car marysiaCar = new Car("GA 12345", "Ford", "Focus", driverMarysia);
+        carDao.save(marysiaCar);
+
+        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverGrzesiu);
+        carDao.save(krzysiuCar);
 
         MapsAddress testFirstAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
                 "Gdańsk", "Kołobrzeska", "41c",
@@ -83,11 +102,11 @@ public class HelloServlet extends HttpServlet {
                 54.4949626, 18.5337226, "Łużycka Office Park - Budynek A");
         mapsAddressDao.save(testThirdAddress);
 
-        MapsAdvert testFirstAdvert = new MapsAdvert(testDriver, testFirstAddress, testSecondAddress,
+        MapsAdvert testFirstAdvert = new MapsAdvert(driverKuba, testFirstAddress, testSecondAddress,
                 LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
         mapsAdvertDao.save(testFirstAdvert);
 
-        MapsAdvert testSecondAdvert = new MapsAdvert(testDriver, testThirdAddress, testSecondAddress,
+        MapsAdvert testSecondAdvert = new MapsAdvert(driverKuba, testThirdAddress, testSecondAddress,
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
         mapsAdvertDao.save(testSecondAdvert);
 
