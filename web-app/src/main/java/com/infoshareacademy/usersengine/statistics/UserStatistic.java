@@ -9,32 +9,33 @@ import java.time.LocalDateTime;
 public class UserStatistic {
 
     @Id
-    @NotNull
-    @Column(name="user_email")
-    private String userEmail;
+    long id;
+
+    @Column(name="user_id")
+    long userId;
 
     @Column(name="time")
     private LocalDateTime time;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.ORDINAL)
     @Column(name="activity")
     UserActivity userActivity;
 
     public UserStatistic() {
     }
 
-    public UserStatistic(@NotNull String userEmail, LocalDateTime time, UserActivity userActivity) {
-        this.userEmail = userEmail;
+    public UserStatistic(long userId, LocalDateTime time, UserActivity userActivity) {
+        this.userId = userId;
         this.time = time;
         this.userActivity = userActivity;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public long getId() {
+        return id;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public long getUserId() {
+        return userId;
     }
 
     public LocalDateTime getTime() {
@@ -55,8 +56,9 @@ public class UserStatistic {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserActivities{");
-        sb.append("userEmail='").append(userEmail).append('\'');
+        final StringBuilder sb = new StringBuilder("UserStatistic{");
+        sb.append("id=").append(id);
+        sb.append(", UserId=").append(userId);
         sb.append(", time=").append(time);
         sb.append(", userActivity=").append(userActivity);
         sb.append('}');
