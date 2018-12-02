@@ -28,9 +28,9 @@ class DriversManagerBeanTest {
         List<Driver> drivers = createDriversList();
         Long id = 1L;
         Optional<Driver> expected = Optional.of(new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating(), 1L));
-        //THEN
-        Optional<Driver> result = testee.getDriverById(drivers, id);
         //WHEN
+        Optional<Driver> result = testee.getDriverById(drivers, id);
+        //THEN
         assertEquals(expected, result);
     }
 
@@ -41,9 +41,9 @@ class DriversManagerBeanTest {
         List<Driver> drivers = createDriversList();
         Long id = 100L;
         Optional<Driver> expected = Optional.empty();
-        //THEN
-        Optional<Driver> result = testee.getDriverById(drivers, id);
         //WHEN
+        Optional<Driver> result = testee.getDriverById(drivers, id);
+        //THEN
         assertEquals(expected, result);
     }
 
@@ -56,9 +56,9 @@ class DriversManagerBeanTest {
         Long id = 1L;
         Integer rating = 5;
 
-        //THEN
-        List<Driver> result = testee.updateDriversList(drivers, rating, id);
         //WHEN
+        List<Driver> result = testee.updateDriversList(drivers, rating, id);
+        //THEN
         assertEquals(expected, result);
     }
 
@@ -69,9 +69,9 @@ class DriversManagerBeanTest {
         List<Driver> drivers = createDriversList();
         Long id = 0L;
         Integer rating = 5;
-        //THEN
-        List<Driver> result = testee.updateDriversList(drivers, rating, id);
         //WHEN
+        List<Driver> result = testee.updateDriversList(drivers, rating, id);
+        //THEN
         assertEquals(drivers, result);
     }
 
@@ -82,9 +82,9 @@ class DriversManagerBeanTest {
         List<Driver> drivers = createDriversList();
         Long id = 1L;
         Integer rating = 50;
-        //THEN
-        List<Driver> result = testee.updateDriversList(drivers, rating, id);
         //WHEN
+        List<Driver> result = testee.updateDriversList(drivers, rating, id);
+        //THEN
         assertEquals(drivers, result);
     }
 
@@ -94,9 +94,9 @@ class DriversManagerBeanTest {
         //GIVEN
         List<Driver> drivers = createDriversList();
         Long expected = 3L;
-        //THEN
-        Long result = testee.getNextDriverId(drivers);
         //WHEN
+        Long result = testee.getNextDriverId(drivers);
+        //THEN
         assertEquals(expected, result);
     }
 
@@ -106,9 +106,9 @@ class DriversManagerBeanTest {
         //GIVEN
         List<Driver> drivers = new ArrayList<>();
         Long expected = 1L;
-        //THEN
-        Long result = testee.getNextDriverId(drivers);
         //WHEN
+        Long result = testee.getNextDriverId(drivers);
+        //THEN
         assertEquals(expected, result);
     }
 

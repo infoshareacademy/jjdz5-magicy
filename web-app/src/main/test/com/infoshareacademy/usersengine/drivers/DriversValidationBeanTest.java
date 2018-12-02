@@ -30,9 +30,9 @@ class DriversValidationBeanTest {
     void runWithCorrectRatingValueThenReturnTrue(){
         //GIVEN
         String rating = RATING;
-        //THEN
-        Boolean isCorrect = testee.checkIsDriverRatingValid(rating);
         //WHEN
+        Boolean isCorrect = testee.checkIsDriverRatingValid(rating);
+        //THEN
         assertThat(isCorrect).isTrue();
     }
 
@@ -41,9 +41,9 @@ class DriversValidationBeanTest {
     void runWithIncorrectRatingValueThenReturnFalse(){
         //GIVEN
         String rating = "100";
-        //THEN
-        Boolean isCorrect = testee.checkIsDriverRatingValid(rating);
         //WHEN
+        Boolean isCorrect = testee.checkIsDriverRatingValid(rating);
+        //THEN
         assertThat(isCorrect).isFalse();
     }
 
@@ -52,9 +52,9 @@ class DriversValidationBeanTest {
     void runWithEmptyRatingValueThenReturnFalse(){
         //GIVEN
         String rating = "";
-        //THEN
-        Boolean isCorrect = testee.checkIsDriverRatingValid(rating);
         //WHEN
+        Boolean isCorrect = testee.checkIsDriverRatingValid(rating);
+        //THEN
         assertThat(isCorrect).isFalse();
     }
 
@@ -66,9 +66,9 @@ class DriversValidationBeanTest {
         Driver newDriver = new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating());
         drivers.add(newDriver);
         String phone = "111 222 333";
-        //THEN
-        Boolean isPhoneOnTheList = testee.isPhoneNumberExist(phone, drivers);
         //WHEN
+        Boolean isPhoneOnTheList = testee.isPhoneNumberExist(phone, drivers);
+        //THEN
         assertThat(isPhoneOnTheList).isFalse();
     }
 
@@ -80,9 +80,9 @@ class DriversValidationBeanTest {
         Driver newDriver = new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating());
         drivers.add(newDriver);
         String phone = "555 555 555";
-        //THEN
-        Boolean isPhoneOnTheList = testee.isPhoneNumberExist(phone, drivers);
         //WHEN
+        Boolean isPhoneOnTheList = testee.isPhoneNumberExist(phone, drivers);
+        //THEN
         assertThat(isPhoneOnTheList).isTrue();
     }
 
@@ -91,9 +91,9 @@ class DriversValidationBeanTest {
     void runWithNullNumberParamThenReturnFalse(){
         //GIVEN
         String number = null;
-        //THEN
-        Boolean isNumber = testee.askForNumber(number);
         //WHEN
+        Boolean isNumber = testee.askForNumber(number);
+        //THEN
         assertThat(isNumber).isFalse();
     }
 
@@ -102,9 +102,9 @@ class DriversValidationBeanTest {
     void runWithEmptyNumberParamThenReturnFalse(){
         //GIVEN
         String number = "";
-        //THEN
-        Boolean isNumber = testee.askForNumber(number);
         //WHEN
+        Boolean isNumber = testee.askForNumber(number);
+        //THEN
         assertThat(isNumber).isFalse();
 
     }
@@ -114,9 +114,9 @@ class DriversValidationBeanTest {
     void runWithIncorrectNumberParamThenReturnFalse(){
         //GIVEN
         String number = "m";
-        //THEN
-        Boolean isNumber = testee.askForNumber(number);
         //WHEN
+        Boolean isNumber = testee.askForNumber(number);
+        //THEN
         assertThat(isNumber).isFalse();
 
     }
@@ -126,9 +126,9 @@ class DriversValidationBeanTest {
     void runWithCorrectNumberParamThenReturnTrue(){
         //GIVEN
         String number = "111 223 333";
-        //THEN
-        Boolean isNumber = testee.askForNumber(number);
         //WHEN
+        Boolean isNumber = testee.askForNumber(number);
+        //THEN
         assertThat(isNumber).isTrue();
     }
 
@@ -137,9 +137,9 @@ class DriversValidationBeanTest {
     void runWithNullTextParamThenReturnFalse(){
         //GIVEN
         String text = null;
-        //THEN
-        Boolean isText = testee.askForText(text);
         //WHEN
+        Boolean isText = testee.askForText(text);
+        //THEN
         assertThat(isText).isFalse();
     }
 
@@ -148,9 +148,9 @@ class DriversValidationBeanTest {
     void runWithEmptyTextParamThenReturnFalse(){
         //GIVEN
         String text = "";
-        //THEN
-        Boolean isText = testee.askForText(text);
         //WHEN
+        Boolean isText = testee.askForText(text);
+        //THEN
         assertThat(isText).isFalse();
     }
 
@@ -159,9 +159,9 @@ class DriversValidationBeanTest {
     void runWithIncorrectTextParamThenReturnFalse(){
         //GIVEN
         String text = "*&(&";
-        //THEN
-        Boolean isText = testee.askForText(text);
         //WHEN
+        Boolean isText = testee.askForText(text);
+        //THEN
         assertThat(isText).isFalse();
     }
 
@@ -170,9 +170,9 @@ class DriversValidationBeanTest {
     void runWithCorrectTextParamThenReturnTrue(){
         //GIVEN
         String text = "tekst";
-        //THEN
-        Boolean isText = testee.askForText(text);
         //WHEN
+        Boolean isText = testee.askForText(text);
+        //THEN
         assertThat(isText).isTrue();
     }
 
@@ -182,9 +182,9 @@ class DriversValidationBeanTest {
         //GIVEN
         String newId = "3";
         List<Driver> drivers = createDriversList();
-        //THEN
-        Boolean idAlreadyUsed = testee.checkIsDriverIdAlreadyUsed(drivers, newId);
         //WHEN
+        Boolean idAlreadyUsed = testee.checkIsDriverIdAlreadyUsed(drivers, newId);
+        //THEN
         assertThat(idAlreadyUsed).isFalse();
     }
 
@@ -194,9 +194,9 @@ class DriversValidationBeanTest {
         //GIVEN
         String newId = "2";
         List<Driver> drivers = createDriversList();
-        //THEN
-        Boolean idAlreadyUsed = testee.checkIsDriverIdAlreadyUsed(drivers, newId);
         //WHEN
+        Boolean idAlreadyUsed = testee.checkIsDriverIdAlreadyUsed(drivers, newId);
+        //THEN
         assertThat(idAlreadyUsed).isTrue();
     }
 
@@ -206,9 +206,9 @@ class DriversValidationBeanTest {
         //GIVEN
         String newId = "3";
         List<Driver> drivers = createDriversList();
-        //THEN
-        Boolean idAlreadyUsed = testee.askForDriverId(drivers, newId);
         //WHEN
+        Boolean idAlreadyUsed = testee.askForDriverId(drivers, newId);
+        //THEN
         assertThat(idAlreadyUsed).isFalse();
     }
 
@@ -218,9 +218,9 @@ class DriversValidationBeanTest {
         //GIVEN
         String newId = "2";
         List<Driver> drivers = createDriversList();
-        //THEN
-        Boolean idAlreadyUsed = testee.askForDriverId(drivers, newId);
         //WHEN
+        Boolean idAlreadyUsed = testee.askForDriverId(drivers, newId);
+        //THEN
         assertThat(idAlreadyUsed).isTrue();
     }
 
@@ -229,9 +229,9 @@ class DriversValidationBeanTest {
     void runWithCorrectRatingParamThenReturnTrue(){
         //GIVEN
         String rating = "3";
-        //THEN
-        Boolean isRating = testee.askForRating(rating);
         //WHEN
+        Boolean isRating = testee.askForRating(rating);
+        //THEN
         assertThat(isRating).isTrue();
     }
 
@@ -240,9 +240,9 @@ class DriversValidationBeanTest {
     void runWithIncorrectRatingParamThenReturnFalse(){
         //GIVEN
         String rating = "30000";
-        //THEN
-        Boolean isRating = testee.askForRating(rating);
         //WHEN
+        Boolean isRating = testee.askForRating(rating);
+        //THEN
         assertThat(isRating).isFalse();
     }
 
@@ -251,9 +251,9 @@ class DriversValidationBeanTest {
     void runWithNullRatingParamThenReturnFalse(){
         //GIVEN
         String rating = null;
-        //THEN
-        Boolean isRating = testee.askForRating(rating);
         //WHEN
+        Boolean isRating = testee.askForRating(rating);
+        //THEN
         assertThat(isRating).isFalse();
     }
 
@@ -262,9 +262,9 @@ class DriversValidationBeanTest {
     void runWitEmptylRatingParamThenReturnFalse(){
         //GIVEN
         String rating = "";
-        //THEN
-        Boolean isRating = testee.askForRating(rating);
         //WHEN
+        Boolean isRating = testee.askForRating(rating);
+        //THEN
         assertThat(isRating).isFalse();
     }
 
@@ -275,9 +275,9 @@ class DriversValidationBeanTest {
         List<Driver> drivers = createDriversList();
         String id = "3";
         String rating = "5";
-        //THEN
-        String message = testee.validateDriverData(id,rating,drivers);
         //WHEN
+        String message = testee.validateDriverData(id,rating,drivers);
+        //THEN
         assertThat(message).isEmpty();
     }
     @Test
@@ -287,9 +287,9 @@ class DriversValidationBeanTest {
         List<Driver> drivers = createDriversList();
         String id = "2";
         String rating = "5";
-        //THEN
-        String message = testee.validateDriverData(id,rating,drivers);
         //WHEN
+        String message = testee.validateDriverData(id,rating,drivers);
+        //THEN
         assertEquals(MESSAGE_SOMETHING_WENT_WRONG, message);
     }
 
@@ -300,9 +300,9 @@ class DriversValidationBeanTest {
         List<Driver> drivers = createDriversList();
         String id = "2";
         String rating = "100";
-        //THEN
-        String message = testee.validateDriverData(id,rating,drivers);
         //WHEN
+        String message = testee.validateDriverData(id,rating,drivers);
+        //THEN
         assertEquals(MESSAGE_SOMETHING_WENT_WRONG + MESSAGE_ADD_RATING_USING_ALERT, message);
     }
 
@@ -313,9 +313,9 @@ class DriversValidationBeanTest {
         List<Driver> drivers = createDriversList();
         String id = "3";
         String rating = "100";
-        //THEN
-        String message = testee.validateDriverData(id,rating,drivers);
         //WHEN
+        String message = testee.validateDriverData(id,rating,drivers);
+        //THEN
         assertEquals(MESSAGE_ADD_RATING_USING_ALERT, message);
     }
 
