@@ -4,6 +4,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import java.util.Map;
 @WebServlet(urlPatterns = "login")
 public class GLoginServlet extends HttpServlet {
 
-
+    private Logger LOG = LoggerFactory.getLogger(GLoginServlet.class);
 
     @Inject
     private TemplateProvider templateProvider;
@@ -34,8 +36,9 @@ public class GLoginServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "login");
         try{
             template.process(dataModel, resp.getWriter());
+            LOG.debug("Template created successfully.");
         }catch (TemplateException e){
-            e.printStackTrace();
+            LOG.error("TemplateException. Template cannot be created.");
         }
     }@Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

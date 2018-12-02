@@ -8,17 +8,18 @@ import java.io.IOException;
 
 @ApplicationScoped
 public class TemplateProvider {
+
+    private static final String UTF_8_ENCODING = "UTF-8";
     private static final String TEMPLATE_DIRECTORY_PATH = "WEB-INF/fm-templates";
     private static final String TEMPLATE_EXTENSION = ".ftlh";
-    
+
     public Template getTemplate(ServletContext servletContext, String templateName) throws IOException{
         final Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
-        cfg.setDefaultEncoding("UTF-8");
+        cfg.setDefaultEncoding(UTF_8_ENCODING);
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(true);
         cfg.setWrapUncheckedExceptions(true);
         cfg.setServletContextForTemplateLoading(servletContext, TEMPLATE_DIRECTORY_PATH);
-
-        return cfg.getTemplate(templateName + ".ftlh");
+        return cfg.getTemplate(templateName + TEMPLATE_EXTENSION);
     }
 }
