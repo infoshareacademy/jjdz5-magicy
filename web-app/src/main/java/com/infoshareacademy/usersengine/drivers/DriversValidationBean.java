@@ -43,7 +43,7 @@ public class DriversValidationBean implements DriversValidation{
 
     public boolean checkIsDriverIdAlreadyUsed(List<Driver> drivers, String id){
         LOG.debug("Checking id: {}.", id);
-        return drivers.stream().anyMatch(driver -> driver.getId().equals(id));
+        return drivers.stream().anyMatch(driver -> driver.getId().equals(Long.parseLong(id)));
     }
 
     public boolean askForText(String text) {
