@@ -8,9 +8,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
+    <script src="js/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
 
+
+
     <style>
+
+        #loader {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: #ECF0F1;
+        }
+
+        .load {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3f51b5 !important; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
         #map {
@@ -34,8 +66,7 @@
         }
 
         .controls-card {
-            margin-top: 10px;
-            margin-left: 10px;
+            margin: 10px;
         }
 
         #origin-input,
@@ -60,6 +91,10 @@
             width: 90px;
         }
 
+        #origin-time:disabled {
+            background-color: rgba(0,0,0,0.1);
+        }
+
         #destination-time {
             background-color: #fff;
             font-family: Roboto;
@@ -75,19 +110,6 @@
             border-color: #4d90fe;
         }
 
-        #mode-selector {
-            color: #fff;
-            background-color: #4d90fe;
-            margin-left: 12px;
-            padding: 5px 11px 0px 11px;
-        }
-
-        #mode-selector label {
-            font-family: Roboto;
-            font-size: 13px;
-            font-weight: 300;
-        }
-
         input[type=time]::-webkit-inner-spin-button,
         input[type=time]::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -96,6 +118,15 @@
 
         .gm-style {
             font: 400 18px Roboto, Arial, sans-serif !important;
+        }
+
+        #origin-address-label {
+            font: 400 15px Roboto, Arial, sans-serif !important;
+        }
+
+        #destination-address-label {
+            margin-top: 0.3rem !important;
+            font: 400 15px Roboto, Arial, sans-serif !important;
         }
 
         #origin-time-label {
@@ -121,9 +152,13 @@
         }
 
         .form-control {
-            padding: 0 !important;
+            padding: 0.2rem !important;
             height: 1.7rem !important;
             line-height: normal !important;
+        }
+
+        #addresses-card {
+            min-width: 500px;
         }
 
 
@@ -133,6 +168,9 @@
 <body>
 
 <div class="container">
+    <div id="loader">
+        <div class="load"></div>
+    </div>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
                                                  height="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
@@ -170,21 +208,31 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-5 mb-5">
         <div class="col-12">
             <form method="post" action="#">
 
-                <input id="origin-input" class="form-control" type="text" name="startMapsPointId"
-                       placeholder="Enter an origin location" required>
+                <div id="addresses-card" class="card controls-card bg-primary text-white">
+                    <div id="addresses-header" class="card-header">
+                        Addresses
+                    </div>
+                    <div class="card-body">
+                        <div id="origin-address-label" class="card-title">Departure:</div>
+                        <input id="origin-address" class="form-control" type="text"
+                               name="startMapsPointId" placeholder="Enter an origin location"
+                               required>
+                        <div id="destination-address-label" class="card-title">Destination:</div>
+                        <input id="destination-address" class="form-control" type="text"
+                               name="endMapsPointId" placeholder="Enter a destination location"
+                               required>
+                    </div>
+                </div>
 
-                <input id="destination-input" class="controls" type="text" name="endMapsPointId"
-                       placeholder="Enter a destination location" required>
-
-                <div id="origin-time-card" class="card controls-card">
+                <div id="time-card" class="card controls-card bg-primary text-white">
                     <div class="card-header">Time</div>
                     <div class="card-body">
                         <div id="origin-time-label" class="card-title">Departure:</div>
-                        <input id="origin-time" class="form-control" type="time" name="startTime" required>
+                        <input id="origin-time" class="form-control" type="time" name="startTime" required disabled>
                         <div id="destination-time-label" class="card-title">Destination:</div>
                         <input id="destination-time" class="form-control" type="time" name="endTime" required>
                     </div>
@@ -194,6 +242,16 @@
 
         </div>
     </div>
+</div>
+
+<script>
+    $(window).on("load", function() {
+        setTimeout(function () {
+            $("#loader").fadeOut(300);
+        }, 300);
+    });
+</script>
+
 <script>
     // This example requires the Places library. Include the libraries=places
     // parameter when you first load the API. For example:
@@ -228,27 +286,28 @@
         this.originPlaceId = null;
         this.destinationPlaceId = null;
         this.travelMode = 'DRIVING';
-        var originInput = document.getElementById('origin-input');
-        var destinationInput = document.getElementById('destination-input');
-        var originTimeCard = document.getElementById('origin-time-card');
+        var addressesCard = document.getElementById('addresses-card');
+        var timeCard = document.getElementById('time-card');
+        var originAddress = document.getElementById('origin-address');
+        var destinationAddress = document.getElementById('destination-address');
         var originTime = document.getElementById('origin-time');
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
 
         this.directionsDisplay.setMap(map);
         var originAutocomplete = new google.maps.places.Autocomplete(
-            originInput);
+            originAddress);
         var destinationAutocomplete = new google.maps.places.Autocomplete(
-            destinationInput);
+            destinationAddress);
         // var destinationTime = document
 
         this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
         this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
 
-        // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
         // this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(destinationInput);
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originTimeCard);
-        // this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(originTime);
+        this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(timeCard);
+        this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(directions);
     }
 
     AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode, map) {
@@ -295,24 +354,28 @@
         }
         var me = this;
 
-        this.directionsService.route({
-            origin: {'placeId': this.originPlaceId},
-            destination: {'placeId': this.destinationPlaceId},
-            travelMode: this.travelMode
-        }, function(response, status) {
-            if (status === 'OK') {
-                isBeforeRouteCounting = false;
-                me.directionsDisplay.setDirections(response);
-            } else {
-                window.alert('Directions request failed due to ' + status);
-            }
-        });
+        if (this.originPlaceId !== this.destinationPlaceId) {
+            this.directionsService.route({
+                origin: {'placeId': this.originPlaceId},
+                destination: {'placeId': this.destinationPlaceId},
+                travelMode: this.travelMode
+            }, function (response, status) {
+                if (status === 'OK') {
+                    marker.setVisible(false);
+                    isBeforeRouteCounting = false;
+                    me.directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        } else {
+            window.alert('Departure and destination points cannot be the same.');
+        }
     };
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSY_lgBsdOf6h574J7IEGstjks1rMqs28&libraries=places&callback=initMap"
         async defer></script>
-
 
 </body>
 </html>
