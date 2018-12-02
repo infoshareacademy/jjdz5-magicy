@@ -1,17 +1,16 @@
 package com.infoshareacademy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+@NamedQuery(
+        name ="findUserByEmail",
+        query = "SELECT u FROM User u WHERE u.userEmail = :param"
+        )
+        })
 public class User {
 
     @Id
@@ -26,6 +25,10 @@ public class User {
     @Column(name = "surname")
     @NotNull
     private String surname;
+
+    @Column(name = "email")
+    @NotNull
+    private String userEmail;
 
     @Column(name = "phone")
     @NotNull

@@ -1,6 +1,7 @@
 package com.infoshareacademy.usersengine.servlets;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,6 +26,9 @@ public class GLoginServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
+
+    @Inject
+    UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,6 +59,9 @@ public class GLoginServlet extends HttpServlet {
 
             HttpSession session = req.getSession(true);
             session.setAttribute("userName", name);
+
+            userDao.getUsersEmails(email);
+
             resp.sendRedirect("/jjdz5-magicy/home");
 
         } catch (Exception e) {

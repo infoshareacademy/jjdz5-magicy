@@ -1,5 +1,6 @@
 package com.infoshareacademy.usersengine.statistics;
 
+import javax.ejb.Stateless;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 public class UserStatistic {
 
     @Id
+    @Column(name="id")
     long id;
 
     @Column(name="user_id")
