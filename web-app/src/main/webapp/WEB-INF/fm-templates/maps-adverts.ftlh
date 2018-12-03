@@ -98,6 +98,11 @@
 </script>
 
 <div class="container">
+
+    <div id="loader">
+        <div class="load"></div>
+    </div>
+
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
                                                  hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
@@ -180,25 +185,7 @@
 
 <#include "footer.ftlh">
 
-
-<#--<script>-->
-    <#--function buildDetailsModal(startAddressId, endAddressId) {-->
-        <#--var startAddress = getAddressJson(startAddressId);-->
-        <#--var endAddress = getAddressJson(endAddressId);-->
-        <#--var paragraph = document.createElement('p');-->
-        <#--var sFormat = startAddress["status"];-->
-        <#--var eFormat = endAddress["status"];-->
-        <#--paragraph.innerText = sFormat + " || " + eFormat;-->
-
-        <#--var div = document.getElementById("modalBuilder");-->
-        <#--div.appendChild(paragraph);-->
-
-    <#--}-->
-
-    <#--function getAddressJson(addressId) {-->
-        <#--return $.getJSON('https://maps.googleapis.com/maps/api/place/details/json?key=${apiKey}&placeid=' + addressId);-->
-    <#--}-->
-<#--</script>-->
+<script src="js/preloader.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
 </body>
 </html>

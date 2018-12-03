@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>AdditionTest</title>
+    <title>goTogether</title>
     <link rel="stylesheet" href="css/overall.css">
+    <link rel="stylesheet" href="css/maps-adverts.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
@@ -12,196 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <style>
-
-        #map {
-            height: 100%;
-        }
-
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        .controls {
-            margin-top: 10px;
-            border: 1px solid transparent;
-            border-radius: 2px 0 0 2px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            height: 32px;
-            outline: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .controls-card {
-            margin: 10px;
-        }
-
-        #origin-time {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 18px;
-            font-weight: 300;
-            text-align: center;
-            text-overflow: ellipsis;
-            width: 120px;
-        }
-
-        #origin-time-suggestion {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 18px;
-            font-weight: 300;
-            text-align: center;
-            text-overflow: ellipsis;
-            width: 120px;
-        }
-
-        #origin-time-suggestion:disabled {
-            background-color: rgba(0,0,0,0.1);
-        }
-
-        #destination-time {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 18px;
-            font-weight: 300;
-            text-align: center;
-            text-overflow: ellipsis;
-            width: 120px;
-        }
-
-        #date {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 18px;
-            font-weight: 300;
-            text-align: center;
-            text-overflow: ellipsis;
-            width: 120px;
-        }
-
-        input[type=time]::-webkit-inner-spin-button,
-        input[type=time]::-webkit-outer-spin-button,
-        input[type=date]::-webkit-inner-spin-button,
-        input[type=date]::-webkit-outer-spin-button,
-        input[type=date]::-webkit-calendar-picker-indicator {
-            -webkit-appearance: none !important;
-            display: none !important;
-            visibility: hidden !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .gm-style {
-            font: 400 18px Roboto, Arial, sans-serif !important;
-        }
-
-        #origin-address-label {
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #destination-address-label {
-            margin-top: 0.3rem !important;
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #addresses-info-label {
-            margin-top: 0.3rem !important;
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #origin-time-label {
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #origin-time-suggestion-label{
-            margin-top: 0.3rem !important;
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #destination-time-label {
-            margin-top: 0.3rem !important;
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #date-label {
-            margin-top: 0.3rem !important;
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        #driver-label {
-            margin-top: 0.3rem !important;
-            font: 400 15px Roboto, Arial, sans-serif !important;
-        }
-
-        .card-header {
-            border-bottom: 1px solid #ffffff !important;
-            padding: 0.2rem 0.2rem !important;
-            text-align: center !important;
-        }
-
-        .card-body {
-            padding: 0.5rem !important;
-        }
-
-        .card-title {
-            margin-bottom: 0.3rem !important;
-        }
-
-        .form-control {
-            padding: 0.2rem !important;
-            height: 1.7rem !important;
-            line-height: normal !important;
-        }
-
-        .custom-select {
-            padding: 0.2rem !important;
-            height: 1.7rem !important;
-            line-height: normal !important;
-        }
-
-        #addresses-card {
-            min-width: 300px;
-            -webkit-transition: ease 0.5s;
-            transition: ease 0.5s;
-        }
-
-        #addresses-card.expanded {
-            min-width: 900px;
-        }
-
-        #time-card {
-            min-width: 140px;
-        }
-
-        #driver-card {
-            min-width: 140px;
-            max-width: 140px;
-        }
-
-        .controls-card.bg-primary {
-            background-color: #3f51b5 !important;
-        }
-
-        #submitButton {
-            background-color: #3f51b5 !important;
-            padding: 0.75rem !important;
-            font: 500 28px Roboto, Arial, sans-serif !important;
-        }
-
-
-    </style>
-
 </head>
+
 <body>
 
 <div class="container">
+
     <div id="loader">
         <div class="load"></div>
     </div>
+
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
                                                  height="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
@@ -236,7 +57,6 @@
     <div class="row">
         <div class="mt-5">
             <h3>Add new advert</h3>
-            <button id="click" class="btn btn-primary">Test</button>
         </div>
     </div>
 
@@ -252,15 +72,13 @@
                     <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
                         <div class="card-body">
                             <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
-                            <div id="origin-address-label" class="card-title">Departure:</div>
+                            <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
                             <input id="origin-address" class="form-control" type="text"
-                                   name="startMapsPointId" placeholder="Please enter departure address."
-                                   required>
-                            <div id="destination-address-label" class="card-title">Destination:</div>
+                                   placeholder="Please enter departure address." required>
+                            <div id="destination-address-label" class="card-title card-label">Destination:</div>
                             <input id="destination-address" class="form-control" type="text"
-                                   name="endMapsPointId" placeholder="Please enter destination address."
-                                   required>
-                            <div id="addresses-info-label" class="card-title">Additional information (not required):</div>
+                                   placeholder="Please enter destination address." required>
+                            <div id="addresses-info-label" class="card-title card-label">Additional information (not required):</div>
                             <input id="origin-address-info" class="form-control" type="text"
                                    name="startAddressInfo" placeholder="Departure additional information.">
                             <input id="destination-address-info" class="form-control mt-1" type="text"
@@ -277,14 +95,14 @@
                             aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
                     <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
                         <div class="card-body">
-                            <div id="origin-time-label" class="card-title">Estimated<br>departure time:</div>
-                            <input id="origin-time" class="form-control" type="time" name="startTime" required>
-                            <div id="origin-time-suggestion-label" class="card-title">Recommended<br>departure time:</div>
-                            <input id="origin-time-suggestion" class="form-control text-white" type="time" disabled>
-                            <div id="destination-time-label" class="card-title">Desired<br>arrival time:</div>
-                            <input id="destination-time" class="form-control" type="time" name="endTime" required>
-                            <div id="date-label" class="card-title">Date:</div>
-                            <input id="date" class="form-control" type="date" name="date" required>
+                            <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
+                            <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
+                            <div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>
+                            <input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time" disabled>
+                            <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
+                            <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required>
+                            <div id="date-label" class="card-title card-label">Date:</div>
+                            <input id="date" class="form-control low-width-inputs" type="date" name="date" required>
                         </div>
                     </div>
                 </div>
@@ -295,225 +113,38 @@
                             aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
                         <div class="card-body">
-                            <div id="driver-label" class="card-title">Driver:</div>
+                            <div id="driver-label" class="card-title card-label">Driver:</div>
                             <select id="driver" class="custom-select" name="driverId" required>
                                <option value="1">Mordeczka</option>
                                <option value="2">Kuciapa</option>
-                               <option value="3">Wąsaty Cierp aaaaaaaaaaaaaaaaaaaaaa</option>
+                               <option value="3">Wąsaty Cierp</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
                 </div>
+                
+                <input id="origin-place-id" type="hidden">
+                <input id="destination-place-id" type="hidden">
+                <input id="origin-precise" type="hidden">
+                <input id="destination-precise" type="hidden">
 
                 <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
-                <div id="map" style="width: 100%; height: 720px"></div>
+
+                <div class="card">
+                <div id="map"></div>
+                </div>
+
             </form>
         </div>
     </div>
 </div>
 
 <script src="js/preloader.js"></script>
-
-<script>
-
-    var departureTimeInput = document.getElementById("origin-time");
-    var destinationTimeInput = document.getElementById("destination-time");
-
-    function addEventListeners() {
-        departureTimeInput.addEventListener("input", departureTimeListener);
-        destinationTimeInput.addEventListener("input", destinationTimeListener);
-    }
-
-    window.onload = addEventListeners;
-
-</script>
-
-<script>
-    var card = $('#addresses-card');
-    var expButton = $('#cardExpander');
-    var extClass = 'expanded';
-    $(expButton).click(function () {
-        if (card.hasClass(extClass)) {
-            $(card).removeClass(extClass);
-        } else {
-            $(card).addClass(extClass);
-        }
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $(window).keydown(function(event){
-            if(event.keyCode == 13) {
-                event.preventDefault();
-                return false;
-            }
-        });
-    });
-</script>
-
-<script>
-
-    var departureTimeInput = document.getElementById("origin-time");
-    var destinationTimeInput = document.getElementById("destination-time");
-    var isBeforeRouteCounting = true;
-    var userModifiedDepartureTime = false;
-    var marker;
-    var destinationTime;
-    var routeDuration;
-
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            mapTypeControl: false,
-            center: {lat: 54.432617, lng: 18.572935},
-            zoom: 12,
-            disableDefaultUI: true,
-            disableDoubleClickZoom: true,
-            draggable: true,
-            fullscreenControl: false,
-            keyboardShortcuts: false,
-            streetViewControl: false,
-            scrollwheel: false,
-            zoomControl: true
-        });
-
-        new AutocompleteDirectionsHandler(map);
-    }
-
-    function departureTimeListener() {
-        if (departureTimeInput === "") {
-            userModifiedDepartureTime = false;
-        } else {
-            userModifiedDepartureTime = true;
-        }
-    }
-
-    function destinationTimeListener() {
-        destinationTime = moment(destinationTimeInput.value, "HH:mm");
-        countApproximateDepartureTime();
-    }
-
-    /**
-     * @constructor
-     */
-    function AutocompleteDirectionsHandler(map) {
-        this.map = map;
-        this.originPlaceId = null;
-        this.destinationPlaceId = null;
-        this.travelMode = 'DRIVING';
-        var addressesCard = document.getElementById('addresses-card');
-        var timeCard = document.getElementById('time-card');
-        var driverCard = document.getElementById('driver-card');
-        var originAddress = document.getElementById('origin-address');
-        var destinationAddress = document.getElementById('destination-address');
-        var originTime = document.getElementById('origin-time');
-        var destinationTime = document.getElementById('destination-time');
-        var submitButton = document.getElementById('submitButton');
-        this.directionsService = new google.maps.DirectionsService;
-        this.directionsDisplay = new google.maps.DirectionsRenderer;
-
-        this.directionsDisplay.setMap(map);
-        var originAutocomplete = new google.maps.places.Autocomplete(
-            originAddress);
-        var destinationAutocomplete = new google.maps.places.Autocomplete(
-            destinationAddress);
-
-        this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
-        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
-
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
-        this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(timeCard);
-        this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(driverCard);
-        this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(submitButton);
-    }
-
-    AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode, map) {
-        var me = this;
-        marker = new google.maps.Marker({
-           map: map
-        });
-        autocomplete.bindTo('bounds', this.map);
-        autocomplete.addListener('place_changed', function() {
-            var place = autocomplete.getPlace();
-            if (!place.place_id) {
-                window.alert("Please select an option from the dropdown list.");
-                return;
-            }
-            if (mode === 'ORIG') {
-                if (isBeforeRouteCounting) {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
-                    marker.setPosition(place.geometry.location);
-                    marker.setVisible(true);
-                } else {
-                    marker.setVisible(false);
-                }
-                me.originPlaceId = place.place_id;
-            } else {
-                if (isBeforeRouteCounting) {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
-                    marker.setPosition(place.geometry.location);
-                    marker.setVisible(true);
-                } else {
-                    marker.setVisible(false);
-                }
-                me.destinationPlaceId = place.place_id;
-            }
-            me.route();
-        });
-
-    };
-
-    AutocompleteDirectionsHandler.prototype.route = function() {
-        if (!this.originPlaceId || !this.destinationPlaceId) {
-            return;
-        }
-        var me = this;
-
-        if (this.originPlaceId !== this.destinationPlaceId) {
-            this.directionsService.route({
-                origin: {'placeId': this.originPlaceId},
-                destination: {'placeId': this.destinationPlaceId},
-                travelMode: this.travelMode
-            }, function (response, status) {
-                if (status === 'OK') {
-                    marker.setVisible(false);
-                    routeDuration = response.routes[0].legs[0].duration.value;
-                    isBeforeRouteCounting = false;
-                    me.directionsDisplay.setDirections(response);
-                    countApproximateDepartureTime(response);
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-            });
-        } else {
-            window.alert('Departure and destination points cannot be the same.');
-        }
-    };
-
-    function countApproximateDepartureTime() {
-        if (!isBeforeRouteCounting && destinationTime.isValid()) {
-            var timeSuggestionField = document.getElementById("origin-time-suggestion");
-            var timeInputField = document.getElementById("origin-time");
-            // var duration = routeResponse.routes[0].legs[0].duration.value;
-            var destinationTimeValue = moment(destinationTimeInput.value, "HH:mm");
-            var departureTime = destinationTimeValue.subtract(routeDuration, "seconds").format("HH:mm").toString();
-            console.log(departureTime);
-            timeSuggestionField.value = departureTime;
-            if (!userModifiedDepartureTime) {
-                timeInputField.value = departureTime;
-            }
-            if (timeInputField.value === "") {
-                userModifiedDepartureTime = false;
-                timeInputField.value = departureTime;
-            }
-        }
-    };
-
-</script>
+<script src="js/address-card-expander.js"></script>
+<script src="js/enter-submit-form-blocker.js"></script>
+<script src="js/maps-advert-addition.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSY_lgBsdOf6h574J7IEGstjks1rMqs28&libraries=places&callback=initMap"
         async defer></script>
 

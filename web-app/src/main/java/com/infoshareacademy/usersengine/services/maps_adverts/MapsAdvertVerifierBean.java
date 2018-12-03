@@ -58,9 +58,9 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
 
     private void verifyStartAddressParameters(Map<String, String[]> parameters) {
         if (verifier.isAddressParameterCorrect(parameters, AdvertPartType.START)) {
-            LOG.debug("Start address main parameters are correct.");
+            LOG.debug("Start address main parameter is correct.");
         } else {
-            LOG.debug("Start address main parameters are not correct.");
+            LOG.debug("Start address main parameter is not correct.");
             errorMessages.add(PropertiesService.getMsgBadMainStartAddress());
         }
         if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.START)) {
@@ -73,9 +73,9 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
 
     private void verifyEndAddressParameters(Map<String, String[]> parameters) {
         if (verifier.isAddressParameterCorrect(parameters, AdvertPartType.END)) {
-            LOG.debug("End address main parameters are correct.");
+            LOG.debug("End address main parameter is correct.");
         } else {
-            LOG.debug("End address main parameters are not correct.");
+            LOG.debug("End address main parameter is not correct.");
             errorMessages.add(PropertiesService.getMsgBadMainEndAddress());
         }
         if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.END)) {

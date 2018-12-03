@@ -1,284 +1,182 @@
-<!doctype html>
-<html lang="en" class="full-height" xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html lang="en" class="full-height">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
-
     <link rel="stylesheet" href="css/overall.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/maps-adverts.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
-
-    <style>
-        .view {
-            background-repeat: no-repeat;
-            background-position: center;
-            background-image: url("img/background.jpg");
-            background-size: cover;
-        }
-        .imgCenter {
-            display: block;
-            margin: auto;
-        }
-        .margin{
-            margin-bottom:40px;
-            margin-top:20px;
-        }
-        .margin-t{
-            margin-bottom:20px;
-            margin-top:20px;
-        }
-        .margin-b{
-            margin-bottom:40px;
-        }
-
-        /*TODO style listy miejsc od googla, za mała i niewidoczna*/
-
-    </style>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
+
 <body>
 
-  <div class="container">
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-         <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
-                                                  hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-               <li class="nav-item">
-                       <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="maps-adverts">Adverts</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="add-maps-advert">Add advert</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="drivers">Drivers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="add-driver">Add driver</a>
-                    </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="about-us">About us</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-      <div class="row">
-          <div class="mt-5 mb-5">
-              <h3>Add new advert</h3>
-          </div>
-      </div>
+<div class="container">
 
-      <#if SUMMARY?has_content>
+    <div id="loader">
+        <div class="load"></div>
+    </div>
 
-          <div class="row mb-4">
-              <div class="col-12">
-                  <div class="alert alert-primary">
-                      <ul>
-                          <#list SUMMARY as msg>
-                              <li>${msg}</li>
-                          </#list>
-                      </ul>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
+        <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
+                                                 height="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="maps-adverts">Adverts</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="add-maps-advert">Add advert</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="drivers">Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add-driver">Add driver</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about-us">About us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row mt-5">
+        <div class="col-10">
+            <button class="btn button" disabled>Add new advert</button>
+        </div>
+        <div class="col-2">
+            <a class="btn button float-right" href="#info">
+                <i class="fas fa-info-circle fa-3x"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-5">
+        <div class="col-12">
+            <form method="post" action="/jjdz5-magicy/add-maps-advert">
+
+                <div id="addresses-card" class="card controls-card bg-primary text-white">
+                    <a><div id="addresses-header" class="card-header" role="button"
+                            data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
+                            aria-controls="collapseAddresses">Addresses
+                    </div></a>
+                    <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
+                        <div class="card-body">
+                            <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
+                            <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
+                            <input id="origin-address" class="form-control" type="text"
+                                   placeholder="Please enter departure address." required>
+                            <div id="destination-address-label" class="card-title card-label">Destination:</div>
+                            <input id="destination-address" class="form-control" type="text"
+                                   placeholder="Please enter destination address." required>
+                            <div id="addresses-info-label" class="card-title card-label">Additional information (not required):</div>
+                            <input id="origin-address-info" class="form-control" type="text"
+                                   name="startAddressInfo" placeholder="Departure additional information.">
+                            <input id="destination-address-info" class="form-control mt-1" type="text"
+                                   name="endAddressInfo" placeholder="Destination additional information.">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="right-cards">
+
+                    <div id="time-card" class="card controls-card bg-primary text-white panel">
+                        <a><div id="time-header" class="card-header" role="button"
+                                data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
+                                aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
+                        <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
+                            <div class="card-body">
+                                <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
+                                <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
+                                <div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>
+                                <input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time" disabled>
+                                <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
+                                <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required>
+                                <div id="date-label" class="card-title card-label">Date:</div>
+                                <input id="date" class="form-control low-width-inputs" type="date" name="date" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="driver-card" class="card controls-card bg-primary text-white panel">
+                        <a><div id="driver-header" class="card-header" role="button"
+                                data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
+                                aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
+                        <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
+                            <div class="card-body">
+                                <div id="driver-label" class="card-title card-label">Driver:</div>
+                                <select id="driver" class="custom-select" name="driverId" required>
+                                    <option value="1">Mordeczka</option>
+                                    <option value="2">Kuciapa</option>
+                                    <option value="3">Wąsaty Cierp</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <input id="origin-place-id" type="hidden" name="startMapsPointId">
+                <input id="destination-place-id" type="hidden" name="endMapsPointId">
+                <input id="origin-precise" type="hidden" name="startStreetNumber">
+                <input id="destination-precise" type="hidden" name="endStreetNumber">
+
+                <button type="submit" id="submitButton" class="btn button">Submit</button>
+
+                <div class="card">
+                    <div id="map"></div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <#if SUMMARY?has_content>
+
+              <div class="row mb-4">
+                  <div class="col-12">
+                      <div class="alert alert-primary">
+                          <ul>
+                              <#list SUMMARY as msg>
+                                  <li>${msg}</li>
+                              </#list>
+                          </ul>
+                      </div>
                   </div>
               </div>
-          </div>
 
-      </#if>
+    </#if>
 
-      <form method="post" action="/jjdz5-magicy/add-maps-advert">
-          <div class="row border-bottom"><div class="col-12"><h3 class="text-muted">From</h3></div></div>
-
-          <div class="row margin-t">
-              <div class="col-10 form-group">
-                  <label for="start_autocomplete">Departure address:</label>
-                  <input id="start_autocomplete" placeholder="Please enter your departure address here."
-                            onFocus="geolocate()" type="text" class="form-control" required>
-              </div>
-              <div class="col-2 form-group">
-                  <label for="startTime">At time (HH:mm):</label>
-                  <input id="startTime" type="time" name="startTime"
-                         placeholder="Enter departure time" class="form-control" required>
-              </div>
-          </div>
-          <div class="row margin-t">
-              <div class="col-12 form-group">
-                  <label for="start_premise">Optional information about departure point.</label>
-                  <input id="start_premise" name="startInfo"
-                         placeholder="Please enter information (e.g. building name) here, if you want to add it."
-                         type="text" class="form-control">
-              </div>
-          </div>
-
-          <input type="hidden" id="start_route" name="startStreet">
-          <input type="hidden" id="start_street_number" name="startStreetNumber">
-          <input type="hidden" id="start_locality" name="startCity">
-          <input type="hidden" id="start_lat" name="startLatitude">
-          <input type="hidden" id="start_lng" name="startLongitude">
-          <input type="hidden" id="start_place_id" name="startMapsPointId">
-
-        <div class="row border-bottom"><div class="col-12 center"><h3 class="text-muted">To</h3></div></div>
-        <div class="row margin-t">
-            <div class="col-10 form-group">
-                <label for="end_autocomplete">Destination address:</label>
-                <input id="end_autocomplete" placeholder="Please enter your destination address here."
-                       onFocus="geolocate()" type="text" class="form-control" required>
-            </div>
-            <div class="col-2 form-group">
-                <label for="endTime">At time (HH:mm):</label>
-                <input id="endTime" type="time" name="endTime"
-                       placeholder="Enter arrival time" class="form-control" required>
-            </div>
+    <div class="row mb-5">
+        <div id="info" class="col-12">
         </div>
+    </div>
 
-          <div class="row margin-t">
-              <div class="col-12 form-group">
-                  <label for="end_premise">Optional information about destination point.</label>
-                  <input id="end_premise" name="endInfo"
-                         placeholder="Please enter information (e.g. building name) here, if you want to add it."
-                         type="text" class="form-control">
-              </div>
-          </div>
-
-          <input type="hidden" id="end_route" name="endStreet">
-          <input type="hidden" id="end_street_number" name="endStreetNumber">
-          <input type="hidden" id="end_locality" name="endCity">
-          <input type="hidden" id="end_lat" name="endLatitude">
-          <input type="hidden" id="end_lng" name="endLongitude">
-          <input type="hidden" id="end_place_id" name="endMapsPointId">
-
-          <div class="row">
-              <div class="col-6 form-group text-muted">
-                  <h3 class="border-bottom"><label for="date">Date</label></h3>
-                  <input id="date" type="date" name="date" class="form-control mt-4" required/>
-              </div>
-
-              <div class="col-6 form-group text-muted">
-                  <h3 class="border-bottom"><label for="driverId">Driver</label></h3>
-                  <select id="driverId" class="form-control mt-4" name="driverId" required>
-                      <#list DRIVERS as driver>
-                        <option value="${driver.id}">${driver.name} ${driver.surname}</option>
-                      </#list>
-                  </select>
-              </div>
-          </div>
-          <div class="row margin pb-5">
-              <div class="col-4"></div>
-              <div class="col-3 imgCenter">
-                  <button type="submit" class="btn btn-primary btn-block">Submit</button>
-              </div>
-              <div class="col-4"></div>
-          </div>
-    </form>
 </div>
 
 <#include "footer.ftlh">
 
-  <script>
-
-      var placeSearch, startAutocomplete, endAutocomplete;
-      var componentForm = {
-          street_number: 'short_name',
-          route: 'long_name',
-          locality: 'long_name',
-          premise: 'long_name'
-      };
-
-      function initAutocomplete() {
-          startAutocomplete = new google.maps.places.Autocomplete(
-                  /** @type {!HTMLInputElement} */(document.getElementById('start_autocomplete')),
-                  {types: ['geocode','establishment']});
-          endAutocomplete = new google.maps.places.Autocomplete(
-                  /** @type {!HTMLInputElement} */(document.getElementById('end_autocomplete')),
-                  {types: ['geocode','establishment']});
-
-          startAutocomplete.addListener('place_changed', fillInStartAddress);
-          endAutocomplete.addListener('place_changed', fillInEndAddress);
-      }
-
-      function fillInStartAddress() {
-          var place = startAutocomplete.getPlace();
-          var prefix = "start_";
-
-          for (var component in componentForm) {
-              document.getElementById(prefix + component).value = '';
-          }
-
-          for (var i = 0; i < place.address_components.length; i++) {
-              var addressType = place.address_components[i].types[0];
-              if (componentForm[addressType]) {
-                  var val = place.address_components[i][componentForm[addressType]];
-                  document.getElementById(prefix + addressType).value = val;
-              }
-          }
-
-          var lat = place.geometry.location.lat();
-          document.getElementById(prefix + "lat").value = lat;
-
-          var lng = place.geometry.location.lng();
-          document.getElementById(prefix + "lng").value = lng;
-
-          var placeGoogleId = place.place_id;
-          document.getElementById(prefix + "place_id").value = placeGoogleId;
-
-      }
-
-      function fillInEndAddress() {
-          var place = endAutocomplete.getPlace();
-          var prefix = "end_";
-
-          for (var component in componentForm) {
-              document.getElementById(prefix + component).value = '';
-          }
-
-          for (var i = 0; i < place.address_components.length; i++) {
-              var addressType = place.address_components[i].types[0];
-              if (componentForm[addressType]) {
-                  var val = place.address_components[i][componentForm[addressType]];
-                  document.getElementById(prefix + addressType).value = val;
-              }
-          }
-
-          var lat = place.geometry.location.lat();
-          document.getElementById(prefix + "lat").value = lat;
-
-          var lng = place.geometry.location.lng();
-          document.getElementById(prefix + "lng").value = lng;
-
-          var placeGoogleId = place.place_id;
-          document.getElementById(prefix + "place_id").value = placeGoogleId;
-      }
-
-      function geolocate() {
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function(position) {
-                  var geolocation = {
-                      lat: position.coords.latitude,
-                      lng: position.coords.longitude
-                  };
-                  var circle = new google.maps.Circle({
-                      center: geolocation,
-                      radius: position.coords.accuracy
-                  });
-                  startAutocomplete.setBounds(circle.getBounds());
-              });
-          }
-      }
-
-  </script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/address-card-expander.js"></script>
+<script src="js/enter-submit-form-blocker.js"></script>
+<script src="js/maps-advert-addition.js"></script>
 <#assign apikey = API_KEY[0]>
-<script src="https://maps.googleapis.com/maps/api/js?key=${apikey}&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=${apikey}&libraries=places&callback=initMap"
+        async defer></script>
+
 </body>
 </html>
