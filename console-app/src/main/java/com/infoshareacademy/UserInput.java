@@ -17,6 +17,8 @@ public class UserInput {
     private static final String CITY_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
     private static final String INPUT_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
     private static final String STREET_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
+    private static final String STREET_NAME_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*$";
+    private static final String STREET_NUMBER_REGEX = "^+[0-9 /]*[a-zA-Z]*$";
     private static final String NUMBER_REGEX = "^\\d{3}\\ \\d{3}\\ \\d{3}$";
 
     private Logger LOG = LoggerFactory.getLogger(UserInput.class);
@@ -108,6 +110,14 @@ public class UserInput {
 
     public boolean isStreetValid(String street) {
         return street.matches(STREET_REGEX);
+    }
+
+    public boolean isStreetNameValid(String streetName) {
+        return streetName.matches(STREET_NAME_REGEX);
+    }
+
+    public boolean isStreetNumberValid(String streetNumber) {
+        return streetNumber.matches(STREET_NUMBER_REGEX);
     }
 
     public boolean isNumberValid(String number){
