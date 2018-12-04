@@ -3,8 +3,8 @@ package com.infoshareacademy.usersengine.servlets;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.services.PropertiesService;
 import com.infoshareacademy.usersengine.services.ServletService;
-import com.infoshareacademy.usersengine.services.data_models.AddMapsAdvertDataModel;
-import com.infoshareacademy.usersengine.services.maps_adverts.MapsAdvertProcessing;
+import com.infoshareacademy.usersengine.services.datamodels.AddMapsAdvertDataModel;
+import com.infoshareacademy.usersengine.services.mapsadverts.MapsAdvertProcessing;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;

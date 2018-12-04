@@ -1,4 +1,4 @@
-package com.infoshareacademy.usersengine.services.maps_adverts;
+package com.infoshareacademy.usersengine.services.mapsadverts;
 
 import java.util.List;
 import java.util.Map;

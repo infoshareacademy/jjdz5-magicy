@@ -1,4 +1,4 @@
-package com.infoshareacademy.usersengine.services.data_models;
+package com.infoshareacademy.usersengine.services.datamodels;
 
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.services.PropertiesService;
@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 @Stateless
-public class MapsAdvertDataModel {
+public class AddMapsAdvertDataModel {
 
-    private static final String ADVERTS_KEY = "ADVERTS";
     private static final String DRIVERS_KEY = "DRIVERS";
 
     private Map<String, List> dataModel;

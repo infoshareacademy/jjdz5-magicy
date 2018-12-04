@@ -1,4 +1,4 @@
-package com.infoshareacademy.usersengine.services.maps_adverts;
+package com.infoshareacademy.usersengine.services.mapsadverts;
 
 import com.infoshareacademy.usersengine.adverts.AdvertsConstants;
 import com.infoshareacademy.usersengine.dao.MapsAdvertDao;

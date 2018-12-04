@@ -120,9 +120,7 @@
                             <div class="card-body">
                                 <div id="driver-label" class="card-title card-label">Driver:</div>
                                 <select id="driver" class="custom-select" name="driverId" required>
-                                    <option value="1">Mordeczka</option>
-                                    <option value="2">Kuciapa</option>
-                                    <option value="3">Wąsaty Cierp</option>
+                                    <option value="1">Driver</option>
                                 </select>
                             </div>
                         </div>
@@ -147,17 +145,17 @@
 
     <#if SUMMARY?has_content>
 
-              <div class="row mb-4">
-                  <div class="col-12">
-                      <div class="alert alert-primary">
-                          <ul>
-                              <#list SUMMARY as msg>
-                                  <li>${msg}</li>
-                              </#list>
-                          </ul>
-                      </div>
+          <div class="row mb-4">
+              <div class="col-12">
+                  <div class="alert alert-primary">
+                      <ul>
+                          <#list SUMMARY as msg>
+                              <li>${msg}</li>
+                          </#list>
+                      </ul>
                   </div>
               </div>
+          </div>
 
     </#if>
 
