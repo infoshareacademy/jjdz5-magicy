@@ -15,8 +15,8 @@ import java.util.List;
 public class AdvertsManagerBean implements AdvertsManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(AdvertsManagerBean.class);
-    private static final Integer START_ID = 0;
-    private static final Integer VALUE_TO_ADD = 1;
+    private static final Long START_ID = 0L;
+    private static final Long VALUE_TO_ADD = 1L;
 
     public List<Advert> addAdvert(Advert advert, List<Advert> adverts){
         adverts.add(advert);

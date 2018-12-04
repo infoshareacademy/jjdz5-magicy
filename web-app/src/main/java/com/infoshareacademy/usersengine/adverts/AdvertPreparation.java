@@ -8,8 +8,8 @@ import com.infoshareacademy.usersengine.drivers.DriversConstants;
 import com.infoshareacademy.usersengine.services.ParametersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.ejb.Stateful;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -106,15 +106,15 @@ public class AdvertPreparation {
         return message;
     }
 
-    public Advert getNewAdvert(List<Advert> adverts) {
+    public Advert getNewAdvert(List<Advert> adverts, AdvertData advertData) {
         advert.setId(advertsManager.getNextAdvertId(adverts));
-        advert.setDriver(setDriverData());
-        advert.setRoute(setRouteData(adverts));
+        advert.setDriver(createDriverData());
+        advert.setRoute(setRouteData(adverts, advertData));
         advert.setDate(new Date());
         return advert;
     }
 
-    private Route setRouteData(List<Advert> adverts) {
+    private Route setRouteData(List<Advert> adverts, AdvertData advertData) {
         try {
             route.setDate(new SimpleDateFormat(DATE_FORMAT).parse(advertData.getDate()));
         } catch (ParseException e) {
@@ -133,18 +133,18 @@ public class AdvertPreparation {
         return route;
     }
 
-    private Driver setDriverData(){
+    private Driver createDriverData(){
         driver.setCity("Gdańsk");
         driver.setDistrict("Wrzeszcz");
         driver.setId(4L);
         driver.setName("Krzysztof");
         driver.setSurname("Gotowała");
         driver.setPhone("555 555 555");
-        driver.setRating(setRatingData());
+        driver.setRating(createRatingData());
         return driver;
     }
 
-    private Rating setRatingData(){
+    private Rating createRatingData(){
         rating.setAverage(4.5);
         rating.setPersons(2);
         return rating;
