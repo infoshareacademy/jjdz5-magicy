@@ -38,7 +38,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
@@ -107,18 +107,16 @@
                 </div>
             </div>
 
-            <div id="right-cards">
+            <div id="right-side-cards">
 
                 <div id="time-card" class="card controls-card bg-primary text-white panel">
-                    <a><div id="time-header" class="card-header" role="button"
-                            data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
-                            aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
-                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
+                    <a role="button" data-toggle="collapse" data-target="#collapseTime"
+                       aria-expanded="false" aria-controls="collapseTime" data-parent="#right-side-cards">
+                        <div id="time-header" class="card-header">Time</div></a>
+                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header">
                         <div class="card-body">
                             <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
                             <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required disabled>
-                            <#--<div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>-->
-                            <#--<input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time" disabled>-->
                             <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
                             <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required disabled>
                             <div id="date-label" class="card-title card-label">Date:</div>
@@ -128,10 +126,10 @@
                 </div>
 
                 <div id="driver-card" class="card controls-card bg-primary text-white panel">
-                    <a><div id="driver-header" class="card-header" role="button"
-                            data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
-                            aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
-                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
+                    <a role="button" data-toggle="collapse" data-target="#collapseDriver"
+                       aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
+                        <div id="driver-header" class="card-header">Driver</div></a>
+                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
                             <div class="card-label">${advert.driver.name} ${advert.driver.surname}</div>
                             <div class="card-label">${advert.driver.phoneNumber}</div>
@@ -142,13 +140,21 @@
                     </div>
                 </div>
 
-                <div id="seats-card" class="card controls-card bg-primary text-white panel">
-
-                </div>
-
             </div>
 
-            <div class="card mb-5">
+            <div id="controls">
+                <button id="show-cards" type="button" class="btn button"
+                        onclick="$('.collapse').collapse('show');">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <br>
+                <button id="hide-cards" type="button" class="btn button"
+                        onclick="$('.collapse').collapse('hide');">
+                    <i class="fas fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <div class="card mt-3 mb-5">
                 <div id="map"></div>
             </div>
             
@@ -171,7 +177,6 @@
 <#assign eTime = advert.endTime>
 <#assign date = advert.date>
 
-
 <script>
 
     var originPlaceIdField = document.getElementById("origin-address");
@@ -179,10 +184,6 @@
     var originTimeField = document.getElementById("origin-time");
     var destinationTimeField = document.getElementById("destination-time");
     var dateField = document.getElementById("date");
-
-
-    var originPlaceInfoField = document.getElementById("origin-address-info");
-    var destinationPlaceInfoField = document.getElementById("destination-address-info");
 
     window.onload = function () {
         originPlaceIdField.value = "${sAddress}";
@@ -194,8 +195,8 @@
     
     function initMap() {
         var addressesCard = document.getElementById('addresses-card');
-        var timeCard = document.getElementById('time-card');
-        var driverCard = document.getElementById('driver-card');
+        var rightSideCards = document.getElementById('right-side-cards');
+        var controls = document.getElementById('controls');
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -213,8 +214,8 @@
         directionsDisplay.setMap(map);
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
-        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(timeCard);
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(driverCard);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
@@ -223,12 +224,6 @@
         directionsService.route({
             origin: {lat: ${sLat}, lng: ${sLng}},
             destination: {lat: ${eLat}, lng: ${eLng}},
-            // waypoints: [
-            //     {
-            //         location: {lat: 54.4007959, lng: 18.5822041},
-            //         stopover: true
-            //     }
-            // ],
             travelMode: google.maps.TravelMode["DRIVING"]
         }, function(response, status) {
             if (status == 'OK') {

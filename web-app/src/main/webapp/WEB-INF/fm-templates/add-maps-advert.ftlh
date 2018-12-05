@@ -30,7 +30,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
@@ -94,12 +94,12 @@
                 </div>
             </div>
 
-            <div id="right-cards">
+            <div id="right-side-cards">
 
                 <div id="time-card" class="card controls-card bg-primary text-white panel">
-                    <a><div id="time-header" class="card-header" role="button"
-                            data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
-                            aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
+                    <a role="button" data-toggle="collapse" data-target="#collapseTime"
+                       aria-expanded="false" aria-controls="collapseTime" data-parent="#right-side-cards">
+                        <div id="time-header" class="card-header">Time</div></a>
                     <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
                         <div class="card-body">
                             <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
@@ -116,9 +116,9 @@
                 </div>
 
                 <div id="driver-card" class="card controls-card bg-primary text-white panel">
-                    <a><div id="driver-header" class="card-header" role="button"
-                            data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
-                            aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
+                    <a role="button" data-toggle="collapse" data-target="#collapseDriver"
+                       aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
+                        <div id="driver-header" class="card-header">Driver</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
                         <div class="card-body">
                             <div id="driver-label" class="card-title card-label">Driver:</div>
@@ -135,6 +135,18 @@
             <input id="destination-place-id" type="hidden" name="endMapsPointId">
             <input id="origin-precise" type="hidden" name="startStreetNumber">
             <input id="destination-precise" type="hidden" name="endStreetNumber">
+
+            <div id="controls">
+                <button id="show-cards" type="button" class="btn button"
+                        onclick="$('.collapse').collapse('show');">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <br>
+                <button id="hide-cards" type="button" class="btn button"
+                        onclick="$('.collapse').collapse('hide');">
+                    <i class="fas fa-eye-slash"></i>
+                </button>
+            </div>
 
             <button type="submit" id="submitButton" class="btn button">Submit</button>
 
