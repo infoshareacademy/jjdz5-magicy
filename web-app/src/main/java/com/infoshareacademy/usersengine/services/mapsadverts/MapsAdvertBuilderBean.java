@@ -14,6 +14,8 @@ import java.util.Map;
 @Stateless
 public class MapsAdvertBuilderBean implements MapsAdvertBuilder{
 
+    private Long buildedAdvertId;
+
     @Inject
     private MapsAddressBuilder addressBuilder;
 
@@ -32,16 +34,39 @@ public class MapsAdvertBuilderBean implements MapsAdvertBuilder{
                 getDriverFromDatabase(parameters),
                 addressBuilder.buildStartMapsAddress(parameters),
                 addressBuilder.buildEndMapsAddress(parameters),
+                buildStartAddressInfo(parameters),
+                buildEndAddressInfo(parameters),
                 dateTimeBuilder.buildStartTime(parameters),
                 dateTimeBuilder.buildEndTime(parameters),
                 dateTimeBuilder.buildDate(parameters));
         mapsAdvertDao.save(mapsAdvert);
+        checkBuildedAdvertId(mapsAdvert);
+    }
+
+    public Long getBuildedAdvertId() {
+        return buildedAdvertId;
+    }
+
+    private void checkBuildedAdvertId(MapsAdvert mapsAdvert) {
+        buildedAdvertId = mapsAdvertDao.findAll().stream()
+                .filter(advert -> advert.equals(mapsAdvert))
+                .findFirst().get().getId();
     }
 
     private MapsDriver getDriverFromDatabase(Map<String, String[]> parameters) {
         final Long driverId = Long.valueOf(ParametersService.getSpecificParameter(parameters,
                 AdvertsConstants.PARAMETER_DRIVER_ID));
         return mapsDriverDao.findById(driverId);
+    }
+    
+    private String buildStartAddressInfo(Map<String, String[]> parameters) {
+        return ParametersService.getSpecificParameter(parameters,
+                AdvertsConstants.PARAMETER_START_INFO);
+    }
+    
+    private String buildEndAddressInfo(Map<String, String[]> parameters) {
+        return ParametersService.getSpecificParameter(parameters,
+                AdvertsConstants.PARAMETER_END_INFO);
     }
 
 }

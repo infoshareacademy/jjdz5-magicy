@@ -155,17 +155,9 @@
                 <tbody>
                 <#list ADVERTS as advert>
                      <tr>
-                         <#if advert.startAddress.info?length &gt; 0>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.info}<hr style="margin: 5px">${advert.startAddress.city}<br>${advert.startAddress.streetName} ${advert.startAddress.streetNumber}</td>
-                         <#else>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.city}<br>${advert.startAddress.streetName} ${advert.startAddress.streetNumber}</td>
-                         </#if>
+                         <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.formattedAddress}</td>
                          <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?string}</td>
-                         <#if advert.endAddress.info?length &gt; 0>
-                            <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.info}<hr style="margin: 5px">${advert.endAddress.city}<br>${advert.endAddress.streetName} ${advert.endAddress.streetNumber}</td>
-                         <#else>
-                            <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.city}<br>${advert.endAddress.streetName} ${advert.endAddress.streetNumber}</td>
-                         </#if>
+                         <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
                          <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?string}</td>
                          <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
                          <#assign car = advert.driver.cars?first>

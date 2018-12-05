@@ -4,36 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
-
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="css/overall.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
-
+    <link rel="stylesheet" href="css/maps-adverts.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
-
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <style>
-        #map {
-            height: 100%;
-            width: 100%;
-        }
-        .margin{
-            margin-bottom:40px;
-            margin-top:20px;
-        }
-        .separator-left {
-            border-left: 1px solid rgba(0,0,0,.1);
+        input:disabled {
+            color: #000000 !important;
+            background-color: #ffffff !important;
         }
     </style>
 </head>
+
 <body>
-<#assign apiKey = API_KEY?first>
+
 <#assign advert = DETAIL_ADVERT?first>
+
 <div class="container">
+
+    <div id="loader">
+        <div class="load"></div>
+    </div>
+
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
                                                  height="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
@@ -43,122 +40,109 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="maps-adverts">Adverts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="add-maps-advert">Add advert</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="drivers">Drivers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="add-driver">Add driver</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about-us">About us</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="maps-adverts">Adverts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add-maps-advert">Add advert</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="drivers">Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add-driver">Add driver</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about-us">About us</a>
+                </li>
             </ul>
         </div>
     </nav>
-    <div class="row">
-        <div class="mt-5 mb-5">
-            <h3>Advert details</h3>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-3">
-            <div class="alert alert-primary text-center">
-                <h3>${advert.date}</h3>
-            </div>
-        </div>
-        <div class="col-6"></div>
-        <div class="col-3">
-            <a href="maps-adverts" class="btn btn-primary float-right">Go back</a>
-        </div>
-    </div>
-    
-    <div class="row">
-
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="text-muted">Departure</h3>
-                </div>
-                <div class="card-body">
-                    <h5 style="color: #747373">${advert.startAddress.city}</h5>
-                    <h5 style="color: #747373">${advert.startAddress.streetName} ${advert.startAddress.streetNumber}</h5>
-                    <#if advert.startAddress.info?length &gt; 0>
-                        <h5 style="color: #747373">${advert.startAddress.info}</h5>
-                    </#if>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="text-muted">Destination</h3>
-                </div>
-                <div class="card-body">
-                    <h5 style="color: #747373">${advert.endAddress.city}</h5>
-                    <h5 style="color: #747373">${advert.endAddress.streetName} ${advert.endAddress.streetNumber}</h5>
-                    <#if advert.endAddress.info?length &gt; 0>
-                        <h5 style="color: #747373">${advert.endAddress.info}<h5>
-                    </#if>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row margin">
-
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="text-muted">Pick up points</h3>
-                </div>
-                <div class="card-body">
-                    <h5 style="color: #747373">Free seats: 0/0</h5><a href="#" class="btn btn-primary">Reserve</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="text-muted">Driver</h3>
-                </div>
-                <div class="card-body">
-                    <h5 style="color: #747373">${advert.driver.name} ${advert.driver.surname}</h5>
-                    <h5 style="color: #747373">${advert.driver.phoneNumber}</h5>
-                    <hr style="margin: 10px">
-                    <#assign car = advert.driver.cars?first>
-                    <h5 style="color: #747373">${car.carBrand} ${car.carModel}</h5>
-                    <h5 style="color: #747373">${car.licensePlate}</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin">
+    <div class="row mt-5">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h3 class="text-muted">Route</h3>
-                </div>
-                <div class="card-body">
-                    <div id="map" style="width: 100%; min-height: 720px"></div>
-                </div>
-            </div>
+            <button class="btn button" disabled>Advert details</button>
         </div>
     </div>
-    <div class="row margin"></div>
+
+    <div class="row mt-3 mb-5">
+        <div class="col-12">
+
+            <div id="addresses-card" class="card controls-card bg-primary text-white expanded">
+                <a><div id="addresses-header" class="card-header" role="button"
+                        data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
+                        aria-controls="collapseAddresses">Addresses
+                </div></a>
+                <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
+                    <div class="card-body">
+                        <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
+                        <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
+                        <input id="origin-address" class="form-control" type="text"
+                               placeholder="Please enter departure address." required disabled>
+                        <div id="destination-address-label" class="card-title card-label">Destination:</div>
+                        <input id="destination-address" class="form-control" type="text"
+                               placeholder="Please enter destination address." required disabled>
+                        <#if advert.startAddressInfo?length &gt; 0>
+                            <div id="origin-address-info-label" class="card-title card-label">Additional information form departure point:</div>
+                            <input id="origin-address-info" class="form-control" type="text"
+                                   name="startAddressInfo" placeholder="Departure additional information."
+                                   disabled value="${advert.startAddressInfo}">
+                        </#if>
+                        <#if advert.endAddressInfo?length &gt; 0>
+                            <div id="destination-address-info-label" class="card-title card-label">Additional information for destination point:</div>
+                            <input id="destination-address-info" class="form-control mt-1" type="text"
+                                   name="endAddressInfo" placeholder="Destination additional information."
+                                   disabled value="${advert.endAddressInfo}">
+                        </#if>
+                    </div>
+                </div>
+            </div>
+
+            <div id="right-cards">
+
+                <div id="time-card" class="card controls-card bg-primary text-white panel">
+                    <a><div id="time-header" class="card-header" role="button"
+                            data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
+                            aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
+                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
+                        <div class="card-body">
+                            <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
+                            <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required disabled>
+                            <#--<div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>-->
+                            <#--<input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time" disabled>-->
+                            <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
+                            <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required disabled>
+                            <div id="date-label" class="card-title card-label">Date:</div>
+                            <input id="date" class="form-control low-width-inputs" type="date" name="date" required disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="driver-card" class="card controls-card bg-primary text-white panel">
+                    <a><div id="driver-header" class="card-header" role="button"
+                            data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
+                            aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
+                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
+                        <div class="card-body">
+                            <div id="driver-label" class="card-title card-label">Driver:</div>
+                            <select id="driver" class="custom-select" name="driverId" required>
+                                <option value="1">Driver</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div id="map"></div>
+            </div>
+            
+        </div>
+    </div>
 </div>
 
 <#include "footer.ftlh">
@@ -166,15 +150,45 @@
 <#setting locale="en_US">
 <#assign sLat = advert.startAddress.latitude?string["0.#######"]>
 <#assign sLng = advert.startAddress.longitude?string["0.#######"]>
+<#assign sId = advert.startAddress.mapsPointId>
+<#assign eId = advert.endAddress.mapsPointId>
 <#assign eLat = advert.endAddress.latitude?string["0.#######"]>
 <#assign eLng = advert.endAddress.longitude?string["0.#######"]>
+<#assign sAddress = advert.startAddress.formattedAddress>
+<#assign eAddress = advert.endAddress.formattedAddress>
+<#assign sTime = advert.startTime>
+<#assign eTime = advert.endTime>
+<#assign date = advert.date>
+
 
 <script>
+
+    var originPlaceIdField = document.getElementById("origin-address");
+    var destinationPlaceIdField = document.getElementById("destination-address");
+    var originTimeField = document.getElementById("origin-time");
+    var destinationTimeField = document.getElementById("destination-time");
+    var dateField = document.getElementById("date");
+
+
+    var originPlaceInfoField = document.getElementById("origin-address-info");
+    var destinationPlaceInfoField = document.getElementById("destination-address-info");
+
+    window.onload = function () {
+        originPlaceIdField.value = "${sAddress}";
+        destinationPlaceIdField.value = "${eAddress}";
+        originTimeField.value = "${sTime}";
+        destinationTimeField.value = "${eTime}";
+        dateField.value = "${date}";
+    };
+    
     function initMap() {
+        var addressesCard = document.getElementById('addresses-card');
+        var timeCard = document.getElementById('time-card');
+        var driverCard = document.getElementById('driver-card');
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14,
+            zoom: 12,
             center: {lat: 54.403859, lng: 18.604555},
             disableDefaultUI: true,
             disableDoubleClickZoom: true,
@@ -187,6 +201,10 @@
 
         directionsDisplay.setMap(map);
 
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(timeCard);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(driverCard);
+
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
@@ -194,27 +212,29 @@
         directionsService.route({
             origin: {lat: ${sLat}, lng: ${sLng}},
             destination: {lat: ${eLat}, lng: ${eLng}},
-            waypoints: [
-                {
-                    location: {lat: 54.4007959, lng: 18.5822041},
-                    stopover: true
-                }
-            ],
+            // waypoints: [
+            //     {
+            //         location: {lat: 54.4007959, lng: 18.5822041},
+            //         stopover: true
+            //     }
+            // ],
             travelMode: google.maps.TravelMode["DRIVING"]
         }, function(response, status) {
             if (status == 'OK') {
                 directionsDisplay.setDirections(response);
-                var legs = response.routes.legs;
 
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
         });
     }
+
 </script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap">
-</script>
+<script src="js/preloader.js"></script>
+<script src="js/address-card-expander.js"></script>
+<#assign apikey = API_KEY[0]>
+<script src="https://maps.googleapis.com/maps/api/js?key=${apikey}&libraries=places&callback=initMap"
+        async defer></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
 </body>
 </html>

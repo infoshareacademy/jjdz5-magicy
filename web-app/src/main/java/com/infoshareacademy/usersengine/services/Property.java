@@ -4,6 +4,8 @@ public enum Property {
 
     API_KEY,
 
+    REDIRECTION_DELAY,
+
     ADVERT_MAX_PERIOD_DAYS,
     ADVERT_MIN_HOURS_TO_START,
 

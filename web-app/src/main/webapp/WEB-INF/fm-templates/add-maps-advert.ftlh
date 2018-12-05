@@ -54,9 +54,11 @@
         </div>
     </nav>
 
+    <form method="post" action="/jjdz5-magicy/add-maps-advert">
+
     <div class="row mt-5">
         <div class="col-10">
-            <button class="btn button" disabled>Add new advert</button>
+            <button type="submit" class="btn button">Add new advert</button>
         </div>
         <div class="col-2">
             <a class="btn button float-right" href="#info">
@@ -67,81 +69,82 @@
 
     <div class="row mt-3 mb-5">
         <div class="col-12">
-            <form method="post" action="/jjdz5-magicy/add-maps-advert">
 
-                <div id="addresses-card" class="card controls-card bg-primary text-white">
-                    <a><div id="addresses-header" class="card-header" role="button"
-                            data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
-                            aria-controls="collapseAddresses">Addresses
-                    </div></a>
-                    <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
+            <div id="addresses-card" class="card controls-card bg-primary text-white">
+                <a><div id="addresses-header" class="card-header" role="button"
+                        data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
+                        aria-controls="collapseAddresses">Addresses
+                </div></a>
+                <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
+                    <div class="card-body">
+                        <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
+                        <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
+                        <input id="origin-address" class="form-control" type="text"
+                               placeholder="Please enter departure address." required>
+                        <div id="destination-address-label" class="card-title card-label">Destination:</div>
+                        <input id="destination-address" class="form-control" type="text"
+                               placeholder="Please enter destination address." required>
+                        <div id="addresses-info-label" class="card-title card-label">Additional information (not required):</div>
+                        <input id="origin-address-info" class="form-control" type="text"
+                               name="startInfo" placeholder="Departure additional information.">
+                        <input id="destination-address-info" class="form-control mt-1" type="text"
+                               name="endInfo" placeholder="Destination additional information.">
+                    </div>
+                </div>
+            </div>
+
+            <div id="right-cards">
+
+                <div id="time-card" class="card controls-card bg-primary text-white panel">
+                    <a><div id="time-header" class="card-header" role="button"
+                            data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
+                            aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
+                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
                         <div class="card-body">
-                            <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
-                            <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
-                            <input id="origin-address" class="form-control" type="text"
-                                   placeholder="Please enter departure address." required>
-                            <div id="destination-address-label" class="card-title card-label">Destination:</div>
-                            <input id="destination-address" class="form-control" type="text"
-                                   placeholder="Please enter destination address." required>
-                            <div id="addresses-info-label" class="card-title card-label">Additional information (not required):</div>
-                            <input id="origin-address-info" class="form-control" type="text"
-                                   name="startAddressInfo" placeholder="Departure additional information.">
-                            <input id="destination-address-info" class="form-control mt-1" type="text"
-                                   name="endAddressInfo" placeholder="Destination additional information.">
+                            <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
+                            <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
+                            <div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>
+                            <input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time"
+                                   style="background: rgba(0.0.0.1)" disabled>
+                            <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
+                            <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required>
+                            <div id="date-label" class="card-title card-label">Date:</div>
+                            <input id="date" class="form-control low-width-inputs" type="date" name="date" required>
                         </div>
                     </div>
                 </div>
 
-                <div id="right-cards">
-
-                    <div id="time-card" class="card controls-card bg-primary text-white panel">
-                        <a><div id="time-header" class="card-header" role="button"
-                                data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
-                                aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
-                        <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
-                            <div class="card-body">
-                                <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
-                                <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
-                                <div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>
-                                <input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time" disabled>
-                                <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
-                                <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required>
-                                <div id="date-label" class="card-title card-label">Date:</div>
-                                <input id="date" class="form-control low-width-inputs" type="date" name="date" required>
-                            </div>
+                <div id="driver-card" class="card controls-card bg-primary text-white panel">
+                    <a><div id="driver-header" class="card-header" role="button"
+                            data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
+                            aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
+                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
+                        <div class="card-body">
+                            <div id="driver-label" class="card-title card-label">Driver:</div>
+                            <select id="driver" class="custom-select" name="driverId" required>
+                                <option value="1">Driver</option>
+                            </select>
                         </div>
                     </div>
-
-                    <div id="driver-card" class="card controls-card bg-primary text-white panel">
-                        <a><div id="driver-header" class="card-header" role="button"
-                                data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
-                                aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
-                        <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
-                            <div class="card-body">
-                                <div id="driver-label" class="card-title card-label">Driver:</div>
-                                <select id="driver" class="custom-select" name="driverId" required>
-                                    <option value="1">Driver</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
-                <input id="origin-place-id" type="hidden" name="startMapsPointId">
-                <input id="destination-place-id" type="hidden" name="endMapsPointId">
-                <input id="origin-precise" type="hidden" name="startStreetNumber">
-                <input id="destination-precise" type="hidden" name="endStreetNumber">
+            </div>
 
-                <button type="submit" id="submitButton" class="btn button">Submit</button>
+            <input id="origin-place-id" type="hidden" name="startMapsPointId">
+            <input id="destination-place-id" type="hidden" name="endMapsPointId">
+            <input id="origin-precise" type="hidden" name="startStreetNumber">
+            <input id="destination-precise" type="hidden" name="endStreetNumber">
 
-                <div class="card">
-                    <div id="map"></div>
-                </div>
+            <button type="submit" id="submitButton" class="btn button">Submit</button>
 
-            </form>
+            <div class="card">
+                <div id="map"></div>
+            </div>
+
         </div>
     </div>
+
+    </form>
 
     <#if SUMMARY?has_content>
 

@@ -22,10 +22,6 @@ html, body {
     width: 120px !important;
 }
 
-.low-width-inputs:disabled {
-    background-color: rgba(0,0,0,0.1) !important;
-}
-
 input[type=time]::-webkit-inner-spin-button,
 input[type=time]::-webkit-outer-spin-button,
 input[type=date]::-webkit-inner-spin-button,
@@ -78,7 +74,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 #addresses-card {
-    min-width: 300px;
+    min-width: 310px;
     -webkit-transition: ease 0.5s;
     transition: ease 0.5s;
 }
@@ -118,4 +114,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 #submitButton {
     font: 500 28px Roboto, Arial, sans-serif !important;
+}
+
+#origin-time-suggestion {
+    background-color: #3f51b5 !important;
 }

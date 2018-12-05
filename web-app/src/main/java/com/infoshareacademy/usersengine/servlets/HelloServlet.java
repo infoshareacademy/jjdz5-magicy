@@ -91,22 +91,27 @@ public class HelloServlet extends HttpServlet {
 
         MapsAddress testFirstAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
                 "Gdańsk", "Kołobrzeska", "41c",
-                54.4043415, 18.5880136,"");
+                "Alfa Centrum, Kołobrzeska 41C, Gdańsk",
+                54.4043415, 18.5880136);
         mapsAddressDao.save(testFirstAddress);
         MapsAddress testSecondAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
                 "Gdańsk", "aleja Grunwaldzka", "472A",
-                54.4024308, 18.5704119, "Olivia Point");
+                "Olivia Bussiness Centre, aleja Grunwaldzka 472A, Gdańsk",
+                54.4024308, 18.5704119);
         mapsAddressDao.save(testSecondAddress);
         MapsAddress testThirdAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
                 "Gdynia", "Łużycka", "6A",
-                54.4949626, 18.5337226, "Łużycka Office Park - Budynek A");
+                "Łużycka Office Park, Łużycka 6A, Gdynia",
+                54.4949626, 18.5337226);
         mapsAddressDao.save(testThirdAddress);
 
         MapsAdvert testFirstAdvert = new MapsAdvert(driverKuba, testFirstAddress, testSecondAddress,
+                "#1 Test start info", "#1 Test end info",
                 LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
         mapsAdvertDao.save(testFirstAdvert);
 
         MapsAdvert testSecondAdvert = new MapsAdvert(driverKuba, testThirdAddress, testSecondAddress,
+                "#2 Test start info", "#2 Test end info",
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
         mapsAdvertDao.save(testSecondAdvert);
 

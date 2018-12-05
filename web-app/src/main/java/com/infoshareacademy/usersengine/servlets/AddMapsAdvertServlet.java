@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.services.PropertiesService;
+import com.infoshareacademy.usersengine.services.RedirectionService;
 import com.infoshareacademy.usersengine.services.ServletService;
 import com.infoshareacademy.usersengine.services.datamodels.AddMapsAdvertDataModel;
 import com.infoshareacademy.usersengine.services.mapsadverts.MapsAdvertProcessing;
@@ -20,8 +21,6 @@ import java.util.List;
 public class AddMapsAdvertServlet extends AppInitServlet {
 
     private static final String TEMPLATE_NAME = "add-maps-advert";
-    private static final String SUMMARY_KEY = "SUMMARY";
-    private static final String REDIRECTION_URL = "/jjdz5-magicy/maps-adverts";
 
     @Inject
     private TemplateProvider templateProvider;
@@ -46,15 +45,18 @@ public class AddMapsAdvertServlet extends AppInitServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
-        processing.processMapsAdvert(req.getParameterMap());
-        proceed(resp, processing.getSummary());
+        processing.processMapsAdvertCreation(req.getParameterMap());
+        proceed(resp);
     }
 
-    private void proceed(HttpServletResponse resp, List<String> summary) throws IOException {
-        if (ifSummaryIsSuccess(summary)) {
-            resp.sendRedirect(REDIRECTION_URL);
+    private void proceed(HttpServletResponse resp) throws IOException {
+        if (ifSummaryIsSuccess(processing.getSummary())) {
+            resp.getWriter().write(RedirectionService.buildAddAdvertRedirectionPage(
+                    PropertiesService.getMsgAdvertAddOk(),
+                    processing.getBuildedAdvertId(),
+                    PropertiesService.getRedirectionDelay()));
         } else {
-            dataModel.fillDataModelWithPostData(SUMMARY_KEY, processing.getSummary());
+            dataModel.fillDataModelWithPostData(processing.getSummary());
             templateProvider.build(getServletContext(), TEMPLATE_NAME,
                     dataModel.getDataModel(), resp);
         }
