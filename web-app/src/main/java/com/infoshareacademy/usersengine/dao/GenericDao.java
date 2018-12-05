@@ -68,4 +68,5 @@ public class GenericDao<T, K> {
         return getEntityClass().getSimpleName();
     }
 
+
 }

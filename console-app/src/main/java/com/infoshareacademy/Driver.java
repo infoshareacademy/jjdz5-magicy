@@ -23,6 +23,7 @@ public class Driver extends User {
 
     private List<Advert> adverts;
 
+
     public Driver(String name, String surname, String phone, String city, String district, Rating rating, Long id) {
         super(name, surname, phone, rating);
         this.city = city;

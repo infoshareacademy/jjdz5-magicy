@@ -1,5 +1,13 @@
 package com.infoshareacademy.usersengine.servlets;
+import com.infoshareacademy.usersengine.dao.CarDao;
+import com.infoshareacademy.usersengine.dao.MapsAddressDao;
+import com.infoshareacademy.usersengine.dao.MapsAdvertDao;
+import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.Car;
+import com.infoshareacademy.usersengine.model.MapsAddress;
+import com.infoshareacademy.usersengine.model.MapsAdvert;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -12,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +33,23 @@ public class HelloServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
+    @Inject
+    private MapsAdvertDao mapsAdvertDao;
+
+    @Inject
+    private MapsAddressDao mapsAddressDao;
+
+    @Inject
+    private MapsDriverDao mapsDriverDao;
+
+    @Inject
+    private CarDao carDao;
+
+    @Override
+    public void init() throws ServletException {
+        fillDatabaseWithAdvancedDefaults();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> dataModel = new HashMap<>();
@@ -33,5 +60,55 @@ public class HelloServlet extends HttpServlet {
         } catch (TemplateException e) {
             LOG.error("TemplateException. Template cannot be created.");
         }
+    }
+
+    private void fillDatabaseWithAdvancedDefaults() {
+
+        MapsDriver driverKuba = new MapsDriver("Kuba", "Jurek",
+                "000-111-222");
+        mapsDriverDao.save(driverKuba);
+
+        MapsDriver driverMarysia = new MapsDriver("Marysia", "Wicherkiewicz",
+                "000-333-444");
+        mapsDriverDao.save(driverMarysia);
+
+        MapsDriver driverKrzysiu = new MapsDriver("Krzysztof", "Gotowała",
+                "000-555-666");
+        mapsDriverDao.save(driverKrzysiu);
+
+        MapsDriver driverGrzesiu = new MapsDriver("Grzegorz", "Ruchniewicz",
+                "000-777-888");
+        mapsDriverDao.save(driverGrzesiu);
+
+        Car kubaCar = new Car("GD 12345", "Opel", "Vectra", driverKuba);
+        carDao.save(kubaCar);
+
+        Car marysiaCar = new Car("GA 12345", "Ford", "Focus", driverMarysia);
+        carDao.save(marysiaCar);
+
+        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverGrzesiu);
+        carDao.save(krzysiuCar);
+
+        MapsAddress testFirstAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
+                "Gdańsk", "Kołobrzeska", "41c",
+                54.4043415, 18.5880136,"");
+        mapsAddressDao.save(testFirstAddress);
+        MapsAddress testSecondAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
+                "Gdańsk", "aleja Grunwaldzka", "472A",
+                54.4024308, 18.5704119, "Olivia Point");
+        mapsAddressDao.save(testSecondAddress);
+        MapsAddress testThirdAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
+                "Gdynia", "Łużycka", "6A",
+                54.4949626, 18.5337226, "Łużycka Office Park - Budynek A");
+        mapsAddressDao.save(testThirdAddress);
+
+        MapsAdvert testFirstAdvert = new MapsAdvert(driverKuba, testFirstAddress, testSecondAddress,
+                LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
+        mapsAdvertDao.save(testFirstAdvert);
+
+        MapsAdvert testSecondAdvert = new MapsAdvert(driverKuba, testThirdAddress, testSecondAddress,
+                LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
+        mapsAdvertDao.save(testSecondAdvert);
+
     }
 }
