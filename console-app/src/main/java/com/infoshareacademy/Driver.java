@@ -12,22 +12,15 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Entity
-@Table(name = "drivers")
 public class Driver extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "city")
     private String city;
 
-    @Column(name = "district")
     private String district;
 
-    @OneToMany(mappedBy = "advert", fetch = FetchType.LAZY)
+
     private List<Advert> adverts;
 
     public Driver(String name, String surname, String phone, String city, String district, Rating rating, Long id) {

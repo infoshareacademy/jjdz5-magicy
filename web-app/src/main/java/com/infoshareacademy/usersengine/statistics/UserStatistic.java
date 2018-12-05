@@ -1,8 +1,7 @@
 package com.infoshareacademy.usersengine.statistics;
 
-import javax.ejb.Stateless;
+import com.infoshareacademy.usersengine.model.User;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,6 +29,10 @@ public class UserStatistic {
         this.userId = userId;
         this.time = time;
         this.userActivity = userActivity;
+    }
+
+    public UserStatistic addStatistic(User user, UserActivity userActivity){
+        return new UserStatistic(user.getId(), LocalDateTime.now(), userActivity);
     }
 
     public long getId() {

@@ -3,42 +3,19 @@ package com.infoshareacademy;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "users")
-@NamedQueries({
-@NamedQuery(
-        name ="findUserByEmail",
-        query = "SELECT u FROM User u WHERE u.userEmail = :param"
-        )
-        })
+
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    @NotNull
     private String name;
 
-    @Column(name = "surname")
-    @NotNull
     private String surname;
 
-    @Column(name = "email")
-    @NotNull
-    private String userEmail;
-
-    @Column(name = "phone")
-    @NotNull
     private String phone;
 
-    @OneToOne
-    @JoinColumn(name = "rating_id", unique = true)
     private Rating rating;
 
-    @Column(name = "password")
     private String password;
 
     public User(String name, String surname, String phone, Rating rating) {
