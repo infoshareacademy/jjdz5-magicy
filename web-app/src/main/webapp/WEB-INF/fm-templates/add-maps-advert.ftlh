@@ -138,7 +138,7 @@
 
             <button type="submit" id="submitButton" class="btn button">Submit</button>
 
-            <div class="card">
+            <div class="card mt-3">
                 <div id="map"></div>
             </div>
 

@@ -5,97 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
 
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <#--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <#--<script src="js/jquery-3.1.1.min.js"></script>-->
+    <#--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>-->
+    <#--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
 
     <link rel="stylesheet" href="css/overall.css">
     <link rel="stylesheet" href="css/maps-adverts.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
-
+    <link rel="stylesheet" href="css/filterables.css">
+    <#--<link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
-
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <style>
-        #map {
-            height: 100%;
-            width: 100%;
+        .card {
+            padding: 5px !important;
         }
-        .filterable {
-            margin-top: 15px;
-        }
-        .filterable .panel-heading .pull-right {
-            margin-top: -20px;
-        }
-        .filterable .filters input[disabled] {
-            background-color: transparent;
-            border: none;
-            cursor: auto;
-            box-shadow: none;
-            padding: 0;
-            height: auto;
-        }
-        .filterable .filters input[disabled]::-webkit-input-placeholder {
-            color: #333;
-        }
-        .filterable .filters input[disabled]::-moz-placeholder {
-            color: #333;
-        }
-        .filterable .filters input[disabled]:-ms-input-placeholder {
-            color: #333;
-        }
-        .blue-column{
-            background: #f2f2f2;
-        }
-
     </style>
 </head>
 <body>
 <script>
-    $(document).ready(function(){
-        $('.filterable .btn-filter').click(function(){
-            var $panel = $(this).parents('.filterable'),
-                    $filters = $panel.find('.filters input'),
-                    $tbody = $panel.find('.table tbody');
-            if ($filters.prop('disabled') == true) {
-                $filters.prop('disabled', false);
-                $filters.first().focus();
-            } else {
-                $filters.val('').prop('disabled', true);
-                $tbody.find('.no-result').remove();
-                $tbody.find('tr').show();
-            }
-        });
-
-        $('.filterable .filters input').keyup(function(e){
-            /* Ignore tab key */
-            var code = e.keyCode || e.which;
-            if (code == '9') return;
-            /* Useful DOM data and selectors */
-            var $input = $(this),
-                    inputContent = $input.val().toLowerCase(),
-                    $panel = $input.parents('.filterable'),
-                    column = $panel.find('.filters th').index($input.parents('th')),
-                    $table = $panel.find('.table'),
-                    $rows = $table.find('tbody tr');
-            /* Dirtiest filter function ever ;) */
-            var $filteredRows = $rows.filter(function(){
-                var value = $(this).find('td').eq(column).text().toLowerCase();
-                return value.indexOf(inputContent) === -1;
-            });
-            /* Clean previous no-result if exist */
-            $table.find('tbody .no-result').remove();
-            /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-            $rows.show();
-            $filteredRows.hide();
-            /* Prepend no-result row if all rows are filtered */
-            if ($filteredRows.length === $rows.length) {
-                $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
-            }
-        });
-    });
+    // $(document).ready(function(){
+    //     $('.filterable .btn-filter').click(function(){
+    //         var $panel = $(this).parents('.filterable'),
+    //                 $filters = $panel.find('.filters input'),
+    //                 $tbody = $panel.find('.table tbody');
+    //         if ($filters.prop('disabled') == true) {
+    //             $filters.prop('disabled', false);
+    //             $filters.first().focus();
+    //         } else {
+    //             $filters.val('').prop('disabled', true);
+    //             $tbody.find('.no-result').remove();
+    //             $tbody.find('tr').show();
+    //         }
+    //     });
+    //
+    //     $('.filterable .filters input').keyup(function(e){
+    //         /* Ignore tab key */
+    //         var code = e.keyCode || e.which;
+    //         if (code == '9') return;
+    //         /* Useful DOM data and selectors */
+    //         var $input = $(this),
+    //                 inputContent = $input.val().toLowerCase(),
+    //                 $panel = $input.parents('.filterable'),
+    //                 column = $panel.find('.filters th').index($input.parents('th')),
+    //                 $table = $panel.find('.table'),
+    //                 $rows = $table.find('tbody tr');
+    //         /* Dirtiest filter function ever ;) */
+    //         var $filteredRows = $rows.filter(function(){
+    //             var value = $(this).find('td').eq(column).text().toLowerCase();
+    //             return value.indexOf(inputContent) === -1;
+    //         });
+    //         /* Clean previous no-result if exist */
+    //         $table.find('tbody .no-result').remove();
+    //         /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+    //         $rows.show();
+    //         $filteredRows.hide();
+    //         /* Prepend no-result row if all rows are filtered */
+    //         if ($filteredRows.length === $rows.length) {
+    //             $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+    //         }
+    //     });
+    // });
 </script>
 
 <div class="container">
@@ -136,12 +109,12 @@
     </nav>
 <#--The columns titles are merged with the filters inputs thanks to the placeholders attributes-->
     <div class="row mt-3">
-        <div class="col-12">
+        <div class="col-12" style="padding-left: 0">
             <button class="btn button" disabled>Adverts list</button>
         </div>
     </div>
 
-    <div class="row mt-1 mb-5">
+    <div class="row mt-3 mb-5">
 
         <div class="card">
             <div class="panel panel-primary filterable">
@@ -154,7 +127,10 @@
                             <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination time" disabled></th>
                             <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
                             <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
-                            <th class="text-center"><button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Filter</button></th>
+                            <#--<th class="text-center"><button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Filter</button></th>-->
+                            <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
+                                Filter
+                            </button></th>
                         </tr>
 
                     </thead>
@@ -170,7 +146,7 @@
                              <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
                              <td class="align-middle">
                                  <form action="/jjdz5-magicy/maps-adverts" method="post">
-                                    <button type="submit" class="btn button" name="advertId" value="${advert.id}">Details</button>
+                                    <button type="submit" class="btn button-functional" name="advertId" value="${advert.id}">Details</button>
                                  </form>
                              </td>
                          </tr>
@@ -185,6 +161,6 @@
 <#include "footer.ftlh">
 
 <script src="js/preloader.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
+<script src="js/filterable-table.js"></script>
 </body>
 </html>

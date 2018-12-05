@@ -99,18 +99,29 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .button {
     background-color: #3f51b5 !important;
     padding: 0.75rem !important;
-    font: 500 28px Roboto, Arial, sans-serif !important;
+    font: 500 24px Roboto, Arial, sans-serif !important;
 }
 
+.button-functional {
+    background-color: #3f51b5 !important;
+    padding: 0.75rem !important;
+    font: 500 16px Roboto, Arial, sans-serif !important;
+}
+
+
 .button:hover {
+    color: #ffffff !important;
+}
+
+.button-functional:hover {
     color: #ffffff !important;
 }
 
 .button:disabled {
     opacity: 1.0 !important;
     background-color: #3f51b5 !important;
-    padding: 0.75rem !important;
-    font: 500 28px Roboto, Arial, sans-serif !important;
+    /*padding: 0.75rem !important;*/
+    /*font: 500 28px Roboto, Arial, sans-serif !important;*/
 }
 
 #submitButton {
@@ -119,4 +130,17 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 #origin-time-suggestion {
     background-color: #3f51b5 !important;
+}
+
+.table-bordered {
+    border-color: #2d2d2d6e !important;
+}
+
+.table-bordered td{
+    border-color: #2d2d2d6e !important;
+}
+
+.table-bordered th{
+    border-color: #2d2d2d6e !important;
+    border-bottom: 0 !important;
 }
