@@ -56,18 +56,19 @@
 
     <form method="post" action="/jjdz5-magicy/add-maps-advert">
 
-    <div class="row mt-5">
-        <div class="col-10">
+    <div class="row mt-3">
+        <div class="col-6">
             <button type="submit" class="btn button">Add new advert</button>
         </div>
-        <div class="col-2">
+        <div class="col-6">
             <a class="btn button float-right" href="#info">
-                <i class="fas fa-info-circle fa-3x"></i>
+                Help
+                <i class="fas fa-info-circle"></i>
             </a>
         </div>
     </div>
 
-    <div class="row mt-3 mb-5">
+    <div class="row mt-1 mb-5">
         <div class="col-12">
 
             <div id="addresses-card" class="card controls-card bg-primary text-white">

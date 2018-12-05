@@ -62,13 +62,19 @@
         </div>
     </nav>
 
-    <div class="row mt-5">
-        <div class="col-12">
+    <div class="row mt-3">
+        <div class="col-6">
             <button class="btn button" disabled>Advert details</button>
+        </div>
+        <div class="col-6">
+            <a class="btn button float-right" href="/jjdz5-magicy/maps-adverts">
+                Go back
+                <i class="fas fa-undo-alt"></i>
+            </a>
         </div>
     </div>
 
-    <div class="row mt-3 mb-5">
+    <div class="row mt-1 mb-5">
         <div class="col-12">
 
             <div id="addresses-card" class="card controls-card bg-primary text-white expanded">
@@ -127,17 +133,22 @@
                             aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
                         <div class="card-body">
-                            <div id="driver-label" class="card-title card-label">Driver:</div>
-                            <select id="driver" class="custom-select" name="driverId" required>
-                                <option value="1">Driver</option>
-                            </select>
+                            <div class="card-label">${advert.driver.name} ${advert.driver.surname}</div>
+                            <div class="card-label">${advert.driver.phoneNumber}</div>
+                            <#assign car = advert.driver.cars?first>
+                            <div class="card-label">${car.carBrand} ${car.carModel}</div>
+                            <div class="card-label">${car.licensePlate}</div>
                         </div>
                     </div>
                 </div>
 
+                <div id="seats-card" class="card controls-card bg-primary text-white panel">
+
+                </div>
+
             </div>
 
-            <div class="card">
+            <div class="card mb-5">
                 <div id="map"></div>
             </div>
             
