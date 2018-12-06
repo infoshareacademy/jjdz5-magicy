@@ -165,6 +165,7 @@
 <#include "footer.ftlh">
 
 <#setting locale="en_US">
+<#setting time_format="HH:mm">
 <#assign sLat = advert.startAddress.latitude?string["0.#######"]>
 <#assign sLng = advert.startAddress.longitude?string["0.#######"]>
 <#assign sId = advert.startAddress.mapsPointId>
@@ -173,8 +174,8 @@
 <#assign eLng = advert.endAddress.longitude?string["0.#######"]>
 <#assign sAddress = advert.startAddress.formattedAddress>
 <#assign eAddress = advert.endAddress.formattedAddress>
-<#assign sTime = advert.startTime>
-<#assign eTime = advert.endTime>
+<#assign sTime = advert.startTime?time>
+<#assign eTime = advert.endTime?time>
 <#assign date = advert.date>
 
 <script>

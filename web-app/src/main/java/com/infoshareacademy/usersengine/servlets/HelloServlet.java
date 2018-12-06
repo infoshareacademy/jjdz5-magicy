@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,7 +108,8 @@ public class HelloServlet extends HttpServlet {
 
         MapsAdvert testFirstAdvert = new MapsAdvert(driverKuba, testFirstAddress, testSecondAddress,
                 "#1 Test start info", "#1 Test end info",
-                LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
+                LocalTime.now().plusHours(2),
+                LocalTime.now().plusHours(3), LocalDate.now());
         mapsAdvertDao.save(testFirstAdvert);
 
         MapsAdvert testSecondAdvert = new MapsAdvert(driverKuba, testThirdAddress, testSecondAddress,

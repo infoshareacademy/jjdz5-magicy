@@ -77,7 +77,6 @@
                             <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination time" disabled></th>
                             <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
                             <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
-                            <#--<th class="text-center"><button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Filter</button></th>-->
                             <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
                                 Filter
                             </button></th>
@@ -86,11 +85,12 @@
                     </thead>
                     <tbody>
                     <#list ADVERTS as advert>
+                    <#setting time_format="HH:mm">
                          <tr>
                              <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.formattedAddress}</td>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?string}</td>
+                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?time}</td>
                              <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
-                             <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?string}</td>
+                             <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
                              <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
                              <#assign car = advert.driver.cars?first>
                              <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
