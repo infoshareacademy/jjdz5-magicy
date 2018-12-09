@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
 
-<body>
+<body id="top">
 
 <div class="container">
 
@@ -68,7 +68,23 @@
         </div>
     </div>
 
-    <div class="row mt-1 mb-5">
+    <#if SUMMARY?has_content>
+
+      <div id="summary" class="row mt-1">
+          <div class="col-12">
+              <div class="alert alert-summary">
+                  <ul>
+                      <#list SUMMARY as msg>
+                          <li>${msg}</li>
+                      </#list>
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+    </#if>
+
+    <div class="row mt-1 mb-3">
         <div class="col-12">
 
             <div id="addresses-card" class="card controls-card bg-primary text-white">
@@ -100,7 +116,7 @@
                     <a role="button" data-toggle="collapse" data-target="#collapseTime"
                        aria-expanded="false" aria-controls="collapseTime" data-parent="#right-side-cards">
                         <div id="time-header" class="card-header">Time</div></a>
-                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
+                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header">
                         <div class="card-body">
                             <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
                             <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
@@ -119,7 +135,7 @@
                     <a role="button" data-toggle="collapse" data-target="#collapseDriver"
                        aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
                         <div id="driver-header" class="card-header">Driver</div></a>
-                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
+                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
                             <div id="driver-label" class="card-title card-label">Driver:</div>
                             <select id="driver" class="custom-select" name="driverId" required>
@@ -150,7 +166,7 @@
 
             <button type="submit" id="submitButton" class="btn button">Submit</button>
 
-            <div class="card mt-3">
+            <div class="card mt-3 mb-3">
                 <div id="map"></div>
             </div>
 
@@ -159,24 +175,33 @@
 
     </form>
 
-    <#if SUMMARY?has_content>
-
-          <div class="row mb-4">
-              <div class="col-12">
-                  <div class="alert alert-primary">
-                      <ul>
-                          <#list SUMMARY as msg>
-                              <li>${msg}</li>
-                          </#list>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-
-    </#if>
-
-    <div class="row mb-5">
+    <div class="row mb-5 pb-5">
         <div id="info" class="col-12">
+            <div class="alert alert-help" role="alert">
+                <h5>Addresses:</h5>
+                <ul>
+                    <li>When you are typing address, be sure to confirm it by selecting your choice from dropdown list.</li>
+                    <li>Try to type address as precise as possible. Writing street number will be very helpful!</li>
+                    <li>Remember that departure and destination address cannot be the same.</li>
+                </ul>
+                <h5>Time:</h5>
+                <ul>
+                    <li>When you enter your desired arrival time, after correct selection of departure and destination addresses, departure time will be calculated automatically.</li>
+                    <li>Recommended departure time is just a suggestion. You can of course modify it by your own.</li>
+                    <li>Remember that departure time cannot be earlier than ${TIME_CONDITION?first} hours from now!</li>
+                </ul>
+                <h5>Date:</h5>
+                <ul>
+                    <li>Chosen date cannot be earlier than today and no later than ${DATE_CONDITION?first} days.</li>
+                </ul>
+            </div>
+            <div class="text-center mt-2">
+                <a href="#top" style="color: #3f51b5 !important;">
+                    <i class="fas fa-arrow-up"></i>
+                    Back to top
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
         </div>
     </div>
 

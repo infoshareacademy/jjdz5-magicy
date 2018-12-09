@@ -22,20 +22,23 @@ html, body {
     width: 133px !important;
 }
 
+.gm-style {
+    font: 400 18px Roboto, Arial, sans-serif !important;
+}
+
+
 input[type=time]::-webkit-inner-spin-button,
 input[type=time]::-webkit-outer-spin-button,
+input[type=time]::-webkit-clear-button,
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-outer-spin-button,
+input[type=date]::-webkit-clear-button,
 input[type=date]::-webkit-calendar-picker-indicator {
     -webkit-appearance: none !important;
     display: none !important;
     visibility: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
-}
-
-.gm-style {
-    font: 400 18px Roboto, Arial, sans-serif !important;
 }
 
 .card-label-first {
@@ -150,4 +153,27 @@ input[type=date]::-webkit-calendar-picker-indicator {
     margin-top: 1px !important;
     margin-right: 5px !important;
     margin-bottom: 1px !important;
+}
+
+.alert {
+    padding: 1rem 0 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.alert-summary {
+    color: #ffffff !important;
+    background-color: #3d50b6 !important;
+    border-color: #b8daff !important;
+    font-weight: 500 !important;
+}
+
+.alert-help {
+    color: #000000;
+    background-color: transparent;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+    border: 2px solid #3d50b6 !important;
+    font-weight: 500 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-bottom: 1rem !important;
 }

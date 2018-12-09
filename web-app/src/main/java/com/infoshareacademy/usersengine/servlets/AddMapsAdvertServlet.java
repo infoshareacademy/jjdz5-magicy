@@ -50,6 +50,7 @@ public class AddMapsAdvertServlet extends AppInitServlet {
     }
 
     private void proceed(HttpServletResponse resp) throws IOException {
+        dataModel.buildNewDataModel();
         if (ifSummaryIsSuccess(processing.getSummary())) {
             resp.getWriter().write(RedirectionService.buildAddAdvertRedirectionPage(
                     PropertiesService.getMsgAdvertAddOk(),
