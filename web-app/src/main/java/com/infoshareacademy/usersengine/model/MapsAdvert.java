@@ -1,5 +1,12 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalDateDeserializer;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalDateSerializer;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalTimeDeserializer;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalTimeSerializer;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -31,14 +38,20 @@ public class MapsAdvert {
 
     @Column(name = "start_time")
     @NotNull
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    @JsonSerialize(using = LocalTimeSerializer.class)
     private LocalTime startTime;
 
     @Column(name = "end_time")
     @NotNull
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    @JsonSerialize(using = LocalTimeSerializer.class)
     private LocalTime endTime;
 
     @Column(name = "date")
     @NotNull
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
 
     public MapsAdvert() {

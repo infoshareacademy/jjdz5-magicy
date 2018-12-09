@@ -1,5 +1,7 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,6 +29,7 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "driver_id")
+    @JsonIgnore
     private MapsDriver driver;
 
     public Car(){

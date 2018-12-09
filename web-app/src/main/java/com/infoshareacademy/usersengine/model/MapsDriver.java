@@ -1,5 +1,7 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +21,7 @@ public class MapsDriver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonIgnore
     private Long id;
 
     @Column(name = "name")
@@ -34,9 +37,11 @@ public class MapsDriver {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Car> cars;
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<MapsAdvert> mapAdverts;
 
     public MapsDriver() {

@@ -1,5 +1,7 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,9 +44,11 @@ public class MapsAddress {
     private String info;
 
     @OneToMany(mappedBy = "startAddress", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<MapsAdvert> starting;
 
     @OneToMany(mappedBy = "endAddress", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<MapsAdvert> ending;
 
     public MapsAddress() {
