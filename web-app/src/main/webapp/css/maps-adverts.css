@@ -19,7 +19,7 @@ html, body {
     font-weight: 300 !important;
     text-align: center !important;
     text-overflow: ellipsis !important;
-    width: 120px !important;
+    width: 133px !important;
 }
 
 input[type=time]::-webkit-inner-spin-button,
@@ -84,12 +84,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 #time-card {
-    min-width: 140px;
+    min-width: 150px;
+    max-width: 150px;
 }
 
 #driver-card {
-    min-width: 140px;
-    max-width: 140px;
+    min-width: 150px;
+    max-width: 150px;
 }
 
 .controls-card.bg-primary {
