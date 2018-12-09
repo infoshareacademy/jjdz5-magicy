@@ -29,6 +29,7 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "driver_id")
+    @NotNull
     @JsonIgnore
     private MapsDriver driver;
 

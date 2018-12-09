@@ -1,6 +1,6 @@
 package com.infoshareacademy.usersengine.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.infoshareacademy.usersengine.restservice.serialize.LocalDateDeserializer;
@@ -27,7 +27,7 @@ public class MapsAdvert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonIgnore
+    @JsonProperty(value = "advert_id")
     private Long id;
 
     @ManyToOne

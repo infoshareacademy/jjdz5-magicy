@@ -55,14 +55,6 @@ public class MapsDriver {
         this.mapAdverts = new ArrayList<>();
     }
 
-    public MapsDriver(String name, String surname, String phoneNumber, List<Car> cars) {
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.cars = cars;
-        this.mapAdverts = new ArrayList<>();
-    }
-
     public Long getId() {
         return id;
     }

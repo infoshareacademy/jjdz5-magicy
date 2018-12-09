@@ -86,7 +86,7 @@ public class HelloServlet extends HttpServlet {
         Car marysiaCar = new Car("GA 12345", "Ford", "Focus", driverMarysia);
         carDao.save(marysiaCar);
 
-        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverGrzesiu);
+        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverKrzysiu);
         carDao.save(krzysiuCar);
 
         MapsAddress alfaTestAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
