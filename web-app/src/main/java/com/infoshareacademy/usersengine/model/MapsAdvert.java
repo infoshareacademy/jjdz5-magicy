@@ -1,5 +1,6 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.infoshareacademy.usersengine.restservice.serialize.LocalDateDeserializer;
@@ -7,7 +8,14 @@ import com.infoshareacademy.usersengine.restservice.serialize.LocalDateSerialize
 import com.infoshareacademy.usersengine.restservice.serialize.LocalTimeDeserializer;
 import com.infoshareacademy.usersengine.restservice.serialize.LocalTimeSerializer;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,6 +27,7 @@ public class MapsAdvert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonIgnore
     private Long id;
 
     @ManyToOne

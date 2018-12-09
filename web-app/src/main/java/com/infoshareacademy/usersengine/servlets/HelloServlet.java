@@ -89,26 +89,37 @@ public class HelloServlet extends HttpServlet {
         Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverGrzesiu);
         carDao.save(krzysiuCar);
 
-        MapsAddress testFirstAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
+        MapsAddress alfaTestAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
                 "Gdańsk", "Kołobrzeska", "41c",
                 54.4043415, 18.5880136,"");
-        mapsAddressDao.save(testFirstAddress);
-        MapsAddress testSecondAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
+        mapsAddressDao.save(alfaTestAddress);
+
+        MapsAddress obcTestAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
                 "Gdańsk", "aleja Grunwaldzka", "472A",
                 54.4024308, 18.5704119, "Olivia Point");
-        mapsAddressDao.save(testSecondAddress);
-        MapsAddress testThirdAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
+        mapsAddressDao.save(obcTestAddress);
+
+        MapsAddress luzyckaTestAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
                 "Gdynia", "Łużycka", "6A",
                 54.4949626, 18.5337226, "Łużycka Office Park - Budynek A");
-        mapsAddressDao.save(testThirdAddress);
+        mapsAddressDao.save(luzyckaTestAddress);
 
-        MapsAdvert testFirstAdvert = new MapsAdvert(driverKuba, testFirstAddress, testSecondAddress,
+        MapsAddress alchemiaTestAddress = new MapsAddress("ChIJs-riZCh1_UYRUa1_LDDJ04A",
+                "Gdańsk", "aleja Grunwaldzka", "409",
+                54.3985837, 18.5769263, "Alchemia");
+        mapsAddressDao.save(alchemiaTestAddress);
+
+        MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
                 LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
-        mapsAdvertDao.save(testFirstAdvert);
+        mapsAdvertDao.save(kubaTestAdvert);
 
-        MapsAdvert testSecondAdvert = new MapsAdvert(driverKuba, testThirdAddress, testSecondAddress,
+        MapsAdvert marysiaTestAdvert = new MapsAdvert(driverMarysia, luzyckaTestAddress, obcTestAddress,
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
-        mapsAdvertDao.save(testSecondAdvert);
+        mapsAdvertDao.save(marysiaTestAdvert);
+
+        MapsAdvert krzysiuTestAdvert = new MapsAdvert(driverKrzysiu, luzyckaTestAddress, alchemiaTestAddress,
+                LocalTime.now().plusHours(4), LocalTime.now().plusHours(5), LocalDate.now().plusDays(1));
+        mapsAdvertDao.save(krzysiuTestAdvert);
 
     }
 }
