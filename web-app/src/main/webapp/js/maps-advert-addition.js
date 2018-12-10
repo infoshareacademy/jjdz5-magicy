@@ -16,7 +16,6 @@ var routeDuration;
 function addEventListeners() {
     originTimeInput.addEventListener("input", departureTimeListener);
     destinationTimeInput.addEventListener("input", destinationTimeListener);
-
 }
 
 window.onload = addEventListeners;
@@ -32,7 +31,7 @@ function initMap() {
         fullscreenControl: false,
         keyboardShortcuts: false,
         streetViewControl: false,
-        scrollwheel: false,
+        scrollwheel: true,
         zoomControl: true
     });
 
@@ -54,6 +53,10 @@ function destinationTimeListener() {
     }
 }
 
+function polylineDragListener() {
+    console.log("Polyline modified.");
+}
+
 /**
  * @constructor
  */
@@ -71,8 +74,12 @@ function AutocompleteDirectionsHandler(map) {
     var submitButton = document.getElementById('submitButton');
     this.directionsService = new google.maps.DirectionsService;
     this.directionsDisplay = new google.maps.DirectionsRenderer;
+    this.polyline = new google.maps.Polyline();
 
     this.directionsDisplay.setMap(map);
+    this.directionsDisplay.setOptions({
+        draggable: true
+    });
     var originAutocomplete = new google.maps.places.Autocomplete(
         originAddress);
     var destinationAutocomplete = new google.maps.places.Autocomplete(
@@ -80,11 +87,13 @@ function AutocompleteDirectionsHandler(map) {
 
     this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
     this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
+    this.polyline.addListener("drag", polylineDragListener());
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+    this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
+    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
     this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(submitButton);
+
 }
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode, map) {
@@ -139,13 +148,15 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         this.directionsService.route({
             origin: {'placeId': this.originPlaceId},
             destination: {'placeId': this.destinationPlaceId},
-            travelMode: this.travelMode
+            travelMode: this.travelMode,
+            provideRouteAlternatives: true
         }, function (response, status) {
             if (status === 'OK') {
                 marker.setVisible(false);
                 routeDuration = response.routes[0].legs[0].duration.value;
                 isBeforeRouteCounting = false;
                 me.directionsDisplay.setDirections(response);
+                me.directionsDisplay.addListener("directions_changed", polylineDragListener());
                 if (destinationTimeInput !== undefined || destinationTimeInput !== "") {
                     countApproximateDepartureTime();
                 }
