@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,6 +33,10 @@ public class MapsAddress {
     @NotNull
     private String streetNumber;
 
+    @Column(name = "formatted_address")
+    @NotNull
+    private String formattedAddress;
+
     @Column(name = "latitude")
     @NotNull
     private Double latitude;
@@ -39,9 +44,6 @@ public class MapsAddress {
     @Column(name = "longitude")
     @NotNull
     private Double longitude;
-
-    @Column(name = "info")
-    private String info;
 
     @OneToMany(mappedBy = "startAddress", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -54,15 +56,15 @@ public class MapsAddress {
     public MapsAddress() {
     }
 
-    public MapsAddress(String mapsPointId, String city, String streetName, String streetNumber, Double latitude,
-                       Double longitude, String info) {
+    public MapsAddress(String mapsPointId, String city, String streetName, String streetNumber,
+                       String formattedAddress, Double latitude, Double longitude) {
         this.mapsPointId = mapsPointId;
         this.city = city;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
+        this.formattedAddress = formattedAddress;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.info = info;
     }
 
     public String getMapsPointId() {
@@ -97,6 +99,14 @@ public class MapsAddress {
         this.streetNumber = streetNumber;
     }
 
+    public String getFormattedAddress() {
+        return formattedAddress;
+    }
+
+    public void setFormattedAddress(String formattedAddress) {
+        this.formattedAddress = formattedAddress;
+    }
+
     public Double getLatitude() {
         return latitude;
     }
@@ -111,14 +121,6 @@ public class MapsAddress {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
     }
 
     public Set<MapsAdvert> getStarting() {
@@ -138,6 +140,28 @@ public class MapsAddress {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MapsAddress that = (MapsAddress) o;
+        return Objects.equals(mapsPointId, that.mapsPointId) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(streetName, that.streetName) &&
+                Objects.equals(streetNumber, that.streetNumber) &&
+                Objects.equals(formattedAddress, that.formattedAddress) &&
+                Objects.equals(latitude, that.latitude) &&
+                Objects.equals(longitude, that.longitude) &&
+                Objects.equals(starting, that.starting) &&
+                Objects.equals(ending, that.ending);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mapsPointId, city, streetName, streetNumber, formattedAddress, latitude, longitude, starting, ending);
+    }
+
+    @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapsAddress{");
         sb.append(" mapsPointId='").append(mapsPointId).append('\'');
@@ -146,7 +170,6 @@ public class MapsAddress {
         sb.append(", streetNumber='").append(streetNumber).append('\'');
         sb.append(", latitude=").append(latitude);
         sb.append(", longitude=").append(longitude);
-        sb.append(", info='").append(info).append('\'');
         sb.append('}');
         return sb.toString();
     }

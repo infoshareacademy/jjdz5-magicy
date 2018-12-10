@@ -5,5 +5,6 @@ import java.util.Map;
 public interface MapsAdvertBuilder {
 
     void buildMapsAdvert(Map<String, String[]> parameters);
+    Long getBuildedAdvertId();
 
 }
