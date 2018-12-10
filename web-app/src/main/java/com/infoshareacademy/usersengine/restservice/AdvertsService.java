@@ -29,25 +29,53 @@ public class AdvertsService extends RestService {
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getAllAdverts() {
         List<MapsAdvert> adverts = mapsAdvertDao.findAll();
-        LOG.info("Number of adverts available for this request: {}.", adverts.size());
+        logAdvertsNumber(adverts.size());
         return sendResultResponse(adverts);
     }
 
     @GET
-    @Path(value = "/adverts")
+    @Path(value = "/adverts/date")
     @Produces(value = MediaType.APPLICATION_JSON)
-    public Response getAdvertsByDate(@QueryParam(value = "date") String date) {
+    public Response getAdvertsByDate(@QueryParam(value = "value") String value) {
         try {
-            LocalDate requestDate = LocalDate.parse(date);
-            List<MapsAdvert> adverts = mapsAdvertDao.findAdvertsByDate(requestDate);
-            LOG.info("Number of adverts available for this request: {}.", adverts.size());
-            return sendResultResponse(adverts);
+            return processAdvertsByDateRequest(value);
         } catch (DateTimeParseException e) {
-            LOG.warn("Cannot parse date from query parameter: {}.", date);
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (NullPointerException e) {
-            return getAllAdverts();
+            return processAdvertsByDateRequestParseFailure(value);
         }
+    }
+
+    @GET
+    @Path(value = "/adverts/startcity")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getAdvertsByStartCity(@QueryParam(value = "value") String value) {
+        List<MapsAdvert> adverts = mapsAdvertDao.findAdvertsByStartCity(value);
+        logAdvertsNumber(adverts.size());
+        return sendResultResponse(adverts);
+    }
+
+    @GET
+    @Path(value = "/adverts/endcity")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response getAdvertsByEndCity(@QueryParam(value = "value") String value) {
+        List<MapsAdvert> adverts = mapsAdvertDao.findAdvertsByEndCity(value);
+        logAdvertsNumber(adverts.size());
+        return sendResultResponse(adverts);
+    }
+
+    private void logAdvertsNumber(Integer responseSize) {
+        LOG.info("Number of adverts available for this request: {}.", responseSize);
+    }
+
+    private Response processAdvertsByDateRequest(String date) {
+        LocalDate requestDate = LocalDate.parse(date);
+        List<MapsAdvert> adverts = mapsAdvertDao.findAdvertsByDate(requestDate);
+        logAdvertsNumber(adverts.size());
+        return sendResultResponse(adverts);
+    }
+
+    private Response processAdvertsByDateRequestParseFailure(String date) {
+        LOG.warn("Cannot parse date from query parameter: {}.", date);
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class RestService {
 
-    public <T> Response sendResultResponse(T result) {
+    public <C extends Collection> Response sendResultResponse(C result) {
         if (isResultEmpty(result)) {
             return Response.noContent().build();
         } else {
@@ -13,11 +13,7 @@ public class RestService {
         }
     }
 
-    private <T extends Collection> Boolean isResultEmpty(T resultCollection) {
-        return resultCollection.isEmpty();
-    }
-
-    private <T> Boolean isResultEmpty(T result) {
-        return result == null;
+    private <C extends Collection> Boolean isResultEmpty(C result) {
+        return result == null || result.isEmpty();
     }
 }
