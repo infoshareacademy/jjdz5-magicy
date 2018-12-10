@@ -27,26 +27,22 @@ public class MapsAddressBuilderBean implements MapsAddressBuilder {
     public MapsAddress buildStartMapsAddress(Map<String, String[]> parameters) {
         final String placeId = ParametersService.getSpecificParameter(parameters,
                 AdvertsConstants.PARAMETER_START_MAPS_POINT_ID);
-        final String info = ParametersService.getSpecificParameter(parameters,
-                AdvertsConstants.PARAMETER_START_INFO);
-        return provideMapsAddress(placeId, info);
+        return provideMapsAddress(placeId);
     }
 
     @Override
     public MapsAddress buildEndMapsAddress(Map<String, String[]> parameters) {
         final String placeId = ParametersService.getSpecificParameter(parameters,
                 AdvertsConstants.PARAMETER_END_MAPS_POINT_ID);
-        final String info = ParametersService.getSpecificParameter(parameters,
-                AdvertsConstants.PARAMETER_END_INFO);
-        return provideMapsAddress(placeId, info);
+        return provideMapsAddress(placeId);
     }
 
-    private MapsAddress provideMapsAddress(String placeId, String info) {
+    private MapsAddress provideMapsAddress(String placeId) {
         Optional<MapsAddress> mapsAddress = Optional.ofNullable(mapsAddressDao.findById(placeId));
-        return mapsAddress.orElseGet(() -> buildMapsAddress(client.getPlaceById(placeId), info));
+        return mapsAddress.orElseGet(() -> buildMapsAddress(client.getPlaceById(placeId)));
     }
     
-    private MapsAddress buildMapsAddress(PlaceResult result, String info) {
+    private MapsAddress buildMapsAddress(PlaceResult result) {
         MapsAddress mapsAddress = new MapsAddress(
             result.getPlaceId(),
             client.getSpecificAddressComponent(result, PlaceAddressComponentType.CITY,
@@ -55,9 +51,9 @@ public class MapsAddressBuilderBean implements MapsAddressBuilder {
                 PlaceAddressComponentResponse.FULL),
             client.getSpecificAddressComponent(result, PlaceAddressComponentType.STREET_NUMBER,
                 PlaceAddressComponentResponse.SHORT),
+            result.getFormattedAddress(),
             result.getGeometry().getLocation().getLatitude(),
-            result.getGeometry().getLocation().getLongitude(),
-            info);
+            result.getGeometry().getLocation().getLongitude());
         mapsAddressDao.save(mapsAddress);
         return mapsAddress;
     }

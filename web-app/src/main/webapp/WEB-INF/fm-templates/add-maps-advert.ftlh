@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
 
-<body>
+<body id="top">
 
 <div class="container">
 
@@ -30,7 +30,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
@@ -54,113 +54,154 @@
         </div>
     </nav>
 
-    <div class="row mt-5">
-        <div class="col-10">
-            <button class="btn button" disabled>Add new advert</button>
+    <form method="post" action="/jjdz5-magicy/add-maps-advert">
+
+    <div class="row mt-3">
+        <div class="col-6">
+            <button type="submit" class="btn button">Add new advert</button>
         </div>
-        <div class="col-2">
+        <div class="col-6">
             <a class="btn button float-right" href="#info">
-                <i class="fas fa-info-circle fa-3x"></i>
+                Help
+                <i class="fas fa-info-circle"></i>
             </a>
-        </div>
-    </div>
-
-    <div class="row mt-3 mb-5">
-        <div class="col-12">
-            <form method="post" action="/jjdz5-magicy/add-maps-advert">
-
-                <div id="addresses-card" class="card controls-card bg-primary text-white">
-                    <a><div id="addresses-header" class="card-header" role="button"
-                            data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
-                            aria-controls="collapseAddresses">Addresses
-                    </div></a>
-                    <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
-                        <div class="card-body">
-                            <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
-                            <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
-                            <input id="origin-address" class="form-control" type="text"
-                                   placeholder="Please enter departure address." required>
-                            <div id="destination-address-label" class="card-title card-label">Destination:</div>
-                            <input id="destination-address" class="form-control" type="text"
-                                   placeholder="Please enter destination address." required>
-                            <div id="addresses-info-label" class="card-title card-label">Additional information (not required):</div>
-                            <input id="origin-address-info" class="form-control" type="text"
-                                   name="startAddressInfo" placeholder="Departure additional information.">
-                            <input id="destination-address-info" class="form-control mt-1" type="text"
-                                   name="endAddressInfo" placeholder="Destination additional information.">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="right-cards">
-
-                    <div id="time-card" class="card controls-card bg-primary text-white panel">
-                        <a><div id="time-header" class="card-header" role="button"
-                                data-toggle="collapse" data-target="#collapseTime" aria-expanded="false"
-                                aria-controls="collapseTime" data-parent="#right-cards">Time</div></a>
-                        <div id="collapseTime" class="collapse show" aria-labelledby="time-header" data-parent="#right-cards">
-                            <div class="card-body">
-                                <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
-                                <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
-                                <div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>
-                                <input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time" disabled>
-                                <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
-                                <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required>
-                                <div id="date-label" class="card-title card-label">Date:</div>
-                                <input id="date" class="form-control low-width-inputs" type="date" name="date" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="driver-card" class="card controls-card bg-primary text-white panel">
-                        <a><div id="driver-header" class="card-header" role="button"
-                                data-toggle="collapse" data-target="#collapseDriver" aria-expanded="false"
-                                aria-controls="collapseDriver" data-parent="#right-cards">Driver</div></a>
-                        <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header" data-parent="#right-cards">
-                            <div class="card-body">
-                                <div id="driver-label" class="card-title card-label">Driver:</div>
-                                <select id="driver" class="custom-select" name="driverId" required>
-                                    <option value="1">Driver</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <input id="origin-place-id" type="hidden" name="startMapsPointId">
-                <input id="destination-place-id" type="hidden" name="endMapsPointId">
-                <input id="origin-precise" type="hidden" name="startStreetNumber">
-                <input id="destination-precise" type="hidden" name="endStreetNumber">
-
-                <button type="submit" id="submitButton" class="btn button">Submit</button>
-
-                <div class="card">
-                    <div id="map"></div>
-                </div>
-
-            </form>
         </div>
     </div>
 
     <#if SUMMARY?has_content>
 
-          <div class="row mb-4">
-              <div class="col-12">
-                  <div class="alert alert-primary">
-                      <ul>
-                          <#list SUMMARY as msg>
-                              <li>${msg}</li>
-                          </#list>
-                      </ul>
-                  </div>
+      <div id="summary" class="row mt-1">
+          <div class="col-12">
+              <div class="alert alert-summary">
+                  <ul>
+                      <#list SUMMARY as msg>
+                          <li>${msg}</li>
+                      </#list>
+                  </ul>
               </div>
           </div>
+      </div>
 
     </#if>
 
-    <div class="row mb-5">
+    <div class="row mt-1 mb-3">
+        <div class="col-12">
+
+            <div id="addresses-card" class="card controls-card bg-primary text-white">
+                <a><div id="addresses-header" class="card-header" role="button"
+                        data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
+                        aria-controls="collapseAddresses">Addresses
+                </div></a>
+                <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
+                    <div class="card-body">
+                        <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
+                        <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
+                        <input id="origin-address" class="form-control" type="text"
+                               placeholder="Please enter departure address." required>
+                        <div id="destination-address-label" class="card-title card-label">Destination:</div>
+                        <input id="destination-address" class="form-control" type="text"
+                               placeholder="Please enter destination address." required>
+                        <div id="addresses-info-label" class="card-title card-label">Additional information (not required):</div>
+                        <input id="origin-address-info" class="form-control" type="text"
+                               name="startInfo" placeholder="Departure additional information.">
+                        <input id="destination-address-info" class="form-control mt-1" type="text"
+                               name="endInfo" placeholder="Destination additional information.">
+                    </div>
+                </div>
+            </div>
+
+            <div id="right-side-cards">
+
+                <div id="time-card" class="card controls-card bg-primary text-white panel">
+                    <a role="button" data-toggle="collapse" data-target="#collapseTime"
+                       aria-expanded="false" aria-controls="collapseTime" data-parent="#right-side-cards">
+                        <div id="time-header" class="card-header">Time</div></a>
+                    <div id="collapseTime" class="collapse show" aria-labelledby="time-header">
+                        <div class="card-body">
+                            <div id="origin-time-label" class="card-title card-label-first">Estimated<br>departure time:</div>
+                            <input id="origin-time" class="form-control low-width-inputs" type="time" name="startTime" required>
+                            <div id="origin-time-suggestion-label" class="card-title card-label">Recommended<br>departure time:</div>
+                            <input id="origin-time-suggestion" class="form-control low-width-inputs text-white" type="time"
+                                   style="background: rgba(0.0.0.1)" disabled>
+                            <div id="destination-time-label" class="card-title card-label">Desired<br>arrival time:</div>
+                            <input id="destination-time" class="form-control low-width-inputs" type="time" name="endTime" required>
+                            <div id="date-label" class="card-title card-label">Date:</div>
+                            <input id="date" class="form-control low-width-inputs" type="date" name="date" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="driver-card" class="card controls-card bg-primary text-white panel">
+                    <a role="button" data-toggle="collapse" data-target="#collapseDriver"
+                       aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
+                        <div id="driver-header" class="card-header">Driver</div></a>
+                    <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
+                        <div class="card-body">
+                            <div id="driver-label" class="card-title card-label">Driver:</div>
+                            <select id="driver" class="custom-select" name="driverId" required>
+                                <option value="1">Driver</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <input id="origin-place-id" type="hidden" name="startMapsPointId">
+            <input id="destination-place-id" type="hidden" name="endMapsPointId">
+            <input id="origin-precise" type="hidden" name="startStreetNumber">
+            <input id="destination-precise" type="hidden" name="endStreetNumber">
+
+            <div id="controls">
+                <button id="show-cards" type="button" class="btn button"
+                        onclick="$('.collapse').collapse('show');">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <br>
+                <button id="hide-cards" type="button" class="btn button"
+                        onclick="$('.collapse').collapse('hide');">
+                    <i class="fas fa-eye-slash"></i>
+                </button>
+            </div>
+
+            <button type="submit" id="submitButton" class="btn button">Submit</button>
+
+            <div class="card mt-3 mb-3">
+                <div id="map"></div>
+            </div>
+
+        </div>
+    </div>
+
+    </form>
+
+    <div class="row mb-5 pb-5">
         <div id="info" class="col-12">
+            <div class="alert alert-help" role="alert">
+                <h5>Addresses:</h5>
+                <ul>
+                    <li>When you are typing address, be sure to confirm it by selecting your choice from dropdown list.</li>
+                    <li>Try to type address as precise as possible. Writing street number will be very helpful!</li>
+                    <li>Remember that departure and destination address cannot be the same.</li>
+                </ul>
+                <h5>Time:</h5>
+                <ul>
+                    <li>When you enter your desired arrival time, after correct selection of departure and destination addresses, departure time will be calculated automatically.</li>
+                    <li>Recommended departure time is just a suggestion. You can of course modify it by your own.</li>
+                    <li>Remember that departure time cannot be earlier than ${TIME_CONDITION?first} hours from now!</li>
+                </ul>
+                <h5>Date:</h5>
+                <ul>
+                    <li>Chosen date cannot be earlier than today and no later than ${DATE_CONDITION?first} days.</li>
+                </ul>
+            </div>
+            <div class="text-center mt-2">
+                <a href="#top" style="color: #3f51b5 !important;">
+                    <i class="fas fa-arrow-up"></i>
+                    Back to top
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
         </div>
     </div>
 

@@ -2,46 +2,41 @@ package com.infoshareacademy.usersengine.services.datamodels;
 
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.services.PropertiesService;
-import com.infoshareacademy.usersengine.services.Property;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Stateless
-public class AddMapsAdvertDataModel {
+public class AddMapsAdvertDataModel extends DataModel<List>{
 
     private static final String DRIVERS_KEY = "DRIVERS";
-
-    private Map<String, List> dataModel;
+    private static final String SUMMARY_KEY = "SUMMARY";
+    private static final String TIME_CONDITION_KEY = "TIME_CONDITION";
+    private static final String DATE_CONDITION_KEY = "DATE_CONDITION";
 
     @Inject
     private MapsDriverDao mapsDriverDao;
 
-    public void buildNewDataModel() {
-        dataModel = new HashMap<>();
-    }
-
+    @Override
     public void fillDataModelWithGetData() {
-        dataModel.put(Property.API_KEY.name(), getMapsApiKeyAsList());
+        putApiKeyIntoDataModel();
         dataModel.put(DRIVERS_KEY, mapsDriverDao.findAll());
+        fillDataModuleWithInformationVariables();
     }
 
-    public void fillDataModelWithPostData(String key, List value) {
-        dataModel.put(key, value);
+    @Override
+    public void fillDataModelWithPostData(List summary) {
+        fillDataModelWithGetData();
+        dataModel.put(SUMMARY_KEY, summary);
     }
 
-    public Map<String, List> getDataModel() {
-        return dataModel;
+    private void fillDataModuleWithInformationVariables() {
+        dataModel.put(TIME_CONDITION_KEY, Collections.singletonList(
+                PropertiesService.getAdvertMinHoursToStart()));
+        dataModel.put(DATE_CONDITION_KEY, Collections.singletonList(
+                PropertiesService.getAdvertMaxPeriodDays()));
     }
-
-    private List<String> getMapsApiKeyAsList() {
-        return Collections.singletonList(PropertiesService.getMapsApiKey());
-    }
-
-
 
 }
