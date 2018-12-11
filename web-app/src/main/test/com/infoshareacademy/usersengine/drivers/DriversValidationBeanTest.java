@@ -63,7 +63,7 @@ class DriversValidationBeanTest {
     void runWithNewPhoneNumberThenReturnFalse(){
         //GIVEN
         List<Driver> drivers = new ArrayList<>();
-        Driver newDriver = new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating());
+        Driver newDriver = new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating(), 1L);
         drivers.add(newDriver);
         String phone = "111 222 333";
         //WHEN
@@ -77,7 +77,7 @@ class DriversValidationBeanTest {
     void runWithPhoneNumberWhichIsOnTheListThenReturnTrue(){
         //GIVEN
         List<Driver> drivers = new ArrayList<>();
-        Driver newDriver = new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating());
+        Driver newDriver = new Driver("Marysia", "Wee", "555 555 555", "Gdynia", "Witomino", new Rating(), 1L);
         drivers.add(newDriver);
         String phone = "555 555 555";
         //WHEN

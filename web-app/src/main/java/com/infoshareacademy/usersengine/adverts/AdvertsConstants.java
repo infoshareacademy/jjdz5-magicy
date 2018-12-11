@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.adverts;
 
 public class AdvertsConstants {
 
+    public static final String PARAMETER_ADVERT_ID = "advertId";
     public static final String PARAMETER_START_CITY = "startCity";
     public static final String PARAMETER_START_STREET = "startStreet";
     public static final String PARAMETER_START_STREET_NUMBER = "startStreetNumber";

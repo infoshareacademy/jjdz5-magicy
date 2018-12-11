@@ -16,7 +16,7 @@ public class GenericDao<T, K> {
     private static final String WHITESPACE = " ";
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     public void save(T entity) {
         entityManager.persist(entity);
@@ -42,6 +42,16 @@ public class GenericDao<T, K> {
         return query.getResultList();
     }
 
+    private String prepareQuery() {
+        final StringJoiner query = new StringJoiner(WHITESPACE);
+        query.add(QUERY_SELECT);
+        query.add(QUERY_ALIAS);
+        query.add(QUERY_FROM);
+        query.add(getEntitySimpleName());
+        query.add(QUERY_ALIAS);
+        return query.toString();
+    }
+
     private Class<T> getEntityClass() {
         return (Class<T>) (getParameterizedType(getClass())).getActualTypeArguments()[ARGUMENTS_INDEX];
     }
@@ -52,16 +62,6 @@ public class GenericDao<T, K> {
 
     private Boolean isEntityPresent(T entity) {
         return entity != null;
-    }
-
-    private String prepareQuery() {
-        final StringJoiner query = new StringJoiner(WHITESPACE);
-        query.add(QUERY_SELECT);
-        query.add(QUERY_ALIAS);
-        query.add(QUERY_FROM);
-        query.add(getEntitySimpleName());
-        query.add(QUERY_ALIAS);
-        return query.toString();
     }
 
     private String getEntitySimpleName() {

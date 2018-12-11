@@ -1,46 +1,39 @@
 package com.infoshareacademy.usersengine.services.datamodels;
 
-import com.infoshareacademy.usersengine.dao.MapsDriverDao;
-import com.infoshareacademy.usersengine.services.PropertiesService;
-import com.infoshareacademy.usersengine.services.Property;
+import com.infoshareacademy.usersengine.adverts.AdvertsConstants;
+import com.infoshareacademy.usersengine.dao.MapsAdvertDao;
+import com.infoshareacademy.usersengine.services.ParametersService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Stateless
-public class MapsAdvertDataModel {
+public class MapsAdvertDataModel extends DataModel<Map<String, String[]>>{
 
     private static final String ADVERTS_KEY = "ADVERTS";
-    private static final String DRIVERS_KEY = "DRIVERS";
-
-    private Map<String, List> dataModel;
+    private static final String DETAIL_ADVERT_KEY = "DETAIL_ADVERT";
 
     @Inject
-    private MapsDriverDao mapsDriverDao;
+    private MapsAdvertDao mapsAdvertDao;
 
-    public void buildNewDataModel() {
-        dataModel = new HashMap<>();
-    }
-
+    @Override
     public void fillDataModelWithGetData() {
-        dataModel.put(Property.API_KEY.name(), getMapsApiKeyAsList());
-        dataModel.put(DRIVERS_KEY, mapsDriverDao.findAll());
+        putApiKeyIntoDataModel();
+        dataModel.put(ADVERTS_KEY, mapsAdvertDao.findAll());
     }
 
-    public void fillDataModelWithPostData(String key, List value) {
-        dataModel.put(key, value);
+    @Override
+    public void fillDataModelWithPostData(Map<String, String[]> parameters) {
+        putApiKeyIntoDataModel();
+        dataModel.put(DETAIL_ADVERT_KEY, Collections.singletonList(
+                mapsAdvertDao.findById(getDetailedAdvertId(parameters))));
     }
 
-    public Map<String, List> getDataModel() {
-        return dataModel;
-    }
-
-    private List<String> getMapsApiKeyAsList() {
-        return Collections.singletonList(PropertiesService.getMapsApiKey());
+    private Long getDetailedAdvertId(Map<String, String[]> parameters) {
+        return Long.valueOf(ParametersService.getSpecificParameter(parameters,
+                AdvertsConstants.PARAMETER_ADVERT_ID));
     }
 
 

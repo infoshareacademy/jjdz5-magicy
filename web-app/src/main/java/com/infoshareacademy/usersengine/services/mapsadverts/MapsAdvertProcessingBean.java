@@ -12,6 +12,7 @@ import java.util.Map;
 @Stateless
 public class MapsAdvertProcessingBean implements MapsAdvertProcessing{
 
+    private Long buildedAdvertId;
     private List<String> summary;
 
     @Inject
@@ -21,15 +22,21 @@ public class MapsAdvertProcessingBean implements MapsAdvertProcessing{
     private MapsAdvertBuilder builder;
 
     @Override
-    public void processMapsAdvert(Map<String, String[]> parameters) {
+    public void processMapsAdvertCreation(Map<String, String[]> parameters) {
         summary = new ArrayList<>();
         verifier.verifyParameters(parameters);
         if (verifier.areParametersCorrect()) {
             builder.buildMapsAdvert(parameters);
+            buildedAdvertId = builder.getBuildedAdvertId();
             summary = Collections.singletonList(PropertiesService.getMsgAdvertAddOk());
         } else {
             summary = verifier.getErrorMessages();
         }
+    }
+
+    @Override
+    public Long getBuildedAdvertId() {
+        return buildedAdvertId;
     }
 
     @Override

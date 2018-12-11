@@ -13,11 +13,16 @@ public class PropertiesService {
     private static final String PROPERTIES_FILEPATH = "WEB-INF/properties/webapp.properties";
     private static final Integer DEFAULT_MAX_PERIOD_DAYS = 30;
     private static final Integer DEFAULT_MIN_HOURS_TO_START = 2;
+    private static final Integer DEFAULT_REDIRECTION_DELAY = 3;
     private static final Properties PROPERTIES = new Properties();
     private static final Logger LOG = LoggerFactory.getLogger(PropertiesService.class);
 
     public static String getMapsApiKey() {
         return PROPERTIES.getProperty(Property.API_KEY.name());
+    }
+
+    public static Integer getRedirectionDelay() {
+        return parseNumericValue(Property.REDIRECTION_DELAY, DEFAULT_REDIRECTION_DELAY);
     }
 
     public static Integer getAdvertMaxPeriodDays() {

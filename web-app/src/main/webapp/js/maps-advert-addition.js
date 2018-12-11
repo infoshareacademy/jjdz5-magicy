@@ -64,8 +64,8 @@ function AutocompleteDirectionsHandler(map) {
     this.destinationPlaceId = null;
     this.travelMode = 'DRIVING';
     var addressesCard = document.getElementById('addresses-card');
-    var timeCard = document.getElementById('time-card');
-    var driverCard = document.getElementById('driver-card');
+    var rightSideCards = document.getElementById('right-side-cards');
+    var controls = document.getElementById('controls');
     var originAddress = document.getElementById('origin-address');
     var destinationAddress = document.getElementById('destination-address');
     var submitButton = document.getElementById('submitButton');
@@ -82,8 +82,8 @@ function AutocompleteDirectionsHandler(map) {
     this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
-    this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(timeCard);
-    this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(driverCard);
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
     this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(submitButton);
 }
 

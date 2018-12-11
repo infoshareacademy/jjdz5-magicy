@@ -5,7 +5,8 @@ import java.util.Map;
 
 public interface MapsAdvertProcessing {
 
-    void processMapsAdvert(Map<String, String[]> parameters);
+    void processMapsAdvertCreation(Map<String, String[]> parameters);
+    Long getBuildedAdvertId();
     List<String> getSummary();
 
 }
