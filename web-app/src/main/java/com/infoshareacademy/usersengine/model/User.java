@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(
                 name ="findUserByEmail",
-                query = "SELECT u FROM User u WHERE u.userEmail = :param"
+                query = "SELECT u FROM User u WHERE u.email = :param"
         )
 })
 public class User {
