@@ -5,6 +5,8 @@ var destinationPlaceIdInput = document.getElementById("destination-place-id");
 var destinationPreciseInput = document.getElementById("destination-precise");
 var originTimeInput = document.getElementById("origin-time");
 var destinationTimeInput = document.getElementById("destination-time");
+var originAddress = document.getElementById('origin-address');
+var destinationAddress = document.getElementById('destination-address');
 var destinationTime;
 var originPlace;
 var destinationPlace;
@@ -28,14 +30,16 @@ function initMap() {
         disableDefaultUI: true,
         disableDoubleClickZoom: true,
         draggable: true,
-        fullscreenControl: false,
+        fullscreenControl: true,
         keyboardShortcuts: false,
         streetViewControl: false,
         scrollwheel: true,
         zoomControl: true
     });
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    new AutocompleteDirectionsHandler(map, directionsDisplay);
 
-    new AutocompleteDirectionsHandler(map);
+
 }
 
 function departureTimeListener() {
@@ -53,28 +57,22 @@ function destinationTimeListener() {
     }
 }
 
-function polylineDragListener() {
-    console.log("Polyline modified.");
-}
-
 /**
  * @constructor
  */
-function AutocompleteDirectionsHandler(map) {
+function AutocompleteDirectionsHandler(map, directionsDisplay) {
     this.map = map;
 
     this.originPlaceId = null;
     this.destinationPlaceId = null;
+    
     this.travelMode = 'DRIVING';
     var addressesCard = document.getElementById('addresses-card');
     var rightSideCards = document.getElementById('right-side-cards');
     var controls = document.getElementById('controls');
-    var originAddress = document.getElementById('origin-address');
-    var destinationAddress = document.getElementById('destination-address');
     var submitButton = document.getElementById('submitButton');
     this.directionsService = new google.maps.DirectionsService;
-    this.directionsDisplay = new google.maps.DirectionsRenderer;
-    this.polyline = new google.maps.Polyline();
+    this.directionsDisplay = directionsDisplay;
 
     this.directionsDisplay.setMap(map);
     this.directionsDisplay.setOptions({
@@ -87,7 +85,61 @@ function AutocompleteDirectionsHandler(map) {
 
     this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
     this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
-    this.polyline.addListener("drag", polylineDragListener());
+    this.directionsDisplay.addListener('directions_changed', function () {
+        var geocoder = new google.maps.Geocoder;
+        var places = new google.maps.places.PlacesService(map);
+        var result = directionsDisplay.getDirections();
+        var route  = result.routes[0];
+        var legs = route.legs;
+        var start = legs[0].start_address;
+        var startLoc = legs[0].start_location;
+        var startLat = startLoc.lat();
+        var startLng = startLoc.lng();
+        var startLatLng = {lat: startLat, lng: startLng};
+        var end = legs[legs.length - 1].end_address;
+        var endLoc = legs[legs.length - 1].end_location;
+        var endLat = endLoc.lat();
+        var endLng = endLoc.lng();
+        var endLatLng = {lat: endLat, lng: endLng};
+        var distance = 0;
+        var duration = 0;
+        console.log(startLatLng);
+        console.log(endLatLng);
+
+        geocoder.geocode({'location': startLatLng}, function (result, status) {
+            var placeId = result[0].place_id;
+            console.log(placeId);
+            places.getDetails({placeId: placeId}, function (place, status) {
+                fillOriginInputFields(place);
+                var address = place.formatted_address;
+                originAddress.value = address;
+                console.log("Formatted Address: " + address);
+            });
+        });
+        geocoder.geocode({"location": endLatLng}, function (result, status) {
+            var placeId = result[0].place_id;
+            console.log(placeId);
+            places.getDetails({placeId: placeId}, function (place, status) {
+                fillDestinationInputFields(place);
+                var address = place.formatted_address;
+                destinationAddress.value = address;
+                console.log("Formatted Address: " + address);
+            });
+        });
+
+        for (var i = 0; i < legs.length; i++) {
+            distance += legs[i].distance.value;
+            duration += legs[i].duration.value;
+        }
+        distance = distance / 1000;
+        routeDuration = duration;
+        var durationMin = duration / 60;
+        console.log("Origin: " + start);
+        console.log("Destination: " + end);
+        console.log("Overall distance: " + distance + " km.");
+        console.log("Duration: " + durationMin + " min.");
+        countApproximateDepartureTime();
+    });
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
     this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
@@ -156,7 +208,6 @@ AutocompleteDirectionsHandler.prototype.route = function() {
                 routeDuration = response.routes[0].legs[0].duration.value;
                 isBeforeRouteCounting = false;
                 me.directionsDisplay.setDirections(response);
-                me.directionsDisplay.addListener("directions_changed", polylineDragListener());
                 if (destinationTimeInput !== undefined || destinationTimeInput !== "") {
                     countApproximateDepartureTime();
                 }
