@@ -3,9 +3,13 @@ package com.infoshareacademy.usersengine.servlets;
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.DriversList;
 import com.infoshareacademy.JsonToList;
+import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.drivers.DriverPreparation;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.UserStatisticService;
+import com.infoshareacademy.usersengine.statistics.UserActivity;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -18,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -39,6 +44,12 @@ public class AddDriverServlet extends HttpServlet {
 
     @Inject
     private DriverPreparation driverPreparation;
+
+    @Inject
+    private UserStatisticDao userStatisticDao;
+
+    @Inject
+    UserStatisticService userStatisticService;
 
 
     @Override
@@ -67,6 +78,10 @@ public class AddDriverServlet extends HttpServlet {
         driversManager.addDriver(driverPreparation.getNewDriver(drivers, driverPreparation.mapReader(map)), drivers);
         driversList.setDriversList(drivers);
         driversManager.writeDriverData(drivers, getPath());
+
+        HttpSession session = req.getSession();
+        userStatisticDao.save(userStatisticService.
+                addStatistic((User)session.getAttribute("user"), UserActivity.ADDING_ADVERT));
         }
 
     private String getPath() {
