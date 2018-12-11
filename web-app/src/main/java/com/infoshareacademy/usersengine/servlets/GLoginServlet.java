@@ -1,12 +1,13 @@
 package com.infoshareacademy.usersengine.servlets;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+;
 import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.UserStatisticService;
 import com.infoshareacademy.usersengine.statistics.UserActivity;
-import com.infoshareacademy.usersengine.statistics.UserStatistic;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class GLoginServlet extends HttpServlet {
     UserDao userDao;
 
     @Inject
-    UserStatistic userStatistic;
+    UserStatisticService userStatisticService;
 
     @Inject
     UserStatisticDao userStatisticDao;
@@ -74,9 +74,9 @@ public class GLoginServlet extends HttpServlet {
 
             User user = userDao.getUserByEmail(email);
             session.setAttribute("user", user);
-            LOG.info("User with id: " + user.getId() + " is logged in");
+            LOG.info("User with id: " + user.getId() + " and email: " + user.getEmail() + " is logged in");
 
-            userStatisticDao.save(userStatistic.addStatistic(user, UserActivity.LOG_IN));
+            userStatisticDao.save(userStatisticService.addStatistic(user, UserActivity.LOG_IN));
 
             resp.sendRedirect("/jjdz5-magicy/home");
 

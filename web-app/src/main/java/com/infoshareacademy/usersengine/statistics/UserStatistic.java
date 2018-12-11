@@ -1,6 +1,5 @@
 package com.infoshareacademy.usersengine.statistics;
 
-import com.infoshareacademy.usersengine.model.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -15,6 +14,9 @@ public class UserStatistic {
     @Column(name="user_id")
     long userId;
 
+    @Column(name="user_email")
+    String UserEmail;
+
     @Column(name="time")
     private LocalDateTime time;
 
@@ -25,15 +27,13 @@ public class UserStatistic {
     public UserStatistic() {
     }
 
-    public UserStatistic(long userId, LocalDateTime time, UserActivity userActivity) {
+    public UserStatistic(long userId, String userEmail, LocalDateTime time, UserActivity userActivity) {
         this.userId = userId;
+        this.UserEmail = userEmail;
         this.time = time;
         this.userActivity = userActivity;
     }
 
-    public UserStatistic addStatistic(User user, UserActivity userActivity){
-        return new UserStatistic(user.getId(), LocalDateTime.now(), userActivity);
-    }
 
     public long getId() {
         return id;

@@ -1,6 +1,5 @@
 package com.infoshareacademy.usersengine.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -18,11 +17,12 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "userEmail")
-    private String userEmail;
+    @Column(name = "email")
+    private String email;
 
+    @OneToOne
     @Column(name = "driver")
-    Driver driver;
+    private MapsDriver driver;
 
     @Column(name = "is_driver")
     boolean isDriver;
@@ -30,31 +30,27 @@ public class User {
     public User() {
     }
 
-    public User(String userEmail) {
-        this.userEmail = userEmail;
+    public User(String email) {
+        this.email = email;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
     public boolean isDriver() {
         return isDriver;
     }
 
-    public void setDriver(boolean driver) {
-        isDriver = driver;
-    }
-
-    public Driver getDriver() {
+    public MapsDriver getDriver() {
         return driver;
     }
 
-    public void setDriver(Driver driver) {
+    public void setDriver(MapsDriver driver) {
         this.driver = driver;
     }
 }
