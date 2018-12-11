@@ -50,11 +50,12 @@ public class GLoginServlet extends HttpServlet {
             GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
             String name = (String) payLoad.get("name");
             String email = payLoad.getEmail();
-            System.out.println("User name: " + name);
-            System.out.println("User email: " + email);
+            LOG.info("Login user: "+email);
+            LOG.info("User name: "+name);
 
             HttpSession session = req.getSession(true);
             session.setAttribute("userName", name);
+            session.setAttribute("userEmail", email);
             resp.sendRedirect("/jjdz5-magicy/home");
 
         } catch (Exception e) {

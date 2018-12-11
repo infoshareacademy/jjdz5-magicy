@@ -92,7 +92,6 @@
 
 <div class="container">
     <#include "menu.ftlh">
-<#--The columns titles are merged with the filters inputs thanks to the placeholders attributes-->
     <div class="row">
         <div class="mt-5">
             <h3>Adverts</h3>

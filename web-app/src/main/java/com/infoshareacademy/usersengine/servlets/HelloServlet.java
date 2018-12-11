@@ -3,11 +3,13 @@ import com.infoshareacademy.usersengine.dao.CarDao;
 import com.infoshareacademy.usersengine.dao.MapsAddressDao;
 import com.infoshareacademy.usersengine.dao.MapsAdvertDao;
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
+import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.Car;
 import com.infoshareacademy.usersengine.model.MapsAddress;
 import com.infoshareacademy.usersengine.model.MapsAdvert;
 import com.infoshareacademy.usersengine.model.MapsDriver;
+import com.infoshareacademy.usersengine.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,6 +49,9 @@ public class HelloServlet extends HttpServlet {
     @Inject
     private CarDao carDao;
 
+    @Inject
+    private UserDao userDao;
+
     @Override
     public void init() throws ServletException {
         fillDatabaseWithAdvancedDefaults();
@@ -54,6 +60,11 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> dataModel = new HashMap<>();
+        HttpSession session = req.getSession(true);
+        String userEmail = session.getAttribute("userEmail").toString();
+        User user = userDao.findUserByEmail(userEmail).get(0);
+
+        dataModel.put("user", user);
         Template template = templateProvider.getTemplate(getServletContext(), "home");
         try {
             template.process(dataModel, resp.getWriter());
@@ -80,6 +91,15 @@ public class HelloServlet extends HttpServlet {
         MapsDriver driverGrzesiu = new MapsDriver("Grzegorz", "Ruchniewicz",
                 "000-777-888");
         mapsDriverDao.save(driverGrzesiu);
+
+        User userKupa = new User(1L, "kuba.jurek@gmail.com", driverKuba, true, true);
+        userDao.save(userKupa);
+        User userMarysia = new User(2L, "maria.wicherkeiwicz@gmail.com", driverMarysia, true, true);
+        userDao.save(userMarysia);
+        User userKrzysiu = new User(3L, "kris.gotowala@gmail.com", driverKrzysiu, true, true);
+        userDao.save(userKrzysiu);
+        User userGrzesiu = new User(4L, "grzegorz.ruchniewicza@gmail.com", driverKrzysiu, true, true);
+        userDao.save(userGrzesiu);
 
         Car kubaCar = new Car("GD 12345", "Opel", "Vectra", driverKuba);
         carDao.save(kubaCar);

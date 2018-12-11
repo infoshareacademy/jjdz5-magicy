@@ -26,6 +26,7 @@
             display: block;
             margin: auto;
         }
+
     </style>
 </head>
 <body>
@@ -45,36 +46,8 @@
       });
     }
     </script>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
-                                              hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="maps-adverts">Adverts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-maps-advert">Add advert</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="drivers">Drivers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-driver">Add driver</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about-us">About us</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+
+    <#include "menu.ftlh">
 
     <div class="view intro-2">
         <div class="mask rgba-black-light flex-center ">
