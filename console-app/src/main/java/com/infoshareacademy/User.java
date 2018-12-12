@@ -1,9 +1,5 @@
 package com.infoshareacademy;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-
 public class User {
 
     private Long id;
