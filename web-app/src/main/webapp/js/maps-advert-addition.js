@@ -114,11 +114,13 @@ function AutocompleteDirectionsHandler(map, directionsDisplay) {
         var distance = 0;
         var duration = 0;
         var waypoints = legs[0].via_waypoint;
+        console.log(waypoints);
 
         if (waypoints.length > 0) {
             var waypointsInput = document.getElementById("route-modifiers");
             var waypointsValue = "";
             for (var j = 0; j < waypoints.length; j++) {
+                console.log(waypoints[j]);
                 var loc = waypoints[j].location;
                 waypointsValue += loc;
                 if (j < waypoints.length - 1) {
@@ -211,6 +213,8 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         return;
     }
     var me = this;
+
+    var testStopover = {lat: 54.395064, lng: 18.586471};
 
     if (this.originPlaceId !== this.destinationPlaceId) {
         fillOriginInputFields(originPlace);
