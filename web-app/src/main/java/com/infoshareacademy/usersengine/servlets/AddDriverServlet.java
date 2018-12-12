@@ -81,7 +81,7 @@ public class AddDriverServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         userStatisticDao.save(userStatisticService.
-                addStatistic((User)session.getAttribute("user"), UserActivity.ADDING_ADVERT));
+                addStatistic((User)session.getAttribute("user"), UserActivity.ADDING_DRIVER));
         }
 
     private String getPath() {

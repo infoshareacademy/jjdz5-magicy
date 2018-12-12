@@ -21,7 +21,7 @@ public class User {
     private String email;
 
     @OneToOne
-    @Column(name = "driver")
+   // @Column(name = "driver")
     private MapsDriver driver;
 
     @Column(name = "is_driver")

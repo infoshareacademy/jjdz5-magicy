@@ -11,6 +11,8 @@ import java.util.Date;
 
 public class Route {
 
+    private long id;
+
     private Date date;
 
     private String startCity;
@@ -36,8 +38,9 @@ public class Route {
     }
 
 
-    public Route(Long id, Date date, String startCity, String startStreet, String endCity,
+    public Route(long id, Date date, String startCity, String startStreet, String endCity,
                  String endStreet, String pickUpCity, String pickUpStreet, String startTime, String endTime, String pickUpTime) {
+        this.id =id;
         this.date = date;
         this.startCity = startCity;
         this.startStreet = startStreet;
@@ -50,6 +53,14 @@ public class Route {
         this.pickUpTime = pickUpTime;
     }
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getStartStreet() {
         return startStreet;
@@ -144,4 +155,6 @@ public class Route {
                 ", pickUpTime='" + pickUpTime + '\'' +
                 '}';
     }
+
+
 }
