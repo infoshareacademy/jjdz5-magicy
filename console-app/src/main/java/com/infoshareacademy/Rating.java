@@ -10,14 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
+@Table(name = "ratings")
 public class Rating {
     private static final Double STARTING_AVERAGE = 0.0;
     private static final Integer STARTING_PERSONS = 0;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "average")
     private Double average;
 
+    @Column(name = "persons")
     private Integer persons;
 
     public Rating(Double average, Integer persons) {

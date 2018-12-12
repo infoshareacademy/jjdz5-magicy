@@ -9,28 +9,50 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "routes")
 public class Route {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
+    @Column(name = "start_at")
+    @NotNull
     private Date date;
 
+    @Column(name = "start_city")
+    @NotNull
     private String startCity;
 
+    @Column(name = "start_street")
+    @NotNull
     private String startStreet;
 
+    @Column(name = "end_city")
+    @NotNull
     private String endCity;
 
+    @Column(name = "ent_street")
+    @NotNull
     private String endStreet;
 
+    @Column(name = "pick_up_city")
     private String pickUpCity;
 
+    @Column(name = "pick_up_street")
     private String pickUpStreet;
 
+    @Column(name = "start_time")
+    @NotNull
     private String startTime;
 
+    @Column(name = "end_time")
+    @NotNull
     private String endTime;
 
+    @Column(name = "pick_up_time")
     private String pickUpTime;
 
     public Route(){
@@ -38,9 +60,9 @@ public class Route {
     }
 
 
-    public Route(long id, Date date, String startCity, String startStreet, String endCity,
+    public Route(Long id, Date date, String startCity, String startStreet, String endCity,
                  String endStreet, String pickUpCity, String pickUpStreet, String startTime, String endTime, String pickUpTime) {
-        this.id =id;
+        this.id = id;
         this.date = date;
         this.startCity = startCity;
         this.startStreet = startStreet;
@@ -53,13 +75,8 @@ public class Route {
         this.pickUpTime = pickUpTime;
     }
 
-
-    public long getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getStartStreet() {
@@ -98,6 +115,10 @@ public class Route {
 
     public String getPickUpTime() {
         return pickUpTime;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setDate(Date date) {
@@ -143,6 +164,7 @@ public class Route {
     @Override
     public String toString() {
         return "Route{" +
+                "id=" + id +
                 ", date=" + date +
                 ", startCity='" + startCity + '\'' +
                 ", startStreet='" + startStreet + '\'' +
@@ -155,6 +177,4 @@ public class Route {
                 ", pickUpTime='" + pickUpTime + '\'' +
                 '}';
     }
-
-
 }

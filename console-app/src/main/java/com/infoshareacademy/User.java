@@ -74,7 +74,7 @@ public class User {
         this.phone = phone;
     }
 
-    public Rating getRating() {
+    public Rating etRating() {
         return rating;
     }
 
