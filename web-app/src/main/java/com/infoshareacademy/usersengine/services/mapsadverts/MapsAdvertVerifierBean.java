@@ -6,6 +6,7 @@ import com.infoshareacademy.usersengine.model.AdvertPartType;
 import com.infoshareacademy.usersengine.model.AdvertOverallType;
 import com.infoshareacademy.usersengine.services.ParametersService;
 import com.infoshareacademy.usersengine.services.PropertiesService;
+import com.infoshareacademy.usersengine.services.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,10 +16,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Stateless
 public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
@@ -63,11 +61,13 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
             LOG.debug("Start address main parameter is not correct.");
             errorMessages.add(PropertiesService.getMsgBadMainStartAddress());
         }
-        if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.START)) {
-            LOG.debug("Start address is precise.");
-        } else {
-            LOG.debug("Start address is not enough precise.");
-            errorMessages.add(PropertiesService.getMsgBadDetailStartAddress());
+        if (PropertiesService.getAdvertPreciseCheck()) {
+            if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.START)) {
+                LOG.debug("Start address is precise.");
+            } else {
+                LOG.debug("Start address is not enough precise.");
+                errorMessages.add(PropertiesService.getMsgBadDetailStartAddress());
+            }
         }
     }
 
@@ -78,11 +78,13 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
             LOG.debug("End address main parameter is not correct.");
             errorMessages.add(PropertiesService.getMsgBadMainEndAddress());
         }
-        if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.END)) {
-            LOG.debug("End address is precise.");
-        } else {
-            LOG.debug("End address is not enough precise.");
-            errorMessages.add(PropertiesService.getMsgBadDetailEndAddress());
+        if (PropertiesService.getAdvertPreciseCheck()) {
+            if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.END)) {
+                LOG.debug("End address is precise.");
+            } else {
+                LOG.debug("End address is not enough precise.");
+                errorMessages.add(PropertiesService.getMsgBadDetailEndAddress());
+            }
         }
     }
 

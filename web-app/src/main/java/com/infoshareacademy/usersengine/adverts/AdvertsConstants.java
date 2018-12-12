@@ -24,6 +24,7 @@ public class AdvertsConstants {
     public static final String PARAMETER_PICK_UP_TIME = "pickUpTime";
     public static final String PARAMETER_DATE = "date";
     public static final String PARAMETER_DRIVER_ID = "driverId";
+    public static final String PARAMETER_PASSIVE_WAYPOINTS = "routeModifiers";
 
     public static final String MESSAGE_INCORRECT_DATE = "The entered date must be later than today and no later than a month after today. Enter correct date.<br>";
     public static final String MESSAGE_INCORRECT_START_CITY = "Enter correct departure city.<br>";

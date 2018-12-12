@@ -1,5 +1,6 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,11 +15,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -52,6 +56,13 @@ public class MapsAdvert {
     @NotNull
     private MapsAddress endAddress;
 
+    @ManyToMany
+    @JoinTable(name = "adverts_to_waypoints",
+            joinColumns = @JoinColumn(name = "advert_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "waypoint_id", referencedColumnName = "id"))
+    @JsonIgnore
+    private List<MapsWaypoint> waypoints;
+
     @Column(name = "start_time")
     @NotNull
     @JsonDeserialize(using = LocalTimeDeserializer.class)
@@ -74,13 +85,14 @@ public class MapsAdvert {
     }
 
     public MapsAdvert(MapsDriver driver, MapsAddress startAddress, MapsAddress endAddress,
-                      String startAddressInfo, String endAddressInfo,
+                      String startAddressInfo, String endAddressInfo, List<MapsWaypoint> waypoints,
                       LocalTime startTime, LocalTime endTime, LocalDate date) {
         this.driver = driver;
         this.startAddress = startAddress;
         this.endAddress = endAddress;
         this.startAddressInfo = startAddressInfo;
         this.endAddressInfo = endAddressInfo;
+        this.waypoints = waypoints;
         this.startTime = startTime;
         this.endTime = endTime;
         this.date = date;
@@ -132,6 +144,14 @@ public class MapsAdvert {
 
     public void setEndAddressInfo(String endAddressInfo) {
         this.endAddressInfo = endAddressInfo;
+    }
+
+    public List<MapsWaypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<MapsWaypoint> waypoints) {
+        this.waypoints = waypoints;
     }
 
     public LocalTime getStartTime() {

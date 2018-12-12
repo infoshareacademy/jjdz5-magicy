@@ -116,17 +116,17 @@ public class HelloServlet extends HttpServlet {
 
         MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
                 "Wyruszam z pod Alfa Centrum.",
-                "Moim punktem docelowym jest Olivia Business Centre",
+                "Moim punktem docelowym jest Olivia Business Centre", null,
                 LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
         mapsAdvertDao.save(kubaTestAdvert);
 
         MapsAdvert marysiaTestAdvert = new MapsAdvert(driverMarysia, luzyckaTestAddress, obcTestAddress,
-                "", "",
+                "", "", null,
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
         mapsAdvertDao.save(marysiaTestAdvert);
 
         MapsAdvert krzysiuTestAdvert = new MapsAdvert(driverKrzysiu, luzyckaTestAddress, alchemiaTestAddress,
-                "", "",
+                "", "", null,
                 LocalTime.now().plusHours(4), LocalTime.now().plusHours(5), LocalDate.now().plusDays(1));
         mapsAdvertDao.save(krzysiuTestAdvert);
 

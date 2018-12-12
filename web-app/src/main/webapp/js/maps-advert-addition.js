@@ -211,7 +211,6 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         return;
     }
     var me = this;
-    var testLatLng = {lat: 54.409278, lng: 18.582951};
 
     if (this.originPlaceId !== this.destinationPlaceId) {
         fillOriginInputFields(originPlace);
