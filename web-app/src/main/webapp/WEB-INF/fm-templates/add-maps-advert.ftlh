@@ -147,10 +147,13 @@
 
             </div>
 
-            <input id="origin-place-id" type="hidden" name="startMapsPointId">
-            <input id="destination-place-id" type="hidden" name="endMapsPointId">
-            <input id="origin-precise" type="hidden" name="startStreetNumber">
-            <input id="destination-precise" type="hidden" name="endStreetNumber">
+            <div id="hidden-inputs">
+                <input id="origin-place-id" type="hidden" name="startMapsPointId">
+                <input id="destination-place-id" type="hidden" name="endMapsPointId">
+                <input id="origin-precise" type="hidden" name="startStreetNumber">
+                <input id="destination-precise" type="hidden" name="endStreetNumber">
+                <input id="route-modifiers" type="hidden" name="routeModifiers">
+            </div>
 
             <div id="controls">
                 <button id="show-cards" type="button" class="btn button"

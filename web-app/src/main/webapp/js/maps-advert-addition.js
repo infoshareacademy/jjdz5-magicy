@@ -15,6 +15,15 @@ var userModifiedDepartureTime = false;
 var marker;
 var routeDuration;
 
+var originAutocomplete;
+var destinationAutocomplete;
+
+var currentOriginId;
+var currentDestinationId;
+
+var waypoints;
+var distance;
+
 function addEventListeners() {
     originTimeInput.addEventListener("input", departureTimeListener);
     destinationTimeInput.addEventListener("input", destinationTimeListener);
@@ -78,14 +87,15 @@ function AutocompleteDirectionsHandler(map, directionsDisplay) {
     this.directionsDisplay.setOptions({
         draggable: true
     });
-    var originAutocomplete = new google.maps.places.Autocomplete(
+    originAutocomplete = new google.maps.places.Autocomplete(
         originAddress);
-    var destinationAutocomplete = new google.maps.places.Autocomplete(
+    destinationAutocomplete = new google.maps.places.Autocomplete(
         destinationAddress);
 
     this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
     this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
     this.directionsDisplay.addListener('directions_changed', function () {
+        var me = this;
         var geocoder = new google.maps.Geocoder;
         var places = new google.maps.places.PlacesService(map);
         var result = directionsDisplay.getDirections();
@@ -103,41 +113,47 @@ function AutocompleteDirectionsHandler(map, directionsDisplay) {
         var endLatLng = {lat: endLat, lng: endLng};
         var distance = 0;
         var duration = 0;
-        console.log(startLatLng);
-        console.log(endLatLng);
+        var waypoints = legs[0].via_waypoint;
 
+        if (waypoints.length > 0) {
+            var waypointsInput = document.getElementById("route-modifiers");
+            var waypointsValue = "";
+            for (var j = 0; j < waypoints.length; j++) {
+                var loc = waypoints[j].location;
+                waypointsValue += loc;
+                if (j < waypoints.length - 1) {
+                    waypointsValue += ";";
+                }
+            }
+            waypointsInput.value = waypointsValue;
+        }
         geocoder.geocode({'location': startLatLng}, function (result, status) {
             var placeId = result[0].place_id;
             console.log(placeId);
+            originAutocomplete.value = placeId;
+            currentOriginId = placeId;
             places.getDetails({placeId: placeId}, function (place, status) {
                 fillOriginInputFields(place);
                 var address = place.formatted_address;
                 originAddress.value = address;
-                console.log("Formatted Address: " + address);
             });
         });
         geocoder.geocode({"location": endLatLng}, function (result, status) {
             var placeId = result[0].place_id;
             console.log(placeId);
+            destinationAutocomplete.value = placeId;
+            currentDestinationId = placeId;
             places.getDetails({placeId: placeId}, function (place, status) {
                 fillDestinationInputFields(place);
                 var address = place.formatted_address;
                 destinationAddress.value = address;
-                console.log("Formatted Address: " + address);
             });
         });
-
         for (var i = 0; i < legs.length; i++) {
             distance += legs[i].distance.value;
             duration += legs[i].duration.value;
         }
-        distance = distance / 1000;
         routeDuration = duration;
-        var durationMin = duration / 60;
-        console.log("Origin: " + start);
-        console.log("Destination: " + end);
-        console.log("Overall distance: " + distance + " km.");
-        console.log("Duration: " + durationMin + " min.");
         countApproximateDepartureTime();
     });
 
@@ -154,7 +170,7 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
         map: map
     });
     autocomplete.bindTo('bounds', this.map);
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', function assign() {
         var place = autocomplete.getPlace();
         if (!place.place_id) {
             window.alert("Please select an option from the dropdown list.");
@@ -169,7 +185,7 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
             } else {
                 marker.setVisible(false);
             }
-            me.originPlaceId = place.place_id;
+            currentOriginId = place.place_id;
             originPlace = place;
         } else {
             if (isBeforeRouteCounting) {
@@ -180,9 +196,11 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
             } else {
                 marker.setVisible(false);
             }
-            me.destinationPlaceId = place.place_id;
+            currentDestinationId = place.place_id;
             destinationPlace = place;
         }
+        me.originPlaceId = currentOriginId;
+        me.destinationPlaceId = currentDestinationId;
         me.route();
     });
 
@@ -193,6 +211,7 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         return;
     }
     var me = this;
+    var testLatLng = {lat: 54.409278, lng: 18.582951};
 
     if (this.originPlaceId !== this.destinationPlaceId) {
         fillOriginInputFields(originPlace);
@@ -271,4 +290,4 @@ function countApproximateDepartureTime() {
     } catch (e) {
         console.log("Enter arrival time.")
     }
-};
+}
