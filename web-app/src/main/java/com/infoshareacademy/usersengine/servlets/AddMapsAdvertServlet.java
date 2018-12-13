@@ -1,6 +1,5 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.User;
@@ -11,7 +10,6 @@ import com.infoshareacademy.usersengine.services.UserStatisticService;
 import com.infoshareacademy.usersengine.services.datamodels.AddMapsAdvertDataModel;
 import com.infoshareacademy.usersengine.services.mapsadverts.MapsAdvertProcessing;
 import com.infoshareacademy.usersengine.statistics.UserActivity;
-import com.infoshareacademy.usersengine.statistics.UserStatistic;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;

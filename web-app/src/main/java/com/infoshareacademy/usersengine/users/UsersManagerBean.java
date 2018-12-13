@@ -1,9 +1,7 @@
 package com.infoshareacademy.usersengine.users;
 
-import com.infoshareacademy.User;
 import com.infoshareacademy.usersengine.repository.UsersRepository;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
