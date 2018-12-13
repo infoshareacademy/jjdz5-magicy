@@ -67,6 +67,10 @@ public class PropertiesService {
         return PROPERTIES.getProperty(Property.MSG_EQUAL_ADDRESSES.name());
     }
 
+    public static String getMsgTooManyRouteModifiers() {
+        return PROPERTIES.getProperty(Property.MSG_TOO_MANY_ROUTE_MODIFIERS.name());
+    }
+
     public static String getMsgBadStartTime() {
         return PROPERTIES.getProperty(Property.MSG_BAD_START_TIME.name());
     }

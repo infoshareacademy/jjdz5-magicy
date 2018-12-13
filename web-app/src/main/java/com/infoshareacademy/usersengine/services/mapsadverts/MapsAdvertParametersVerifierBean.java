@@ -4,12 +4,17 @@ import com.infoshareacademy.usersengine.adverts.AdvertsConstants;
 import com.infoshareacademy.usersengine.model.AdvertPartType;
 import com.infoshareacademy.usersengine.model.AdvertOverallType;
 import com.infoshareacademy.usersengine.services.ParametersService;
+import com.infoshareacademy.usersengine.services.PropertiesService;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.Map;
 
 @Stateless
 public class MapsAdvertParametersVerifierBean implements MapsAdvertParametersVerifier {
+
+    @Inject
+    private MapsWaypointExtractor extractor;
 
     @Override
     public Boolean isAddressParameterCorrect(Map<String, String[]> parameters, AdvertPartType type) {
@@ -67,5 +72,11 @@ public class MapsAdvertParametersVerifierBean implements MapsAdvertParametersVer
                     AdvertsConstants.PARAMETER_END_STREET_NUMBER);
         }
         return precisionParameterCorrectness;
+    }
+
+    @Override
+    public Boolean areNotToManyPassiveWaypoints(Map<String, String[]> parameters) {
+        return extractor.extractWaypointsFromInput(parameters).size() <=
+                PropertiesService.getAdvertMaxRouteModifiers();
     }
 }

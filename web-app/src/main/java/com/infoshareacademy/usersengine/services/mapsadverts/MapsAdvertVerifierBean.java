@@ -37,6 +37,7 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
         verifyStartAddressParameters(parameters);
         verifyEndAddressParameters(parameters);
         verifyAddressesEquality(parameters);
+        verifyPassiveWaypointsNumber(parameters);
         LocalTime startTime = verifyStartTimeParameter(parameters);
         LocalTime endTime = verifyEndTimeParameter(parameters);
         LocalDate date = verifyDate(parameters);
@@ -91,6 +92,12 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
     private void verifyAddressesEquality(Map<String, String[]> parameters) {
         if (areAddressesEqual(parameters)) {
             errorMessages.add(PropertiesService.getMsgEqualAddresses());
+        }
+    }
+
+    private void verifyPassiveWaypointsNumber(Map<String, String[]> parameters) {
+        if (verifier.areNotToManyPassiveWaypoints(parameters)) {
+            errorMessages.add(PropertiesService.getMsgTooManyRouteModifiers());
         }
     }
 
