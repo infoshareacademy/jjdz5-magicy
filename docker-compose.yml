@@ -1,28 +1,25 @@
-version: "3.1"
+version: "3.3"
 services:
   db:
     container_name: jjdz5magicy-db
-    image: mysql
+    image: mysql:8.0.13
     environment:
       - MYSQL_ROOT_PASSWORD=magicy
       - MYSQL_DATABASE=magicy
       - MYSQL_USER=
       - MYSQL_PASSWORD=
+      - TZ=Europe/Warsaw
     ports:
       - 4222:3306
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://0.0.0.0:4222"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
   app:
     build:
       context: ./
+    image: jjdz5-magicy_app
+    container_name: jjdz5magicy-app
     ports:
       - 4220:8080
       - 4221:9990
-    restart: on-failure
     depends_on:
       - db
     links:

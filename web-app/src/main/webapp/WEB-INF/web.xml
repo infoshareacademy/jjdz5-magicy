@@ -8,7 +8,7 @@
   version="3.1">
 
   <data-source>
-    <name>#demoPU</name>
+    <name>java:ds/MAGds</name>
     <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
     <url>jdbc:mysql://jjdz5magicy-db:3306/magicy?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
     <user>root</user>
