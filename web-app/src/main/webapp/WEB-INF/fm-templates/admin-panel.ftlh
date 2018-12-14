@@ -92,7 +92,7 @@
 
 <div class="container">
     <#include "menu.ftlh">
-    <div class="row">
+    <div class="row" id="adverts">
         <div class="mt-5">
             <h3>Adverts</h3>
         </div>
@@ -115,11 +115,11 @@
                         <th><input type="text" class="form-control" placeholder="To" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Time" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Promo" disabled></th>
                     </tr>
                 </thead>
 	<tbody>
 	<#list adverts as a>
-    <#if a.getPromo() == true>
         <tr style="background: #ffffcc">
                 <td>${a.id}</td>
                 <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
@@ -130,23 +130,8 @@
                 <td style="background: #ffcc66">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
                 <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
+            <td>${a.} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
         </tr>
-    </#if>
-    </#list>
-    <#list adverts as a>
-        <#if a.getPromo() == false>
-         <tr>
-             <td>${a.id}</td>
-             <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
-             <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
-             <td>${a.getRoute().getPickUpTime()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
-             <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
-         </tr>
-        </#if>
     </#list>
 	</tbody>
             </table>

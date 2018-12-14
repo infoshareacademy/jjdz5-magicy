@@ -40,12 +40,8 @@ public class AdminPanelServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         Map<String, Object> dataModel = new HashMap<>();
-
-        HttpSession session = req.getSession(true);
-        String userEmail = session.getAttribute("userEmail").toString();
-        User user = userDao.findUserByEmail(userEmail).get(0);
-
-        dataModel.put("user", user);
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         Template template = templateProvider.getTemplate(getServletContext(), "admin-panel");
         try {
             template.process(dataModel, resp.getWriter());

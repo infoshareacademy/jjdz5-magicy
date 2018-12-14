@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,8 @@ public class AboutUsServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         Map<String, Object> dataModel = new HashMap<>();
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         dataModel.put("fatnastic", "fantastic");
         Template template = templateProvider.getTemplate(getServletContext(), "about-us");
         try {

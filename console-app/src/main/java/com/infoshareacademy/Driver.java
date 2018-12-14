@@ -1,25 +1,31 @@
 package com.infoshareacademy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 @Entity
 @Table(name = "drivers")
-public class Driver extends User {
+public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Column(name="name")
+    private String name;
+
+    @Column(name="surname")
+    private String surname;
+
+    @Column(name="phone")
+    private String phone;
+
+    @OneToOne
+    @JoinColumn(name = "rating_id", unique = true)
+    private Rating rating;
 
     @Column(name = "city")
     private String city;
@@ -32,10 +38,33 @@ public class Driver extends User {
 
 
     public Driver(String name, String surname, String phone, String city, String district, Rating rating, Long id) {
-        super(name, surname, phone, rating);
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.rating = rating;
         this.city = city;
         this.district = district;
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     public Driver(){

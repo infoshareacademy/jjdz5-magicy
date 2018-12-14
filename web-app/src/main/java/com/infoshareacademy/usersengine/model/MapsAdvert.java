@@ -1,5 +1,13 @@
 package com.infoshareacademy.usersengine.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalDateDeserializer;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalDateSerializer;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalTimeDeserializer;
+import com.infoshareacademy.usersengine.restservice.serialize.LocalTimeSerializer;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +28,7 @@ public class MapsAdvert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonProperty(value = "advert_id")
     private Long id;
 
     @ManyToOne
@@ -31,10 +40,10 @@ public class MapsAdvert {
     @JoinColumn(name = "start_address_id")
     @NotNull
     private MapsAddress startAddress;
-    
+
     @Column(name = "start_address_info")
     private String startAddressInfo;
-    
+
     @Column(name = "end_address_info")
     private String endAddressInfo;
 
@@ -45,14 +54,20 @@ public class MapsAdvert {
 
     @Column(name = "start_time")
     @NotNull
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    @JsonSerialize(using = LocalTimeSerializer.class)
     private LocalTime startTime;
 
     @Column(name = "end_time")
     @NotNull
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    @JsonSerialize(using = LocalTimeSerializer.class)
     private LocalTime endTime;
 
     @Column(name = "date")
     @NotNull
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
 
     public MapsAdvert() {

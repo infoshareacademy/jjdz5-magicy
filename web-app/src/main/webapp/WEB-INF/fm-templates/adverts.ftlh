@@ -47,6 +47,9 @@
 <body>
 <script>
     $(document).ready(function(){
+
+    document.getElementById("2nav").classList.add('active');
+
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
                     $filters = $panel.find('.filters input'),

@@ -52,19 +52,16 @@ public class HelloServlet extends HttpServlet {
     @Inject
     private UserDao userDao;
 
-    @Override
-    public void init() throws ServletException {
-        fillDatabaseWithAdvancedDefaults();
-    }
+//    @Override
+//    public void init() throws ServletException {
+//        fillDatabaseWithAdvancedDefaults();
+//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> dataModel = new HashMap<>();
-        HttpSession session = req.getSession(true);
-        String userEmail = session.getAttribute("userEmail").toString();
-        User user = userDao.findUserByEmail(userEmail).get(0);
-
-        dataModel.put("user", user);
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         Template template = templateProvider.getTemplate(getServletContext(), "home");
         try {
             template.process(dataModel, resp.getWriter());
@@ -92,50 +89,56 @@ public class HelloServlet extends HttpServlet {
                 "000-777-888");
         mapsDriverDao.save(driverGrzesiu);
 
-        User userKupa = new User(1L, "kuba.jurek@gmail.com", driverKuba, true, true);
-        userDao.save(userKupa);
-        User userMarysia = new User(2L, "maria.wicherkeiwicz@gmail.com", driverMarysia, true, true);
-        userDao.save(userMarysia);
-        User userKrzysiu = new User(3L, "kris.gotowala@gmail.com", driverKrzysiu, true, true);
-        userDao.save(userKrzysiu);
-        User userGrzesiu = new User(4L, "grzegorz.ruchniewicza@gmail.com", driverKrzysiu, true, true);
-        userDao.save(userGrzesiu);
-
         Car kubaCar = new Car("GD 12345", "Opel", "Vectra", driverKuba);
         carDao.save(kubaCar);
 
         Car marysiaCar = new Car("GA 12345", "Ford", "Focus", driverMarysia);
         carDao.save(marysiaCar);
 
-        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverGrzesiu);
+        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverKrzysiu);
         carDao.save(krzysiuCar);
 
-        MapsAddress testFirstAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
+        MapsAddress alfaTestAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
                 "Gdańsk", "Kołobrzeska", "41c",
-                "Alfa Centrum, Kołobrzeska 41C, Gdańsk",
+                "Alfa Centrum, aleja Grunwaldzka 409, 80-236 Gdańsk, Poland",
                 54.4043415, 18.5880136);
-        mapsAddressDao.save(testFirstAddress);
-        MapsAddress testSecondAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
+        mapsAddressDao.save(alfaTestAddress);
+
+        MapsAddress obcTestAddress = new MapsAddress("ChIJLaUT9i51_UYRd4PCJjKUE6s",
                 "Gdańsk", "aleja Grunwaldzka", "472A",
-                "Olivia Bussiness Centre, aleja Grunwaldzka 472A, Gdańsk",
+                "Olivia Point, aleja Grunwaldzka 472A, 80-309 Gdańsk, Poland",
                 54.4024308, 18.5704119);
-        mapsAddressDao.save(testSecondAddress);
-        MapsAddress testThirdAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
+        mapsAddressDao.save(obcTestAddress);
+
+        MapsAddress luzyckaTestAddress = new MapsAddress("ChIJ9Wu2Acag_UYRxtFwAORIirk",
                 "Gdynia", "Łużycka", "6A",
-                "Łużycka Office Park, Łużycka 6A, Gdynia",
+                "Łużycka Office Park - Budynek A, Łużycka 6A, 81-537 Gdynia, Poland",
                 54.4949626, 18.5337226);
-        mapsAddressDao.save(testThirdAddress);
+        mapsAddressDao.save(luzyckaTestAddress);
 
-        MapsAdvert testFirstAdvert = new MapsAdvert(driverKuba, testFirstAddress, testSecondAddress,
-                "#1 Test start info", "#1 Test end info",
-                LocalTime.now().plusHours(2),
-                LocalTime.now().plusHours(3), LocalDate.now());
-        mapsAdvertDao.save(testFirstAdvert);
+        MapsAddress alchemiaTestAddress = new MapsAddress("ChIJs-riZCh1_UYRUa1_LDDJ04A",
+                "Gdańsk", "aleja Grunwaldzka", "409",
+                "Alchemia, aleja Grunwaldzka 409, 80-236 Gdańsk, Poland",
+                54.3985837, 18.5769263);
+        mapsAddressDao.save(alchemiaTestAddress);
 
-        MapsAdvert testSecondAdvert = new MapsAdvert(driverKuba, testThirdAddress, testSecondAddress,
-                "#2 Test start info", "#2 Test end info",
+        User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, true, true );
+
+        MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
+                "Wyruszam z pod Alfa Centrum.",
+                "Moim punktem docelowym jest Olivia Business Centre",
+                LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
+        mapsAdvertDao.save(kubaTestAdvert);
+
+        MapsAdvert marysiaTestAdvert = new MapsAdvert(driverMarysia, luzyckaTestAddress, obcTestAddress,
+                "", "",
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
-        mapsAdvertDao.save(testSecondAdvert);
+        mapsAdvertDao.save(marysiaTestAdvert);
+
+        MapsAdvert krzysiuTestAdvert = new MapsAdvert(driverKrzysiu, luzyckaTestAddress, alchemiaTestAddress,
+                "", "",
+                LocalTime.now().plusHours(4), LocalTime.now().plusHours(5), LocalDate.now().plusDays(1));
+        mapsAdvertDao.save(krzysiuTestAdvert);
 
     }
 }
