@@ -22,12 +22,19 @@ public class MapsWaypointBuilderBean implements MapsWaypointBuilder{
     public List<MapsWaypoint> buildPassiveMapsWaypointsList(Map<String, String[]> parameters) {
         final Boolean isStopover = false;
         List<MapsWaypoint> waypoints = new ArrayList<>();
-        extractor.extractWaypointsFromInput(parameters).forEach(w -> {
-            MapsWaypoint waypoint = buildMapsWaypoint(w, isStopover);
-            mapsWaypointDao.save(waypoint);
-            waypoints.add(waypoint);
-        });
+        List<String> waypointsFromInput = extractor.extractWaypointsFromInput(parameters);
+        if (areWaypointsPresent(waypointsFromInput)) {
+            waypointsFromInput.forEach(w -> {
+                MapsWaypoint waypoint = buildMapsWaypoint(w, isStopover);
+                mapsWaypointDao.save(waypoint);
+                waypoints.add(waypoint);
+            });
+        }
         return waypoints;
+    }
+
+    private Boolean areWaypointsPresent(List<String> waypointsFromInput) {
+        return waypointsFromInput != null || !waypointsFromInput.isEmpty();
     }
 
     private MapsWaypoint buildMapsWaypoint(String coordinatesString, Boolean isStopover) {

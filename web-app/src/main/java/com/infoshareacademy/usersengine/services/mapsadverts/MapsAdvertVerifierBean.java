@@ -6,7 +6,6 @@ import com.infoshareacademy.usersengine.model.AdvertPartType;
 import com.infoshareacademy.usersengine.model.AdvertOverallType;
 import com.infoshareacademy.usersengine.services.ParametersService;
 import com.infoshareacademy.usersengine.services.PropertiesService;
-import com.infoshareacademy.usersengine.services.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,7 +95,7 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
     }
 
     private void verifyPassiveWaypointsNumber(Map<String, String[]> parameters) {
-        if (verifier.areNotToManyPassiveWaypoints(parameters)) {
+        if (verifier.areTooManyPassiveWaypoints(parameters)) {
             errorMessages.add(PropertiesService.getMsgTooManyRouteModifiers());
         }
     }

@@ -5,13 +5,18 @@ import com.infoshareacademy.usersengine.model.AdvertPartType;
 import com.infoshareacademy.usersengine.model.AdvertOverallType;
 import com.infoshareacademy.usersengine.services.ParametersService;
 import com.infoshareacademy.usersengine.services.PropertiesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 
 @Stateless
 public class MapsAdvertParametersVerifierBean implements MapsAdvertParametersVerifier {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MapsAdvertParametersVerifierBean.class);
 
     @Inject
     private MapsWaypointExtractor extractor;
@@ -75,8 +80,9 @@ public class MapsAdvertParametersVerifierBean implements MapsAdvertParametersVer
     }
 
     @Override
-    public Boolean areNotToManyPassiveWaypoints(Map<String, String[]> parameters) {
-        return extractor.extractWaypointsFromInput(parameters).size() <=
-                PropertiesService.getAdvertMaxRouteModifiers();
+    public Boolean areTooManyPassiveWaypoints(Map<String, String[]> parameters) {
+        List<String> waypoints = extractor.extractWaypointsFromInput(parameters);
+        LOG.info("Number of passive waypoints from parameters: {}.", waypoints.size());
+        return waypoints.size() > PropertiesService.getAdvertMaxRouteModifiers();
     }
 }

@@ -187,6 +187,11 @@
                     <li>Try to type address as precise as possible. Writing street number will be very helpful!</li>
                     <li>Remember that departure and destination address cannot be the same.</li>
                 </ul>
+                <h5>Route modifying:</h5>
+                <ul>
+                    <li>You can modify route generated for you. To achieve that drag route lines into streets you want to go through.</li>
+                    <li>Modifying route will generate waypoints on it. Please remember that maximum quantity of these points is ${ROUTE_MODIFIERS_CONDITION?first}.</li>
+                </ul>
                 <h5>Time:</h5>
                 <ul>
                     <li>When you enter your desired arrival time, after correct selection of departure and destination addresses, departure time will be calculated automatically.</li>

@@ -15,6 +15,7 @@ public class AddMapsAdvertDataModel extends DataModel<List>{
     private static final String SUMMARY_KEY = "SUMMARY";
     private static final String TIME_CONDITION_KEY = "TIME_CONDITION";
     private static final String DATE_CONDITION_KEY = "DATE_CONDITION";
+    private static final String ROUTE_MODIFIERS_CONDITION_KEY = "ROUTE_MODIFIERS_CONDITION";
 
     @Inject
     private MapsDriverDao mapsDriverDao;
@@ -37,6 +38,8 @@ public class AddMapsAdvertDataModel extends DataModel<List>{
                 PropertiesService.getAdvertMinHoursToStart()));
         dataModel.put(DATE_CONDITION_KEY, Collections.singletonList(
                 PropertiesService.getAdvertMaxPeriodDays()));
+        dataModel.put(ROUTE_MODIFIERS_CONDITION_KEY, Collections.singletonList(
+                PropertiesService.getAdvertMaxRouteModifiers()));
     }
 
 }
