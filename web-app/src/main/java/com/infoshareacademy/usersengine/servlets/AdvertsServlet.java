@@ -1,7 +1,11 @@
 package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.JsonToList;
+import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.UserStatisticService;
+import com.infoshareacademy.usersengine.statistics.UserActivity;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -14,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +31,12 @@ public class AdvertsServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
+
+    @Inject
+    UserStatisticDao userStatisticDao;
+
+    @Inject
+    UserStatisticService userStatisticService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +53,11 @@ public class AdvertsServlet extends HttpServlet {
         } catch (TemplateException e) {
             LOG.error("TemplateException. Template cannot be created.");
         }
+
+        HttpSession session = req.getSession();
+        userStatisticDao.save(userStatisticService.
+                addStatistic((User)session.getAttribute("user"), UserActivity.DISPLAYING_ADVERTS));
+
     }
 
     private String getPath() {
@@ -49,4 +65,3 @@ public class AdvertsServlet extends HttpServlet {
         return application.getRealPath("WEB-INF/adverts.json");
     }
 }
-

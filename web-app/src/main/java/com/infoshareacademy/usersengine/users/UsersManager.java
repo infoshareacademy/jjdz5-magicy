@@ -1,7 +1,5 @@
 package com.infoshareacademy.usersengine.users;
 
-import com.infoshareacademy.User;
-
 import java.util.List;
 import java.util.Optional;
 
