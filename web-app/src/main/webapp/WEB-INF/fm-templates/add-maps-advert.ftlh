@@ -106,6 +106,10 @@
                                name="startInfo" placeholder="Departure additional information.">
                         <input id="destination-address-info" class="form-control mt-1" type="text"
                                name="endInfo" placeholder="Destination additional information.">
+                        <div class="card-title card-label">
+                            <span>Overall distance: </span>
+                            <span id="overall-distance">0 km</span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ var originTimeInput = document.getElementById("origin-time");
 var destinationTimeInput = document.getElementById("destination-time");
 var originAddress = document.getElementById('origin-address');
 var destinationAddress = document.getElementById('destination-address');
+var overallDistance = document.getElementById("overall-distance");
 var destinationTime;
 var originPlace;
 var destinationPlace;
@@ -23,6 +24,7 @@ var currentDestinationId;
 
 var waypoints;
 var distance;
+var formattedDistance;
 
 function addEventListeners() {
     originTimeInput.addEventListener("input", departureTimeListener);
@@ -152,11 +154,16 @@ function AutocompleteDirectionsHandler(map, directionsDisplay) {
             });
         });
         for (var i = 0; i < legs.length; i++) {
+            distance = 0;
             distance += legs[i].distance.value;
             duration += legs[i].duration.value;
+            console.log(distance);
         }
+
         routeDuration = duration;
         countApproximateDepartureTime();
+        fillDistanceField(distance);
+
     });
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
@@ -214,8 +221,6 @@ AutocompleteDirectionsHandler.prototype.route = function() {
     }
     var me = this;
 
-    var testStopover = {lat: 54.395064, lng: 18.586471};
-
     if (this.originPlaceId !== this.destinationPlaceId) {
         fillOriginInputFields(originPlace);
         fillDestinationInputFields(destinationPlace);
@@ -228,8 +233,10 @@ AutocompleteDirectionsHandler.prototype.route = function() {
             if (status === 'OK') {
                 marker.setVisible(false);
                 routeDuration = response.routes[0].legs[0].duration.value;
+                distance = response.routes[0].legs[0].distance.value;
                 isBeforeRouteCounting = false;
                 me.directionsDisplay.setDirections(response);
+                fillDistanceField(distance);
                 if (destinationTimeInput !== undefined || destinationTimeInput !== "") {
                     countApproximateDepartureTime();
                 }
@@ -293,4 +300,14 @@ function countApproximateDepartureTime() {
     } catch (e) {
         console.log("Enter arrival time.")
     }
+}
+
+function fillDistanceField(dist) {
+    console.log("Formatting distance");
+    formattedDistance = "";
+    formattedDistance = dist / 1000;
+    formattedDistance = formattedDistance.toString();
+    formattedDistance += " km";
+    console.log(formattedDistance);
+    overallDistance.innerText = formattedDistance;
 }
