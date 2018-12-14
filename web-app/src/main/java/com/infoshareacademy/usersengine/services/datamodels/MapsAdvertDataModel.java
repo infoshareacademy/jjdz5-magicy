@@ -36,6 +36,4 @@ public class MapsAdvertDataModel extends DataModel<Map<String, String[]>>{
                 AdvertsConstants.PARAMETER_ADVERT_ID));
     }
 
-
-
 }

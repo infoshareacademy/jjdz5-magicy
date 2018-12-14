@@ -31,6 +31,11 @@
     </style>
 </head>
 <body>
+<script>
+    $(document).ready(function(){
+    document.getElementById("5nav").classList.add('active');
+    });
+</script>
 <div class="container">
     <#include "menu.ftlh">
     <div class="row">

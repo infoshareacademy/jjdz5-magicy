@@ -24,7 +24,11 @@
 <body>
 
 <#assign advert = DETAIL_ADVERT?first>
-
+<script>
+    $(document).ready(function(){
+    document.getElementById("2nav").classList.add('active');
+    });
+</script>
 <div class="container">
 
     <div id="loader">

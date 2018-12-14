@@ -1,6 +1,5 @@
 package com.infoshareacademy.usersengine.services.datamodels;
 
-import com.infoshareacademy.usersengine.model.User;
 import com.infoshareacademy.usersengine.services.PropertiesService;
 import com.infoshareacademy.usersengine.services.Property;
 

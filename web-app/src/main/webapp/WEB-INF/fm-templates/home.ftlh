@@ -33,6 +33,10 @@
 
 <header>
     <script>
+
+        $(document).ready(function(){
+    document.getElementById("1nav").classList.add('active');
+    });
         function myFunction() {
               var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {

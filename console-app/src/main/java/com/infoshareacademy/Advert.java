@@ -12,30 +12,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
-@Table(name = "adverts")
+
 public class Advert {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "add_at")
-    @NotNull
     private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "driver_id", unique = true)
-    @NotNull
     private Driver driver;
 
-    @OneToOne
-    @JoinColumn(name = "route_id", unique = true)
-    @NotNull
     private Route route;
 
-    @Column(name = "promo")
     private Boolean promo;
 
     public Advert(){

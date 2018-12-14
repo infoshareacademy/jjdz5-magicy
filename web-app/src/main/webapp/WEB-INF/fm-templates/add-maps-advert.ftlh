@@ -16,10 +16,15 @@
 </head>
 
 <body id="top">
-
+<script>
+    $(document).ready(function(){
+    document.getElementById("3nav").classList.add('active');
+    });
+</script>
 <div class="container">
 
     <div id="loader">
+
         <div class="load"></div>
     </div>
 

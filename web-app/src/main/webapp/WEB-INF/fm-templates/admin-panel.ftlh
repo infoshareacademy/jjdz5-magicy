@@ -47,6 +47,8 @@
 <body>
 <script>
     $(document).ready(function(){
+    document.getElementById("8nav").classList.add('active');
+
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
                     $filters = $panel.find('.filters input'),
@@ -102,39 +104,7 @@
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 </div>
             </div>
-            <table class="table">
 
-                <thead>
-                    <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="Advert" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="From" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Via" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="To" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Promo" disabled></th>
-                    </tr>
-                </thead>
-	<tbody>
-	<#list adverts as a>
-        <tr style="background: #ffffcc">
-                <td>${a.id}</td>
-                <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
-                <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
-                <td>${a.getRoute().getPickUpTime()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
-                <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
-            <td>${a.} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
-        </tr>
-    </#list>
-	</tbody>
-            </table>
         </div>
     </div>
 </div>

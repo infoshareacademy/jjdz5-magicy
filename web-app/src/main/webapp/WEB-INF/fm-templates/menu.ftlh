@@ -26,17 +26,12 @@
             <a class="nav-link" href="add-driver">Add driver</a>
         </li>
         </#if>
-          <#if user.isDriver() == true>
-      <li id="6nav" class="nav-item">
-        <a class="nav-link" href="add-driver">My account</a>
-     </li>
-        </#if>
 <li id="7nav" class="nav-item">
     <a class="nav-link" href="about-us">About us</a>
 </li>
 <#if user.isAdmin() == true>
 <li id="8nav" class="nav-item">
-    <a class="nav-link" href="about-us">Admin Panel</a>
+    <a class="nav-link" href="admin-panel">Admin Panel</a>
 </li>
 </#if>
 </ul>

@@ -162,7 +162,7 @@ public class GLoginServlet extends HttpServlet {
                 54.3985837, 18.5769263);
         mapsAddressDao.save(alchemiaTestAddress);
 
-        User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, true, true );
+        User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, false, false );
         userDao.save(userMarysia);
 
         MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
@@ -172,7 +172,7 @@ public class GLoginServlet extends HttpServlet {
         mapsAdvertDao.save(kubaTestAdvert);
 
         MapsAdvert marysiaTestAdvert = new MapsAdvert(driverMarysia, luzyckaTestAddress, obcTestAddress,
-                "", "",
+                "Wyruszam z pod Alfa Centrum.", "Moim punktem docelowym jest Olivia Business Centre",
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
         mapsAdvertDao.save(marysiaTestAdvert);
 

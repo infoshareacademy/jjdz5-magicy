@@ -47,6 +47,9 @@
 </head>
 <body>
 <script>
+    $(document).ready(function(){
+    document.getElementById("4nav").classList.add('active');
+    });
 
 function myAlertFunction(id, name, surname) {
 var inputOptions = new Promise(function(resolve) {

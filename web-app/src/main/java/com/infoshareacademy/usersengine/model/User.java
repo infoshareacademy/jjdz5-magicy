@@ -33,6 +33,12 @@ public class User {
     public User() {
     }
 
+    public User(String email, boolean isDriver, boolean isAdmin) {
+        this.email = email;
+        this.isDriver = isDriver;
+        this.isAdmin = isAdmin;
+    }
+
     public User(String email, MapsDriver driver, boolean isDriver, boolean isAdmin) {
         this.email = email;
         this.driver = driver;
