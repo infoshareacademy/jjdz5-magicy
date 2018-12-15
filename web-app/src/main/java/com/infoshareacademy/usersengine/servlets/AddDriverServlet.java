@@ -8,6 +8,7 @@ import com.infoshareacademy.usersengine.drivers.DriverPreparation;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.BandleService;
 import com.infoshareacademy.usersengine.services.UserStatisticService;
 import com.infoshareacademy.usersengine.statistics.UserActivity;
 import freemarker.template.Template;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @WebServlet("/add-driver")
@@ -49,7 +51,10 @@ public class AddDriverServlet extends HttpServlet {
     private UserStatisticDao userStatisticDao;
 
     @Inject
-    UserStatisticService userStatisticService;
+    private UserStatisticService userStatisticService;
+
+    @Inject
+    private BandleService bandleService;
 
 
     @Override
@@ -57,6 +62,10 @@ public class AddDriverServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
+
+        Locale plLocale = new Locale("pl","PL");
+        dataModel.put("language", bandleService.getBundle(plLocale));
+
         Template template = templateProvider.getTemplate(getServletContext(), "add-driver");
         try {
             template.process(dataModel, resp.getWriter());

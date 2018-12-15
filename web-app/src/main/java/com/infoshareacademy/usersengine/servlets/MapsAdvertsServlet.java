@@ -47,6 +47,7 @@ public class MapsAdvertsServlet extends AppInitServlet {
         dataModel.buildNewDataModel();
         dataModel.addUserToDataModel(req);
         dataModel.fillDataModelWithGetData();
+
         templateProvider.build(getServletContext(), TEMPLATE_NAME_GET,
                 dataModel.getDataModel(), resp);
 

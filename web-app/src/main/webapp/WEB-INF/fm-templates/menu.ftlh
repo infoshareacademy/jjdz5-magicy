@@ -11,33 +11,33 @@
                 <a class="nav-link" href="home">${language.getString("home")}<span class="sr-only">(current)</span></a>
             </li>
             <li id="2nav" class="nav-item">
-                <a class="nav-link" href="maps-adverts">Adverts</a>
+                <a class="nav-link" href="maps-adverts">${language.getString("adverts")}</a>
             </li>
             <#if user.isDriver() == true>
             <li id="3nav" class="nav-item">
-                <a class="nav-link" href="add-maps-advert">Add advert</a>
+                <a class="nav-link" href="add-maps-advert">${language.getString("addAdverts")}</a>
             </li>
         </#if>
         <li id="4nav" class="nav-item">
-            <a class="nav-link" href="drivers">Drivers</a>
+            <a class="nav-link" href="drivers">${language.getString("drivers")}</a>
         </li>
         <#if user.isDriver() == false>
         <li  id="5nav" class="nav-item">
-            <a class="nav-link" href="add-driver">Add driver</a>
+            <a class="nav-link" href="add-driver">${language.getString("addDriver")}</a>
         </li>
         </#if>
 <li id="7nav" class="nav-item">
-    <a class="nav-link" href="about-us">About us</a>
+    <a class="nav-link" href="about-us">${language.getString("abautUs")}</a>
 </li>
 <#if user.isAdmin() == true>
 <li id="8nav" class="nav-item">
-    <a class="nav-link" href="admin-panel">Admin Panel</a>
+    <a class="nav-link" href="admin-panel">${language.getString("adminPanel")}</a>
 </li>
 </#if>
 </ul>
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link" href="logout" onclick="signOut()">Sign out</a>
+        <a class="nav-link" href="logout" onclick="signOut()">${language.getString("signOut")}</a>
     </li>
 </ul>
 </div>

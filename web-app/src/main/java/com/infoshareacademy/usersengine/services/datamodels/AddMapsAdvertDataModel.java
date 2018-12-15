@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.services.datamodels;
 
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.model.MapsDriver;
+import com.infoshareacademy.usersengine.services.BandleService;
 import com.infoshareacademy.usersengine.services.PropertiesService;
 
 import javax.ejb.Stateless;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Stateless
 public class AddMapsAdvertDataModel extends DataModel<List>{
@@ -19,15 +21,23 @@ public class AddMapsAdvertDataModel extends DataModel<List>{
     private static final String DATE_CONDITION_KEY = "DATE_CONDITION";
     private static final String ROUTE_MODIFIERS_CONDITION_KEY = "ROUTE_MODIFIERS_CONDITION";
     private static final String DRIVER_KEY = "DRIVER";
+    private static final String BANDLE_KEY = "language";
+
 
     @Inject
     private MapsDriverDao mapsDriverDao;
+
+    @Inject
+    private BandleService bandleService;
 
     @Override
     public void fillDataModelWithGetData() {
         putApiKeyIntoDataModel();
         dataModel.put(DRIVERS_KEY, mapsDriverDao.findAll());
         fillDataModuleWithInformationVariables();
+
+        Locale plLocale = new Locale("pl","PL");
+        dataModel.put(BANDLE_KEY, bandleService.getBundle(plLocale));
     }
 
     @Override

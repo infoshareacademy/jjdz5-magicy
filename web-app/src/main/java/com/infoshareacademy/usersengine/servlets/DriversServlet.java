@@ -7,6 +7,7 @@ import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.BandleService;
 import com.infoshareacademy.usersengine.services.UserStatisticService;
 import com.infoshareacademy.usersengine.statistics.UserActivity;
 import freemarker.template.Template;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @WebServlet("drivers")
@@ -49,6 +51,9 @@ public class DriversServlet extends HttpServlet {
     @Inject
     private UserStatisticService userStatisticService;
 
+    @Inject
+    private BandleService bandleService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -58,6 +63,10 @@ public class DriversServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
+
+        Locale plLocale = new Locale("pl","PL");
+        dataModel.put("language", bandleService.getBundle(plLocale));
+
         driversList.setDriversList(jsonToList.driversToList(getPath()));
         dataModel.put("drivers", driversList.getDriversList());
         Template template = templateProvider.getTemplate(getServletContext(), "drivers");
