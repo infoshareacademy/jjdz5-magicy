@@ -85,12 +85,10 @@ public class AddDriverServlet extends HttpServlet {
         Map<String, String[]> map = req.getParameterMap();
 
         MapsDriver driver = driverPreparation.driverMapReader(map);
-        Car car = driverPreparation.carMapReader(map);
-        String message = driverPreparation.validateDriver(driver, car);
+        String message = driverPreparation.validateDriver(driver);
         if(message.isEmpty()){
+            carDao.save(driver.getCar());
             mapsDriverDao.save(driver);
-            car.setDriver(driver);
-            carDao.save(car);
             User currentUser = (User) req.getSession().getAttribute("user");
             currentUser.setDriver(driver);
             currentUser.setDriverStatus(true);

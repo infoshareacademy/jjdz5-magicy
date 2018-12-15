@@ -1,9 +1,11 @@
 package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.*;
+import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -38,6 +40,9 @@ public class DriversServlet extends HttpServlet {
     @Inject
     private DriversValidation driversValidation;
 
+    @Inject
+    private MapsDriverDao mapsDriverDao;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -47,9 +52,8 @@ public class DriversServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
-        driversList.setDriversList(jsonToList.driversToList(getPath()));
-        dataModel.put("drivers", driversList.getDriversList());
-        Template template = templateProvider.getTemplate(getServletContext(), "drivers");
+        dataModel.put("drivers", mapsDriverDao.findAll());
+        Template template = templateProvider.getTemplate(getServletContext(), "maps-drivers");
         try {
             template.process(dataModel, resp.getWriter());
             LOG.debug("Template created successfully.");
@@ -65,6 +69,9 @@ public class DriversServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");
         String rating = req.getParameter("rating");
+
+        MapsDriver driverToRate = mapsDriverDao.findById(Long.parseLong(id));
+
 
         redirect(resp,driversValidation.validateDriverData(id, rating, driversList.getDriversList()), id, rating);
     }

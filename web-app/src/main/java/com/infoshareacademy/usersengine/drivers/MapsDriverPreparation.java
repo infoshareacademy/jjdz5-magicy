@@ -32,24 +32,21 @@ public class MapsDriverPreparation {
         String name = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_NAME);
         String surname = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_SURNAME);
         String phone = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_PHONE);
-        return new MapsDriver(name, surname, phone);
-    }
-
-    public Car carMapReader(Map<String, String[]> map) {
         String carBrand = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CAR_BRAND);
         String carModel = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CAR_MODEL);
         String licensePlate = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_LICENSE_PLATE);
-        return new Car(carBrand, carModel, licensePlate, null);
+        Car car = new Car(carBrand, carModel, licensePlate);
+        return new MapsDriver(name, surname, phone, car);
     }
 
-    public String validateDriver(MapsDriver driver, Car car) {
+    public String validateDriver(MapsDriver driver) {
         String message = DriversConstants.EMPTY_FIELD;
         if (isPhoneNumberAlreadyInUse(driver.getPhoneNumber())) {
             LOG.info("Driver with phone number {} already exist.", driver.getPhoneNumber());
             message += DriversConstants.MESSAGE_DRIVER_ALREADY_EXIST;
             return message;
         }
-        if (isLicensePlateAlreadyInUse(car.getLicensePlate())) {
+        if (isLicensePlateAlreadyInUse(driver.getCar().getLicensePlate())) {
             message += "License plate is already in use.<br>";
             return message;
         }

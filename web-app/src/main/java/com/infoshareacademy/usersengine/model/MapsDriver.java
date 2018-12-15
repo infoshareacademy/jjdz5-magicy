@@ -1,6 +1,7 @@
 package com.infoshareacademy.usersengine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.infoshareacademy.Rating;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,23 +30,28 @@ public class MapsDriver {
     @NotNull
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "driver", fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Car> cars;
+    @OneToOne
+    @JoinColumn(name = "car_id", unique = true)
+    private Car car;
 
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<MapsAdvert> mapAdverts;
 
+//    @OneToOne
+//    @Column(name = "mapsrating_id")
+//    private MapsRating rating;
+
     public MapsDriver() {
     }
 
-    public MapsDriver(String name, String surname, String phoneNumber) {
+    public MapsDriver(String name, String surname, String phoneNumber, Car car) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
-        this.cars = new ArrayList<>();
+        this.car = car;
         this.mapAdverts = new ArrayList<>();
+//        this.rating = new MapsRating();
     }
 
     public Long getId() {
@@ -80,12 +86,12 @@ public class MapsDriver {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Car> getCars() {
-        return cars;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public List<MapsAdvert> getMapAdverts() {
@@ -96,6 +102,14 @@ public class MapsDriver {
         this.mapAdverts = mapAdverts;
     }
 
+//    public MapsRating getRating() {
+//        return rating;
+//    }
+//
+//    public void setRating(MapsRating rating) {
+//        this.rating = rating;
+//    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapsDriver{");
@@ -103,7 +117,7 @@ public class MapsDriver {
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", phoneNumber='").append(phoneNumber).append('\'');
-        sb.append(", cars=").append(cars);
+        sb.append(", car=").append(car);
         sb.append(", mapAdverts=").append(mapAdverts);
         sb.append('}');
         return sb.toString();

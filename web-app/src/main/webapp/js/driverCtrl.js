@@ -34,7 +34,7 @@ function addDriver(){
                             $('#car-brand').val('');
                             $('#car-model').val('');
                             $('#license-plate').val('');
-                            window.location.replace("http://localhost:8080/jjdz5magicy/drivers")
+                            window.location.replace("http://localhost:8080/jjdz5-magicy/drivers");
                     },
                     error: function (resultData) {
                         console.log(resultData);

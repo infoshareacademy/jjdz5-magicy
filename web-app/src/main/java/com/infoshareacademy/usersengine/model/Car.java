@@ -1,12 +1,9 @@
 package com.infoshareacademy.usersengine.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -27,19 +24,13 @@ public class Car {
     @NotNull
     private String carModel;
 
-    @ManyToOne
-    @JoinColumn(name = "driver_id")
-    @JsonIgnore
-    private MapsDriver driver;
-
     public Car(){
     }
 
-    public Car(String licensePlate, String carBrand, String carModel, MapsDriver driver) {
+    public Car(String licensePlate, String carBrand, String carModel) {
         this.licensePlate = licensePlate;
         this.carBrand = carBrand;
         this.carModel = carModel;
-        this.driver = driver;
     }
 
     public String getLicensePlate() {
@@ -64,14 +55,6 @@ public class Car {
 
     public void setCarModel(String carModel) {
         this.carModel = carModel;
-    }
-
-    public MapsDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(MapsDriver driver) {
-        this.driver = driver;
     }
 
     @Override

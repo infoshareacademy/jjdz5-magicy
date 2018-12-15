@@ -47,12 +47,9 @@ public class AddDriverValidationServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
 
         Map<String, String[]> map = req.getParameterMap();
-        map.entrySet().forEach(e -> LOG.info(e.getKey() + " --- " + e.getValue()[0]));
         PrintWriter writer = resp.getWriter();
         MapsDriver driver = driverPreparation.driverMapReader(map);
-        Car car = driverPreparation.carMapReader(map);
-        LOG.info(car.toString());
-        String message = driverPreparation.validateDriver(driver, car);
+        String message = driverPreparation.validateDriver(driver);
         if(message.isEmpty()){
             LOG.debug("Driver data is valid.");
             writer.println("OK");

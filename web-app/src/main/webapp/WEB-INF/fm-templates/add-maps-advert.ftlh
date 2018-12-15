@@ -126,15 +126,13 @@
                         <div id="driver-header" class="card-header">Your data:</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
-                            <div id="driver-label" class="card-title card-label">
+                            <div class="card-body">
                                 <#assign driver = DRIVER>
-                                <span>${driver.name} ${driver.surname}</span><br>
-                                <span>${driver.phoneNumber}</span><br>
-                                <#list driver.cars as c>
-                                <#assign car = c>
-                                <span>${car.carBrand} ${car.carModel}</span><br>
-                                <span>${car.licensePlate}</span><br>
-                                </#list>
+                                <div class="card-label">${driver.name} ${driver.surname}</div>
+                                <div class="card-label">${driver.phoneNumber}</div>
+                                <div class="card-label">${driver.car.carBrand}</div>
+                                <div class="card-label">${driver.car.carModel}</div>
+                                <div class="card-label">${driver.car.licensePlate}</div>
                             </div>
                         </div>
                     </div>

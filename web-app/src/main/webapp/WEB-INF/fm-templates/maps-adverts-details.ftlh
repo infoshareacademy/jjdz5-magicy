@@ -109,9 +109,9 @@
                         <div class="card-body">
                             <div class="card-label">${advert.driver.name} ${advert.driver.surname}</div>
                             <div class="card-label">${advert.driver.phoneNumber}</div>
-                            <#assign car = advert.driver.cars?first>
-                            <div class="card-label">${car.carBrand} ${car.carModel}</div>
-                            <div class="card-label">${car.licensePlate}</div>
+                            <div class="card-label">${advert.driver.car.carBrand}</div>
+                            <div class="card-label">${advert.driver.car.carModel}</div>
+                            <div class="card-label">${advert.driver.car.licensePlate}</div>
                         </div>
                     </div>
                 </div>
