@@ -148,6 +148,7 @@
                 <input id="origin-precise" type="hidden" name="startStreetNumber">
                 <input id="destination-precise" type="hidden" name="endStreetNumber">
                 <input id="route-modifiers" type="hidden" name="routeModifiers">
+                <input id="driver-id" type="hidden" name="driverId" value="${driver.id}">
             </div>
 
             <div id="controls">
