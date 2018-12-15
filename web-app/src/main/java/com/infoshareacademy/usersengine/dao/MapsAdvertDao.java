@@ -21,7 +21,7 @@ public class MapsAdvertDao extends GenericDao<MapsAdvert, Long> {
     public List<MapsAdvert> findAdvertsByStartCity(String city) {
         return findAdvertsByCity(city, AdvertPartType.START);
     }
-    
+
     public List<MapsAdvert> findAdvertsByEndCity(String city) {
         return findAdvertsByCity(city, AdvertPartType.END);
     }

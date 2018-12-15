@@ -6,6 +6,7 @@
     <title>goTogether</title>
 
     <link rel="stylesheet" href="css/overall.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
@@ -48,8 +49,7 @@
 <body>
 <script>
     $(document).ready(function(){
-
-    document.getElementById("2nav").classList.add('active');
+    document.getElementById("8nav").classList.add('active');
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -96,8 +96,7 @@
 
 <div class="container">
     <#include "menu.ftlh">
-<#--The columns titles are merged with the filters inputs thanks to the placeholders attributes-->
-    <div class="row">
+    <div class="row" id="adverts">
         <div class="mt-5">
             <h3>Adverts</h3>
         </div>
@@ -107,54 +106,7 @@
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 </div>
             </div>
-            <table class="table">
 
-                <thead>
-                    <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="Advert" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="From" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Via" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="To" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Driver" disabled></th>
-                    </tr>
-                </thead>
-	<tbody>
-	<#list adverts as a>
-    <#if a.getPromo() == true>
-        <tr style="background: #ffffcc">
-                <td>${a.id}</td>
-                <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
-                <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
-                <td>${a.getRoute().getPickUpTime()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
-                <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
-        </tr>
-    </#if>
-    </#list>
-    <#list adverts as a>
-        <#if a.getPromo() == false>
-         <tr>
-             <td>${a.id}</td>
-             <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
-             <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
-             <td>${a.getRoute().getPickUpTime()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
-             <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
-         </tr>
-        </#if>
-    </#list>
-	</tbody>
-            </table>
         </div>
     </div>
 </div>

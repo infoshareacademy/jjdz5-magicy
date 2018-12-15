@@ -20,14 +20,30 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "is_driver")
+    private boolean isDriver;
+
+    @Column(name = "is_admin")
+    private boolean isAdmin;
+
     @OneToOne
-   // @Column(name = "driver")
+    @JoinColumn(name = "driver_id", unique = true)
     private MapsDriver driver;
 
-    @Column(name = "is_driver")
-    boolean isDriver;
-
     public User() {
+    }
+
+    public User(String email, boolean isDriver, boolean isAdmin) {
+        this.email = email;
+        this.isDriver = isDriver;
+        this.isAdmin = isAdmin;
+    }
+
+    public User(String email, MapsDriver driver, boolean isDriver, boolean isAdmin) {
+        this.email = email;
+        this.driver = driver;
+        this.isDriver = isDriver;
+        this.isAdmin = isAdmin;
     }
 
     public User(String email) {
@@ -48,6 +64,18 @@ public class User {
 
     public MapsDriver getDriver() {
         return driver;
+    }
+
+    public void setDriver(boolean driver) {
+        isDriver = driver;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public void setDriver(MapsDriver driver) {

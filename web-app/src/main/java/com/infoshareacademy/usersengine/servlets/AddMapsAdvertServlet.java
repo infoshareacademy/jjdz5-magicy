@@ -47,6 +47,7 @@ public class AddMapsAdvertServlet extends AppInitServlet {
             throws ServletException, IOException {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
+        dataModel.addUserToDataModel(req);
         dataModel.fillDataModelWithGetData();
         templateProvider.build(getServletContext(), TEMPLATE_NAME,
                 dataModel.getDataModel(), resp);
@@ -62,11 +63,12 @@ public class AddMapsAdvertServlet extends AppInitServlet {
         userStatisticDao.save(userStatisticService.
                 addStatistic((User)session.getAttribute("user"), UserActivity.ADDING_ADVERT));
 
-        proceed(resp);
+        proceed(resp, req);
     }
 
-    private void proceed(HttpServletResponse resp) throws IOException {
+    private void proceed(HttpServletResponse resp, HttpServletRequest req) throws IOException {
         dataModel.buildNewDataModel();
+        dataModel.addUserToDataModel(req);
         if (ifSummaryIsSuccess(processing.getSummary())) {
             resp.getWriter().write(RedirectionService.buildAddAdvertRedirectionPage(
                     PropertiesService.getMsgAdvertAddOk(),

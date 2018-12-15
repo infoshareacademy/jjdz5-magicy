@@ -45,6 +45,8 @@ public class AdvertsServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         Map<String, Object> dataModel = new HashMap<>();
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         dataModel.put("adverts", jsonToList.jsonToList(getPath()));
         Template template = templateProvider.getTemplate(getServletContext(), "adverts");
         try {
@@ -54,7 +56,6 @@ public class AdvertsServlet extends HttpServlet {
             LOG.error("TemplateException. Template cannot be created.");
         }
 
-        HttpSession session = req.getSession();
         userStatisticDao.save(userStatisticService.
                 addStatistic((User)session.getAttribute("user"), UserActivity.DISPLAYING_ADVERTS));
 

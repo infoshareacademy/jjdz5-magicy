@@ -55,6 +55,8 @@ public class AddDriverServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> dataModel = new HashMap<>();
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         Template template = templateProvider.getTemplate(getServletContext(), "add-driver");
         try {
             template.process(dataModel, resp.getWriter());

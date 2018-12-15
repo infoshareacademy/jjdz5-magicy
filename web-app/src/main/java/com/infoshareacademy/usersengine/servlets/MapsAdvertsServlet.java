@@ -30,6 +30,7 @@ public class MapsAdvertsServlet extends AppInitServlet {
             throws ServletException, IOException {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
+        dataModel.addUserToDataModel(req);
         dataModel.fillDataModelWithGetData();
         templateProvider.build(getServletContext(), TEMPLATE_NAME_GET,
                 dataModel.getDataModel(), resp);
@@ -40,6 +41,7 @@ public class MapsAdvertsServlet extends AppInitServlet {
             throws ServletException, IOException {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
+        dataModel.addUserToDataModel(req);
         dataModel.fillDataModelWithPostData(req.getParameterMap());
         templateProvider.build(getServletContext(), TEMPLATE_NAME_POST,
                 dataModel.getDataModel(), resp);

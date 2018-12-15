@@ -10,8 +10,8 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-@WebFilter(urlPatterns = "/*")
+//FIXME
+@WebFilter(urlPatterns = "/side")
 public class SecurityFilter extends HttpFilter {
 
     private static final String LOGIN_SERVLET_URL = "/jjdz5-magicy/login";
