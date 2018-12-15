@@ -139,12 +139,12 @@
 
             <div id="controls">
                 <button id="show-cards" type="button" class="btn button"
-                        onclick="showAddress()">
+                        onclick="$('.collapse').collapse('show');">
                     <i class="fas fa-eye"></i>
                 </button>
                 <br>
                 <button id="hide-cards" type="button" class="btn button"
-                        onclick="hideAddress()">
+                        onclick="$('.collapse').collapse('hide');">
                     <i class="fas fa-eye-slash"></i>
                 </button>
             </div>

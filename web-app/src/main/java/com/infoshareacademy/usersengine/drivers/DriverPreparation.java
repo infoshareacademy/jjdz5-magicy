@@ -25,9 +25,9 @@ public class DriverPreparation {
         String city = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CITY);
         String district = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_DISTRICT);
 
-        driver.setName(name);
-        driver.setSurname(surname);
-        driver.setPhone(phone);
+//        driver.setName(name);
+//        driver.setSurname(surname);
+//        driver.setPhone(phone);
         driver.setCity(city);
         driver.setDistrict(district);
         driver.setRating(new Rating());

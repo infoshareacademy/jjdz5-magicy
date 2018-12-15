@@ -6,6 +6,7 @@
     <title>goTogether</title>
 
     <link rel="stylesheet" href="css/overall.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
