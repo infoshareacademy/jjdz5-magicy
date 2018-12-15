@@ -35,5 +35,29 @@
 </li>
 </#if>
 </ul>
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="logout" onclick="signOut()">Sign out</a>
+    </li>
+</ul>
 </div>
 </nav>
+<script>
+      function signOut() {
+                  console.log("logging out ...");
+                  gapi.auth.authorize(
+                          {
+                              'client_id': "176776774224-o5k7gckft8lg5oc4qbf9t6ps0aet9vjc.apps.googleusercontent.com",
+                              'scope': "profile email",
+                              'immediate': false,
+                              cookie_policy: 'single_host_origin',
+                              response_type: 'token id_token'
+                          },
+                          function (authResult) {
+                              gapi.auth.signOut();
+                              gapi.auth.disconnect();
+                          }
+                  );
+                  window.location.href = '/jjdz5-magicy/logout';
+              }
+</script>

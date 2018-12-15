@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="js/advertCtrl.js" type="text/javascript"></script>
 
+    <#include "google-log.ftlh">
     <style>
         .view {
             background-repeat: no-repeat;

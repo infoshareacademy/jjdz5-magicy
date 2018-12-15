@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/czarnaKrowa")
 public class SecurityFilter extends HttpFilter {
 
     private static final String LOGIN_SERVLET_URL = "/jjdz5-magicy/login";
