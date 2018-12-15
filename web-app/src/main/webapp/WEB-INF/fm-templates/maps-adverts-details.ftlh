@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <#include "google-log.ftlh">
     <style>
         input:disabled {
             color: #000000 !important;
@@ -24,43 +25,18 @@
 <body>
 
 <#assign advert = DETAIL_ADVERT?first>
-
+<script>
+    $(document).ready(function(){
+    document.getElementById("2nav").classList.add('active');
+    });
+</script>
 <div class="container">
 
     <div id="loader">
         <div class="load"></div>
     </div>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
-                                                 height="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="maps-adverts">Adverts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-maps-advert">Add advert</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="drivers">Drivers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-driver">Add driver</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about-us">About us</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <#include "menu.ftlh">
 
     <div class="row mt-3">
         <div class="col-6">

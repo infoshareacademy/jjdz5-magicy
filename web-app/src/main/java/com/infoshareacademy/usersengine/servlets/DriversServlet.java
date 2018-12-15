@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -44,6 +45,8 @@ public class DriversServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         Map<String, Object> dataModel = new HashMap<>();
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         driversList.setDriversList(jsonToList.driversToList(getPath()));
         dataModel.put("drivers", driversList.getDriversList());
         Template template = templateProvider.getTemplate(getServletContext(), "drivers");

@@ -5,6 +5,7 @@ import com.infoshareacademy.usersengine.services.PropertiesService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
 

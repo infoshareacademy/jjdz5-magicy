@@ -3,11 +3,13 @@ import com.infoshareacademy.usersengine.dao.CarDao;
 import com.infoshareacademy.usersengine.dao.MapsAddressDao;
 import com.infoshareacademy.usersengine.dao.MapsAdvertDao;
 import com.infoshareacademy.usersengine.dao.MapsDriverDao;
+import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.Car;
 import com.infoshareacademy.usersengine.model.MapsAddress;
 import com.infoshareacademy.usersengine.model.MapsAdvert;
 import com.infoshareacademy.usersengine.model.MapsDriver;
+import com.infoshareacademy.usersengine.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,14 +49,19 @@ public class HelloServlet extends HttpServlet {
     @Inject
     private CarDao carDao;
 
-    @Override
-    public void init() throws ServletException {
-        fillDatabaseWithAdvancedDefaults();
-    }
+    @Inject
+    private UserDao userDao;
+
+//    @Override
+//    public void init() throws ServletException {
+//        fillDatabaseWithAdvancedDefaults();
+//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> dataModel = new HashMap<>();
+        HttpSession session = req.getSession();
+        dataModel.put("user", session.getAttribute("user"));
         Template template = templateProvider.getTemplate(getServletContext(), "home");
         try {
             template.process(dataModel, resp.getWriter());
@@ -113,6 +121,8 @@ public class HelloServlet extends HttpServlet {
                 "Alchemia, aleja Grunwaldzka 409, 80-236 Gdańsk, Poland",
                 54.3985837, 18.5769263);
         mapsAddressDao.save(alchemiaTestAddress);
+
+        User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, true, true );
 
         MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
                 "Wyruszam z pod Alfa Centrum.",
