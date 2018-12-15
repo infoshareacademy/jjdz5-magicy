@@ -17,7 +17,7 @@ public class UserDao extends GenericDao<User, Long> {
         final Query query = entityManager.createNamedQuery("findUserByEmail");
         query.setParameter("param", email);
 
-        return  addIfDoNotExist((User) query.getSingleResult(), email);
+        return addIfDoNotExist((User) query.getResultList().stream().findFirst().orElse(null), email);
     }
 
     private boolean isUserExist(User user){

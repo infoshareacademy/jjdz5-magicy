@@ -43,13 +43,13 @@ public class GLoginServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    UserDao userDao;
+    private UserDao userDao;
 
     @Inject
-    UserStatisticService userStatisticService;
+    private UserStatisticService userStatisticService;
 
     @Inject
-    UserStatisticDao userStatisticDao;
+    private UserStatisticDao userStatisticDao;
 
     @Inject
     private MapsAdvertDao mapsAdvertDao;
@@ -103,7 +103,7 @@ public class GLoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             LOG.info("User with id: " + user.getId() + " and email: " + user.getEmail() + " is logged in");
 
-      //      userStatisticDao.save(userStatisticService.addStatistic(user, UserActivity.LOG_IN));
+            userStatisticDao.save(userStatisticService.addStatistic(user, UserActivity.LOG_IN));
 
             resp.sendRedirect("/jjdz5-magicy/home");
 
