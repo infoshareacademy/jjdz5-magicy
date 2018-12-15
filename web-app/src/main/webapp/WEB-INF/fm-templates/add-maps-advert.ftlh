@@ -21,6 +21,14 @@
     $(document).ready(function(){
     document.getElementById("3nav").classList.add('active');
     });
+
+        function showAddress(){
+    $('.collapse').show();
+    }
+
+    function hideAddress(){
+    $('.collapse').hide();
+    }
 </script>
 <div class="container">
 
@@ -131,12 +139,12 @@
 
             <div id="controls">
                 <button id="show-cards" type="button" class="btn button"
-                        onclick="$('.collapse').collapse('show');">
+                        onclick="showAddress()">
                     <i class="fas fa-eye"></i>
                 </button>
                 <br>
                 <button id="hide-cards" type="button" class="btn button"
-                        onclick="$('.collapse').collapse('hide');">
+                        onclick="hideAddress()">
                     <i class="fas fa-eye-slash"></i>
                 </button>
             </div>

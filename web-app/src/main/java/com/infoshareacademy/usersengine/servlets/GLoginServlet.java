@@ -165,6 +165,9 @@ public class GLoginServlet extends HttpServlet {
         User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, false, false );
         userDao.save(userMarysia);
 
+        User userKuba = new User("jakubjurek.jjd.isa@gmail.com", driverKuba, true, true);
+        userDao.save(userKuba);
+
         MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
                 "Wyruszam z pod Alfa Centrum.",
                 "Moim punktem docelowym jest Olivia Business Centre",
