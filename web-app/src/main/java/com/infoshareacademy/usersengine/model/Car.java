@@ -1,6 +1,5 @@
 package com.infoshareacademy.usersengine.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

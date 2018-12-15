@@ -1,7 +1,6 @@
 package com.infoshareacademy.usersengine.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.infoshareacademy.Rating;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +10,9 @@ import java.util.List;
 @Entity
 @Table(name = "maps_drivers")
 public class MapsDriver {
+
+    private static final Double START_RATING_VALUE = 5.0;
+    private static final Integer START_RATINGS_QUANTITY_VALUE = 0;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +40,17 @@ public class MapsDriver {
     @JsonIgnore
     private List<MapsAdvert> mapAdverts;
 
-//    @OneToOne
-//    @Column(name = "mapsrating_id")
-//    private MapsRating rating;
+    @Column(name = "average_rating")
+    @NotNull
+    private Double averageRating;
+
+    @Column(name = "ratings_quantity")
+    @NotNull
+    private Integer ratingsQuantity;
+
+    @Column(name = "rating_sum")
+    @NotNull
+    private Integer ratingSum;
 
     public MapsDriver() {
     }
@@ -51,7 +61,9 @@ public class MapsDriver {
         this.phoneNumber = phoneNumber;
         this.car = car;
         this.mapAdverts = new ArrayList<>();
-//        this.rating = new MapsRating();
+        this.averageRating = START_RATING_VALUE;
+        this.ratingsQuantity = START_RATINGS_QUANTITY_VALUE;
+        this.ratingSum = START_RATING_VALUE.intValue();
     }
 
     public Long getId() {
@@ -102,13 +114,29 @@ public class MapsDriver {
         this.mapAdverts = mapAdverts;
     }
 
-//    public MapsRating getRating() {
-//        return rating;
-//    }
-//
-//    public void setRating(MapsRating rating) {
-//        this.rating = rating;
-//    }
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public Integer getRatingsQuantity() {
+        return ratingsQuantity;
+    }
+
+    public void setRatingsQuantity(Integer ratingsQuantity) {
+        this.ratingsQuantity = ratingsQuantity;
+    }
+
+    public Integer getRatingSum() {
+        return ratingSum;
+    }
+
+    public void setRatingSum(Integer ratingSum) {
+        this.ratingSum = ratingSum;
+    }
 
     @Override
     public String toString() {

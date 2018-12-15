@@ -27,7 +27,6 @@ import java.util.Map;
 @WebServlet("drivers")
 public class DriversServlet extends HttpServlet {
 
-    private JsonToList jsonToList = new JsonToList();
     private DriversList driversList = new DriversList();
     private Logger LOG = LoggerFactory.getLogger(DriversServlet.class);
 
@@ -71,9 +70,13 @@ public class DriversServlet extends HttpServlet {
         String rating = req.getParameter("rating");
 
         MapsDriver driverToRate = mapsDriverDao.findById(Long.parseLong(id));
+        Integer rateToAdd = Integer.valueOf(rating);
+        driverToRate.setRatingSum(driverToRate.getRatingSum() + rateToAdd);
+        driverToRate.setRatingsQuantity(driverToRate.getRatingsQuantity() + 1);
+        driverToRate.setAverageRating(updateAverageRating(driverToRate));
+        mapsDriverDao.update(driverToRate);
 
-
-        redirect(resp,driversValidation.validateDriverData(id, rating, driversList.getDriversList()), id, rating);
+        resp.sendRedirect("/jjdz5-magicy/drivers");
     }
 
     private String getPath(){
@@ -92,6 +95,12 @@ public class DriversServlet extends HttpServlet {
             PrintWriter writer = resp.getWriter();
             writer.println("<!DOCTYPE html><body><form><t1>" + message+ "</t1><br/><input type=\"button\" value=\"Go back!\" onclick=\"history.back()\"></form></body></html>");
         }
+    }
+
+    private Double updateAverageRating(MapsDriver driverToRate) {
+        Integer sum = driverToRate.getRatingSum();
+        Integer quantity = (driverToRate.getRatingsQuantity()) + 1;
+        return (double) sum / quantity;
     }
 }
 
