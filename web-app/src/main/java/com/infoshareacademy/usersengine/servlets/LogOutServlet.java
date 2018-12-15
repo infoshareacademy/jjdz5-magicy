@@ -1,6 +1,11 @@
 package com.infoshareacademy.usersengine.servlets;
 
+import com.infoshareacademy.usersengine.dao.GenericDao;
+import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.UserStatisticService;
+import com.infoshareacademy.usersengine.statistics.UserActivity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,10 +31,19 @@ public class LogOutServlet extends HttpServlet {
 
     private static final Logger LOG = LogManager.getLogger(LogOutServlet.class);
 
+    @Inject
+    private UserStatisticDao userStatisticDao;
+
+    @Inject
+    private UserStatisticService userStatisticService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
+        userStatisticDao.save(userStatisticService.
+                addStatistic((User) session.getAttribute("user"), UserActivity.LOG_OUT));
+
         try {
             String token = (String) session.getAttribute("token");
             String urlString = String.format(

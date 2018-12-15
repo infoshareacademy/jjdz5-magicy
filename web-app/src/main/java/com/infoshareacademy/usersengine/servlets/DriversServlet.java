@@ -1,9 +1,14 @@
 package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.*;
+import com.infoshareacademy.usersengine.dao.GenericDao;
+import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
 import com.infoshareacademy.usersengine.drivers.DriversValidation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.UserStatisticService;
+import com.infoshareacademy.usersengine.statistics.UserActivity;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -38,6 +43,12 @@ public class DriversServlet extends HttpServlet {
     @Inject
     private DriversValidation driversValidation;
 
+    @Inject
+    private UserStatisticDao userStatisticDao;
+
+    @Inject
+    private UserStatisticService userStatisticService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -56,6 +67,9 @@ public class DriversServlet extends HttpServlet {
         } catch (TemplateException e) {
             LOG.error("TemplateException. Template cannot be created.");
         }
+
+        userStatisticDao.save(userStatisticService.
+                addStatistic((User) session.getAttribute("user"), UserActivity.DISPLAYING_DRIVERS));
     }
 
     @Override

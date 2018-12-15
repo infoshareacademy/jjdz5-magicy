@@ -101,7 +101,7 @@ public class GLoginServlet extends HttpServlet {
 
             User user = userDao.getUserByEmail(email);
             session.setAttribute("user", user);
-            LOG.info("User with id: " + user.getId() + " and email: " + user.getEmail() + " is logged in");
+            LOG.warn("User with id: " + user.getId() + " and email: " + user.getEmail() + " is logged in");
 
             userStatisticDao.save(userStatisticService.addStatistic(user, UserActivity.LOG_IN));
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class UserStatistic {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     long id;
 

@@ -10,6 +10,7 @@ import com.infoshareacademy.usersengine.model.MapsAddress;
 import com.infoshareacademy.usersengine.model.MapsAdvert;
 import com.infoshareacademy.usersengine.model.MapsDriver;
 import com.infoshareacademy.usersengine.model.User;
+import com.infoshareacademy.usersengine.services.BandleService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -27,7 +28,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 @WebServlet("/home")
 public class HelloServlet extends HttpServlet {
@@ -52,6 +55,9 @@ public class HelloServlet extends HttpServlet {
     @Inject
     private UserDao userDao;
 
+    @Inject
+    private BandleService bandleService;
+
 //    @Override
 //    public void init() throws ServletException {
 //        fillDatabaseWithAdvancedDefaults();
@@ -62,6 +68,9 @@ public class HelloServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
+        Locale plLocale = new Locale("pl","PL");
+        dataModel.put("language", bandleService.getBundle(plLocale));
+
         Template template = templateProvider.getTemplate(getServletContext(), "home");
         try {
             template.process(dataModel, resp.getWriter());
