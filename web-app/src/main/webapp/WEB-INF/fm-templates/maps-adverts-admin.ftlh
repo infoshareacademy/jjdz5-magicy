@@ -14,6 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <#include "google-log.ftlh">
 
     <style>
@@ -92,33 +93,94 @@
             }
         });
     });
+
+    function deleteAdvert(id){
+swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this advert!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+  $('#id').val(id);
+  $('#delete-button').click();
+  } else {
+    swal("Canceled!");
+  }
+});
+    }
 </script>
 
 <div class="container">
     <#include "menu.ftlh">
  <div class="row">
-     <form method="get" action="/jjdz5-magicy/adverts-admin">
-     <div class="row mt-3">
-         <div class="col-12" style="padding-left: 15">
-             <button class="btn button" style="background-color: #3f51b5">Adverts list</button>
-         </div>
-     </div>
-     </form>
      <div class="row mt-3">
          <form method="get" action="/jjdz5-magicy/drivers-admin">
-         <div class="col-12" style="padding-left: 15">
+         <div class="col-12" style="padding: 15px">
              <button class="btn button" style="background-color: #3f51b5">Drivers list</button>
          </div>
          </form>
      </div>
      <div class="row mt-3">
          <form method="get" action="/jjdz5-magicy/statistics-admin">
-         <div class="col-12" style="padding-left: 15">
+         <div class="col-12" style="padding: 15px">
              <button class="btn button" style="background-color: #3f51b5">Statistics</button>
          </div>
          </form>
      </div>
  </div>
+    <div class="row mt-3">
+        <div class="mt-5">
+            <h3>Adverts</h3>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-5">
+
+        <div class="card">
+            <div class="panel panel-primary filterable">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr class="filters">
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure address" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure time" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
+                        <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
+                        <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
+                            Filter
+                        </button></th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <#list ADVERTS as advert>
+                    <#setting time_format="HH:mm">
+                    <tr>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.formattedAddress}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?time}</td>
+                        <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
+                        <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
+                        <#assign car = advert.driver.cars?first>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
+                        <td class="align-middle">
+                                <button class="btn button-functional" onclick="deleteAdvert(${advert.id})" style="background-color: red;">Delete</button>
+                        </td>
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <form method="post" action="/jjdz5-magicy/adverts-admin">
+    <input type="hidden" id="id" name="id" value="0"/>
+    <button type="submit" id="delete-button" hidden="hidden"></button>
+    </form>
 </div>
 
 <#include "footer.ftlh">
