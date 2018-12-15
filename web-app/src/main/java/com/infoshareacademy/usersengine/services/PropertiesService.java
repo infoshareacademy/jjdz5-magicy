@@ -11,9 +11,11 @@ import java.util.Properties;
 public class PropertiesService {
 
     private static final String PROPERTIES_FILEPATH = "WEB-INF/properties/webapp.properties";
+    private static final Integer DEFAULT_REDIRECTION_DELAY = 3;
     private static final Integer DEFAULT_MAX_PERIOD_DAYS = 30;
     private static final Integer DEFAULT_MIN_HOURS_TO_START = 2;
-    private static final Integer DEFAULT_REDIRECTION_DELAY = 3;
+    private static final Integer DEFAULT_MAX_ROUTE_MODIFIERS = 10;
+    private static final Boolean DEFAULT_PRECISE_CHECK = false;
     private static final Properties PROPERTIES = new Properties();
     private static final Logger LOG = LoggerFactory.getLogger(PropertiesService.class);
 
@@ -31,6 +33,14 @@ public class PropertiesService {
 
     public static Integer getAdvertMinHoursToStart() {
         return parseNumericValue(Property.ADVERT_MIN_HOURS_TO_START, DEFAULT_MIN_HOURS_TO_START);
+    }
+
+    public static Integer getAdvertMaxRouteModifiers() {
+        return parseNumericValue(Property.ADVERT_MAX_ROUTE_MODIFIERS, DEFAULT_MAX_ROUTE_MODIFIERS);
+    }
+
+    public static Boolean getAdvertPreciseCheck() {
+        return parseBoolean(Property.ADVERT_PRECISE_CHECK, DEFAULT_PRECISE_CHECK);
     }
 
     public static String getMsgAdvertAddOk() {
@@ -55,6 +65,10 @@ public class PropertiesService {
 
     public static String getMsgEqualAddresses() {
         return PROPERTIES.getProperty(Property.MSG_EQUAL_ADDRESSES.name());
+    }
+
+    public static String getMsgTooManyRouteModifiers() {
+        return PROPERTIES.getProperty(Property.MSG_TOO_MANY_ROUTE_MODIFIERS.name());
     }
 
     public static String getMsgBadStartTime() {
@@ -105,4 +119,13 @@ public class PropertiesService {
         return value;
     }
 
+    private static Boolean parseBoolean(Property property, Boolean defaultValue) {
+        Boolean value;
+        try {
+            value = Boolean.valueOf(PROPERTIES.getProperty(property.name()));
+        } catch (Exception e) {
+            value = defaultValue;
+        }
+        return value;
+    }
 }

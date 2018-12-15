@@ -5,6 +5,9 @@ var destinationPlaceIdInput = document.getElementById("destination-place-id");
 var destinationPreciseInput = document.getElementById("destination-precise");
 var originTimeInput = document.getElementById("origin-time");
 var destinationTimeInput = document.getElementById("destination-time");
+var originAddress = document.getElementById('origin-address');
+var destinationAddress = document.getElementById('destination-address');
+var overallDistance = document.getElementById("overall-distance");
 var destinationTime;
 var originPlace;
 var destinationPlace;
@@ -13,10 +16,19 @@ var userModifiedDepartureTime = false;
 var marker;
 var routeDuration;
 
+var originAutocomplete;
+var destinationAutocomplete;
+
+var currentOriginId;
+var currentDestinationId;
+
+var waypoints;
+var distance;
+var formattedDistance;
+
 function addEventListeners() {
     originTimeInput.addEventListener("input", departureTimeListener);
     destinationTimeInput.addEventListener("input", destinationTimeListener);
-
 }
 
 window.onload = addEventListeners;
@@ -29,14 +41,16 @@ function initMap() {
         disableDefaultUI: true,
         disableDoubleClickZoom: true,
         draggable: true,
-        fullscreenControl: false,
+        fullscreenControl: true,
         keyboardShortcuts: false,
         streetViewControl: false,
-        scrollwheel: false,
+        scrollwheel: true,
         zoomControl: true
     });
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    new AutocompleteDirectionsHandler(map, directionsDisplay);
 
-    new AutocompleteDirectionsHandler(map);
+
 }
 
 function departureTimeListener() {
@@ -57,34 +71,106 @@ function destinationTimeListener() {
 /**
  * @constructor
  */
-function AutocompleteDirectionsHandler(map) {
+function AutocompleteDirectionsHandler(map, directionsDisplay) {
     this.map = map;
 
     this.originPlaceId = null;
     this.destinationPlaceId = null;
+    
     this.travelMode = 'DRIVING';
     var addressesCard = document.getElementById('addresses-card');
     var rightSideCards = document.getElementById('right-side-cards');
     var controls = document.getElementById('controls');
-    var originAddress = document.getElementById('origin-address');
-    var destinationAddress = document.getElementById('destination-address');
     var submitButton = document.getElementById('submitButton');
     this.directionsService = new google.maps.DirectionsService;
-    this.directionsDisplay = new google.maps.DirectionsRenderer;
+    this.directionsDisplay = directionsDisplay;
 
     this.directionsDisplay.setMap(map);
-    var originAutocomplete = new google.maps.places.Autocomplete(
+    this.directionsDisplay.setOptions({
+        draggable: true
+    });
+    originAutocomplete = new google.maps.places.Autocomplete(
         originAddress);
-    var destinationAutocomplete = new google.maps.places.Autocomplete(
+    destinationAutocomplete = new google.maps.places.Autocomplete(
         destinationAddress);
 
     this.setupPlaceChangedListener(originAutocomplete, 'ORIG', map);
     this.setupPlaceChangedListener(destinationAutocomplete, 'DEST', map);
+    this.directionsDisplay.addListener('directions_changed', function () {
+        var me = this;
+        var geocoder = new google.maps.Geocoder;
+        var places = new google.maps.places.PlacesService(map);
+        var result = directionsDisplay.getDirections();
+        var route  = result.routes[0];
+        var legs = route.legs;
+        var start = legs[0].start_address;
+        var startLoc = legs[0].start_location;
+        var startLat = startLoc.lat();
+        var startLng = startLoc.lng();
+        var startLatLng = {lat: startLat, lng: startLng};
+        var end = legs[legs.length - 1].end_address;
+        var endLoc = legs[legs.length - 1].end_location;
+        var endLat = endLoc.lat();
+        var endLng = endLoc.lng();
+        var endLatLng = {lat: endLat, lng: endLng};
+        var distance = 0;
+        var duration = 0;
+        var waypoints = legs[0].via_waypoint;
+        console.log(waypoints);
+
+        if (waypoints.length > 0) {
+            var waypointsInput = document.getElementById("route-modifiers");
+            var waypointsValue = "";
+            for (var j = 0; j < waypoints.length; j++) {
+                console.log(waypoints[j]);
+                var loc = waypoints[j].location;
+                waypointsValue += loc;
+                if (j < waypoints.length - 1) {
+                    waypointsValue += ";";
+                }
+            }
+            waypointsInput.value = waypointsValue;
+        }
+        geocoder.geocode({'location': startLatLng}, function (result, status) {
+            var placeId = result[0].place_id;
+            console.log(placeId);
+            originAutocomplete.value = placeId;
+            currentOriginId = placeId;
+            places.getDetails({placeId: placeId}, function (place, status) {
+                fillOriginInputFields(place);
+                var address = place.formatted_address;
+                originAddress.value = address;
+            });
+        });
+        geocoder.geocode({"location": endLatLng}, function (result, status) {
+            var placeId = result[0].place_id;
+            console.log(placeId);
+            destinationAutocomplete.value = placeId;
+            currentDestinationId = placeId;
+            places.getDetails({placeId: placeId}, function (place, status) {
+                fillDestinationInputFields(place);
+                var address = place.formatted_address;
+                destinationAddress.value = address;
+            });
+        });
+        for (var i = 0; i < legs.length; i++) {
+            distance = 0;
+            distance += legs[i].distance.value;
+            duration += legs[i].duration.value;
+            console.log(distance);
+        }
+
+        routeDuration = duration;
+        countApproximateDepartureTime();
+        fillDistanceField(distance);
+
+    });
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+    this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
+    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
     this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(submitButton);
+
 }
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode, map) {
@@ -93,7 +179,7 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
         map: map
     });
     autocomplete.bindTo('bounds', this.map);
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', function assign() {
         var place = autocomplete.getPlace();
         if (!place.place_id) {
             window.alert("Please select an option from the dropdown list.");
@@ -108,7 +194,7 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
             } else {
                 marker.setVisible(false);
             }
-            me.originPlaceId = place.place_id;
+            currentOriginId = place.place_id;
             originPlace = place;
         } else {
             if (isBeforeRouteCounting) {
@@ -119,9 +205,11 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
             } else {
                 marker.setVisible(false);
             }
-            me.destinationPlaceId = place.place_id;
+            currentDestinationId = place.place_id;
             destinationPlace = place;
         }
+        me.originPlaceId = currentOriginId;
+        me.destinationPlaceId = currentDestinationId;
         me.route();
     });
 
@@ -139,13 +227,16 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         this.directionsService.route({
             origin: {'placeId': this.originPlaceId},
             destination: {'placeId': this.destinationPlaceId},
-            travelMode: this.travelMode
+            travelMode: this.travelMode,
+            provideRouteAlternatives: true
         }, function (response, status) {
             if (status === 'OK') {
                 marker.setVisible(false);
                 routeDuration = response.routes[0].legs[0].duration.value;
+                distance = response.routes[0].legs[0].distance.value;
                 isBeforeRouteCounting = false;
                 me.directionsDisplay.setDirections(response);
+                fillDistanceField(distance);
                 if (destinationTimeInput !== undefined || destinationTimeInput !== "") {
                     countApproximateDepartureTime();
                 }
@@ -209,4 +300,14 @@ function countApproximateDepartureTime() {
     } catch (e) {
         console.log("Enter arrival time.")
     }
-};
+}
+
+function fillDistanceField(dist) {
+    console.log("Formatting distance");
+    formattedDistance = "";
+    formattedDistance = dist / 1000;
+    formattedDistance = formattedDistance.toString();
+    formattedDistance += " km";
+    console.log(formattedDistance);
+    overallDistance.innerText = formattedDistance;
+}
