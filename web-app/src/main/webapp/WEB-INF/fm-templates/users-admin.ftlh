@@ -51,6 +51,7 @@
 <script>
     $(document).ready(function(){
     document.getElementById("8nav").classList.add('active');
+    $('#user_id').val(${user.id});
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -94,10 +95,13 @@
         });
     });
 
-    function deleteAdvert(id){
+    function deleteUser(id){
+     if(id == $('#user_id').val()){
+    swal("You can not delete yourself!");
+    }else{
 swal({
   title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this advert!",
+  text: "Do you want to delete this user?",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -110,18 +114,42 @@ swal({
     swal("Canceled!");
   }
 });
+}
     }
+
+    function changeFlag(id){
+    if(id == $('#user_id').val()){
+    swal("You can not change your flag!");
+    }else{
+    swal({
+  title: "Are you sure?",
+  text: "Do you want to change user's flag?",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+  $('#uid').val(id);
+  $('#change-flag').click();
+  } else {
+    swal("Canceled!");
+  }
+});
+}
+    }
+
 </script>
 
 <div class="container">
     <#include "menu.ftlh">
  <div class="row">
      <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/users-admin">
+     <form method="get" action="/jjdz5-magicy/adverts-admin">
              <div class="col-12" style="padding: 15px">
-                 <button class="btn button" style="background-color: #3f51b5">Users</button>
+                 <button class="btn button" style="background-color: #3f51b5">Adverts</button>
              </div>
-         </form>
+     </form>
      </div>
      <div class="row mt-3">
          <form method="get" action="/jjdz5-magicy/drivers-admin">
@@ -140,7 +168,7 @@ swal({
  </div>
     <div class="row mt-3">
         <div class="mt-5">
-            <h3>Adverts</h3>
+            <h3>Users</h3>
         </div>
     </div>
 
@@ -151,12 +179,9 @@ swal({
                 <table class="table table-bordered table-sm">
                     <thead>
                     <tr class="filters">
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure address" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure time" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
-                        <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Email" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Flag" disabled></th>
                         <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
                             Filter
                         </button></th>
@@ -164,18 +189,17 @@ swal({
 
                     </thead>
                     <tbody>
-                    <#list ADVERTS as advert>
-                    <#setting time_format="HH:mm">
+                    <#list USERS as u>
                     <tr>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.formattedAddress}</td>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?time}</td>
-                        <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
-                        <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
-                        <#assign car = advert.driver.cars?first>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${u.email}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${u.getDriver().getName()} ${u.getDriver().getSurname()} <br> Phone: ${u.getDriver().getPhoneNumber()}</td>
+                        <#if u.isAdmin() == true>
+                        <td style="background: #99ff66; text-align: center; cursor:pointer;" title="Change flag" class="align-middle" ondblclick="changeFlag(${u.id});">ADMIN</td>
+                        <#else>
+                        <td style="background: #ffff99; text-align: center; cursor:pointer;" title="Change flag" class="align-middle" ondblclick="changeFlag(${u.id});">USER</td>
+                    </#if>
                         <td class="align-middle">
-                                <button class="btn button-functional" onclick="deleteAdvert(${advert.id})" style="background-color: red;">Delete</button>
+                                <button class="btn button-functional" onclick="deleteUser(${u.id})" title="Delete user" style="background-color: red;">Delete</button>
                         </td>
                     </tr>
                     </#list>
@@ -184,9 +208,15 @@ swal({
             </div>
         </div>
     </div>
-    <form method="post" action="/jjdz5-magicy/adverts-admin">
+    <input type="hidden" id="user_id" name="user_id"/>
+    <form method="post" action="/jjdz5-magicy/users-admin">
     <input type="hidden" id="id" name="id" value="0"/>
     <button type="submit" id="delete-button" hidden="hidden"></button>
+    </form>
+
+    <form method="put" action="/jjdz5-magicy/users-admin">
+        <input type="hidden" id="uid" name="uid" value="0"/>
+        <button type="submit" id="change-flag" hidden="hidden"></button>
     </form>
 </div>
 

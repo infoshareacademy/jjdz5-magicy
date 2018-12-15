@@ -97,23 +97,30 @@
 <div class="container">
     <#include "menu.ftlh">
  <div class="row">
-     <form method="get" action="/jjdz5-magicy/adverts-admin">
      <div class="row mt-3">
-         <div class="col-12" style="padding-left: 15">
-             <button class="btn button" style="background-color: #3f51b5">Adverts list</button>
+     <form method="get" action="/jjdz5-magicy/adverts-admin">
+         <div class="col-12" style="padding: 15px">
+             <button class="btn button" style="background-color: #3f51b5">Adverts</button>
          </div>
-     </div>
      </form>
+     </div>
+     <div class="row mt-3">
+         <form method="get" action="/jjdz5-magicy/users-admin">
+             <div class="col-12" style="padding: 15px">
+                 <button class="btn button" style="background-color: #3f51b5">Users</button>
+             </div>
+         </form>
+     </div>
      <div class="row mt-3">
          <form method="get" action="/jjdz5-magicy/drivers-admin">
-         <div class="col-12" style="padding-left: 15">
-             <button class="btn button" style="background-color: #3f51b5">Drivers list</button>
+         <div class="col-12" style="padding: 15px">
+             <button class="btn button" style="background-color: #3f51b5">Drivers</button>
          </div>
          </form>
      </div>
      <div class="row mt-3">
          <form method="get" action="/jjdz5-magicy/statistics-admin">
-         <div class="col-12" style="padding-left: 15">
+         <div class="col-12" style="padding: 15px">
              <button class="btn button" style="background-color: #3f51b5">Statistics</button>
          </div>
          </form>
