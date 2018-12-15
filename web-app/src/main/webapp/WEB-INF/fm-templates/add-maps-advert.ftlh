@@ -130,7 +130,6 @@
                                 <#assign driver = DRIVER>
                                 <div class="card-label">${driver.name} ${driver.surname}</div>
                                 <div class="card-label">${driver.phoneNumber}</div>
-                                <div class="card-label">${driver.car.carBrand}</div>
                                 <div class="card-label">${driver.car.carModel}</div>
                                 <div class="card-label">${driver.car.licensePlate}</div>
                             </div>

@@ -15,9 +15,9 @@ public class Car {
     @NotNull
     private String licensePlate;
 
-    @Column(name = "car_brand")
-    @NotNull
-    private String carBrand;
+//    @Column(name = "car_brand")
+//    @NotNull
+//    private String carBrand;
 
     @Column(name = "car_model")
     @NotNull
@@ -26,9 +26,8 @@ public class Car {
     public Car(){
     }
 
-    public Car(String licensePlate, String carBrand, String carModel) {
+    public Car(String licensePlate, String carModel) {
         this.licensePlate = licensePlate;
-        this.carBrand = carBrand;
         this.carModel = carModel;
     }
 
@@ -40,13 +39,13 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
-    public String getCarBrand() {
-        return carBrand;
-    }
-
-    public void setCarBrand(String carBrand) {
-        this.carBrand = carBrand;
-    }
+//    public String getCarBrand() {
+//        return carBrand;
+//    }
+//
+//    public void setCarBrand(String carBrand) {
+//        this.carBrand = carBrand;
+//    }
 
     public String getCarModel() {
         return carModel;
@@ -60,7 +59,6 @@ public class Car {
     public String toString() {
         final StringBuffer sb = new StringBuffer("Car{");
         sb.append("licensePlate='").append(licensePlate).append('\'');
-        sb.append(", carBrand='").append(carBrand).append('\'');
         sb.append(", carModel='").append(carModel).append('\'');
         sb.append('}');
         return sb.toString();

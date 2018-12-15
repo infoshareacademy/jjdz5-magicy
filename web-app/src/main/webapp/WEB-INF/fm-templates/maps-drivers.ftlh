@@ -110,7 +110,7 @@ var inputOptions = new Promise(function(resolve) {
 	<#list drivers as d>
 		<tr>
             <td style="width:10%; vertical-align: middle">${d.name} ${d.surname} ${d.phoneNumber}</td>
-            <td style="width:50%; vertical-align: middle">${d.car.carBrand} ${d.car.carModel} ${d.car.licensePlate}</td>
+            <td style="width:50%; vertical-align: middle">${d.car.carModel} ${d.car.licensePlate}</td>
             <td style="width:30%; vertical-align: middle">${d.averageRating?string("0.00")}<br>
                 <#if d.ratingsQuantity == 1>
                     ${d.ratingsQuantity} review

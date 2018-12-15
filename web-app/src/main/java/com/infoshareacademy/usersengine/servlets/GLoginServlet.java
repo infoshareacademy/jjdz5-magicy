@@ -113,13 +113,13 @@ public class GLoginServlet extends HttpServlet {
     }
     private void fillDatabaseWithAdvancedDefaults() {
 
-        Car kubaCar = new Car("GD 12345", "Opel", "Vectra");
+        Car kubaCar = new Car("GD 12345", "Opel Vectra");
         carDao.save(kubaCar);
 
-        Car marysiaCar = new Car("GA 12345", "Ford", "Focus");
+        Car marysiaCar = new Car("GA 12345", "Ford Focus");
         carDao.save(marysiaCar);
 
-        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML");
+        Car krzysiuCar = new Car("GA 67890", "Mercedes ML");
         carDao.save(krzysiuCar);
 
         MapsDriver driverKuba = new MapsDriver("Kuba", "Jurek",

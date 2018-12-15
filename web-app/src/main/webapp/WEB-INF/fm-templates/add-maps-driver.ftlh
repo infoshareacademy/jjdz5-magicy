@@ -82,22 +82,14 @@
         <hr>
         <div class="row">
             <div class="col-6 form-group">
-                <label for="car-brand">Car brand:</label>
-                <input id="car-brand" required type="text" name="carBrand"
-                    placeholder="Enter your car brand name." class="form-control"/>
-            </div>
-            <div class="col-6 form-group">
                 <label for="car-model">Car model:</label>
                 <input id="car-model" required type="text" name="carModel"
                     placeholder="Enter your car model." class="form-control"/>
             </div>
-        </div>
-
-        <div class="row">
             <div class="col-6 form-group">
                 <label for="license-plate">Car license plate:</label>
                 <input id="license-plate" required type="text" name="licensePlate"
-                    placeholder="Enter your car's licence plate." class="form-control">
+                       placeholder="Enter your car's licence plate." class="form-control">
             </div>
         </div>
 

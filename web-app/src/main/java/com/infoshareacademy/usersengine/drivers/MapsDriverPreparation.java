@@ -32,10 +32,9 @@ public class MapsDriverPreparation {
         String name = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_NAME);
         String surname = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_SURNAME);
         String phone = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_PHONE);
-        String carBrand = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CAR_BRAND);
         String carModel = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CAR_MODEL);
         String licensePlate = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_LICENSE_PLATE);
-        Car car = new Car(carBrand, carModel, licensePlate);
+        Car car = new Car(carModel, licensePlate);
         return new MapsDriver(name, surname, phone, car);
     }
 
