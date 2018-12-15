@@ -14,6 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <#include "google-log.ftlh">
 
     <style>
@@ -50,6 +51,7 @@
 <script>
     $(document).ready(function(){
     document.getElementById("8nav").classList.add('active');
+    $('#user_id').val(${user.id});
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -92,40 +94,102 @@
             }
         });
     });
+
+    function deleteDriver(id){
+swal({
+  title: "Are you sure?",
+  text: "Do you want to delete driver?",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+  $('#id').val(id);
+  $('#delete-button').click();
+  } else {
+    swal("Canceled!");
+  }
+});
+
+    }
+
 </script>
 
 <div class="container">
     <#include "menu.ftlh">
- <div class="row">
-     <div class="row mt-3">
-     <form method="get" action="/jjdz5-magicy/adverts-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Adverts</button>
-         </div>
-     </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/users-admin">
-             <div class="col-12" style="padding: 15px">
-                 <button class="btn button" style="background-color: #3f51b5">Users</button>
-             </div>
-         </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/drivers-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Drivers</button>
-         </div>
-         </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/statistics-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Statistics</button>
-         </div>
-         </form>
-     </div>
- </div>
+    <div class="row">
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/adverts-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Adverts</button>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/users-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Users</button>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #999999">Drivers</button>
+                </div>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/statistics-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Statistics</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="mt-5">
+            <h3>Drivers</h3>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-5">
+
+        <div class="card" style="width:90%">
+            <div class="panel panel-primary filterable">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr class="filters">
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Name" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Surname" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Phone" disabled></th>
+                        <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
+                            Filter
+                        </button></th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <#list DRIVERS as d>
+                    <tr>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${d.getName()}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${d.getSurname()}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${d.getPhoneNumber()}</td>
+                        <td class="align-middle" style="text-align: center;">
+                                <button class="btn button-functional" onclick="deleteDriver(${d.id})" title="Delete driver" style="background-color: red;">Delete</button>
+                        </td>
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="user_id" name="user_id"/>
+    <form method="post" action="/jjdz5-magicy/drivers-admin">
+    <input type="hidden" id="id" name="id" value="0"/>
+    <button type="submit" id="delete-button" hidden="hidden"></button>
+    </form>
+
 </div>
 
 <#include "footer.ftlh">

@@ -35,8 +35,8 @@
     <#include "menu.ftlh">
 
     <div class="row mt-3">
-        <div class="col-12" style="padding-left: 0">
-            <button class="btn button" disabled>Adverts list</button>
+        <div class="mt-5">
+            <h3>Adverts</h3>
         </div>
     </div>
 
