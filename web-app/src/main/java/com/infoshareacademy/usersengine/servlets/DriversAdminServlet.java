@@ -1,5 +1,6 @@
 package com.infoshareacademy.usersengine.servlets;
 
+import com.infoshareacademy.usersengine.dao.MapsDriverDao;
 import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
 import com.infoshareacademy.usersengine.model.User;
@@ -20,17 +21,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/users-admin")
+import static java.lang.Thread.*;
+
+@WebServlet(urlPatterns = "/drivers-admin")
 @Transactional
-public class UsersAdminServlet extends HttpServlet {
+public class DriversAdminServlet extends HttpServlet {
     private Logger LOG = LoggerFactory.getLogger(DriversServlet.class);
-    private static final String TEMPLATE_NAME_GET = "users-admin";
+    private static final String TEMPLATE_NAME_GET = "drivers-admin";
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private UserDao userDao;
+    private MapsDriverDao mapsDriverDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,7 +44,7 @@ public class UsersAdminServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
-        dataModel.put("USERS", userDao.findAll());
+        dataModel.put("DRIVERS", mapsDriverDao.findAll());
 
         Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME_GET);
         try {
@@ -53,24 +56,12 @@ public class UsersAdminServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        req.setCharacterEncoding("UTF-8");
-        Long id = Long.parseLong(req.getParameter("uid"));
-        User user = userDao.findById(id);
-        user.setAdmin(!user.isAdmin());
-        userDao.update(user);
-       // resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/users-admin");
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(req.getParameter("id"));
-        userDao.delete(id);
-        resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/users-admin");
+        mapsDriverDao.delete(id);
+        resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/drivers-admin");
     }
 }

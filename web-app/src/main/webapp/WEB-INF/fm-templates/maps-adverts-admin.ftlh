@@ -115,29 +115,34 @@ swal({
 
 <div class="container">
     <#include "menu.ftlh">
- <div class="row">
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/users-admin">
-             <div class="col-12" style="padding: 15px">
-                 <button class="btn button" style="background-color: #3f51b5">Users</button>
-             </div>
-         </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/drivers-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Drivers</button>
-         </div>
-         </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/statistics-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Statistics</button>
-         </div>
-         </form>
-     </div>
- </div>
+    <div class="row">
+        <div class="row mt-3">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #999999">Adverts</button>
+                </div>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/users-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Users</button>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/drivers-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Drivers</button>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/statistics-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Statistics</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="mt-5">
             <h3>Adverts</h3>
@@ -146,7 +151,7 @@ swal({
 
     <div class="row mt-3 mb-5">
 
-        <div class="card">
+        <div class="card" style="width:90%">
             <div class="panel panel-primary filterable">
                 <table class="table table-bordered table-sm">
                     <thead>
@@ -174,7 +179,7 @@ swal({
                         <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
                         <#assign car = advert.driver.cars?first>
                         <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
-                        <td class="align-middle">
+                        <td class="align-middle" style="text-align: center;">
                                 <button class="btn button-functional" onclick="deleteAdvert(${advert.id})" style="background-color: red;">Delete</button>
                         </td>
                     </tr>

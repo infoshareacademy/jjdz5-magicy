@@ -46,7 +46,7 @@ public class MapsAdvertsAdminServlet extends AppInitServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(req.getParameter("id"));
-       mapsAdvertDao.delete(id);
-        resp.sendRedirect("/jjdz5-magicy/adverts-admin");
+        mapsAdvertDao.delete(id);
+        resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/adverts-admin");
     }
 }

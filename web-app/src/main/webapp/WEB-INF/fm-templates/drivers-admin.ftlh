@@ -95,13 +95,10 @@
         });
     });
 
-    function deleteUser(id){
-     if(id == $('#user_id').val()){
-    swal("You can not delete yourself!");
-    }else{
+    function deleteDriver(id){
 swal({
   title: "Are you sure?",
-  text: "Do you want to delete this user?",
+  text: "Do you want to delete driver?",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -114,29 +111,7 @@ swal({
     swal("Canceled!");
   }
 });
-}
-    }
 
-    function changeFlag(id){
-    if(id == $('#user_id').val()){
-    swal("You can not change your flag!");
-    }else{
-    swal({
-  title: "Are you sure?",
-  text: "Do you want to change user's flag?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $('#uid').val(id);
-  $('#change-flag').click();
-  } else {
-    swal("Canceled!");
-  }
-});
-}
     }
 
 </script>
@@ -159,21 +134,21 @@ swal({
             </form>
         </div>
         <div class="row mt-3">
-            <form method="get" action="/jjdz5-magicy/drivers-admin">
                 <div class="col-12" style="padding: 15px">
-                    <button class="btn button" style="background-color: #3f51b5">Drivers</button>
+                    <button class="btn button" style="background-color: #999999">Drivers</button>
                 </div>
-            </form>
         </div>
         <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/statistics-admin">
                 <div class="col-12" style="padding: 15px">
-                    <button class="btn button" style="background-color: #999999">Statistics</button>
+                    <button class="btn button" style="background-color: #3f51b5">Statistics</button>
                 </div>
+            </form>
         </div>
     </div>
     <div class="row mt-3">
         <div class="mt-5">
-            <h3>Statistics</h3>
+            <h3>Drivers</h3>
         </div>
     </div>
 
@@ -184,9 +159,9 @@ swal({
                 <table class="table table-bordered table-sm">
                     <thead>
                     <tr class="filters">
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Email" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Time" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Activity" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Name" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Surname" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Phone" disabled></th>
                         <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
                             Filter
                         </button></th>
@@ -194,12 +169,13 @@ swal({
 
                     </thead>
                     <tbody>
-                    <#list STATISTICS as s>
+                    <#list DRIVERS as d>
                     <tr>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${s.getUserEmail()}</td>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${s.getTime()?string}</td>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${s.getUserActivity().getDesctription()}</td>
-                        <td class="align-middle">
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${d.getName()}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${d.getSurname()}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${d.getPhoneNumber()}</td>
+                        <td class="align-middle" style="text-align: center;">
+                                <button class="btn button-functional" onclick="deleteDriver(${d.id})" title="Delete driver" style="background-color: red;">Delete</button>
                         </td>
                     </tr>
                     </#list>
@@ -209,15 +185,11 @@ swal({
         </div>
     </div>
     <input type="hidden" id="user_id" name="user_id"/>
-    <form method="post" action="/jjdz5-magicy/users-admin">
+    <form method="post" action="/jjdz5-magicy/drivers-admin">
     <input type="hidden" id="id" name="id" value="0"/>
     <button type="submit" id="delete-button" hidden="hidden"></button>
     </form>
 
-    <form method="put" action="/jjdz5-magicy/users-admin">
-        <input type="hidden" id="uid" name="uid" value="0"/>
-        <button type="submit" id="change-flag" hidden="hidden"></button>
-    </form>
 </div>
 
 <#include "footer.ftlh">

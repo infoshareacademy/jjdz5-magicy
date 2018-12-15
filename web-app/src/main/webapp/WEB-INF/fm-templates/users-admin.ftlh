@@ -130,8 +130,21 @@ swal({
 })
 .then((willDelete) => {
   if (willDelete) {
-  $('#uid').val(id);
-  $('#change-flag').click();
+  $.ajax({
+                    type: 'PUT',
+                    url: "users-admin",
+                    data: {
+                        id: $('#id').val()
+                    },
+                    dataType: "text",
+                    success: function (resultData) {
+                            window.location.replace("http://localhost:8080/jjdz5-magicy/users-admin");
+
+                    },
+                    error: function (resultData) {
+                        console.log(resultData);
+                    }
+            });
   } else {
     swal("Canceled!");
   }
@@ -143,29 +156,34 @@ swal({
 
 <div class="container">
     <#include "menu.ftlh">
- <div class="row">
-     <div class="row mt-3">
-     <form method="get" action="/jjdz5-magicy/adverts-admin">
-             <div class="col-12" style="padding: 15px">
-                 <button class="btn button" style="background-color: #3f51b5">Adverts</button>
-             </div>
-     </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/drivers-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Drivers</button>
-         </div>
-         </form>
-     </div>
-     <div class="row mt-3">
-         <form method="get" action="/jjdz5-magicy/statistics-admin">
-         <div class="col-12" style="padding: 15px">
-             <button class="btn button" style="background-color: #3f51b5">Statistics</button>
-         </div>
-         </form>
-     </div>
- </div>
+    <div class="row">
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/adverts-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Adverts</button>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #999999">Users</button>
+                </div>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/drivers-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Drivers</button>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+            <form method="get" action="/jjdz5-magicy/statistics-admin">
+                <div class="col-12" style="padding: 15px">
+                    <button class="btn button" style="background-color: #3f51b5">Statistics</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="mt-5">
             <h3>Users</h3>
@@ -174,7 +192,7 @@ swal({
 
     <div class="row mt-3 mb-5">
 
-        <div class="card">
+        <div class="card" style="width:90%">
             <div class="panel panel-primary filterable">
                 <table class="table table-bordered table-sm">
                     <thead>
@@ -194,11 +212,15 @@ swal({
                         <td style="background: #cceeff; text-align: center" class="align-middle">${u.email}</td>
                         <td style="background: #cceeff; text-align: center" class="align-middle">${u.getDriver().getName()} ${u.getDriver().getSurname()} <br> Phone: ${u.getDriver().getPhoneNumber()}</td>
                         <#if u.isAdmin() == true>
-                        <td style="background: #99ff66; text-align: center; cursor:pointer;" title="Change flag" class="align-middle" ondblclick="changeFlag(${u.id});">ADMIN</td>
+                        <td class="align-middle" style="text-align: center;">
+                            <button class="btn button-functional" onclick="changeFlag(${u.id})" title="Change user flag" style="background-color: #99ff66;">ADMIN</button>
+                        </td>
                         <#else>
-                        <td style="background: #ffff99; text-align: center; cursor:pointer;" title="Change flag" class="align-middle" ondblclick="changeFlag(${u.id});">USER</td>
+                        <td class="align-middle" style="text-align: center;">
+                            <button class="btn button-functional" onclick="changeFlag(${u.id})" title="Change user flag" style="background-color: #ffff99;">USER</button>
+                        </td>
                     </#if>
-                        <td class="align-middle">
+                        <td class="align-middle" style="text-align: center;">
                                 <button class="btn button-functional" onclick="deleteUser(${u.id})" title="Delete user" style="background-color: red;">Delete</button>
                         </td>
                     </tr>
