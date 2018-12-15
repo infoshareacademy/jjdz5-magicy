@@ -11,5 +11,6 @@ public interface MapsAdvertParametersVerifier {
     Boolean isTimeParameterCorrect(Map<String, String[]> parameters, AdvertPartType type);
     Boolean isOverallParameterCorrect(Map<String, String[]> parameters, AdvertOverallType type);
     Boolean isAddressPrecisionParameterCorrect(Map<String, String[]> parameters, AdvertPartType type);
+    Boolean areTooManyPassiveWaypoints(Map<String, String[]> parameters);
 
 }

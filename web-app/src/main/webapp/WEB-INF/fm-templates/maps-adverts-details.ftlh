@@ -182,9 +182,9 @@
             disableDefaultUI: true,
             disableDoubleClickZoom: true,
             draggable: true,
-            fullscreenControl: false,
+            fullscreenControl: true,
             streetViewControl: false,
-            scrollwheel: false,
+            scrollwheel: true,
             zoomControl: true
         });
 
@@ -201,6 +201,18 @@
         directionsService.route({
             origin: {lat: ${sLat}, lng: ${sLng}},
             destination: {lat: ${eLat}, lng: ${eLng}},
+            <#if advert.waypoints?size &gt; 0>
+            waypoints: [
+                <#list advert.waypoints as waypoint>
+                    <#assign wLat = waypoint.latitude?string["0.####################"]>
+                    <#assign wLng = waypoint.longitude?string["0.####################"]>
+                    {
+                        location: {lat: ${wLat}, lng: ${wLng}},
+                        stopover: ${waypoint.stopover?string}
+                    }<#if waypoint_has_next>,</#if>
+                </#list>
+            ],
+            </#if>
             travelMode: google.maps.TravelMode["DRIVING"]
         }, function(response, status) {
             if (status == 'OK') {

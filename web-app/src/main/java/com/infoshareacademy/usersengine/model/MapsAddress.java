@@ -30,7 +30,6 @@ public class MapsAddress {
     private String streetName;
 
     @Column(name = "street_number")
-    @NotNull
     private String streetNumber;
 
     @Column(name = "formatted_address")

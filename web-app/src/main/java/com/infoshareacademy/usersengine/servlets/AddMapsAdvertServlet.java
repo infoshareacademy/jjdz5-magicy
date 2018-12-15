@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import com.infoshareacademy.usersengine.model.User;
 import com.infoshareacademy.usersengine.services.PropertiesService;
 import com.infoshareacademy.usersengine.services.RedirectionService;
@@ -48,6 +49,9 @@ public class AddMapsAdvertServlet extends AppInitServlet {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
         dataModel.addUserToDataModel(req);
+        User currentUser = (User) req.getSession().getAttribute("user");
+        MapsDriver currentDriver = currentUser.getDriver();
+        dataModel.fillDataModelWithCurrentDriver(currentDriver);
         dataModel.fillDataModelWithGetData();
         templateProvider.build(getServletContext(), TEMPLATE_NAME,
                 dataModel.getDataModel(), resp);
@@ -59,7 +63,6 @@ public class AddMapsAdvertServlet extends AppInitServlet {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         processing.processMapsAdvertCreation(req.getParameterMap());
         HttpSession session = req.getSession();
-
         userStatisticDao.save(userStatisticService.
                 addStatistic((User)session.getAttribute("user"), UserActivity.ADDING_ADVERT));
 
@@ -69,6 +72,9 @@ public class AddMapsAdvertServlet extends AppInitServlet {
     private void proceed(HttpServletResponse resp, HttpServletRequest req) throws IOException {
         dataModel.buildNewDataModel();
         dataModel.addUserToDataModel(req);
+        User currentUser = (User) req.getSession().getAttribute("user");
+        MapsDriver currentDriver = currentUser.getDriver();
+        dataModel.fillDataModelWithCurrentDriver(currentDriver);
         if (ifSummaryIsSuccess(processing.getSummary())) {
             resp.getWriter().write(RedirectionService.buildAddAdvertRedirectionPage(
                     PropertiesService.getMsgAdvertAddOk(),

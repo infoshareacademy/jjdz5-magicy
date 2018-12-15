@@ -20,6 +20,9 @@ public class MapsAdvertBuilderBean implements MapsAdvertBuilder{
     private MapsAddressBuilder addressBuilder;
 
     @Inject
+    private MapsWaypointBuilder waypointBuilder;
+
+    @Inject
     private DateTimeBuilder dateTimeBuilder;
 
     @Inject
@@ -36,6 +39,7 @@ public class MapsAdvertBuilderBean implements MapsAdvertBuilder{
                 addressBuilder.buildEndMapsAddress(parameters),
                 buildStartAddressInfo(parameters),
                 buildEndAddressInfo(parameters),
+                waypointBuilder.buildPassiveMapsWaypointsList(parameters),
                 dateTimeBuilder.buildStartTime(parameters),
                 dateTimeBuilder.buildEndTime(parameters),
                 dateTimeBuilder.buildDate(parameters));

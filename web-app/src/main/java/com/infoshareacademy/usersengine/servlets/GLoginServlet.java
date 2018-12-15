@@ -43,13 +43,13 @@ public class GLoginServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    UserDao userDao;
+    private UserDao userDao;
 
     @Inject
-    UserStatisticService userStatisticService;
+    private UserStatisticService userStatisticService;
 
     @Inject
-    UserStatisticDao userStatisticDao;
+    private UserStatisticDao userStatisticDao;
 
     @Inject
     private MapsAdvertDao mapsAdvertDao;
@@ -103,7 +103,7 @@ public class GLoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             LOG.info("User with id: " + user.getId() + " and email: " + user.getEmail() + " is logged in");
 
-      //      userStatisticDao.save(userStatisticService.addStatistic(user, UserActivity.LOG_IN));
+            userStatisticDao.save(userStatisticService.addStatistic(user, UserActivity.LOG_IN));
 
             resp.sendRedirect("/jjdz5-magicy/home");
 
@@ -170,17 +170,17 @@ public class GLoginServlet extends HttpServlet {
 
         MapsAdvert kubaTestAdvert = new MapsAdvert(driverKuba, alfaTestAddress, obcTestAddress,
                 "Wyruszam z pod Alfa Centrum.",
-                "Moim punktem docelowym jest Olivia Business Centre",
+                "Moim punktem docelowym jest Olivia Business Centre", null,
                 LocalTime.now().plusHours(2), LocalTime.now().plusHours(3), LocalDate.now());
         mapsAdvertDao.save(kubaTestAdvert);
 
         MapsAdvert marysiaTestAdvert = new MapsAdvert(driverMarysia, luzyckaTestAddress, obcTestAddress,
-                "Wyruszam z pod Alfa Centrum.", "Moim punktem docelowym jest Olivia Business Centre",
+                "Wyruszam z pod Alfa Centrum.", "Moim punktem docelowym jest Olivia Business Centre", null,
                 LocalTime.now().plusHours(6), LocalTime.now().plusHours(8), LocalDate.now());
         mapsAdvertDao.save(marysiaTestAdvert);
 
         MapsAdvert krzysiuTestAdvert = new MapsAdvert(driverKrzysiu, luzyckaTestAddress, alchemiaTestAddress,
-                "", "",
+                "", "", null,
                 LocalTime.now().plusHours(4), LocalTime.now().plusHours(5), LocalDate.now().plusDays(1));
         mapsAdvertDao.save(krzysiuTestAdvert);
 

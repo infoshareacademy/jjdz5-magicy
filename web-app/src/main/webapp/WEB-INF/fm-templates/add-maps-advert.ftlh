@@ -91,6 +91,10 @@
                                name="startInfo" placeholder="Departure additional information.">
                         <input id="destination-address-info" class="form-control mt-1" type="text"
                                name="endInfo" placeholder="Destination additional information.">
+                        <div class="card-title card-label">
+                            <span>Overall distance: </span>
+                            <span id="overall-distance">0 km</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,23 +123,33 @@
                 <div id="driver-card" class="card controls-card bg-primary text-white panel">
                     <a role="button" data-toggle="collapse" data-target="#collapseDriver"
                        aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
-                        <div id="driver-header" class="card-header">Driver</div></a>
+                        <div id="driver-header" class="card-header">Your data:</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
-                            <div id="driver-label" class="card-title card-label">Driver:</div>
-                            <select id="driver" class="custom-select" name="driverId" required>
-                                <option value="1">Driver</option>
-                            </select>
+                            <div id="driver-label" class="card-title card-label">
+                                <#assign driver = DRIVER>
+                                <span>${driver.name} ${driver.surname}</span><br>
+                                <span>${driver.phoneNumber}</span><br>
+                                <#list driver.cars as c>
+                                <#assign car = c>
+                                <span>${car.carBrand} ${car.carModel}</span><br>
+                                <span>${car.licensePlate}</span><br>
+                                </#list>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <input id="origin-place-id" type="hidden" name="startMapsPointId">
-            <input id="destination-place-id" type="hidden" name="endMapsPointId">
-            <input id="origin-precise" type="hidden" name="startStreetNumber">
-            <input id="destination-precise" type="hidden" name="endStreetNumber">
+            <div id="hidden-inputs">
+                <input id="origin-place-id" type="hidden" name="startMapsPointId">
+                <input id="destination-place-id" type="hidden" name="endMapsPointId">
+                <input id="origin-precise" type="hidden" name="startStreetNumber">
+                <input id="destination-precise" type="hidden" name="endStreetNumber">
+                <input id="route-modifiers" type="hidden" name="routeModifiers">
+                <input id="driver-id" type="hidden" name="driverId" value="${driver.id}">
+            </div>
 
             <div id="controls">
                 <button id="show-cards" type="button" class="btn button"
@@ -168,6 +182,11 @@
                     <li>When you are typing address, be sure to confirm it by selecting your choice from dropdown list.</li>
                     <li>Try to type address as precise as possible. Writing street number will be very helpful!</li>
                     <li>Remember that departure and destination address cannot be the same.</li>
+                </ul>
+                <h5>Route modifying:</h5>
+                <ul>
+                    <li>You can modify route generated for you. To achieve that drag route lines into streets you want to go through.</li>
+                    <li>Modifying route will generate waypoints on it. Please remember that maximum quantity of these points is ${ROUTE_MODIFIERS_CONDITION?first}.</li>
                 </ul>
                 <h5>Time:</h5>
                 <ul>

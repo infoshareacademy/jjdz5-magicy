@@ -15,10 +15,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Stateless
 public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
@@ -39,6 +36,7 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
         verifyStartAddressParameters(parameters);
         verifyEndAddressParameters(parameters);
         verifyAddressesEquality(parameters);
+        verifyPassiveWaypointsNumber(parameters);
         LocalTime startTime = verifyStartTimeParameter(parameters);
         LocalTime endTime = verifyEndTimeParameter(parameters);
         LocalDate date = verifyDate(parameters);
@@ -63,11 +61,13 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
             LOG.debug("Start address main parameter is not correct.");
             errorMessages.add(PropertiesService.getMsgBadMainStartAddress());
         }
-        if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.START)) {
-            LOG.debug("Start address is precise.");
-        } else {
-            LOG.debug("Start address is not enough precise.");
-            errorMessages.add(PropertiesService.getMsgBadDetailStartAddress());
+        if (PropertiesService.getAdvertPreciseCheck()) {
+            if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.START)) {
+                LOG.debug("Start address is precise.");
+            } else {
+                LOG.debug("Start address is not enough precise.");
+                errorMessages.add(PropertiesService.getMsgBadDetailStartAddress());
+            }
         }
     }
 
@@ -78,17 +78,25 @@ public class MapsAdvertVerifierBean implements MapsAdvertVerifier{
             LOG.debug("End address main parameter is not correct.");
             errorMessages.add(PropertiesService.getMsgBadMainEndAddress());
         }
-        if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.END)) {
-            LOG.debug("End address is precise.");
-        } else {
-            LOG.debug("End address is not enough precise.");
-            errorMessages.add(PropertiesService.getMsgBadDetailEndAddress());
+        if (PropertiesService.getAdvertPreciseCheck()) {
+            if (verifier.isAddressPrecisionParameterCorrect(parameters, AdvertPartType.END)) {
+                LOG.debug("End address is precise.");
+            } else {
+                LOG.debug("End address is not enough precise.");
+                errorMessages.add(PropertiesService.getMsgBadDetailEndAddress());
+            }
         }
     }
 
     private void verifyAddressesEquality(Map<String, String[]> parameters) {
         if (areAddressesEqual(parameters)) {
             errorMessages.add(PropertiesService.getMsgEqualAddresses());
+        }
+    }
+
+    private void verifyPassiveWaypointsNumber(Map<String, String[]> parameters) {
+        if (verifier.areTooManyPassiveWaypoints(parameters)) {
+            errorMessages.add(PropertiesService.getMsgTooManyRouteModifiers());
         }
     }
 
