@@ -29,7 +29,6 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "driver_id")
-    @NotNull
     @JsonIgnore
     private MapsDriver driver;
 
@@ -81,7 +80,6 @@ public class Car {
         sb.append("licensePlate='").append(licensePlate).append('\'');
         sb.append(", carBrand='").append(carBrand).append('\'');
         sb.append(", carModel='").append(carModel).append('\'');
-        sb.append(", driver=").append(driver.getName()).append(" ").append(driver.getSurname());
         sb.append('}');
         return sb.toString();
     }

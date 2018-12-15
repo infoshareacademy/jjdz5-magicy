@@ -9,27 +9,28 @@ public class UserStatistic {
 
     @Id
     @Column(name="id")
-    long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name="user_id")
-    long userId;
+    private long userId;
 
     @Column(name="user_email")
-    String UserEmail;
+    private String userEmail;
 
     @Column(name="time")
     private LocalDateTime time;
 
     @Enumerated(value = EnumType.ORDINAL)
     @Column(name="activity")
-    UserActivity userActivity;
+    private UserActivity userActivity;
 
     public UserStatistic() {
     }
 
     public UserStatistic(long userId, String userEmail, LocalDateTime time, UserActivity userActivity) {
         this.userId = userId;
-        this.UserEmail = userEmail;
+        this.userEmail = userEmail;
         this.time = time;
         this.userActivity = userActivity;
     }
