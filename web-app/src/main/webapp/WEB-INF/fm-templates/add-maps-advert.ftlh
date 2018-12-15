@@ -123,13 +123,19 @@
                 <div id="driver-card" class="card controls-card bg-primary text-white panel">
                     <a role="button" data-toggle="collapse" data-target="#collapseDriver"
                        aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
-                        <div id="driver-header" class="card-header">Driver</div></a>
+                        <div id="driver-header" class="card-header">Your data:</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
-                            <div id="driver-label" class="card-title card-label">Driver:</div>
-                            <select id="driver" class="custom-select" name="driverId" required>
-                                <option value="1">Driver</option>
-                            </select>
+                            <div id="driver-label" class="card-title card-label">
+                                <#assign driver = DRIVER>
+                                <span>${driver.name} ${driver.surname}</span><br>
+                                <span>${driver.phoneNumber}</span><br>
+                                <#list driver.cars as c>
+                                <#assign car = c>
+                                <span>${car.carBrand} ${car.carModel}</span><br>
+                                <span>${car.licensePlate}</span><br>
+                                </#list>
+                            </div>
                         </div>
                     </div>
                 </div>

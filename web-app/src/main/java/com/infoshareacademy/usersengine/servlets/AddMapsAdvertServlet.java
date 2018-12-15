@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import com.infoshareacademy.usersengine.model.User;
 import com.infoshareacademy.usersengine.services.PropertiesService;
 import com.infoshareacademy.usersengine.services.RedirectionService;
@@ -48,6 +49,9 @@ public class AddMapsAdvertServlet extends AppInitServlet {
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
         dataModel.addUserToDataModel(req);
+        User currentUser = (User) req.getSession().getAttribute("user");
+        MapsDriver currentDriver = currentUser.getDriver();
+        dataModel.fillDataModelWithCurrentDriver(currentDriver);
         dataModel.fillDataModelWithGetData();
         templateProvider.build(getServletContext(), TEMPLATE_NAME,
                 dataModel.getDataModel(), resp);
