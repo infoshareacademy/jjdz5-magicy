@@ -10,13 +10,13 @@ public class UserStatistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    long id;
+    private Long id;
 
     @Column(name="user_id")
-    long userId;
+    private Long userId;
 
     @Column(name="user_email")
-    String UserEmail;
+    String userEmail;
 
     @Column(name="time")
     private LocalDateTime time;
@@ -28,19 +28,22 @@ public class UserStatistic {
     public UserStatistic() {
     }
 
-    public UserStatistic(long userId, String userEmail, LocalDateTime time, UserActivity userActivity) {
+    public UserStatistic(Long userId, String userEmail, LocalDateTime time, UserActivity userActivity) {
         this.userId = userId;
-        this.UserEmail = userEmail;
+        this.userEmail = userEmail;
         this.time = time;
         this.userActivity = userActivity;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
