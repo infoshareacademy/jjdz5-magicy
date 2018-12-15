@@ -15,10 +15,6 @@ public class Car {
     @NotNull
     private String licensePlate;
 
-//    @Column(name = "car_brand")
-//    @NotNull
-//    private String carBrand;
-
     @Column(name = "car_model")
     @NotNull
     private String carModel;
@@ -38,14 +34,6 @@ public class Car {
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
-
-//    public String getCarBrand() {
-//        return carBrand;
-//    }
-//
-//    public void setCarBrand(String carBrand) {
-//        this.carBrand = carBrand;
-//    }
 
     public String getCarModel() {
         return carModel;
