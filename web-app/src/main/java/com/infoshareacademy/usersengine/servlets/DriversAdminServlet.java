@@ -35,6 +35,9 @@ public class DriversAdminServlet extends HttpServlet {
     @Inject
     private MapsDriverDao mapsDriverDao;
 
+    @Inject
+    private UserDao userDao;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -61,7 +64,8 @@ public class DriversAdminServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(req.getParameter("id"));
+        mapsDriverDao.deleteDriverAdvert(mapsDriverDao.findById(id));
+        mapsDriverDao.deleteDriverUser(mapsDriverDao.findById(id));
         mapsDriverDao.delete(id);
-        resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/drivers-admin");
     }
 }

@@ -50,8 +50,8 @@
 <body>
 <script>
     $(document).ready(function(){
-    document.getElementById("8nav").classList.add('active');
-    $('#user_id').val(${user.id});
+        document.getElementById("8nav").classList.add('active');
+        $('#user_id').val(${user.id});
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -96,21 +96,35 @@
     });
 
     function deleteDriver(id){
-swal({
-  title: "Are you sure?",
-  text: "Do you want to delete driver?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $('#id').val(id);
-  $('#delete-button').click();
-  } else {
-    swal("Canceled!");
-  }
-});
+        $('#id').val(id);
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to delete driver?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+                .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: 'POST',
+                    url: "drivers-admin",
+                    data: {
+                        id: $('#id').val()
+                    },
+                    dataType: "text",
+                    success: function (resultData) {
+                        $('#id').val('');
+                        window.location.replace("http://localhost:8080/jjdz5-magicy/drivers-admin");
+                    },
+                    error: function (resultData) {
+                        console.log(resultData);
+                    }
+                });
+            } else {
+                swal("Canceled!");
+    }
+    });
 
     }
 
@@ -134,9 +148,9 @@ swal({
             </form>
         </div>
         <div class="row mt-3">
-                <div class="col-12" style="padding: 15px">
-                    <button class="btn button" style="background-color: #999999">Drivers</button>
-                </div>
+            <div class="col-12" style="padding: 15px">
+                <button class="btn button" style="background-color: #999999">Drivers</button>
+            </div>
         </div>
         <div class="row mt-3">
             <form method="get" action="/jjdz5-magicy/statistics-admin">
@@ -175,7 +189,7 @@ swal({
                         <td style="background: #cceeff; text-align: center" class="align-middle">${d.getSurname()}</td>
                         <td style="background: #cceeff; text-align: center" class="align-middle">${d.getPhoneNumber()}</td>
                         <td class="align-middle" style="text-align: center;">
-                                <button class="btn button-functional" onclick="deleteDriver(${d.id})" title="Delete driver" style="background-color: red;">Delete</button>
+                            <button class="btn button-functional" onclick="deleteDriver(${d.id})" title="Delete driver" style="background-color: red;">Delete</button>
                         </td>
                     </tr>
                     </#list>
@@ -186,8 +200,8 @@ swal({
     </div>
     <input type="hidden" id="user_id" name="user_id"/>
     <form method="post" action="/jjdz5-magicy/drivers-admin">
-    <input type="hidden" id="id" name="id" value="0"/>
-    <button type="submit" id="delete-button" hidden="hidden"></button>
+        <input type="hidden" id="id" name="id" value="0"/>
+        <button type="submit" id="delete-button" hidden="hidden"></button>
     </form>
 
 </div>

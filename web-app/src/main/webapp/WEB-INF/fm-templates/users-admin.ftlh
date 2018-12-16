@@ -50,8 +50,8 @@
 <body>
 <script>
     $(document).ready(function(){
-    document.getElementById("8nav").classList.add('active');
-    $('#user_id').val(${user.id});
+        document.getElementById("8nav").classList.add('active');
+        $('#user_id').val(${user.id});
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -96,60 +96,75 @@
     });
 
     function deleteUser(id){
-     if(id == $('#user_id').val()){
-    swal("You can not delete yourself!");
-    }else{
-swal({
-  title: "Are you sure?",
-  text: "Do you want to delete this user?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $('#id').val(id);
-  $('#delete-button').click();
-  } else {
-    swal("Canceled!");
-  }
-});
-}
+        $('#id').val(id);
+        if(id == $('#user_id').val()){
+            swal("You can not delete yourself!");
+        }else{
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to delete this user?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                    .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "users-admin",
+                        data: {
+                            id: $('#id').val()
+                        },
+                        dataType: "text",
+                        success: function (resultData) {
+                            $('#id').val('');
+                            window.location.replace("http://localhost:8080/jjdz5-magicy/users-admin");
+                        },
+                        error: function (resultData) {
+                            console.log(resultData);
+                        }
+                    });
+                } else {
+                    swal("Canceled!");
+        }
+        });
+        }
     }
 
     function changeFlag(id){
-    if(id == $('#user_id').val()){
-    swal("You can not change your flag!");
-    }else{
-    swal({
-  title: "Are you sure?",
-  text: "Do you want to change user's flag?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $.ajax({
-                    type: 'PUT',
-                    url: "users-admin",
-                    data: {
-                        id: $('#id').val()
-                    },
-                    dataType: "text",
-                    success: function (resultData) {
+        $('#uid').val(id);
+        if(id == $('#user_id').val()){
+            swal("You can not change your flag!");
+        }else{
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to change user's flag?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                    .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "flags-admin",
+                        data: {
+                            uid: $('#uid').val()
+                        },
+                        dataType: "text",
+                        success: function (resultData) {
+                            $('#uid').val('');
                             window.location.replace("http://localhost:8080/jjdz5-magicy/users-admin");
-
-                    },
-                    error: function (resultData) {
-                        console.log(resultData);
-                    }
-            });
-  } else {
-    swal("Canceled!");
-  }
-});
-}
+                        },
+                        error: function (resultData) {
+                            console.log(resultData);
+                        }
+                    });
+                } else {
+                    swal("Canceled!");
+        }
+        });
+        }
     }
 
 </script>
@@ -165,9 +180,9 @@ swal({
             </form>
         </div>
         <div class="row mt-3">
-                <div class="col-12" style="padding: 15px">
-                    <button class="btn button" style="background-color: #999999">Users</button>
-                </div>
+            <div class="col-12" style="padding: 15px">
+                <button class="btn button" style="background-color: #999999">Users</button>
+            </div>
         </div>
         <div class="row mt-3">
             <form method="get" action="/jjdz5-magicy/drivers-admin">
@@ -219,9 +234,9 @@ swal({
                         <td class="align-middle" style="text-align: center;">
                             <button class="btn button-functional" onclick="changeFlag(${u.id})" title="Change user flag" style="background-color: #ffff99;">USER</button>
                         </td>
-                    </#if>
+                        </#if>
                         <td class="align-middle" style="text-align: center;">
-                                <button class="btn button-functional" onclick="deleteUser(${u.id})" title="Delete user" style="background-color: red;">Delete</button>
+                            <button class="btn button-functional" onclick="deleteUser(${u.id})" title="Delete user" style="background-color: red;">Delete</button>
                         </td>
                     </tr>
                     </#list>
@@ -231,15 +246,10 @@ swal({
         </div>
     </div>
     <input type="hidden" id="user_id" name="user_id"/>
-    <form method="post" action="/jjdz5-magicy/users-admin">
     <input type="hidden" id="id" name="id" value="0"/>
     <button type="submit" id="delete-button" hidden="hidden"></button>
-    </form>
-
-    <form method="put" action="/jjdz5-magicy/users-admin">
-        <input type="hidden" id="uid" name="uid" value="0"/>
-        <button type="submit" id="change-flag" hidden="hidden"></button>
-    </form>
+    <input type="hidden" id="uid" name="uid" value="0"/>
+    <button type="submit" id="change-flag" hidden="hidden"></button>
 </div>
 
 <#include "footer.ftlh">

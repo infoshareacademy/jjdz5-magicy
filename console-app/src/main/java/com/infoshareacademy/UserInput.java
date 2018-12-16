@@ -16,7 +16,7 @@ public class UserInput {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String CITY_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
     private static final String INPUT_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
-    private static final String INPUT_TEXT_NUMBER_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]*[0-9 /]+$";
+    private static final String INPUT_TEXT_NUMBER_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż0-9]+$";
     private static final String STREET_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
     private static final String STREET_NAME_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*$";
     private static final String STREET_NUMBER_REGEX = "^+[0-9 /]*[a-zA-Z]*$";

@@ -50,7 +50,7 @@
 <body>
 <script>
     $(document).ready(function(){
-    document.getElementById("8nav").classList.add('active');
+        document.getElementById("8nav").classList.add('active');
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -95,21 +95,35 @@
     });
 
     function deleteAdvert(id){
-swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this advert!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $('#id').val(id);
-  $('#delete-button').click();
-  } else {
-    swal("Canceled!");
-  }
-});
+        $('#id').val(id);
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this advert!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+                .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: 'POST',
+                    url: "adverts-admin",
+                    data: {
+                        id: $('#id').val()
+                    },
+                    dataType: "text",
+                    success: function (resultData) {
+                        $('#id').val('');
+                        window.location.replace("http://localhost:8080/jjdz5-magicy/adverts-admin");
+                    },
+                    error: function (resultData) {
+                        console.log(resultData);
+                    }
+                });
+            } else {
+                swal("Canceled!");
+    }
+    });
     }
 </script>
 
@@ -117,9 +131,9 @@ swal({
     <#include "menu.ftlh">
     <div class="row">
         <div class="row mt-3">
-                <div class="col-12" style="padding: 15px">
-                    <button class="btn button" style="background-color: #999999">Adverts</button>
-                </div>
+            <div class="col-12" style="padding: 15px">
+                <button class="btn button" style="background-color: #999999">Adverts</button>
+            </div>
         </div>
         <div class="row mt-3">
             <form method="get" action="/jjdz5-magicy/users-admin">
@@ -161,7 +175,6 @@ swal({
                         <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
                         <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
                         <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
                         <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
                             Filter
                         </button></th>
@@ -177,10 +190,8 @@ swal({
                         <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
                         <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
                         <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
-                        <#assign car = advert.driver.cars?first>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
                         <td class="align-middle" style="text-align: center;">
-                                <button class="btn button-functional" onclick="deleteAdvert(${advert.id})" style="background-color: red;">Delete</button>
+                            <button class="btn button-functional" onclick="deleteAdvert(${advert.id})" style="background-color: red;">Delete</button>
                         </td>
                     </tr>
                     </#list>
@@ -189,10 +200,8 @@ swal({
             </div>
         </div>
     </div>
-    <form method="post" action="/jjdz5-magicy/adverts-admin">
     <input type="hidden" id="id" name="id" value="0"/>
     <button type="submit" id="delete-button" hidden="hidden"></button>
-    </form>
 </div>
 
 <#include "footer.ftlh">
