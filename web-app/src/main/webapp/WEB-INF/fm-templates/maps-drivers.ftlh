@@ -61,10 +61,10 @@ var inputOptions = new Promise(function(resolve) {
         '2': '2',
         '3': '3',
         '4': '4',
-        '5': '5',
+        '5': '5'
       })
     }, 1)
-  })
+  });
   swal({
       title: 'Your rating for '+name+' '+surname,
       input: 'radio',
@@ -92,7 +92,6 @@ var inputOptions = new Promise(function(resolve) {
         <div class="col-6" style="padding-top: 0.9rem">
             <h3>Drivers</h3>
         </div>
-        <div class="col-6"></div>
     </div>
     <form method="post" action="/jjdz5-magicy/drivers">
     <div class="row">
@@ -100,9 +99,9 @@ var inputOptions = new Promise(function(resolve) {
             <table class="table" style="width: 100%; text-align: center">
                 <thead>
                     <tr class="filters">
-                        <th style="width:10%">Number</th>
-                        <th style="width:50%">Driver</th>
-                        <th style="width:30%">Rating</th>
+                        <th style="width:10%">Driver</th>
+                        <th style="width:50%">Car</th>
+                        <th style="width:30%">Average rating</th>
                         <th style="width:20%"></th>
                     </tr>
 
@@ -110,10 +109,17 @@ var inputOptions = new Promise(function(resolve) {
 	<tbody>
 	<#list drivers as d>
 		<tr>
-            <td style="width:10%; vertical-align: middle">${d.getId()}</td>
-            <td style="width:50%; vertical-align: middle">${d.getName()} ${d.getSurname()} ${d.getPhone()} ${d.getCity()}</td>
-			<td style="width:30%; vertical-align: middle">Rating: ${d.getRating().getAverage()}/5,0  <br/> ${d.getRating().getPersons()} reviews</td>
-            <td style="width:20%"><button onclick="myAlertFunction(${d.getId()}, '${d.getName()}', '${d.getSurname()}')" id="add-button" type="button" class="btn btn-info" style="width:100%">Add rating</button></td>
+            <td style="width:10%; vertical-align: middle">${d.name} ${d.surname}<br>${d.phoneNumber}</td>
+            <td style="width:50%; vertical-align: middle">${d.car.carModel}<br>${d.car.licensePlate}</td>
+            <td style="width:30%; vertical-align: middle">${d.averageRating?string("0.00")}<br>
+                <#if d.ratingsQuantity == 1>
+                    ${d.ratingsQuantity} review
+                </#if>
+                <#if d.ratingsQuantity &gt; 1>
+                    ${d.ratingsQuantity} reviews
+                </#if>
+            </td>
+            <td style="width:20%"><button onclick="myAlertFunction(${d.id}, '${d.name}', '${d.surname}')" id="add-button" type="button" class="btn btn-info" style="width:100%">Add rating</button></td>
 		</tr>
 		</#list>
 	</tbody>
@@ -130,7 +136,7 @@ var inputOptions = new Promise(function(resolve) {
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/js/mdb.min.js"></script>
 </body>
 </html>

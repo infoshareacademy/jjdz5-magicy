@@ -7,6 +7,7 @@ import java.util.List;
 @Local
 public interface DriversValidation {
     boolean askForText(String text);
+    boolean askForTextNumbers(String text);
     boolean askForNumber(String number);
     boolean checkIsDriverRatingValid(String rating);
     boolean checkIsDriverIdAlreadyUsed(List<Driver> drivers, String id);

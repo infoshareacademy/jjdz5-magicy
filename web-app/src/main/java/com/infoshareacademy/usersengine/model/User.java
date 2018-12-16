@@ -66,7 +66,7 @@ public class User {
         return driver;
     }
 
-    public void setDriver(boolean driver) {
+    public void setDriverStatus(boolean driver) {
         isDriver = driver;
     }
 

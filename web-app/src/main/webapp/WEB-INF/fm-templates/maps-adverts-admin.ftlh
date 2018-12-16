@@ -175,7 +175,6 @@ $.ajax({
                         <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
                         <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
                         <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
-                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
                         <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
                             Filter
                         </button></th>
@@ -191,8 +190,6 @@ $.ajax({
                         <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
                         <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
                         <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
-                        <#assign car = advert.driver.cars?first>
-                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
                         <td class="align-middle" style="text-align: center;">
                                 <button class="btn button-functional" onclick="deleteAdvert(${advert.id})" style="background-color: red;">Delete</button>
                         </td>

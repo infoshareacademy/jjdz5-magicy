@@ -3,10 +3,16 @@ package com.infoshareacademy.usersengine.servlets;
 import com.infoshareacademy.Driver;
 import com.infoshareacademy.DriversList;
 import com.infoshareacademy.JsonToList;
+import com.infoshareacademy.usersengine.dao.CarDao;
+import com.infoshareacademy.usersengine.dao.MapsDriverDao;
+import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.dao.UserStatisticDao;
 import com.infoshareacademy.usersengine.drivers.DriverPreparation;
 import com.infoshareacademy.usersengine.drivers.DriversManager;
+import com.infoshareacademy.usersengine.drivers.MapsDriverPreparation;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.Car;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import com.infoshareacademy.usersengine.model.User;
 import com.infoshareacademy.usersengine.services.UserStatisticService;
 import com.infoshareacademy.usersengine.statistics.UserActivity;
@@ -32,24 +38,28 @@ import java.util.Map;
 @WebServlet("/add-driver")
 public class AddDriverServlet extends HttpServlet {
 
-    private JsonToList jsonToList = new JsonToList();
-    private DriversList driversList = new DriversList();
     private Logger LOG = LoggerFactory.getLogger(AddDriverServlet.class);
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private DriversManager driversManager;
+    private MapsDriverDao mapsDriverDao;
 
     @Inject
-    private DriverPreparation driverPreparation;
+    private CarDao carDao;
+
+    @Inject
+    private UserDao userDao;
+
+    @Inject
+    private MapsDriverPreparation driverPreparation;
 
     @Inject
     private UserStatisticDao userStatisticDao;
 
     @Inject
-    UserStatisticService userStatisticService;
+    private UserStatisticService userStatisticService;
 
 
     @Override
@@ -57,7 +67,7 @@ public class AddDriverServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
-        Template template = templateProvider.getTemplate(getServletContext(), "add-driver");
+        Template template = templateProvider.getTemplate(getServletContext(), "add-maps-driver");
         try {
             template.process(dataModel, resp.getWriter());
             LOG.debug("Template created successfully.");
@@ -72,22 +82,21 @@ public class AddDriverServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
 
-        List<Driver> drivers = jsonToList.driversToList(getPath());
-        driversList.setDriversList(drivers);
-
         Map<String, String[]> map = req.getParameterMap();
 
-        driversManager.addDriver(driverPreparation.getNewDriver(drivers, driverPreparation.mapReader(map)), drivers);
-        driversList.setDriversList(drivers);
-        driversManager.writeDriverData(drivers, getPath());
+        MapsDriver driver = driverPreparation.driverMapReader(map);
+        String message = driverPreparation.validateDriver(driver);
+        if(message.isEmpty()){
+            carDao.save(driver.getCar());
+            mapsDriverDao.save(driver);
+            User currentUser = (User) req.getSession().getAttribute("user");
+            currentUser.setDriver(driver);
+            currentUser.setDriverStatus(true);
+            userDao.update(currentUser);
+        }
 
         HttpSession session = req.getSession();
         userStatisticDao.save(userStatisticService.
-                addStatistic((User)session.getAttribute("user"), UserActivity.ADDING_DRIVER));
-        }
-
-    private String getPath() {
-        ServletContext application = getServletConfig().getServletContext();
-        return application.getRealPath("WEB-INF/driver.json");
+                addStatistic((User) session.getAttribute("user"), UserActivity.ADDING_DRIVER));
     }
 }

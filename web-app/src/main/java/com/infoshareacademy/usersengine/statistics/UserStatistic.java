@@ -10,20 +10,20 @@ public class UserStatistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long id;
+    private long id;
 
     @Column(name="user_id")
-    private Long userId;
+    private long userId;
 
     @Column(name="user_email")
-    String userEmail;
+    private String userEmail;
 
     @Column(name="time")
     private LocalDateTime time;
 
     @Enumerated(value = EnumType.ORDINAL)
     @Column(name="activity")
-    UserActivity userActivity;
+    private UserActivity userActivity;
 
     public UserStatistic() {
     }

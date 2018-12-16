@@ -41,32 +41,32 @@
 
     <form method="post" action="/jjdz5-magicy/add-maps-advert">
 
-    <div class="row mt-3">
-        <div class="col-6">
-            <h3>Add new advert</h3>
+        <div class="row mt-3">
+            <div class="col-6" style="padding-top: 0.9rem">
+                <#--<button type="submit" class="btn button">Add new advert</button>-->
+                <h3>Add new advert</h3>
+            </div>
+            <div class="col-6">
+                <a class="btn button float-right" href="#info">
+                    Help
+                    <i class="fas fa-info-circle"></i>
+                </a>
+            </div>
         </div>
-        </div>
-        <div class="col-6">
-            <a class="btn button float-right" href="#info">
-                Help
-                <i class="fas fa-info-circle"></i>
-            </a>
-        </div>
-    </div>
 
-    <#if SUMMARY?has_content>
+        <#if SUMMARY?has_content>
 
-      <div id="summary" class="row mt-1">
-          <div class="col-12">
-              <div class="alert alert-summary">
-                  <ul>
-                      <#list SUMMARY as msg>
-                          <li>${msg}</li>
-                      </#list>
-                  </ul>
-              </div>
-          </div>
-      </div>
+        <div id="summary" class="row mt-1">
+            <div class="col-12">
+                <div class="alert alert-summary">
+                    <ul>
+                        <#list SUMMARY as msg>
+                        <li>${msg}</li>
+                    </#list>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
     </#if>
 
@@ -127,16 +127,11 @@
                         <div id="driver-header" class="card-header">Your data:</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
-                            <div id="driver-label" class="card-title card-label">
-                                <#assign driver = DRIVER>
-                                <span>${driver.name} ${driver.surname}</span><br>
-                                <span>${driver.phoneNumber}</span><br>
-                                <#list driver.cars as c>
-                                <#assign car = c>
-                                <span>${car.carBrand} ${car.carModel}</span><br>
-                                <span>${car.licensePlate}</span><br>
-                                </#list>
-                            </div>
+                            <#assign driver = DRIVER>
+                            <div class="card-label">${driver.name} ${driver.surname}</div>
+                            <div class="card-label">${driver.phoneNumber}</div>
+                            <div class="card-label">${driver.car.carModel}</div>
+                            <div class="card-label">${driver.car.licensePlate}</div>
                         </div>
                     </div>
                 </div>
@@ -152,7 +147,7 @@
                 <input id="driver-id" type="hidden" name="driverId" value="${driver.id}">
             </div>
 
-            <div id="controls">
+            <div id="controls" class="mb-5">
                 <button id="show-cards" type="button" class="btn button"
                         onclick="$('.collapse').collapse('show');">
                     <i class="fas fa-eye"></i>

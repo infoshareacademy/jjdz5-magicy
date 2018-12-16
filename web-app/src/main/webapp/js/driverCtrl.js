@@ -5,9 +5,10 @@ function addDriver(){
         data : {
             name : $('#name').val(),
             surname : $('#surname').val(),
-            city : $('#city').val(),
-            district : $('#district').val(),
-            phone : $('#phone').val()
+            phone : $('#phone').val(),
+            carBrand : $('#car-brand').val(),
+            carModel : $('#car-model').val(),
+            licensePlate : $('#license-plate').val()
         },
         success : function(responseText) {
             console.log("response "+responseText);
@@ -19,20 +20,21 @@ function addDriver(){
                     data: {
                         name : $('#name').val(),
                         surname : $('#surname').val(),
-                        city : $('#city').val(),
-                        district : $('#district').val(),
-                        phone : $('#phone').val()
+                        phone : $('#phone').val(),
+                        carBrand : $('#car-brand').val(),
+                        carModel : $('#car-model').val(),
+                        licensePlate : $('#license-plate').val()
                     },
                     dataType: "text",
                     success: function (resultData) {
                             swal('Great job!', 'New driver has been added', 'success');
                             $('#name').val('');
                             $('#surname').val('');
-                            $('#city').val('');
-                            $('#district').val('');
                             $('#phone').val('');
-
-
+                            $('#car-brand').val('');
+                            $('#car-model').val('');
+                            $('#license-plate').val('');
+                            window.location.replace("http://localhost:8080/jjdz5-magicy/drivers");
                     },
                     error: function (resultData) {
                         console.log(resultData);

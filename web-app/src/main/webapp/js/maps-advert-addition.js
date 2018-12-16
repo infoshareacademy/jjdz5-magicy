@@ -42,6 +42,9 @@ function initMap() {
         disableDoubleClickZoom: true,
         draggable: true,
         fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
+        },
         keyboardShortcuts: false,
         streetViewControl: false,
         scrollwheel: true,
@@ -168,7 +171,7 @@ function AutocompleteDirectionsHandler(map, directionsDisplay) {
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
     this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
-    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+    this.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(controls);
     this.map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(submitButton);
 
 }

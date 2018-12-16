@@ -64,7 +64,6 @@ public class DriversAdminServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(req.getParameter("id"));
-        mapsDriverDao.deleteDriverCar(mapsDriverDao.findById(id));
         mapsDriverDao.deleteDriverAdvert(mapsDriverDao.findById(id));
         mapsDriverDao.deleteDriverUser(mapsDriverDao.findById(id));
         mapsDriverDao.delete(id);

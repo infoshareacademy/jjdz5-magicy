@@ -16,6 +16,7 @@ public class UserInput {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final String CITY_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
     private static final String INPUT_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+$";
+    private static final String INPUT_TEXT_NUMBER_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]*[0-9 /]+$";
     private static final String STREET_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż.]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*[0-9 /]*[a-z]*$";
     private static final String STREET_NAME_REGEX = "^[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż-]+[a-zA-Z ĄąĆćĘęŁłŃńÓóŚśŹźŻż]*$";
     private static final String STREET_NUMBER_REGEX = "^+[0-9 /]*[a-zA-Z]*$";
@@ -108,6 +109,10 @@ public class UserInput {
         return input.matches(INPUT_REGEX);
     }
 
+    public boolean isInputTextNumberValid(String input) {
+        return input.matches(INPUT_TEXT_NUMBER_REGEX);
+    }
+
     public boolean isStreetValid(String street) {
         return street.matches(STREET_REGEX);
     }
@@ -121,7 +126,7 @@ public class UserInput {
     }
 
     public boolean isNumberValid(String number){
-       return number.matches(NUMBER_REGEX);
+        return number.matches(NUMBER_REGEX);
     }
 
     Integer askForRating(final String question) {

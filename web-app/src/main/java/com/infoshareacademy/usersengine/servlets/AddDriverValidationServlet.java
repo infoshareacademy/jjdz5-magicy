@@ -1,8 +1,7 @@
 package com.infoshareacademy.usersengine.servlets;
 
-import com.infoshareacademy.DriversList;
-
-import com.infoshareacademy.usersengine.drivers.DriverPreparation;
+import com.infoshareacademy.usersengine.drivers.MapsDriverPreparation;
+import com.infoshareacademy.usersengine.model.MapsDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,11 +18,10 @@ import java.util.Map;
 @WebServlet("/addDriverValidation")
 public class AddDriverValidationServlet extends HttpServlet{
 
-    private DriversList driversList = new DriversList();
     private Logger LOG = LoggerFactory.getLogger(AddDriverValidationServlet.class);
 
     @Inject
-    DriverPreparation driverPreparation;
+    private MapsDriverPreparation driverPreparation;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,11 +29,12 @@ public class AddDriverValidationServlet extends HttpServlet{
         resp.setCharacterEncoding("UTF-8");
         req.setCharacterEncoding("UTF-8");
 
-       Map<String, String[]> map = req.getParameterMap();
+        Map<String, String[]> map = req.getParameterMap();
         PrintWriter writer = resp.getWriter();
-        String message = driverPreparation.validateDriver(driverPreparation.mapReader(map), driversList.getDriversList());
+        MapsDriver driver = driverPreparation.driverMapReader(map);
+        String message = driverPreparation.validateDriver(driver);
         if(message.isEmpty()){
-            LOG.debug("Driver data is valid: {}.", driverPreparation.mapReader(map));
+            LOG.debug("Driver data is valid.");
             writer.println("OK");
         }
         else{

@@ -42,7 +42,7 @@
     <#include "menu.ftlh">
     <div class="row">
         <div class="mt-5 mb-5">
-            <h3>Add new driver</h3>
+            <h3>Become driver</h3>
         </div>
     </div>
         <div class="row margin">

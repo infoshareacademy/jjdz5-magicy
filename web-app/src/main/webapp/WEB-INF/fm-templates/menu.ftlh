@@ -23,7 +23,7 @@
         </li>
         <#if user.isDriver() == false>
         <li  id="5nav" class="nav-item">
-            <a class="nav-link" href="add-driver">Add driver</a>
+            <a class="nav-link" href="add-driver">Become driver</a>
         </li>
         </#if>
 <li id="7nav" class="nav-item">

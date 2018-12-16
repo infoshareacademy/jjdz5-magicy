@@ -35,7 +35,7 @@
     <#include "menu.ftlh">
 
     <div class="row mt-3">
-        <div class="mt-5">
+        <div class="col-6" style="padding-top: 0.9rem">
             <h3>Adverts</h3>
         </div>
     </div>
@@ -46,36 +46,35 @@
             <div class="panel panel-primary filterable">
                 <table class="table table-bordered table-sm">
                     <thead>
-                        <tr class="filters">
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure address" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure time" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
-                            <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
-                            <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
-                                Filter
-                            </button></th>
-                        </tr>
+                    <tr class="filters">
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure address" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure time" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
+                        <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
+                        <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
+                        <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
+                            Filter
+                        </button></th>
+                    </tr>
 
                     </thead>
                     <tbody>
                     <#list ADVERTS as advert>
                     <#setting time_format="HH:mm">
-                         <tr>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.formattedAddress}</td>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?time}</td>
-                             <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
-                             <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
-                             <#assign car = advert.driver.cars?first>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
-                             <td class="align-middle">
-                                 <form action="/jjdz5-magicy/maps-adverts" method="post">
-                                    <button type="submit" class="btn button-functional" name="advertId" value="${advert.id}">Details</button>
-                                 </form>
-                             </td>
-                         </tr>
+                    <tr>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startAddress.formattedAddress}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.startTime?time}</td>
+                        <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
+                        <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
+                        <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${advert.driver.car.carModel}</td>
+                        <td class="align-middle">
+                            <form action="/jjdz5-magicy/maps-adverts" method="post">
+                                <button type="submit" class="btn button-functional" name="advertId" value="${advert.id}">Details</button>
+                            </form>
+                        </td>
+                    </tr>
                     </#list>
                     </tbody>
                 </table>
