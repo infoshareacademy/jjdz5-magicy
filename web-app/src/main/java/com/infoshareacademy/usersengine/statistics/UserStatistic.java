@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class UserStatistic {
 
     @Id
-    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private long id;
 
     @Column(name="user_id")
@@ -28,19 +28,22 @@ public class UserStatistic {
     public UserStatistic() {
     }
 
-    public UserStatistic(long userId, String userEmail, LocalDateTime time, UserActivity userActivity) {
+    public UserStatistic(Long userId, String userEmail, LocalDateTime time, UserActivity userActivity) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.time = time;
         this.userActivity = userActivity;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 

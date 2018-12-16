@@ -158,7 +158,7 @@ public class GLoginServlet extends HttpServlet {
                 54.3985837, 18.5769263);
         mapsAddressDao.save(alchemiaTestAddress);
 
-        User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, false, false );
+        User userMarysia = new User("maria.wicherkiewicz@gmail.com", driverMarysia, true, true);
         userDao.save(userMarysia);
 
         User userKuba = new User("jakubjurek.jjd.isa@gmail.com", driverKuba, true, true);
