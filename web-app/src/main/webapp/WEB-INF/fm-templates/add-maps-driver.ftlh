@@ -45,8 +45,8 @@
             <h3>Become driver</h3>
         </div>
     </div>
-        <div class="row margin">
-            <div class="col-5 form-group">
+        <div class="row">
+            <div class="col-6 form-group">
                 <label for="name">Name:</label>
                 <input id="name"
                        required
@@ -56,7 +56,7 @@
                        class="form-control" />
             </div>
 
-            <div class="col-5 form-group">
+            <div class="col-6 form-group">
                 <label for="surname">Surname:</label>
                 <input id="surname"
                        type="text"
@@ -67,42 +67,35 @@
             </div>
             </div>
 
-        <div class="row margin">
-            <div class="col-5 form-group">
-                <label for="city">City:</label>
-                <input id="city"
-                       type="text"
-                       required
-                       name="city"
-                       placeholder="Enter your city"
-                       class="form-control" />
-            </div>
-
-            <div class="col-5 form-group">
-                <label for="district">District:</label>
-                <input id="district"
-                       type="text"
-                       required
-                       name="district"
-                       placeholder="Enter your district"
-                       class="form-control" />
-            </div>
-            </div>
-
         <div class="row">
-            <div class="col-5 form-group">
+            <div class="col-6 form-group">
                 <label for="phone">Your phone number (xxx xxx xxx)</label>
                 <input id="phone"
                        required
                        type="phone"
                        name="phone"
-                       placeholder="xxx xxx xxx"
+                       placeholder="Enter your phone number."
                        class="form-control" />
             </div>
+            <div class="col-6"></div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-6 form-group">
+                <label for="car-model">Car model:</label>
+                <input id="car-model" required type="text" name="carModel"
+                    placeholder="Enter your car model." class="form-control"/>
+            </div>
+            <div class="col-6 form-group">
+                <label for="license-plate">Car license plate:</label>
+                <input id="license-plate" required type="text" name="licensePlate"
+                       placeholder="Enter your car's licence plate." class="form-control">
+            </div>
+        </div>
+
         <div class="row margin">
             <div class="col-3 imgCenter">
-                <button type="submit" class="btn btn-primary btn-block" onclick="addDriver()">Add</button>
+                <button type="submit" class="btn btn-primary btn-block" onclick="addDriver()">Submit</button>
             </div>
         </div>
 </div>

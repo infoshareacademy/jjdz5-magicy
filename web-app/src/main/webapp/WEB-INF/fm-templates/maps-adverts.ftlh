@@ -68,8 +68,7 @@
                              <td style="background: #fff; text-align: center" class="align-middle">${advert.endAddress.formattedAddress}</td>
                              <td style="background: #fff; text-align: center" class="align-middle">${advert.endTime?time}</td>
                              <td style="background: #cceeff; text-align: center" class="align-middle">${advert.date?string}</td>
-                             <#assign car = advert.driver.cars?first>
-                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${car.carBrand} ${car.carModel}</td>
+                             <td style="background: #cceeff; text-align: center" class="align-middle">${advert.driver.name} ${advert.driver.surname}<br>${advert.driver.car.carModel}</td>
                              <td class="align-middle">
                                  <form action="/jjdz5-magicy/maps-adverts" method="post">
                                     <button type="submit" class="btn button-functional" name="advertId" value="${advert.id}">Details</button>

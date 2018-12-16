@@ -113,30 +113,26 @@ public class GLoginServlet extends HttpServlet {
     }
     private void fillDatabaseWithAdvancedDefaults() {
 
+        Car kubaCar = new Car("GD 12345", "Opel Vectra");
+        carDao.save(kubaCar);
+
+        Car marysiaCar = new Car("GA 12345", "Ford Focus");
+        carDao.save(marysiaCar);
+
+        Car krzysiuCar = new Car("GA 67890", "Mercedes ML");
+        carDao.save(krzysiuCar);
+
         MapsDriver driverKuba = new MapsDriver("Kuba", "Jurek",
-                "000-111-222");
+                "000-111-222", kubaCar);
         mapsDriverDao.save(driverKuba);
 
         MapsDriver driverMarysia = new MapsDriver("Marysia", "Wicherkiewicz",
-                "000-333-444");
+                "000-333-444", marysiaCar);
         mapsDriverDao.save(driverMarysia);
 
         MapsDriver driverKrzysiu = new MapsDriver("Krzysztof", "Gotowała",
-                "000-555-666");
+                "000-555-666", krzysiuCar);
         mapsDriverDao.save(driverKrzysiu);
-
-        MapsDriver driverGrzesiu = new MapsDriver("Grzegorz", "Ruchniewicz",
-                "000-777-888");
-        mapsDriverDao.save(driverGrzesiu);
-
-        Car kubaCar = new Car("GD 12345", "Opel", "Vectra", driverKuba);
-        carDao.save(kubaCar);
-
-        Car marysiaCar = new Car("GA 12345", "Ford", "Focus", driverMarysia);
-        carDao.save(marysiaCar);
-
-        Car krzysiuCar = new Car("GA 67890", "Mercedes", "ML", driverKrzysiu);
-        carDao.save(krzysiuCar);
 
         MapsAddress alfaTestAddress = new MapsAddress("ChIJhYXVl9V0_UYRnv4hHm9KBEE",
                 "Gdańsk", "Kołobrzeska", "41c",

@@ -8,6 +8,10 @@ public class DriversConstants {
     public static final String PARAMETER_CITY = "city";
     public static final String PARAMETER_DISTRICT = "district";
 
+    public static final String PARAMETER_CAR_BRAND = "carBrand";
+    public static final String PARAMETER_CAR_MODEL = "carModel";
+    public static final String PARAMETER_LICENSE_PLATE = "licensePlate";
+
     public static final String EMPTY_FIELD = "";
 
     public static final String MESSAGE_DRIVER_ALREADY_EXIST = "Driver already exist <br>";
