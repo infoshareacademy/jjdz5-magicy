@@ -26,11 +26,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 @WebServlet("/home")
 public class HelloServlet extends HttpServlet {
@@ -68,6 +66,7 @@ public class HelloServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession();
         dataModel.put("user", session.getAttribute("user"));
+
         Locale plLocale = new Locale("pl","PL");
         dataModel.put("language", bandleService.getBundle(plLocale));
 

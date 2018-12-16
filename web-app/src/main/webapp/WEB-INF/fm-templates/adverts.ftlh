@@ -88,7 +88,7 @@
             $filteredRows.hide();
             /* Prepend no-result row if all rows are filtered */
             if ($filteredRows.length === $rows.length) {
-                $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+                $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">${language.getString("noResultFound")}</td></tr>'));
             }
         });
     });
@@ -99,12 +99,12 @@
 <#--The columns titles are merged with the filters inputs thanks to the placeholders attributes-->
     <div class="row">
         <div class="mt-5">
-            <h3>Adverts</h3>
+            <h3>${language.getString("adverts")}</h3>
         </div>
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
                 <div class="pull-right">
-                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> ${language.getString("filter")}</button>
                 </div>
             </div>
             <table class="table">

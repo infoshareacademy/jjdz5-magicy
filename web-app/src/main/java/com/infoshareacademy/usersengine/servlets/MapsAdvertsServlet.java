@@ -43,6 +43,7 @@ public class MapsAdvertsServlet extends AppInitServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
         dataModel.addUserToDataModel(req);
@@ -59,6 +60,7 @@ public class MapsAdvertsServlet extends AppInitServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
         ServletService.setDefaultContentTypeAndEncoding(req, resp);
         dataModel.buildNewDataModel();
         dataModel.addUserToDataModel(req);

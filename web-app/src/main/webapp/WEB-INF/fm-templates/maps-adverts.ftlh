@@ -36,7 +36,7 @@
 
     <div class="row mt-3">
         <div class="col-12" style="padding-left: 0">
-            <button class="btn button" disabled>Adverts list</button>
+            <button class="btn button" disabled>${language.getString("advertsList")}</button>
         </div>
     </div>
 

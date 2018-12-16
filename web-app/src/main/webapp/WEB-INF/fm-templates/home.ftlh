@@ -56,31 +56,31 @@
                     <div class="container white-text">
                         <div class="white-text text-center wow fadeInUp" style="font-size:30px; margin: 100px;">
                             <p style="font-size:60px;">goTogether</p>
-                            car pooling made easy
+                           ${language.getString("carPooling")}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4 text-center white-text">
                         <img class="imgCenter" src="img/dolar.png" alt="..." width="95" hight="95" class="rounded-circle">
-                        <h3>save money</h3>
+                        <h3>${language.getString("saveMoney")}</h3>
                     </div>
                     <div class="col-4 text-center white-text">
                         <img class="imgCenter" src="img/ecology.png" alt="..." width="95" hight="95" class="rounded-circle">
-                        <h3>care about environment</h3>
+                        <h3>${language.getString("care")}</h3>
                     </div>
                     <div class="col-4 text-center white-text">
                         <img class="imgCenter" src="img/friends.png" alt="..." width="95" hight="95" class="rounded-circle">
-                        <h3>meet new friends</h3>
+                        <h3>${language.getString("meet")}</h3>
                     </div>
                 </div>
                 <div class="row">
                     <div class="container white-text">
                         <div class="white-text text-center" style="font-size:25px; margin: 30px;">
-                            <br>This application is dedicated to a car pooling arrangement.
+                            <br>${language.getString("desctription1")}
                             <br>
-                            <br>Looking for a nice & easy trip to work? Select 'Adverts'.
-                            <br>Have a free seat in your car? Select 'Add advert'.
+                            <br>${language.getString("desctription2")}
+                            <br>${language.getString("desctription3")}
                         </div>
                     </div>
                 </div>

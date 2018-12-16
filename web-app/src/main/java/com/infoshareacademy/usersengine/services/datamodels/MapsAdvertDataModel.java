@@ -16,7 +16,6 @@ public class MapsAdvertDataModel extends DataModel<Map<String, String[]>>{
 
     private static final String ADVERTS_KEY = "ADVERTS";
     private static final String DETAIL_ADVERT_KEY = "DETAIL_ADVERT";
-    private static final String BANDLE_KEY = "language";
 
     @Inject
     private MapsAdvertDao mapsAdvertDao;
@@ -30,7 +29,8 @@ public class MapsAdvertDataModel extends DataModel<Map<String, String[]>>{
         dataModel.put(ADVERTS_KEY, mapsAdvertDao.findAll());
 
         Locale plLocale = new Locale("pl","PL");
-        dataModel.put(BANDLE_KEY, bandleService.getBundle(plLocale));
+        dataModel.put("language", bandleService.getBundle(plLocale));
+
     }
 
 
@@ -39,6 +39,9 @@ public class MapsAdvertDataModel extends DataModel<Map<String, String[]>>{
         putApiKeyIntoDataModel();
         dataModel.put(DETAIL_ADVERT_KEY, Collections.singletonList(
                 mapsAdvertDao.findById(getDetailedAdvertId(parameters))));
+
+        Locale plLocale = new Locale("pl","PL");
+        dataModel.put("language", bandleService.getBundle(plLocale));
     }
 
     private Long getDetailedAdvertId(Map<String, String[]> parameters) {

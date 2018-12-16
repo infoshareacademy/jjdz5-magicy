@@ -40,7 +40,7 @@
 
     <div class="row mt-3">
         <div class="col-6">
-            <button class="btn button" disabled>Advert details</button>
+            <button class="btn button" disabled>${language.getString("advertDetails")}</button>
         </div>
         <div class="col-6">
             <a class="btn button float-right" href="/jjdz5-magicy/maps-adverts">
@@ -56,25 +56,25 @@
             <div id="addresses-card" class="card controls-card bg-primary text-white expanded">
                 <a><div id="addresses-header" class="card-header" role="button"
                         data-toggle="collapse" data-target="#collapseAddresses" aria-expanded="false"
-                        aria-controls="collapseAddresses">Addresses
+                        aria-controls="collapseAddresses">${language.getString("addresses")}
                 </div></a>
                 <div id="collapseAddresses" class="collapse show" aria-labelledby="addresses-header">
                     <div class="card-body">
                         <a><i id="cardExpander" class="fas fa-exchange-alt float-right"></i></a>
-                        <div id="origin-address-label" class="card-title card-label-first">Departure:</div>
+                        <div id="origin-address-label" class="card-title card-label-first">${language.getString("departure")}:</div>
                         <input id="origin-address" class="form-control" type="text"
                                placeholder="Please enter departure address." required disabled>
-                        <div id="destination-address-label" class="card-title card-label">Destination:</div>
+                        <div id="destination-address-label" class="card-title card-label">${language.getString("destination")}:</div>
                         <input id="destination-address" class="form-control" type="text"
                                placeholder="Please enter destination address." required disabled>
                         <#if advert.startAddressInfo?length &gt; 0>
-                            <div id="origin-address-info-label" class="card-title card-label">Additional information form departure point:</div>
+                            <div id="origin-address-info-label" class="card-title card-label">${language.getString("additionalInfoDeparture")}:</div>
                             <input id="origin-address-info" class="form-control" type="text"
                                    name="startAddressInfo" placeholder="Departure additional information."
                                    disabled value="${advert.startAddressInfo}">
                         </#if>
                         <#if advert.endAddressInfo?length &gt; 0>
-                            <div id="destination-address-info-label" class="card-title card-label">Additional information for destination point:</div>
+                            <div id="destination-address-info-label" class="card-title card-label">${language.getString("additionalInfoDeparture")}:</div>
                             <input id="destination-address-info" class="form-control mt-1" type="text"
                                    name="endAddressInfo" placeholder="Destination additional information."
                                    disabled value="${advert.endAddressInfo}">
@@ -104,7 +104,7 @@
                 <div id="driver-card" class="card controls-card bg-primary text-white panel">
                     <a role="button" data-toggle="collapse" data-target="#collapseDriver"
                        aria-expanded="false" aria-controls="collapseDriver" data-parent="#right-side-cards">
-                        <div id="driver-header" class="card-header">Driver</div></a>
+                        <div id="driver-header" class="card-header">${language.getString("driver")}</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
                             <div class="card-label">${advert.driver.name} ${advert.driver.surname}</div>
