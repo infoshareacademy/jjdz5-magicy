@@ -29,7 +29,7 @@ public class MapsDriver {
     @NotNull
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "driver", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Car> cars;
 

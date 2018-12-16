@@ -101,8 +101,6 @@
         });
     });
 
-    }
-
     function showInterval(){
     $('#interval').show();
     $('#searchButton').show();
