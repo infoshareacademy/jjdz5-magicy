@@ -8,6 +8,8 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <meta name="google-signin-scope" content="profile email">
+    <#--<meta name="google-signin-client_id"-->
+          <#--content="444424982972-jklpm47ig2ven5u2crll8kha0o1g37dj.apps.googleusercontent.com">-->
     <meta name="google-signin-client_id"
           content="176776774224-o5k7gckft8lg5oc4qbf9t6ps0aet9vjc.apps.googleusercontent.com">
 

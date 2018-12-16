@@ -10,7 +10,7 @@
   <data-source>
     <name>java:ds/MAGDBds</name>
     <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-    <url>jdbc:mysql://db:3306/magicy?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+    <url>jdbc:mysql://0.0.0.0:6603/magicy?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
     <user>root</user>
     <password>magicy</password>
   </data-source>
