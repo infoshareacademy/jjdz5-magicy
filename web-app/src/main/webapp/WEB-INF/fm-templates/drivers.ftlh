@@ -88,10 +88,11 @@ var inputOptions = new Promise(function(resolve) {
 
 <div class="container">
     <#include "menu.ftlh">
-    <div class="row">
-        <div class="mt-5 mb-5">
+    <div class="row mt-3">
+        <div class="col-6" style="padding-top: 0.9rem">
             <h3>Drivers</h3>
         </div>
+        <div class="col-6"></div>
     </div>
     <form method="post" action="/jjdz5-magicy/drivers">
     <div class="row">

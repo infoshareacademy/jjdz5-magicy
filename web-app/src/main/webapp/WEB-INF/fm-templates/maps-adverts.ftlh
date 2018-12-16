@@ -35,7 +35,7 @@
     <#include "menu.ftlh">
 
     <div class="row mt-3">
-        <div class="mt-5">
+        <div class="col-6" style="padding-top: 0.9rem">
             <h3>Adverts</h3>
         </div>
     </div>

@@ -39,8 +39,9 @@
     <#include "menu.ftlh">
 
     <div class="row mt-3">
-        <div class="col-6">
-            <button class="btn button" disabled>Advert details</button>
+        <div class="col-6" style="padding-top: 0.9rem">
+            <#--<button class="btn button" disabled>Advert details</button>-->
+            <h3>Advert details</h3>
         </div>
         <div class="col-6">
             <a class="btn button float-right" href="/jjdz5-magicy/maps-adverts">
@@ -117,7 +118,7 @@
 
             </div>
 
-            <div id="controls">
+            <div id="controls" class="mb-5">
                 <button id="show-cards" type="button" class="btn button"
                         onclick="$('.collapse').collapse('show');">
                     <i class="fas fa-eye"></i>
@@ -182,6 +183,9 @@
             disableDoubleClickZoom: true,
             draggable: true,
             fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            },
             streetViewControl: false,
             scrollwheel: true,
             zoomControl: true
@@ -191,7 +195,7 @@
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(controls);
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }

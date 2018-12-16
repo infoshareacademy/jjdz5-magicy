@@ -8,13 +8,13 @@
   version="3.1">
 
   <data-source>
-    <name>java:ds/demods</name>
+    <name>java:ds/MAGDBds</name>
     <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
     <url>jdbc:mysql://0.0.0.0:6603/magicy?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
     <user>root</user>
     <password>magicy</password>
-
   </data-source>
+
   <welcome-file-list>
     <welcome-file>/login</welcome-file>
   </welcome-file-list>
