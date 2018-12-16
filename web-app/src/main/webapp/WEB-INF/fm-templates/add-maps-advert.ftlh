@@ -126,13 +126,11 @@
                         <div id="driver-header" class="card-header">Your data:</div></a>
                     <div id="collapseDriver" class="collapse show" aria-labelledby="driver-header">
                         <div class="card-body">
-                            <div class="card-body">
-                                <#assign driver = DRIVER>
-                                <div class="card-label">${driver.name} ${driver.surname}</div>
-                                <div class="card-label">${driver.phoneNumber}</div>
-                                <div class="card-label">${driver.car.carModel}</div>
-                                <div class="card-label">${driver.car.licensePlate}</div>
-                            </div>
+                            <#assign driver = DRIVER>
+                            <div class="card-label">${driver.name} ${driver.surname}</div>
+                            <div class="card-label">${driver.phoneNumber}</div>
+                            <div class="card-label">${driver.car.carModel}</div>
+                            <div class="card-label">${driver.car.licensePlate}</div>
                         </div>
                     </div>
                 </div>
@@ -148,7 +146,7 @@
                 <input id="driver-id" type="hidden" name="driverId" value="${driver.id}">
             </div>
 
-            <div id="controls">
+            <div id="controls" class="mb-5">
                 <button id="show-cards" type="button" class="btn button"
                         onclick="$('.collapse').collapse('show');">
                     <i class="fas fa-eye"></i>

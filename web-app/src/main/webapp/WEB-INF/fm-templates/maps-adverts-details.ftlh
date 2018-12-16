@@ -117,7 +117,7 @@
 
             </div>
 
-            <div id="controls">
+            <div id="controls" class="mb-5">
                 <button id="show-cards" type="button" class="btn button"
                         onclick="$('.collapse').collapse('show');">
                     <i class="fas fa-eye"></i>
@@ -182,6 +182,9 @@
             disableDoubleClickZoom: true,
             draggable: true,
             fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: google.maps.ControlPosition.RIGHT_BOTTOM
+            },
             streetViewControl: false,
             scrollwheel: true,
             zoomControl: true
@@ -191,7 +194,7 @@
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(addressesCard);
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(rightSideCards);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(controls);
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
