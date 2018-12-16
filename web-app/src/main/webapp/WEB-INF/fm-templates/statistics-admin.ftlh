@@ -44,6 +44,10 @@
         .blue-column{
             background: #f2f2f2;
         }
+          .margin{
+            margin-bottom:40px;
+            margin-top:20px;
+        }
 
     </style>
 </head>
@@ -51,7 +55,9 @@
 <script>
     $(document).ready(function(){
     document.getElementById("8nav").classList.add('active');
-    $('#user_id').val(${user.id});
+    $('#interval').hide();
+    $('#hideInervalButton').hide();
+    $('#searchButton').hide();
 
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
@@ -95,48 +101,20 @@
         });
     });
 
-    function deleteUser(id){
-     if(id == $('#user_id').val()){
-    swal("You can not delete yourself!");
-    }else{
-swal({
-  title: "Are you sure?",
-  text: "Do you want to delete this user?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $('#id').val(id);
-  $('#delete-button').click();
-  } else {
-    swal("Canceled!");
-  }
-});
-}
     }
 
-    function changeFlag(id){
-    if(id == $('#user_id').val()){
-    swal("You can not change your flag!");
-    }else{
-    swal({
-  title: "Are you sure?",
-  text: "Do you want to change user's flag?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-  $('#uid').val(id);
-  $('#change-flag').click();
-  } else {
-    swal("Canceled!");
-  }
-});
-}
+    function showInterval(){
+    $('#interval').show();
+    $('#searchButton').show();
+    $('#hideInervalButton').show();
+    $('#showInervalButton').hide();
+    }
+
+    function hideInterval(){
+    $('#interval').hide();
+    $('#searchButton').hide();
+    $('#hideInervalButton').hide();
+    $('#showInervalButton').show();
     }
 
 </script>
@@ -171,6 +149,68 @@ swal({
                 </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-3">
+            <button id="showInervalButton" class="btn btn-primary btn-block" onclick="showInterval()">Set interwal</button>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-3" style="margin-bottom: 10px">
+            <button id="hideInervalButton"class="btn btn-primary btn-block" onclick="hideInterval()">Hide interwal</button>
+        </div>
+    </div>
+
+    <form method="post" action="/jjdz5-magicy/statistics-admin">
+<div id="interval">
+    <div class="row border-bottom"><div class="col-12"><h5 class="text-muted">From</h5></div></div>
+    <div class="row margin">
+        <div class="col-6 form-group">
+            <label for="dateStart">Date(<sup>*</sup>):</label>
+            <input id="dateStart"
+                   type="date"
+                   required
+                   name="dateStart"
+                   placeholder="Enter date"
+                   class="form-control" />
+        </div>
+        <div class="col-6 form-group">
+            <label for="timeStart">At time (HH:mm):</label>
+            <input id="timeStart"
+                   type="time"
+                   name="timeStart"
+                   placeholder="Enter time"
+                   class="form-control" />
+        </div></div>
+
+    <div class="row border-bottom"><div class="col-12"><h5 class="text-muted">To</h5></div></div>
+    <div class="row margin">
+
+        <div class="col-6 form-group">
+            <label for="dateStop">Date(<sup>*</sup>):</label>
+            <input id="dateStop"
+                   type="date"
+                   required
+                   name="dateStop"
+                   placeholder="Enter datet"
+                   class="form-control" />
+        </div>
+        <div class="col-6 form-group">
+            <label for="timeStop">At time (HH:mm):</label>
+            <input id="timeStop"
+                   type="time"
+                   name="timeStop"
+                   placeholder="Enter time"
+                   class="form-control" />
+        </div></div>
+    <div class="row"><div class="col-6"><h6>(<sup>*</sup>) - input is requred</h6></div></div>
+</div>
+    <div class="row margin">
+        <div class="col-4 imgCenter">
+            <button id ="searchButton" type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+    </div>
+
+    </form>
     <div class="row mt-3">
         <div class="mt-5">
             <h3>Statistics</h3>

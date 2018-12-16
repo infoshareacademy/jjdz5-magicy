@@ -2,6 +2,7 @@ package com.infoshareacademy.usersengine.servlets;
 
 import com.infoshareacademy.usersengine.dao.UserDao;
 import com.infoshareacademy.usersengine.freemarker.TemplateProvider;
+import com.infoshareacademy.usersengine.model.User;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
@@ -19,9 +20,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/users-admin")
+@WebServlet(urlPatterns = "/flags-admin")
 @Transactional
-public class UsersAdminServlet extends HttpServlet {
+public class UserFlagServlet extends HttpServlet {
     private Logger LOG = LoggerFactory.getLogger(DriversServlet.class);
     private static final String TEMPLATE_NAME_GET = "users-admin";
 
@@ -51,13 +52,16 @@ public class UsersAdminServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
-        resp.setCharacterEncoding("UTF-8");
-        req.setCharacterEncoding("UTF-8");
-        Long id = Long.parseLong(req.getParameter("id"));
-        userDao.delete(id);
-        resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/users-admin");
+  @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      resp.setContentType("text/html;charset=UTF-8");
+      resp.setCharacterEncoding("UTF-8");
+      req.setCharacterEncoding("UTF-8");
+      Long id = Long.parseLong(req.getParameter("uid"));
+      User user = userDao.findById(id);
+      user.setAdmin(!user.isAdmin());
+      userDao.update(user);
+            resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/users-admin");
+        }
     }
-}
+

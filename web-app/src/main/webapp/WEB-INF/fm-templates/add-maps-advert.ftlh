@@ -43,7 +43,8 @@
 
     <div class="row mt-3">
         <div class="col-6">
-            <button type="submit" class="btn button">Add new advert</button>
+            <h3>Add new advert</h3>
+        </div>
         </div>
         <div class="col-6">
             <a class="btn button float-right" href="#info">

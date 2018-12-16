@@ -118,6 +118,7 @@ swal({
     }
 
     function changeFlag(id){
+    $('#uid').val(id);
     if(id == $('#user_id').val()){
     swal("You can not change your flag!");
     }else{
@@ -130,16 +131,16 @@ swal({
 })
 .then((willDelete) => {
   if (willDelete) {
-  $.ajax({
-                    type: 'PUT',
-                    url: "users-admin",
+$.ajax({
+                    type: 'POST',
+                    url: "flags-admin",
                     data: {
-                        id: $('#id').val()
+                        uid: $('#uid').val()
                     },
                     dataType: "text",
                     success: function (resultData) {
-                            window.location.replace("http://localhost:8080/jjdz5-magicy/users-admin");
-
+                    $('#uid').val('');
+                    window.location.replace("http://localhost:8080/jjdz5-magicy/users-admin");
                     },
                     error: function (resultData) {
                         console.log(resultData);
@@ -236,7 +237,7 @@ swal({
     <button type="submit" id="delete-button" hidden="hidden"></button>
     </form>
 
-    <form method="put" action="/jjdz5-magicy/users-admin">
+    <form method="post" action="/jjdz5-magicy/flags-admin">
         <input type="hidden" id="uid" name="uid" value="0"/>
         <button type="submit" id="change-flag" hidden="hidden"></button>
     </form>
