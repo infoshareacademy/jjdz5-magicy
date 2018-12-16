@@ -1,18 +1,58 @@
 package com.infoshareacademy;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
+@Table(name = "routes")
 public class Route {
-    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "start_at")
+    @NotNull
     private Date date;
+
+    @Column(name = "start_city")
+    @NotNull
     private String startCity;
+
+    @Column(name = "start_street")
+    @NotNull
     private String startStreet;
+
+    @Column(name = "end_city")
+    @NotNull
     private String endCity;
+
+    @Column(name = "ent_street")
+    @NotNull
     private String endStreet;
+
+    @Column(name = "pick_up_city")
     private String pickUpCity;
+
+    @Column(name = "pick_up_street")
     private String pickUpStreet;
+
+    @Column(name = "start_time")
+    @NotNull
     private String startTime;
+
+    @Column(name = "end_time")
+    @NotNull
     private String endTime;
+
+    @Column(name = "pick_up_time")
     private String pickUpTime;
 
     public Route(){
@@ -20,7 +60,7 @@ public class Route {
     }
 
 
-    public Route(Integer id, Date date, String startCity, String startStreet, String endCity,
+    public Route(Long id, Date date, String startCity, String startStreet, String endCity,
                  String endStreet, String pickUpCity, String pickUpStreet, String startTime, String endTime, String pickUpTime) {
         this.id = id;
         this.date = date;
@@ -35,7 +75,7 @@ public class Route {
         this.pickUpTime = pickUpTime;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -77,7 +117,7 @@ public class Route {
         return pickUpTime;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

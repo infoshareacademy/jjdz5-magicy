@@ -12,6 +12,8 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta name="google-signin-scope" content="profile email">
+    <#--<meta name="google-signin-client_id"-->
+          <#--content="444424982972-jklpm47ig2ven5u2crll8kha0o1g37dj.apps.googleusercontent.com">-->
     <meta name="google-signin-client_id"
           content="176776774224-o5k7gckft8lg5oc4qbf9t6ps0aet9vjc.apps.googleusercontent.com">
 
@@ -20,58 +22,50 @@
 <body>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
+
+<h2>GoTogether</h2>
+<br>
+
+<div id="my-signin2"></div>
 <script>
-      //google callback. This function will redirect to our login servlet
-      function onSignIn(googleUser) {
-         var profile = googleUser.getBasicProfile();
-         console.log('ID: ' + profile.getId());
-         console.log('Name: ' + profile.getName());
-         console.log('Image URL: ' + profile.getImageUrl());
-         console.log('Email: ' + profile.getEmail());
-         console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+    function onSuccess(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        console.log('id_token: ' + googleUser.getAuthResponse().id_token);
 
-         //do not post all above info to the server because that is not secure.
-         //just send the id_token
+        var redirectUrl = 'login';
 
-         var redirectUrl = 'login';
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+        '<input type="text" name="id_token" value="' +
+        googleUser.getAuthResponse().id_token + '" />' +
+        '</form>');
+        $('body').append(form);
+        googleUser.disconnect();
+        form.submit();
+    }
+    function onFailure(error) {
+        console.log(error);
+    }
+    function renderButton() {
+                gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+</script>
 
-         //using jquery to post data dynamically
-         var form = $('<form action="' + redirectUrl + '" method="post">' +
-                          '<input type="text" name="id_token" value="' +
-                           googleUser.getAuthResponse().id_token + '" />' +
-                                                                '</form>');
-         $('body').append(form);
-         form.submit();
-      }
-
-   </script>
-<div class="container">
-    <div class="row" style="margin-top: 10%">
-        <div class="col-4"></div>
-        <div class="col-4" style="text-align: center"><img src="img/logo.png" width="100"
-                                                           hight="100" class="display-inline-block" alt=""></div>
-        <div class="col-4"></div>
-        </div>
-
-    <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4" style="text-align: center"><h1>goTogether</h1></div>
-        <div class="col-4"></div>
-    </div>
-    <br>
-    <br>
-        <div class="row">
-            <div class="col-5"></div>
-            <div class="col-2 col-centered">
-                <div style="margin-right:20%"></div><div syle="margin-top:10px" class="g-signin2" data-onsuccess="onSignIn"></div>
-            </div>
-            <div class="col-5"></div>
-        </div>
-    </div>
-</div>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 
-
+<#include "footer.ftlh">
 </div>
 </body>
 </html>

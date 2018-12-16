@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
 
+    <link rel="stylesheet" href="css/overall.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
@@ -12,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.10/css/mdb.min.css" rel="stylesheet">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <#include "google-log.ftlh">
 
     <style>
         .filterable {
@@ -46,6 +48,9 @@
 <body>
 <script>
     $(document).ready(function(){
+
+    document.getElementById("2nav").classList.add('active');
+
         $('.filterable .btn-filter').click(function(){
             var $panel = $(this).parents('.filterable'),
                     $filters = $panel.find('.filters input'),
@@ -90,42 +95,14 @@
 </script>
 
 <div class="container">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
-                                                 hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="adverts">Adverts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="add-advert">Add advert</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="drivers">Drivers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="add-driver">Add driver</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about-us">About us</a>
-                    </li>
-            </ul>
-        </div>
-    </nav>
-    <h3>The columns titles are merged with the filters inputs thanks to the placeholders attributes</h3>
-    <hr>
+    <#include "menu.ftlh">
+<#--The columns titles are merged with the filters inputs thanks to the placeholders attributes-->
     <div class="row">
+        <div class="mt-5">
+            <h3>Adverts</h3>
+        </div>
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
-                <h3 class="panel-title">Adverts</h3>
                 <div class="pull-right">
                     <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
                 </div>
@@ -151,13 +128,13 @@
         <tr style="background: #ffffcc">
                 <td>${a.id}</td>
                 <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-                <td style="background: #ffcc66">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getStartTime()}</td>
-                <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
+                <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
                 <td>${a.getRoute().getPickUpTime()}</td>
-                <td style="background: #ffcc66">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+                <td style="background: #ffcc66">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
                 <td style="background: #ffcc66">${a.getRoute().getEndTime()}</td>
-                <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
+                <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
         </tr>
     </#if>
     </#list>
@@ -166,13 +143,13 @@
          <tr>
              <td>${a.id}</td>
              <td>${a.getRoute().getDate()?string("dd-MM-yyyy")}</td>
-             <td style="background: #cceeff">${a.getRoute().getStartCity()} ${a.getRoute().getStartStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getStartCity()} <br>${a.getRoute().getStartStreet()}</td>
              <td style="background: #cceeff">${a.getRoute().getStartTime()}</td>
-             <td>${a.getRoute().getPickUpCity()} ${a.getRoute().getPickUpStreet()}</td>
+             <td>${a.getRoute().getPickUpCity()} <br>${a.getRoute().getPickUpStreet()}</td>
              <td>${a.getRoute().getPickUpTime()}</td>
-             <td style="background: #cceeff">${a.getRoute().getEndCity()} ${a.getRoute().getEndStreet()}</td>
+             <td style="background: #cceeff">${a.getRoute().getEndCity()} <br>${a.getRoute().getEndStreet()}</td>
              <td style="background: #cceeff">${a.getRoute().getEndTime()}</td>
-             <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} ${a.getDriver().getPhone()}</td>
+             <td>${a.getDriver().getName()} ${a.getDriver().getSurname()} <br>${a.getDriver().getPhone()}</td>
          </tr>
         </#if>
     </#list>

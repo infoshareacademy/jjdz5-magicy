@@ -7,7 +7,7 @@ import java.util.List;
 @Local
 public interface AdvertsManager {
     List<Advert> addAdvert(Advert advert,List<Advert> adverts);
-    Integer getNextAdvertId(List<Advert> adverts);
-    Integer getNextRouteId(List<Advert> adverts);
+    Long getNextAdvertId(List<Advert> adverts);
+    Long getNextRouteId(List<Advert> adverts);
     void advertsToJson(List<Advert> advertList, String path);
 }

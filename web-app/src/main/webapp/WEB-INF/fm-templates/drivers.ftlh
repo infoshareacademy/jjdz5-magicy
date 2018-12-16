@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>goTogether</title>
 
+    <link rel="stylesheet" href="css/overall.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="sytlesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css">
 
@@ -13,6 +15,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+    <#include "google-log.ftlh">
 
     <style>
         .filterable {
@@ -46,6 +49,9 @@
 </head>
 <body>
 <script>
+    $(document).ready(function(){
+    document.getElementById("4nav").classList.add('active');
+    });
 
 function myAlertFunction(id, name, surname) {
 var inputOptions = new Promise(function(resolve) {
@@ -80,45 +86,17 @@ var inputOptions = new Promise(function(resolve) {
 }
 </script>
 
-<header style="height: 100px">
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark indigo">
-      <a class="navbar-brand" href="home"><img src="img/logo.png" width="40"
-                                               hight="40" class="display-inline-block" alt=""><strong>    goTogether</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adverts">Adverts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-advert">Add advert</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="drivers">Drivers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-driver">Add driver</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about-us">About us</a>
-                </li>
-            </ul>
+<div class="container">
+    <#include "menu.ftlh">
+    <div class="row mt-3">
+        <div class="col-6" style="padding-top: 0.9rem">
+            <h3>Drivers</h3>
         </div>
-    </nav>
-</header>
-<main class="container">
+        <div class="col-6"></div>
+    </div>
     <form method="post" action="/jjdz5-magicy/drivers">
     <div class="row">
         <div class="panel panel-primary filterable" style="width:100%">
-            <div class="panel-heading">
-                <h3 class="panel-title">Drivers</h3>
-            </div>
             <table class="table" style="width: 100%; text-align: center">
                 <thead>
                     <tr class="filters">
@@ -146,7 +124,7 @@ var inputOptions = new Promise(function(resolve) {
     <input type="hidden" id="rating" name="rating" value="0"/>
         <button type="submit" id="sub" hidden="hidden"></button>
     </form>
-</main>
+</div>
 
 <#include "footer.ftlh">
 

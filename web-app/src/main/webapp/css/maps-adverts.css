@@ -1,0 +1,179 @@
+#map {
+    height: 720px;
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.controls-card {
+    margin: 10px;
+}
+
+.low-width-inputs {
+    background-color: #fff !important;
+    font-family: Roboto !important;
+    font-size: 18px !important;
+    font-weight: 300 !important;
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    width: 133px !important;
+}
+
+.gm-style {
+    font: 400 18px Roboto, Arial, sans-serif !important;
+}
+
+
+input[type=time]::-webkit-inner-spin-button,
+input[type=time]::-webkit-outer-spin-button,
+input[type=time]::-webkit-clear-button,
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button,
+input[type=date]::-webkit-clear-button,
+input[type=date]::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none !important;
+    display: none !important;
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.card-label-first {
+    font: 400 15px Roboto, Arial, sans-serif !important;
+}
+
+.card-label {
+    margin-top: 0.3rem !important;
+    font: 400 15px Roboto, Arial, sans-serif !important;
+}
+
+.card-header {
+    border-bottom: 1px solid #ffffff !important;
+    padding: 0.2rem 0.2rem !important;
+    text-align: center !important;
+}
+
+.card-body {
+    padding: 0.5rem !important;
+}
+
+.card-title {
+    margin-bottom: 0.3rem !important;
+}
+
+.form-control {
+    padding: 0.2rem !important;
+    height: 1.7rem !important;
+    line-height: normal !important;
+}
+
+.custom-select {
+    padding: 0.2rem !important;
+    height: 1.7rem !important;
+    line-height: normal !important;
+}
+
+#addresses-card {
+    min-width: 310px;
+    -webkit-transition: ease 0.5s;
+    transition: ease 0.5s;
+}
+
+#addresses-card.expanded {
+    min-width: 900px;
+}
+
+#time-card {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+#driver-card {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.controls-card.bg-primary {
+    background-color: #3f51b5 !important;
+}
+
+.button {
+    background-color: #3f51b5 !important;
+    padding: 0.75rem !important;
+    font: 500 24px Roboto, Arial, sans-serif !important;
+}
+
+.button-functional {
+    background-color: #3f51b5 !important;
+    padding: 0.75rem !important;
+    font: 500 16px Roboto, Arial, sans-serif !important;
+}
+
+
+.button:hover {
+    color: #ffffff !important;
+}
+
+.button-functional:hover {
+    color: #ffffff !important;
+}
+
+.button:disabled {
+    opacity: 1.0 !important;
+    background-color: #3f51b5 !important;
+}
+
+#submitButton {
+    font: 500 28px Roboto, Arial, sans-serif !important;
+}
+
+#origin-time-suggestion {
+    background-color: #3f51b5 !important;
+}
+
+.table-bordered {
+    border-color: #2d2d2d6e !important;
+}
+
+.table-bordered td{
+    border-color: #2d2d2d6e !important;
+}
+
+.table-bordered th{
+    border-color: #2d2d2d6e !important;
+    border-bottom: 0 !important;
+}
+
+#show-cards,
+#hide-cards {
+    font: 500 15px Roboto, Arial, sans-serif !important;
+    margin-top: 1px !important;
+    margin-right: 5px !important;
+    margin-bottom: 1px !important;
+}
+
+.alert {
+    padding: 1rem 0 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.alert-summary {
+    color: #ffffff !important;
+    background-color: #3d50b6 !important;
+    border-color: #b8daff !important;
+    font-weight: 500 !important;
+}
+
+.alert-help {
+    color: #000000;
+    background-color: transparent;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+    border: 2px solid #3d50b6 !important;
+    font-weight: 500 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-bottom: 1rem !important;
+}

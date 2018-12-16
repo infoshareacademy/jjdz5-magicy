@@ -7,11 +7,12 @@ import java.util.List;
 @Local
 public interface DriversValidation {
     boolean askForText(String text);
+    boolean askForTextNumbers(String text);
     boolean askForNumber(String number);
-    boolean checkRating(String rating);
-    boolean checkDriverId(List<Driver> drivers, String id);
+    boolean checkIsDriverRatingValid(String rating);
+    boolean checkIsDriverIdAlreadyUsed(List<Driver> drivers, String id);
     boolean askForRating(String rating);
     boolean askForDriverId(List<Driver> drivers, String id);
-    String validateAdvertData(String id, String rating, List<Driver> drivers);
+    String validateDriverData(String id, String rating, List<Driver> drivers);
     boolean isPhoneNumberExist(String number, List<Driver> drivers);
 }
