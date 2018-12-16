@@ -88,8 +88,8 @@ var inputOptions = new Promise(function(resolve) {
 
 <div class="container">
     <#include "menu.ftlh">
-    <div class="row">
-        <div class="mt-5 mb-5">
+    <div class="row mt-3">
+        <div class="col-6" style="padding-top: 0.9rem">
             <h3>Drivers</h3>
         </div>
     </div>
@@ -109,8 +109,8 @@ var inputOptions = new Promise(function(resolve) {
 	<tbody>
 	<#list drivers as d>
 		<tr>
-            <td style="width:10%; vertical-align: middle">${d.name} ${d.surname} ${d.phoneNumber}</td>
-            <td style="width:50%; vertical-align: middle">${d.car.carModel} ${d.car.licensePlate}</td>
+            <td style="width:10%; vertical-align: middle">${d.name} ${d.surname}<br>${d.phoneNumber}</td>
+            <td style="width:50%; vertical-align: middle">${d.car.carModel}<br>${d.car.licensePlate}</td>
             <td style="width:30%; vertical-align: middle">${d.averageRating?string("0.00")}<br>
                 <#if d.ratingsQuantity == 1>
                     ${d.ratingsQuantity} review

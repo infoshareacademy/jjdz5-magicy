@@ -39,8 +39,9 @@
     <#include "menu.ftlh">
 
     <div class="row mt-3">
-        <div class="col-6">
-            <button class="btn button" disabled>Advert details</button>
+        <div class="col-6" style="padding-top: 0.9rem">
+            <#--<button class="btn button" disabled>Advert details</button>-->
+            <h3>Advert details</h3>
         </div>
         <div class="col-6">
             <a class="btn button float-right" href="/jjdz5-magicy/maps-adverts">

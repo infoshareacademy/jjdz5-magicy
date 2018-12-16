@@ -40,64 +40,65 @@
 </script>
 <div class="container">
     <#include "menu.ftlh">
-    <div class="row">
-        <div class="mt-5 mb-5">
+    <div class="row mt-3">
+        <div class="col-6" style="padding-top: 0.9rem">
             <h3>Become driver</h3>
         </div>
+        <div class="col-6"></div>
     </div>
-        <div class="row">
-            <div class="col-6 form-group">
-                <label for="name">Name:</label>
-                <input id="name"
-                       required
-                       type="text"
-                       name="name"
-                       placeholder="Enter your name"
-                       class="form-control" />
-            </div>
-
-            <div class="col-6 form-group">
-                <label for="surname">Surname:</label>
-                <input id="surname"
-                       type="text"
-                       required
-                       name="surname"
-                       placeholder="Enter your surname"
-                       class="form-control" />
-            </div>
-            </div>
-
-        <div class="row">
-            <div class="col-6 form-group">
-                <label for="phone">Your phone number (xxx xxx xxx)</label>
-                <input id="phone"
-                       required
-                       type="phone"
-                       name="phone"
-                       placeholder="Enter your phone number."
-                       class="form-control" />
-            </div>
-            <div class="col-6"></div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-6 form-group">
-                <label for="car-model">Car model:</label>
-                <input id="car-model" required type="text" name="carModel"
-                    placeholder="Enter your car model." class="form-control"/>
-            </div>
-            <div class="col-6 form-group">
-                <label for="license-plate">Car license plate:</label>
-                <input id="license-plate" required type="text" name="licensePlate"
-                       placeholder="Enter your car's licence plate." class="form-control">
-            </div>
+    <div class="row mt-4">
+        <div class="col-6 form-group">
+            <label for="name">Name:</label>
+            <input id="name"
+                   required
+                   type="text"
+                   name="name"
+                   placeholder="Enter your name"
+                   class="form-control" />
         </div>
 
-        <div class="row margin">
-            <div class="col-3 imgCenter">
-                <button type="submit" class="btn btn-primary btn-block" onclick="addDriver()">Submit</button>
-            </div>
+        <div class="col-6 form-group">
+            <label for="surname">Surname:</label>
+            <input id="surname"
+                   type="text"
+                   required
+                   name="surname"
+                   placeholder="Enter your surname"
+                   class="form-control" />
         </div>
+        </div>
+
+    <div class="row">
+        <div class="col-6 form-group">
+            <label for="phone">Your phone number (xxx xxx xxx)</label>
+            <input id="phone"
+                   required
+                   type="phone"
+                   name="phone"
+                   placeholder="Enter your phone number."
+                   class="form-control" />
+        </div>
+        <div class="col-6"></div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 form-group">
+            <label for="car-model">Car model:</label>
+            <input id="car-model" required type="text" name="carModel"
+                placeholder="Enter your car model." class="form-control"/>
+        </div>
+        <div class="col-6 form-group">
+            <label for="license-plate">Car license plate:</label>
+            <input id="license-plate" required type="text" name="licensePlate"
+                   placeholder="Enter your car's licence plate." class="form-control">
+        </div>
+    </div>
+
+    <div class="row margin">
+        <div class="col-3 imgCenter">
+            <button type="submit" class="btn btn-primary btn-block" onclick="addDriver()">Submit</button>
+        </div>
+    </div>
 </div>
 
 <#include "footer.ftlh">

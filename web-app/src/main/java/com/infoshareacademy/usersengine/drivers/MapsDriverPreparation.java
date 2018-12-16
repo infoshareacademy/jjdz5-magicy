@@ -34,7 +34,7 @@ public class MapsDriverPreparation {
         String phone = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_PHONE);
         String carModel = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_CAR_MODEL);
         String licensePlate = ParametersService.getSpecificParameter(map, DriversConstants.PARAMETER_LICENSE_PLATE);
-        Car car = new Car(carModel, licensePlate);
+        Car car = new Car(licensePlate, carModel);
         return new MapsDriver(name, surname, phone, car);
     }
 
@@ -60,6 +60,12 @@ public class MapsDriverPreparation {
         if (!driversValidation.askForNumber(driver.getPhoneNumber())) {
             LOG.info("Incorrect phone number from user input: {}.", driver.getPhoneNumber());
             message += DriversConstants.MESSAGE_INCORRECT_PHONE_NUMBER;
+        }
+        if (!driversValidation.askForTextNumbers(driver.getCar().getLicensePlate())) {
+            message += "Enter correct license plate.<br>";
+        }
+        if (!driversValidation.askForTextNumbers(driver.getCar().getCarModel())) {
+            message += "Enter correct car model.<br>";
         }
         return message;
     }

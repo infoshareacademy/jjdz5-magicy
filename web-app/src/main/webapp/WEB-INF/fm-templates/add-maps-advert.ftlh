@@ -42,8 +42,9 @@
     <form method="post" action="/jjdz5-magicy/add-maps-advert">
 
     <div class="row mt-3">
-        <div class="col-6">
-            <button type="submit" class="btn button">Add new advert</button>
+        <div class="col-6" style="padding-top: 0.9rem">
+            <#--<button type="submit" class="btn button">Add new advert</button>-->
+            <h3>Add new advert</h3>
         </div>
         <div class="col-6">
             <a class="btn button float-right" href="#info">
