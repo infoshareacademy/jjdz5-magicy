@@ -61,7 +61,6 @@ public class UserFlagServlet extends HttpServlet {
       User user = userDao.findById(id);
       user.setAdmin(!user.isAdmin());
       userDao.update(user);
-            resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/users-admin");
         }
     }
 

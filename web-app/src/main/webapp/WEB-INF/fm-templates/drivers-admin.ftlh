@@ -96,6 +96,7 @@
     });
 
     function deleteDriver(id){
+    $('#id').val(id);
 swal({
   title: "Are you sure?",
   text: "Do you want to delete driver?",
@@ -105,8 +106,21 @@ swal({
 })
 .then((willDelete) => {
   if (willDelete) {
-  $('#id').val(id);
-  $('#delete-button').click();
+$.ajax({
+                    type: 'POST',
+                    url: "drivers-admin",
+                    data: {
+                        id: $('#id').val()
+                    },
+                    dataType: "text",
+                    success: function (resultData) {
+                    $('#id').val('');
+                    window.location.replace("http://localhost:8080/jjdz5-magicy/drivers-admin");
+                    },
+                    error: function (resultData) {
+                        console.log(resultData);
+                    }
+            });
   } else {
     swal("Canceled!");
   }

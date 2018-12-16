@@ -58,6 +58,5 @@ public class UsersAdminServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(req.getParameter("id"));
         userDao.delete(id);
-        resp.setHeader("Refresh", "1;url=http://localhost:8080/jjdz5-magicy/users-admin");
     }
 }

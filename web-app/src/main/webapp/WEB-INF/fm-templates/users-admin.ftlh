@@ -96,6 +96,7 @@
     });
 
     function deleteUser(id){
+    $('#id').val(id);
      if(id == $('#user_id').val()){
     swal("You can not delete yourself!");
     }else{
@@ -108,8 +109,21 @@ swal({
 })
 .then((willDelete) => {
   if (willDelete) {
-  $('#id').val(id);
-  $('#delete-button').click();
+  $.ajax({
+                    type: 'POST',
+                    url: "users-admin",
+                    data: {
+                        id: $('#id').val()
+                    },
+                    dataType: "text",
+                    success: function (resultData) {
+                    $('#id').val('');
+                    window.location.replace("http://localhost:8080/jjdz5-magicy/users-admin");
+                    },
+                    error: function (resultData) {
+                        console.log(resultData);
+                    }
+            });
   } else {
     swal("Canceled!");
   }
@@ -232,15 +246,10 @@ $.ajax({
         </div>
     </div>
     <input type="hidden" id="user_id" name="user_id"/>
-    <form method="post" action="/jjdz5-magicy/users-admin">
     <input type="hidden" id="id" name="id" value="0"/>
     <button type="submit" id="delete-button" hidden="hidden"></button>
-    </form>
-
-    <form method="post" action="/jjdz5-magicy/flags-admin">
         <input type="hidden" id="uid" name="uid" value="0"/>
         <button type="submit" id="change-flag" hidden="hidden"></button>
-    </form>
 </div>
 
 <#include "footer.ftlh">
