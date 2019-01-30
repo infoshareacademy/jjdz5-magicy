@@ -47,12 +47,12 @@
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr class="filters">
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure address" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Departure time" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Destination address" disabled></th>
-                            <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="Destination time" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Date" disabled></th>
-                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="Driver & Car" disabled></th>
+                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="${language.getString("departureAddress")}" disabled></th>
+                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="${language.getString("departureTime")}" disabled></th>
+                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="${language.getString("destinationAddress")}" disabled></th>
+                            <th class="align-middle"><input style="text-align: center; min-width: 90px" type="text" class="form-control" placeholder="${language.getString("destinationTime")}" disabled></th>
+                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="${language.getString("date")}" disabled></th>
+                            <th class="align-middle"><input style="text-align: center" type="text" class="form-control" placeholder="${language.getString("driver&car")}" disabled></th>
                             <th class="text-center"><button class="btn btn-filter button-functional" style="background-color: #2bbbad!important">
                                 Filter
                             </button></th>
